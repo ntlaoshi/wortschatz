@@ -70,15 +70,18 @@ Wortschatz 支持通过 JSON 文件导入自定义词表。本文是你需要遵
 
 短语和整句一律用 `phr`，比如 `Wie geht's?`。
 
-## 四、重要约定：空字段请省略，不要写 `null`
+## 四、空字段约定
 
 ```json
 ✅ { "w": "laufen", "zh": "跑" }
-❌ { "w": "laufen", "zh": "跑", "pl": null, "g": null }
+✅ { "w": "laufen", "zh": "跑", "pl": null, "g": null }
 ```
 
-原因：App 用 Android 的 `optString()` 读取字段，它对 JSON 的 `null` 会返回字符串 `"null"`，
-于是词条会显示成「复数 null」这种脏数据。省略字段则走默认值，安全。
+两种写法等价。App 从 1.8 起显式判断 `JSONObject.isNull()`，字段缺失、显式 `null`、
+甚至字面量字符串 `"null"` 都按「空」处理，不会出现「复数 null」这类脏数据。
+
+仍建议省略空字段：文件更小，且老版本 App 只有省略才不会出错
+（旧解析器用 `optString()` 读字段，对 JSON `null` 会返回字符串 `"null"`）。
 
 ## 五、导入时的去重规则
 

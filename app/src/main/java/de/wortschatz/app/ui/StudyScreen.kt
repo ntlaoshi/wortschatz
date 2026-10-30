@@ -486,7 +486,18 @@ private fun FrontFace(
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurface
         )
-        Spacer(Modifier.height(22.dp))
+        // 名词复数与单数一起记，正面就要看得到，不能只放在背面
+        word.pluralNote?.let {
+            Spacer(Modifier.height(6.dp))
+            Text(
+                text = it,
+                fontFamily = FontFamily.Default,
+                fontSize = 16.sp,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+        Spacer(Modifier.height(18.dp))
         SpeakButton(onClick = { speaker(word.word) }, size = 54.dp)
 
         Spacer(Modifier.weight(1f))

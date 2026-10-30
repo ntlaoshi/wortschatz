@@ -214,6 +214,16 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
                     )
                 }
             }
+            // 拼错时顺带把复数一起复习，避免只记住单数
+            word.pluralNote?.let { note ->
+                Spacer(Modifier.height(6.dp))
+                Text(
+                    text = note,
+                    fontFamily = FontFamily.Default,
+                    fontSize = 12.5.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
         } else {
             Spacer(Modifier.height(18.dp))
         }

@@ -43,8 +43,19 @@ data class Word(
                 "n" -> "中性 das"
                 else -> null
             }
-            val p = plural?.takeIf { it.isNotBlank() }?.let { "复数 $it" }
-            return listOfNotNull(g, p).joinToString(" · ").ifBlank { null }
+            return listOfNotNull(g, pluralNote).joinToString(" · ").ifBlank { null }
+        }
+
+    /**
+     * 名词复数提示，单独暴露给卡片正面与列表行使用。
+     * 德语名词的复数形式变化无规律，背单词时必须与单数同时记住，
+     * 因此除详情页外，凡是出现词条的地方都要带上这一行。
+     */
+    val pluralNote: String?
+        get() {
+            if (pos != "n") return null
+            val p = plural?.takeIf { it.isNotBlank() } ?: return null
+            return "复数 $p"
         }
 
     companion object {

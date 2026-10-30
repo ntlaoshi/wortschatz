@@ -109,6 +109,14 @@ class WordDb private constructor(context: Context) :
             db.execSQL("CREATE INDEX IF NOT EXISTS idx_book_words_book ON book_words(book_id)")
             version = 3
         }
+        if (version < 4) {
+            // v4：修复旧版解析器把 JSON null 写成字符串 "null" 的脏数据，
+            // 否则名词会显示「复数 null」。只清理字面量 "null"，真实值不受影响。
+            listOf("gender", "plural", "en", "example", "example_zh", "tags").forEach { col ->
+                db.execSQL("UPDATE words SET $col = NULL WHERE LOWER($col) = 'null'")
+            }
+            version = 4
+        }
     }
 
     override fun onConfigure(db: SQLiteDatabase) {
@@ -605,7 +613,7 @@ class WordDb private constructor(context: Context) :
 
     companion object {
         private const val DB_NAME = "wortschatz.db"
-        private const val DB_VERSION = 3
+        private const val DB_VERSION = 4
         private const val COLUMNS =
             "id, word, lemma, pos, gender, plural, zh, en, example, example_zh, level, tags, source"
 

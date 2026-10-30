@@ -69,33 +69,43 @@ object SeedLoader {
         val out = ArrayList<Word>(arr.length())
         for (i in 0 until arr.length()) {
             val o = arr.optJSONObject(i) ?: continue
-            val word = o.optString("w").ifBlank { o.optString("word") }.trim()
-            if (word.isEmpty()) continue
-            val zh = o.optString("zh").ifBlank { o.optString("meaning") }.trim()
-            val lemma = o.optString("l").ifBlank {
-                o.optString("lemma").ifBlank {
-                    // 去掉冠词作为检索词根
-                    word.removePrefix("der ").removePrefix("die ").removePrefix("das ")
-                }
-            }
+            val word = jsonString(o, "w", "word")?.trim() ?: continue
+            val zh = jsonString(o, "zh", "meaning") ?: ""
+            val lemma = jsonString(o, "l", "lemma") ?: word
+                .removePrefix("der ").removePrefix("die ").removePrefix("das ")
             out.add(
                 Word(
                     word = word,
                     lemma = lemma,
-                    pos = o.optString("p").ifBlank { o.optString("pos", "") },
-                    gender = o.optString("g").ifBlank { o.optString("gender") }.ifBlank { null },
-                    plural = o.optString("pl").ifBlank { o.optString("plural") }.ifBlank { null },
+                    pos = jsonString(o, "p", "pos") ?: "",
+                    gender = jsonString(o, "g", "gender"),
+                    plural = jsonString(o, "pl", "plural"),
                     zh = zh,
-                    en = o.optString("en").ifBlank { null },
-                    example = o.optString("ex").ifBlank { o.optString("example") }.ifBlank { null },
-                    exampleZh = o.optString("exZh").ifBlank { o.optString("example_zh") }
-                        .ifBlank { null },
-                    level = o.optString("lv").ifBlank { o.optString("level", "A1") },
-                    tags = o.optString("tg").ifBlank { o.optString("tags") }.ifBlank { null },
-                    source = o.optString("src", Word.SRC_BUILTIN)
+                    en = jsonString(o, "en"),
+                    example = jsonString(o, "ex", "example"),
+                    exampleZh = jsonString(o, "exZh", "example_zh"),
+                    level = jsonString(o, "lv", "level") ?: "A1",
+                    tags = jsonString(o, "tg", "tags"),
+                    source = jsonString(o, "src") ?: Word.SRC_BUILTIN
                 )
             )
         }
         return out
+    }
+
+    /**
+     * 读取字符串字段。
+     *
+     * 必须显式判断 isNull：`JSONObject.optString()` 遇到 JSON null 时返回字符串 "null"
+     * 而不是空串，直接落库会让名词显示成「复数 null」。字段缺失、显式 null、
+     * 以及字面量 "null" 三种情况统一返回 null。
+     */
+    private fun jsonString(o: JSONObject, vararg keys: String): String? {
+        for (key in keys) {
+            if (!o.has(key) || o.isNull(key)) continue
+            val v = o.optString(key).trim()
+            if (v.isNotEmpty() && !v.equals("null", ignoreCase = true)) return v
+        }
+        return null
     }
 }

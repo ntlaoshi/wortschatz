@@ -242,6 +242,15 @@ private fun BookWordRow(
                     fontSize = 12.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                word.pluralNote?.let { note ->
+                    Spacer(Modifier.height(1.dp))
+                    Text(
+                        text = note,
+                        fontFamily = FontFamily.Default,
+                        fontSize = 11.sp,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
             }
             if (showResults) {
                 if (inBook) {
