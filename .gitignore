@@ -22,6 +22,9 @@ keystore.properties
 # 词库原始数据（体积数百 MB，不入库）
 data_src/raw/
 
+# 合成语音的中间文件（最终 mp3 在 app/src/main/assets/voice，需入库）
+.tmpvoice/
+
 # 验证截图
 screenshots/
 

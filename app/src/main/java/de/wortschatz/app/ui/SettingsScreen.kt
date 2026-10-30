@@ -216,52 +216,56 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                         Icons.Rounded.RecordVoiceOver,
                         contentDescription = null,
                         modifier = Modifier.size(18.dp),
-                        tint = if (vm.speaker.germanAvailable) ExtraColors.success
+                        tint = if (vm.speaker.offlineCount > 0) ExtraColors.success
                         else MaterialTheme.colorScheme.error
                     )
                     Spacer(Modifier.width(8.dp))
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = when {
-                                !vm.speaker.ready -> "正在初始化语音引擎…"
-                                vm.speaker.germanAvailable -> "德语语音已就绪"
-                                else -> "未检测到德语语音包"
-                            },
+                            text = if (vm.speaker.offlineCount > 0)
+                                "离线发音已内置 · ${vm.speaker.offlineCount} 词"
+                            else "离线发音包缺失",
                             fontSize = 13.sp,
                             color = MaterialTheme.colorScheme.onSurface
                         )
-                        if (vm.speaker.ready && !vm.speaker.germanAvailable) {
-                            Text(
-                                text = "请在系统「文字转语音」中安装德语语音数据",
-                                fontSize = 11.5.sp,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                    TextButton(onClick = {
-                        runCatching { context.startActivity(Speaker.ttsSettingsIntent()) }
-                            .onFailure {
-                                Toast.makeText(context, "无法打开系统语音设置", Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-                    }) {
-                        Text("语音设置", fontSize = 12.5.sp)
+                        Text(
+                            text = if (vm.speaker.germanAvailable)
+                                "不依赖系统语音组件；例句可用系统语音朗读"
+                            else "不依赖系统语音组件；例句朗读联网时自动获取",
+                            fontSize = 11.5.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
                     }
                 }
 
-                Spacer(Modifier.height(4.dp))
-                Surface(
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    onClick = { vm.speak("Guten Tag, wie geht es Ihnen?") }
-                ) {
-                    Text(
-                        text = "试听一句",
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 9.dp),
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
+                Spacer(Modifier.height(8.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        onClick = { vm.speak("Entschuldigung") }
+                    ) {
+                        Text(
+                            text = "试听单词",
+                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 9.dp),
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        onClick = { vm.speak("Guten Tag, wie geht es Ihnen?") }
+                    ) {
+                        Text(
+                            text = "试听句子",
+                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 9.dp),
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                 }
             }
         }
