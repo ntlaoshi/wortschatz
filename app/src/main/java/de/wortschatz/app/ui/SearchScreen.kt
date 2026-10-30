@@ -49,9 +49,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.wortschatz.app.AppViewModel
@@ -78,15 +80,22 @@ fun SearchScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                 onValueChange = { vm.onQueryChange(it) },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 10.dp)
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
                     .focusRequester(focus),
-                placeholder = { Text("输入德语单词或中文，如 Hund", fontSize = 15.sp) },
+                placeholder = {
+                    Text(
+                        text = "搜德语或中文",
+                        fontSize = 15.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
                 leadingIcon = {
                     Icon(
                         Icons.Rounded.Search,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(19.dp)
                     )
                 },
                 trailingIcon = {
@@ -95,13 +104,14 @@ fun SearchScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                             Icon(
                                 Icons.Rounded.Clear,
                                 contentDescription = "清除",
-                                modifier = Modifier.size(19.dp),
+                                modifier = Modifier.size(18.dp),
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
                     }
                 },
                 singleLine = true,
+                textStyle = TextStyle(fontSize = 16.sp, lineHeight = 22.sp),
                 shape = RoundedCornerShape(14.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant,

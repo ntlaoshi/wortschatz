@@ -126,12 +126,28 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     var learnedWords by mutableStateOf<List<Word>>(emptyList())
         private set
 
+    /** 当前使用的自建单词书 id；为 null 表示按内置书的等级范围学习 */
+    var currentBookId by mutableStateOf(prefs.getString(KEY_CURRENT_BOOK, null))
+        private set
+
+    /** 当前书的词条（仅自建书有） */
+    var bookWords by mutableStateOf<List<Word>>(emptyList())
+        private set
+
     /** 用户自建单词书 */
     var customBooks by mutableStateOf(loadBooks())
         private set
 
+    /** 各本书的词数（自建书来自 book_words，内置书来自等级统计） */
+    var bookCounts by mutableStateOf<Map<String, Int>>(emptyMap())
+        private set
+
     /** 内置 + 自建，供设置页展示 */
     val allBooks: List<WordBook> get() = WordBook.BUILTINS + customBooks
+
+    /** 当前单词书 */
+    val currentBook: WordBook?
+        get() = currentBookId?.let { id -> customBooks.firstOrNull { it.id == id } }
 
     init {
         speaker.init()
@@ -149,15 +165,16 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     fun refresh() {
         viewModelScope.launch {
-            val snapshot = withContext(Dispatchers.IO) {
-                Triple(db.stats(levels), db.countByLevel(), db.countWords())
+            stats = withContext(Dispatchers.IO) { db.stats(levels, currentBookId) }
+            levelCounts = withContext(Dispatchers.IO) { db.countByLevel() }
+            totalWords = withContext(Dispatchers.IO) { db.countWords() }
+            bookCounts = withContext(Dispatchers.IO) {
+                customBooks.associate { it.id to db.bookWordCount(it.id) }
             }
-            stats = snapshot.first
-            levelCounts = snapshot.second
-            totalWords = snapshot.third
             loadStarred()
             loadCheckins()
             loadRecords()
+            loadBookWords()
         }
     }
 
@@ -279,15 +296,16 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             val items = withContext(Dispatchers.IO) {
                 val now = System.currentTimeMillis()
+                val book = currentBookId
                 when (mode) {
-                    SessionMode.REVIEW -> db.dueWords(now, levels, sessionSize)
-                    SessionMode.NEW -> db.newWords(levels, sessionSize)
+                    SessionMode.REVIEW -> db.dueWords(now, levels, sessionSize, book)
+                    SessionMode.NEW -> db.newWords(levels, sessionSize, book)
                         .map { WordWithProgress(it, Progress(it.id)) }
                     SessionMode.MIXED -> {
-                        val due = db.dueWords(now, levels, sessionSize)
+                        val due = db.dueWords(now, levels, sessionSize, book)
                         val remaining = (sessionSize - due.size).coerceAtLeast(0)
                         val fresh = if (remaining == 0) emptyList()
-                        else db.newWords(levels, remaining)
+                        else db.newWords(levels, remaining, book)
                         due + fresh.map { WordWithProgress(it, Progress(it.id)) }
                     }
                 }
@@ -452,45 +470,113 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         val next = if (levels.contains(level)) levels - level else levels + level
         if (next.isEmpty()) return
         levels = next
-        prefs.edit().putString(KEY_LEVELS, next.joinToString(",")).apply()
+        // 手动调等级即退出自建书模式，回到按等级学习
+        currentBookId = null
+        prefs.edit()
+            .putString(KEY_LEVELS, next.joinToString(","))
+            .remove(KEY_CURRENT_BOOK)
+            .apply()
         refresh()
     }
 
-    /** 选择单词书：整本替换当前学习范围 */
-    fun selectBook(bookLevels: Set<String>) {
-        if (bookLevels.isEmpty()) return
-        levels = bookLevels
-        prefs.edit().putString(KEY_LEVELS, bookLevels.joinToString(",")).apply()
+    /** 选择单词书：内置书设置等级范围，自建书按书内词集合学习 */
+    fun selectBook(book: WordBook) {
+        if (book.builtin) {
+            currentBookId = null
+            levels = book.levels
+            prefs.edit()
+                .putString(KEY_LEVELS, book.levels.joinToString(","))
+                .remove(KEY_CURRENT_BOOK)
+                .apply()
+        } else {
+            currentBookId = book.id
+            prefs.edit().putString(KEY_CURRENT_BOOK, book.id).apply()
+        }
         refresh()
     }
 
     // ---------------------------------------------------------------- 单词书管理
 
-    fun addBook(name: String, bookLevels: Set<String>) {
+    fun addBook(name: String) {
         val clean = name.trim()
-        if (clean.isEmpty() || bookLevels.isEmpty()) return
-        val book = WordBook(java.util.UUID.randomUUID().toString(), clean, bookLevels)
+        if (clean.isEmpty()) return
+        val book = WordBook(java.util.UUID.randomUUID().toString(), clean)
         customBooks = customBooks + book
         saveBooks()
-        selectBook(bookLevels)
+        selectBook(book)
     }
 
-    fun updateBook(id: String, name: String, bookLevels: Set<String>) {
+    fun updateBook(id: String, name: String) {
         val clean = name.trim()
-        if (clean.isEmpty() || bookLevels.isEmpty()) return
+        if (clean.isEmpty()) return
         customBooks = customBooks.map {
-            if (it.id == id) it.copy(name = clean, levels = bookLevels) else it
+            if (it.id == id) it.copy(name = clean) else it
         }
         saveBooks()
-        // 改的是当前正在用的书，学习范围要跟着变
-        if (customBooks.firstOrNull { it.id == id }?.levels == levels) refresh()
     }
 
     fun deleteBook(id: String) {
-        val removed = customBooks.firstOrNull { it.id == id } ?: return
+        if (customBooks.none { it.id == id }) return
         customBooks = customBooks.filterNot { it.id == id }
         saveBooks()
-        if (removed.levels == levels) selectBook(DEFAULT_LEVELS)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) { db.deleteBookWords(id) }
+        }
+        if (currentBookId == id) {
+            currentBookId = null
+            prefs.edit().remove(KEY_CURRENT_BOOK).apply()
+        }
+        refresh()
+    }
+
+    // ---------------------------------------------------------------- 书内词
+
+    fun loadBookWords() {
+        val id = currentBookId
+        if (id == null) {
+            bookWords = emptyList()
+            return
+        }
+        viewModelScope.launch {
+            bookWords = withContext(Dispatchers.IO) { db.bookWords(id) }
+        }
+    }
+
+    /** 往指定书里加词，返回新增条数 */
+    fun addWordsToBook(bookId: String, words: List<Word>, onDone: (Int) -> Unit = {}) {
+        if (words.isEmpty()) return
+        viewModelScope.launch {
+            val n = withContext(Dispatchers.IO) {
+                db.addWordsToBook(bookId, words.map { it.id })
+            }
+            refresh()
+            onDone(n)
+        }
+    }
+
+    fun removeFromBook(word: Word) {
+        val id = currentBookId ?: return
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) { db.removeWordFromBook(id, word.id) }
+            refresh()
+        }
+    }
+
+    /** 词是否在当前书里 */
+    fun isInCurrentBook(wordId: Long): Boolean = bookWords.any { it.id == wordId }
+
+    /** 管理单词书时用的搜索（不受全局查词状态影响） */
+    fun searchForBook(text: String, onResult: (List<Word>) -> Unit) {
+        if (text.isBlank()) {
+            onResult(emptyList())
+            return
+        }
+        viewModelScope.launch {
+            val list = withContext(Dispatchers.IO) {
+                db.search(text, ALL_LEVELS.toSet(), 40)
+            }
+            onResult(list)
+        }
     }
 
     private fun saveBooks() {
@@ -500,7 +586,6 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 JSONObject().apply {
                     put("id", b.id)
                     put("name", b.name)
-                    put("levels", b.levels.joinToString(","))
                 }
             )
         }
@@ -514,11 +599,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             buildList {
                 for (i in 0 until arr.length()) {
                     val o = arr.getJSONObject(i)
-                    val lv = o.optString("levels").split(",")
-                        .filter { it.isNotBlank() }.toSet()
-                    if (lv.isNotEmpty()) {
-                        add(WordBook(o.getString("id"), o.getString("name"), lv))
-                    }
+                    add(WordBook(o.getString("id"), o.getString("name")))
                 }
             }
         }.getOrDefault(emptyList())
@@ -600,6 +681,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         private const val KEY_THEME = "theme_mode"
         private const val KEY_SPELL_TEST = "spell_test"
         private const val KEY_BOOKS = "custom_books"
+        private const val KEY_CURRENT_BOOK = "current_book_id"
         val ALL_LEVELS = listOf("A1", "A2", "B1", "B2")
         val DEFAULT_LEVELS = setOf("A1", "A2", "B1", "B2")
     }

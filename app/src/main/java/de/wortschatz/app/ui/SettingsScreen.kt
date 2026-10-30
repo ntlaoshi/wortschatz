@@ -67,6 +67,7 @@ import kotlin.math.roundToInt
 fun SettingsScreen(
     vm: AppViewModel,
     onOpenRecords: () -> Unit,
+    onOpenBook: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -121,25 +122,30 @@ fun SettingsScreen(
         item {
             SettingCard(title = "单词书") {
                 Text(
-                    text = "选一本，学习与复习都只从这本书取词",
+                    text = "内置书按等级划分；自建书是自己挑的词，学习与复习只从当前这本取词",
                     fontSize = 12.5.sp,
+                    lineHeight = 18.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(Modifier.height(6.dp))
                 vm.allBooks.forEach { book ->
-                    val selected = vm.levels == book.levels
-                    val count = book.levels.sumOf { vm.levelCounts[it] ?: 0 }
+                    val selected = if (book.builtin)
+                        vm.currentBookId == null && vm.levels == book.levels
+                    else vm.currentBookId == book.id
+                    val count = if (book.builtin)
+                        book.levels.sumOf { vm.levelCounts[it] ?: 0 }
+                    else vm.bookCounts[book.id] ?: 0
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(10.dp))
-                            .clickable { vm.selectBook(book.levels) }
+                            .clickable { vm.selectBook(book) }
                             .padding(vertical = 6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         RadioButton(
                             selected = selected,
-                            onClick = { vm.selectBook(book.levels) },
+                            onClick = { vm.selectBook(book) },
                             colors = RadioButtonDefaults.colors(
                                 selectedColor = MaterialTheme.colorScheme.primary
                             )
@@ -175,7 +181,7 @@ fun SettingsScreen(
                             ) {
                                 Icon(
                                     Icons.Rounded.Edit,
-                                    contentDescription = "编辑",
+                                    contentDescription = "重命名",
                                     modifier = Modifier.size(16.dp),
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -191,6 +197,36 @@ fun SettingsScreen(
                                     tint = MaterialTheme.colorScheme.error.copy(alpha = 0.7f)
                                 )
                             }
+                        }
+                    }
+                }
+
+                // 选中自建书时，提供加词入口
+                val active = vm.currentBook
+                if (active != null) {
+                    Spacer(Modifier.height(6.dp))
+                    Surface(
+                        shape = RoundedCornerShape(11.dp),
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        onClick = onOpenBook
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 13.dp, vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Rounded.ListAlt,
+                                contentDescription = null,
+                                modifier = Modifier.size(17.dp),
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Spacer(Modifier.width(6.dp))
+                            Text(
+                                text = "管理《${active.name}》的单词 · ${vm.bookWords.size} 词",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
                         }
                     }
                 }
@@ -615,7 +651,7 @@ fun SettingsScreen(
                     Spacer(Modifier.width(8.dp))
                     Column {
                         Text(
-                            text = "德语单词 Wortschatz 1.4",
+                            text = "德语单词 Wortschatz 1.5",
                             fontSize = 13.sp,
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -665,33 +701,29 @@ fun SettingsScreen(
         BookEditDialog(
             initial = editingBook,
             onDismiss = { showBookDialog = false },
-            onConfirm = { name, picked ->
+            onConfirm = { name ->
                 val editing = editingBook
-                if (editing == null) vm.addBook(name, picked)
-                else vm.updateBook(editing.id, name, picked)
+                if (editing == null) vm.addBook(name) else vm.updateBook(editing.id, name)
                 showBookDialog = false
             }
         )
     }
 }
 
-/** 新建 / 编辑单词书：名称 + 包含的等级 */
+/** 新建 / 重命名单词书。书里的词通过「管理单词」单独添加。 */
 @Composable
 private fun BookEditDialog(
     initial: WordBook?,
     onDismiss: () -> Unit,
-    onConfirm: (String, Set<String>) -> Unit
+    onConfirm: (String) -> Unit
 ) {
     var name by remember(initial) { mutableStateOf(initial?.name ?: "") }
-    var picked by remember(initial) {
-        mutableStateOf(initial?.levels ?: setOf("A1"))
-    }
 
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
             Text(
-                text = if (initial == null) "新建单词书" else "编辑单词书",
+                text = if (initial == null) "新建单词书" else "重命名单词书",
                 fontSize = 17.sp,
                 fontWeight = FontWeight.SemiBold
             )
@@ -707,35 +739,20 @@ private fun BookEditDialog(
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
-                Spacer(Modifier.height(14.dp))
+                Spacer(Modifier.height(10.dp))
                 Text(
-                    text = "包含哪些等级",
-                    fontSize = 12.5.sp,
+                    text = if (initial == null) "建好后点「管理单词」把要背的词加进来"
+                    else "只改名字，书里的词不受影响",
+                    fontSize = 11.5.sp,
+                    lineHeight = 17.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                Spacer(Modifier.height(8.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(7.dp)) {
-                    AppViewModel.ALL_LEVELS.forEach { lv ->
-                        FilterChip(
-                            selected = picked.contains(lv),
-                            onClick = {
-                                picked = if (picked.contains(lv)) picked - lv else picked + lv
-                            },
-                            label = { Text(lv, fontSize = 12.5.sp) },
-                            colors = FilterChipDefaults.filterChipColors(
-                                selectedContainerColor = ExtraColors.levelColor(lv)
-                                    .copy(alpha = 0.16f),
-                                selectedLabelColor = ExtraColors.levelColor(lv)
-                            )
-                        )
-                    }
-                }
             }
         },
         confirmButton = {
             TextButton(
-                onClick = { onConfirm(name, picked) },
-                enabled = name.isNotBlank() && picked.isNotEmpty()
+                onClick = { onConfirm(name) },
+                enabled = name.isNotBlank()
             ) {
                 Text("保存")
             }

@@ -72,6 +72,18 @@ class WordDb private constructor(context: Context) :
             )
             """.trimIndent()
         )
+
+        db.execSQL(
+            """
+            CREATE TABLE book_words (
+                book_id TEXT NOT NULL,
+                word_id INTEGER NOT NULL,
+                added INTEGER NOT NULL DEFAULT 0,
+                PRIMARY KEY (book_id, word_id)
+            )
+            """.trimIndent()
+        )
+        db.execSQL("CREATE INDEX idx_book_words_book ON book_words(book_id)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -81,6 +93,21 @@ class WordDb private constructor(context: Context) :
             // v2：新增「已掌握」标记，已掌握的词不再进入复习队列
             db.execSQL("ALTER TABLE progress ADD COLUMN mastered INTEGER NOT NULL DEFAULT 0")
             version = 2
+        }
+        if (version < 3) {
+            // v3：自建单词书改为「自选词集合」，需要书与词的关联表
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS book_words (
+                    book_id TEXT NOT NULL,
+                    word_id INTEGER NOT NULL,
+                    added INTEGER NOT NULL DEFAULT 0,
+                    PRIMARY KEY (book_id, word_id)
+                )
+                """.trimIndent()
+            )
+            db.execSQL("CREATE INDEX IF NOT EXISTS idx_book_words_book ON book_words(book_id)")
+            version = 3
         }
     }
 
@@ -234,6 +261,63 @@ class WordDb private constructor(context: Context) :
     /** 移除单个词的学习记录（回到未学状态） */
     fun removeLearningRecord(wordId: Long): Int = resetWordProgress(wordId)
 
+    // ---------------------------------------------------------------- 自建单词书
+
+    /** 往书里添加词，返回实际新增条数（已存在的自动跳过） */
+    fun addWordsToBook(bookId: String, wordIds: List<Long>): Int {
+        if (wordIds.isEmpty()) return 0
+        val db = writableDatabase
+        var added = 0
+        db.beginTransaction()
+        try {
+            val stmt = db.compileStatement(
+                "INSERT OR IGNORE INTO book_words(book_id, word_id, added) VALUES(?,?,?)"
+            )
+            val now = System.currentTimeMillis()
+            wordIds.forEach { id ->
+                stmt.clearBindings()
+                stmt.bindString(1, bookId)
+                stmt.bindLong(2, id)
+                stmt.bindLong(3, now)
+                if (stmt.executeInsert() != -1L) added++
+            }
+            db.setTransactionSuccessful()
+        } finally {
+            db.endTransaction()
+        }
+        return added
+    }
+
+    fun removeWordFromBook(bookId: String, wordId: Long): Int = writableDatabase.delete(
+        "book_words", "book_id = ? AND word_id = ?", arrayOf(bookId, wordId.toString())
+    )
+
+    /** 书里的全部词 */
+    fun bookWords(bookId: String): List<Word> {
+        val sql = """
+            SELECT ${prefix("w.")} FROM words w
+            JOIN book_words b ON b.word_id = w.id
+            WHERE b.book_id = ?
+            ORDER BY w.level ASC, w.word ASC
+        """.trimIndent()
+        return readableDatabase.rawQuery(sql, arrayOf(bookId)).use { c ->
+            buildList { while (c.moveToNext()) add(readWord(c, c.getLong(0))) }
+        }
+    }
+
+    fun bookWordCount(bookId: String): Int = rawInt(
+        "SELECT COUNT(*) FROM book_words WHERE book_id = '${bookId.replace("'", "''")}'"
+    )
+
+    /** 词是否已在这本书里 */
+    fun isInBook(bookId: String, wordId: Long): Boolean = rawInt(
+        "SELECT COUNT(*) FROM book_words WHERE book_id = '${bookId.replace("'", "''")}' " +
+            "AND word_id = $wordId"
+    ) > 0
+
+    fun deleteBookWords(bookId: String): Int =
+        writableDatabase.delete("book_words", "book_id = ?", arrayOf(bookId))
+
     /** 有练习记录的日期集合（yyyy-MM-dd），供打卡日历使用 */
     fun loggedDays(): Set<String> {
         val set = mutableSetOf<String>()
@@ -309,12 +393,21 @@ class WordDb private constructor(context: Context) :
         }
     }
 
-    /** 待复习：state > 0 且 due <= now，已掌握的词永久排除 */
-    fun dueWords(now: Long, levels: Set<String>, limit: Int): List<WordWithProgress> {
+    /**
+     * 待复习：state > 0 且 due <= now，已掌握的词永久排除。
+     * bookId 非空时只取该单词书里的词，忽略等级条件。
+     */
+    fun dueWords(
+        now: Long,
+        levels: Set<String>,
+        limit: Int,
+        bookId: String? = null
+    ): List<WordWithProgress> {
+        val filter = bookFilter(bookId) ?: levelClause(levels, "w.")
         val sql = """
             SELECT ${prefix("w.")}, ${prefixProgress()}
             FROM words w JOIN progress p ON p.word_id = w.id
-            WHERE p.state > 0 AND p.due <= ? AND p.mastered = 0 ${levelClause(levels, "w.")}
+            WHERE p.state > 0 AND p.due <= ? AND p.mastered = 0 $filter
             ORDER BY p.due ASC
             LIMIT ?
         """.trimIndent()
@@ -322,18 +415,30 @@ class WordDb private constructor(context: Context) :
             .use { c -> buildList { while (c.moveToNext()) add(readWordWithProgress(c)) } }
     }
 
-    /** 未学过的新词，按等级由低到高取 */
-    fun newWords(levels: Set<String>, limit: Int): List<Word> {
+    /** 未学过的新词，按等级由低到高取；bookId 非空时只取该书内的词 */
+    fun newWords(
+        levels: Set<String>,
+        limit: Int,
+        bookId: String? = null
+    ): List<Word> {
+        val filter = bookFilter(bookId) ?: levelClause(levels, "w.")
         val sql = """
             SELECT ${prefix("w.")} FROM words w
             LEFT JOIN progress p ON p.word_id = w.id
-            WHERE p.word_id IS NULL ${levelClause(levels, "w.")}
+            WHERE p.word_id IS NULL $filter
             ORDER BY w.level ASC, w.id ASC
             LIMIT ?
         """.trimIndent()
         return readableDatabase.rawQuery(sql, arrayOf(limit.toString())).use { c ->
             buildList { while (c.moveToNext()) add(readWord(c, c.getLong(0))) }
         }
+    }
+
+    /** 自建书的过滤条件；bookId 为空返回 null 表示按等级筛选 */
+    private fun bookFilter(bookId: String?): String? {
+        if (bookId == null) return null
+        val safe = bookId.replace("'", "''")
+        return " AND w.id IN (SELECT word_id FROM book_words WHERE book_id = '$safe')"
     }
 
     fun starredWords(): List<Word> {
@@ -351,10 +456,10 @@ class WordDb private constructor(context: Context) :
 
     fun progressOf(wordId: Long): Progress = getProgress(wordId) ?: Progress(wordId)
 
-    fun stats(levels: Set<String>): StudyStats {
+    fun stats(levels: Set<String>, bookId: String? = null): StudyStats {
         val now = System.currentTimeMillis()
         val today = todayString()
-        val clause = levelClause(levels, "w.")
+        val clause = bookFilter(bookId) ?: levelClause(levels, "w.")
         val learned = rawInt(
             "SELECT COUNT(*) FROM progress p JOIN words w ON w.id = p.word_id " +
                 "WHERE p.state > 0 AND p.mastered = 0 $clause"
@@ -465,7 +570,7 @@ class WordDb private constructor(context: Context) :
 
     companion object {
         private const val DB_NAME = "wortschatz.db"
-        private const val DB_VERSION = 2
+        private const val DB_VERSION = 3
         private const val COLUMNS =
             "id, word, lemma, pos, gender, plural, zh, en, example, example_zh, level, tags, source"
 

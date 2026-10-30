@@ -1,13 +1,15 @@
 package de.wortschatz.app.data
 
 /**
- * 单词书：一本书对应一组学习等级。
- * 内置 5 本不可编辑，用户自建的可以改名、改范围、删除。
+ * 单词书。
+ *
+ * 内置书按等级划分（levels 有效、builtin = true）；
+ * 自建书是用户自己挑的词集合（存在 book_words 表里，levels 为空）。
  */
 data class WordBook(
     val id: String,
     val name: String,
-    val levels: Set<String>,
+    val levels: Set<String> = emptySet(),
     val builtin: Boolean = false
 ) {
     companion object {
@@ -26,7 +28,7 @@ data class WordBook(
             "builtin_b1" -> "工作、社会与观点表达"
             "builtin_b2" -> "抽象话题与书面表达"
             "builtin_all" -> "所有等级混合"
-            else -> book.levels.sorted().joinToString(" + ")
+            else -> "自选词集合"
         }
     }
 }

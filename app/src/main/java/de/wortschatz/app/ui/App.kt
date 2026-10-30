@@ -59,6 +59,15 @@ fun WortschatzApp(vm: AppViewModel) {
     var showStudy by remember { mutableStateOf(false) }
     var showCalendar by remember { mutableStateOf(false) }
     var showRecords by remember { mutableStateOf(false) }
+    var showBook by remember { mutableStateOf(false) }
+
+    if (showBook) {
+        BookDetailScreen(vm = vm, onBack = {
+            showBook = false
+            vm.refresh()
+        })
+        return
+    }
 
     if (showRecords) {
         LearningRecordsScreen(vm = vm, onBack = {
@@ -146,7 +155,8 @@ fun WortschatzApp(vm: AppViewModel) {
                     2 -> StarredScreen(vm = vm)
                     else -> SettingsScreen(
                         vm = vm,
-                        onOpenRecords = { showRecords = true }
+                        onOpenRecords = { showRecords = true },
+                        onOpenBook = { showBook = true }
                     )
                 }
             }
