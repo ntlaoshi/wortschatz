@@ -16,12 +16,15 @@ import de.wortschatz.app.data.Sm2
 import de.wortschatz.app.data.SpellTest
 import de.wortschatz.app.data.StudyStats
 import de.wortschatz.app.data.Word
+import de.wortschatz.app.data.WordBook
 import de.wortschatz.app.data.WordDb
 import de.wortschatz.app.data.WordWithProgress
 import de.wortschatz.app.tts.Speaker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
 
 class AppViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -115,6 +118,21 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     var checkinDays by mutableStateOf<Set<String>>(emptySet())
         private set
 
+    /** 已掌握的词 */
+    var masteredWords by mutableStateOf<List<Word>>(emptyList())
+        private set
+
+    /** 已学习但未掌握的词 */
+    var learnedWords by mutableStateOf<List<Word>>(emptyList())
+        private set
+
+    /** 用户自建单词书 */
+    var customBooks by mutableStateOf(loadBooks())
+        private set
+
+    /** 内置 + 自建，供设置页展示 */
+    val allBooks: List<WordBook> get() = WordBook.BUILTINS + customBooks
+
     init {
         speaker.init()
         speaker.updateSpeed(ttsSpeed)
@@ -139,6 +157,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             totalWords = snapshot.third
             loadStarred()
             loadCheckins()
+            loadRecords()
         }
     }
 
@@ -158,6 +177,28 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             checkinDays = withContext(Dispatchers.IO) { db.loggedDays() }
         }
     }
+
+    /** 加载已学习 / 已掌握列表 */
+    fun loadRecords() {
+        viewModelScope.launch {
+            val pair = withContext(Dispatchers.IO) {
+                db.learnedWords() to db.masteredWords()
+            }
+            learnedWords = pair.first
+            masteredWords = pair.second
+        }
+    }
+
+    /** 标记或取消「已掌握」 */
+    fun setMastered(word: Word, mastered: Boolean) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) { db.setMastered(word.id, mastered) }
+            refresh()
+            loadRecords()
+        }
+    }
+
+    fun isMastered(wordId: Long): Boolean = masteredWords.any { it.id == wordId }
 
     // ---------------------------------------------------------------- 查词
 
@@ -279,6 +320,22 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         revealed = true
     }
 
+    /**
+     * 把当前词标记为「已掌握」：此后它不会再出现在复习队列里。
+     * 直接进入下一张，本张算作已完成。
+     */
+    fun masterCurrent() {
+        val item = current ?: return
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) { db.setMastered(item.word.id, true) }
+            queue.removeAll { it.word.id == item.word.id }
+            // 已掌握的词不再参与拼写测试
+            sessionDone++
+            revealed = false
+            nextCard()
+        }
+    }
+
     fun rate(rating: Rating) {
         val item = current ?: return
         viewModelScope.launch {
@@ -376,6 +433,16 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) { db.resetWordProgress(wordId) }
             refresh()
+            loadRecords()
+        }
+    }
+
+    /** 移除单个词的学习记录（回到未学状态） */
+    fun removeLearningRecord(word: Word) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) { db.removeLearningRecord(word.id) }
+            refresh()
+            loadRecords()
         }
     }
 
@@ -395,6 +462,66 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         levels = bookLevels
         prefs.edit().putString(KEY_LEVELS, bookLevels.joinToString(",")).apply()
         refresh()
+    }
+
+    // ---------------------------------------------------------------- 单词书管理
+
+    fun addBook(name: String, bookLevels: Set<String>) {
+        val clean = name.trim()
+        if (clean.isEmpty() || bookLevels.isEmpty()) return
+        val book = WordBook(java.util.UUID.randomUUID().toString(), clean, bookLevels)
+        customBooks = customBooks + book
+        saveBooks()
+        selectBook(bookLevels)
+    }
+
+    fun updateBook(id: String, name: String, bookLevels: Set<String>) {
+        val clean = name.trim()
+        if (clean.isEmpty() || bookLevels.isEmpty()) return
+        customBooks = customBooks.map {
+            if (it.id == id) it.copy(name = clean, levels = bookLevels) else it
+        }
+        saveBooks()
+        // 改的是当前正在用的书，学习范围要跟着变
+        if (customBooks.firstOrNull { it.id == id }?.levels == levels) refresh()
+    }
+
+    fun deleteBook(id: String) {
+        val removed = customBooks.firstOrNull { it.id == id } ?: return
+        customBooks = customBooks.filterNot { it.id == id }
+        saveBooks()
+        if (removed.levels == levels) selectBook(DEFAULT_LEVELS)
+    }
+
+    private fun saveBooks() {
+        val arr = JSONArray()
+        customBooks.forEach { b ->
+            arr.put(
+                JSONObject().apply {
+                    put("id", b.id)
+                    put("name", b.name)
+                    put("levels", b.levels.joinToString(","))
+                }
+            )
+        }
+        prefs.edit().putString(KEY_BOOKS, arr.toString()).apply()
+    }
+
+    private fun loadBooks(): List<WordBook> {
+        val raw = prefs.getString(KEY_BOOKS, null) ?: return emptyList()
+        return runCatching {
+            val arr = JSONArray(raw)
+            buildList {
+                for (i in 0 until arr.length()) {
+                    val o = arr.getJSONObject(i)
+                    val lv = o.optString("levels").split(",")
+                        .filter { it.isNotBlank() }.toSet()
+                    if (lv.isNotEmpty()) {
+                        add(WordBook(o.getString("id"), o.getString("name"), lv))
+                    }
+                }
+            }
+        }.getOrDefault(emptyList())
     }
 
     fun updateSessionSize(n: Int) {
@@ -472,6 +599,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         private const val KEY_SPEED = "tts_speed"
         private const val KEY_THEME = "theme_mode"
         private const val KEY_SPELL_TEST = "spell_test"
+        private const val KEY_BOOKS = "custom_books"
         val ALL_LEVELS = listOf("A1", "A2", "B1", "B2")
         val DEFAULT_LEVELS = setOf("A1", "A2", "B1", "B2")
     }

@@ -47,7 +47,8 @@ class WordDb private constructor(context: Context) :
                 lapses INTEGER NOT NULL DEFAULT 0,
                 due INTEGER NOT NULL DEFAULT 0,
                 last_review INTEGER NOT NULL DEFAULT 0,
-                state INTEGER NOT NULL DEFAULT 0
+                state INTEGER NOT NULL DEFAULT 0,
+                mastered INTEGER NOT NULL DEFAULT 0
             )
             """.trimIndent()
         )
@@ -74,13 +75,12 @@ class WordDb private constructor(context: Context) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        // 词库为可重灌数据，升级时直接重建，避免复杂的迁移逻辑。
-        if (oldVersion < newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS words")
-            db.execSQL("DROP TABLE IF EXISTS progress")
-            db.execSQL("DROP TABLE IF EXISTS starred")
-            db.execSQL("DROP TABLE IF EXISTS daily_log")
-            onCreate(db)
+        // 增量迁移：学习进度是用户数据，不能因为加字段就丢掉。
+        var version = oldVersion
+        if (version < 2) {
+            // v2：新增「已掌握」标记，已掌握的词不再进入复习队列
+            db.execSQL("ALTER TABLE progress ADD COLUMN mastered INTEGER NOT NULL DEFAULT 0")
+            version = 2
         }
     }
 
@@ -185,6 +185,55 @@ class WordDb private constructor(context: Context) :
     /** 清除全部学习进度，返回受影响的词条数 */
     fun resetAllProgress(): Int = writableDatabase.delete("progress", null, null)
 
+    /**
+     * 标记 / 取消标记「已掌握」。
+     * 已掌握的词不再进入复习队列；取消掌握后立即回到待复习队列。
+     */
+    fun setMastered(wordId: Long, mastered: Boolean) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put("mastered", if (mastered) 1 else 0)
+            if (!mastered) put("due", System.currentTimeMillis())
+        }
+        val updated = db.update("progress", values, "word_id = ?", arrayOf(wordId.toString()))
+        if (updated == 0) {
+            // 尚未学过就直接标记掌握：补一条进度记录，避免它再被当成新词
+            values.put("word_id", wordId)
+            values.put("state", 1)
+            db.insert("progress", null, values)
+        }
+    }
+
+    fun isMastered(wordId: Long): Boolean =
+        rawInt("SELECT COALESCE(MAX(mastered),0) FROM progress WHERE word_id = $wordId") == 1
+
+    /** 已掌握的词 */
+    fun masteredWords(): List<Word> {
+        val sql = """
+            SELECT ${prefix("w.")} FROM words w JOIN progress p ON p.word_id = w.id
+            WHERE p.mastered = 1
+            ORDER BY w.word ASC
+        """.trimIndent()
+        return readableDatabase.rawQuery(sql, null).use { c ->
+            buildList { while (c.moveToNext()) add(readWord(c, c.getLong(0))) }
+        }
+    }
+
+    /** 已学习但未掌握的词，最近复习的排在前面 */
+    fun learnedWords(): List<Word> {
+        val sql = """
+            SELECT ${prefix("w.")} FROM words w JOIN progress p ON p.word_id = w.id
+            WHERE p.state > 0 AND p.mastered = 0
+            ORDER BY p.last_review DESC, w.word ASC
+        """.trimIndent()
+        return readableDatabase.rawQuery(sql, null).use { c ->
+            buildList { while (c.moveToNext()) add(readWord(c, c.getLong(0))) }
+        }
+    }
+
+    /** 移除单个词的学习记录（回到未学状态） */
+    fun removeLearningRecord(wordId: Long): Int = resetWordProgress(wordId)
+
     /** 有练习记录的日期集合（yyyy-MM-dd），供打卡日历使用 */
     fun loggedDays(): Set<String> {
         val set = mutableSetOf<String>()
@@ -260,12 +309,12 @@ class WordDb private constructor(context: Context) :
         }
     }
 
-    /** 待复习：state > 0 且 due <= now */
+    /** 待复习：state > 0 且 due <= now，已掌握的词永久排除 */
     fun dueWords(now: Long, levels: Set<String>, limit: Int): List<WordWithProgress> {
         val sql = """
             SELECT ${prefix("w.")}, ${prefixProgress()}
             FROM words w JOIN progress p ON p.word_id = w.id
-            WHERE p.state > 0 AND p.due <= ? ${levelClause(levels, "w.")}
+            WHERE p.state > 0 AND p.due <= ? AND p.mastered = 0 ${levelClause(levels, "w.")}
             ORDER BY p.due ASC
             LIMIT ?
         """.trimIndent()
@@ -308,11 +357,11 @@ class WordDb private constructor(context: Context) :
         val clause = levelClause(levels, "w.")
         val learned = rawInt(
             "SELECT COUNT(*) FROM progress p JOIN words w ON w.id = p.word_id " +
-                "WHERE p.state > 0 $clause"
+                "WHERE p.state > 0 AND p.mastered = 0 $clause"
         )
         val due = rawInt(
             "SELECT COUNT(*) FROM progress p JOIN words w ON w.id = p.word_id " +
-                "WHERE p.state > 0 AND p.due <= $now $clause"
+                "WHERE p.state > 0 AND p.due <= $now AND p.mastered = 0 $clause"
         )
         val newAvail = rawInt(
             "SELECT COUNT(*) FROM words w LEFT JOIN progress p ON p.word_id = w.id " +
@@ -416,7 +465,7 @@ class WordDb private constructor(context: Context) :
 
     companion object {
         private const val DB_NAME = "wortschatz.db"
-        private const val DB_VERSION = 1
+        private const val DB_VERSION = 2
         private const val COLUMNS =
             "id, word, lemma, pos, gender, plural, zh, en, example, example_zh, level, tags, source"
 

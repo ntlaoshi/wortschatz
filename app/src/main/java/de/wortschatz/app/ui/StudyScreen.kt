@@ -161,6 +161,7 @@ fun StudyScreen(vm: AppViewModel, onExit: () -> Unit) {
                     onReveal = { vm.reveal() },
                     onRate = { vm.rate(it) },
                     onStar = { vm.toggleStar(current.word.id) },
+                    onMastered = { vm.masterCurrent() },
                     modifier = Modifier.weight(1f)
                 )
                 SwipeHint()
@@ -194,6 +195,7 @@ private fun StudyCard(
     onReveal: () -> Unit,
     onRate: (Rating) -> Unit,
     onStar: () -> Unit,
+    onMastered: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val word = item.word
@@ -324,6 +326,47 @@ private fun StudyCard(
                     isNew = item.progress.state == 0,
                     starred = starred
                 )
+            }
+        }
+
+        // 已掌握：点一下这个词就永久退出复习队列。按钮跟随卡片位移，手感一致。
+        if (dragDistance < threshold * 0.6f) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(12.dp)
+                    .graphicsLayer {
+                        translationX = offsetX.value
+                        translationY = offsetY.value
+                    }
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(10.dp),
+                    color = ExtraColors.successContainer,
+                    border = androidx.compose.foundation.BorderStroke(
+                        1.dp, ExtraColors.success.copy(alpha = 0.32f)
+                    ),
+                    onClick = { if (!busy) onMastered() }
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            Icons.Rounded.Check,
+                            contentDescription = null,
+                            modifier = Modifier.size(13.dp),
+                            tint = ExtraColors.success
+                        )
+                        Spacer(Modifier.width(3.dp))
+                        Text(
+                            text = "已掌握",
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = ExtraColors.success
+                        )
+                    }
+                }
             }
         }
 

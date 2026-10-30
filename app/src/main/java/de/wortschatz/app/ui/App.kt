@@ -58,6 +58,15 @@ fun WortschatzApp(vm: AppViewModel) {
     var tab by rememberSaveable { mutableIntStateOf(0) }
     var showStudy by remember { mutableStateOf(false) }
     var showCalendar by remember { mutableStateOf(false) }
+    var showRecords by remember { mutableStateOf(false) }
+
+    if (showRecords) {
+        LearningRecordsScreen(vm = vm, onBack = {
+            showRecords = false
+            vm.refresh()
+        })
+        return
+    }
 
     if (showCalendar) {
         CheckinCalendarScreen(vm = vm, onBack = { showCalendar = false })
@@ -135,7 +144,10 @@ fun WortschatzApp(vm: AppViewModel) {
 
                     1 -> SearchScreen(vm = vm)
                     2 -> StarredScreen(vm = vm)
-                    else -> SettingsScreen(vm = vm)
+                    else -> SettingsScreen(
+                        vm = vm,
+                        onOpenRecords = { showRecords = true }
+                    )
                 }
             }
         }

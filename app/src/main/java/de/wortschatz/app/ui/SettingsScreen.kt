@@ -20,15 +20,21 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.FileOpen
 import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material.icons.rounded.ListAlt
 import androidx.compose.material.icons.rounded.RecordVoiceOver
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Slider
@@ -52,15 +58,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.wortschatz.app.AppViewModel
+import de.wortschatz.app.data.WordBook
 import de.wortschatz.app.tts.Speaker
 import de.wortschatz.app.ui.theme.ExtraColors
 import kotlin.math.roundToInt
 
 @Composable
-fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
+fun SettingsScreen(
+    vm: AppViewModel,
+    onOpenRecords: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     val context = LocalContext.current
     val levels = AppViewModel.ALL_LEVELS
     var showResetConfirm by remember { mutableStateOf(false) }
+    var showBookDialog by remember { mutableStateOf(false) }
+    var editingBook by remember { mutableStateOf<WordBook?>(null) }
 
     val importLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument()
@@ -113,27 +126,20 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(Modifier.height(6.dp))
-                val books = listOf(
-                    Triple("A1 入门", setOf("A1"), "基础词汇与日常表达"),
-                    Triple("A2 基础", setOf("A2"), "生活场景与简单交流"),
-                    Triple("B1 进阶", setOf("B1"), "工作、社会与观点表达"),
-                    Triple("B2 提高", setOf("B2"), "抽象话题与书面表达"),
-                    Triple("全部词库", setOf("A1", "A2", "B1", "B2"), "所有等级混合")
-                )
-                books.forEach { (title, set, desc) ->
-                    val selected = vm.levels == set
-                    val count = set.sumOf { vm.levelCounts[it] ?: 0 }
+                vm.allBooks.forEach { book ->
+                    val selected = vm.levels == book.levels
+                    val count = book.levels.sumOf { vm.levelCounts[it] ?: 0 }
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(10.dp))
-                            .clickable { vm.selectBook(set) }
-                            .padding(vertical = 7.dp),
+                            .clickable { vm.selectBook(book.levels) }
+                            .padding(vertical = 6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         RadioButton(
                             selected = selected,
-                            onClick = { vm.selectBook(set) },
+                            onClick = { vm.selectBook(book.levels) },
                             colors = RadioButtonDefaults.colors(
                                 selectedColor = MaterialTheme.colorScheme.primary
                             )
@@ -141,14 +147,14 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                         Spacer(Modifier.width(6.dp))
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = title,
+                                text = book.name,
                                 fontSize = 13.5.sp,
                                 fontWeight = if (selected) FontWeight.Medium
                                 else FontWeight.Normal,
                                 color = MaterialTheme.colorScheme.onSurface
                             )
                             Text(
-                                text = desc,
+                                text = WordBook.descriptionOf(book),
                                 fontSize = 11.sp,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -158,6 +164,62 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                             fontSize = 12.sp,
                             color = if (selected) MaterialTheme.colorScheme.primary
                             else MaterialTheme.colorScheme.outline
+                        )
+                        if (!book.builtin) {
+                            IconButton(
+                                onClick = {
+                                    editingBook = book
+                                    showBookDialog = true
+                                },
+                                modifier = Modifier.size(32.dp)
+                            ) {
+                                Icon(
+                                    Icons.Rounded.Edit,
+                                    contentDescription = "编辑",
+                                    modifier = Modifier.size(16.dp),
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            IconButton(
+                                onClick = { vm.deleteBook(book.id) },
+                                modifier = Modifier.size(32.dp)
+                            ) {
+                                Icon(
+                                    Icons.Rounded.Delete,
+                                    contentDescription = "删除",
+                                    modifier = Modifier.size(16.dp),
+                                    tint = MaterialTheme.colorScheme.error.copy(alpha = 0.7f)
+                                )
+                            }
+                        }
+                    }
+                }
+
+                Spacer(Modifier.height(8.dp))
+                Surface(
+                    shape = RoundedCornerShape(11.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f),
+                    onClick = {
+                        editingBook = null
+                        showBookDialog = true
+                    }
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 13.dp, vertical = 9.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            Icons.Rounded.Add,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp),
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                        Spacer(Modifier.width(5.dp))
+                        Text(
+                            text = "新建单词书",
+                            fontSize = 12.5.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                 }
@@ -478,13 +540,13 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "已学 ${vm.stats.totalLearned} 个词 · 连续 ${vm.stats.streak} 天",
+                            text = "学习中 ${vm.learnedWords.size} 个 · 已掌握 ${vm.masteredWords.size} 个",
                             fontSize = 13.5.sp,
                             color = MaterialTheme.colorScheme.onSurface
                         )
                         Spacer(Modifier.height(2.dp))
                         Text(
-                            text = "清除后这些词回到「未学」状态，可重新进入学习队列；收藏不受影响",
+                            text = "进列表可以逐个标记掌握或移除记录；已掌握的词不再进入复习",
                             fontSize = 11.5.sp,
                             lineHeight = 17.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -494,11 +556,40 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                 Spacer(Modifier.height(12.dp))
                 Surface(
                     shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f),
+                    onClick = onOpenRecords
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            Icons.Rounded.ListAlt,
+                            contentDescription = null,
+                            modifier = Modifier.size(17.dp),
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            text = "管理已学习 / 已掌握",
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                }
+                Spacer(Modifier.height(8.dp))
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
                     color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f),
                     border = androidx.compose.foundation.BorderStroke(
                         1.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.35f)
                     ),
-                    onClick = { if (vm.stats.totalLearned > 0) showResetConfirm = true }
+                    onClick = {
+                        if (vm.learnedWords.isNotEmpty() || vm.masteredWords.isNotEmpty()) {
+                            showResetConfirm = true
+                        }
+                    }
                 ) {
                     Text(
                         text = "清除全部学习记录",
@@ -524,7 +615,7 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                     Spacer(Modifier.width(8.dp))
                     Column {
                         Text(
-                            text = "德语单词 Wortschatz 1.3",
+                            text = "德语单词 Wortschatz 1.4",
                             fontSize = 13.sp,
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -569,6 +660,90 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             }
         )
     }
+
+    if (showBookDialog) {
+        BookEditDialog(
+            initial = editingBook,
+            onDismiss = { showBookDialog = false },
+            onConfirm = { name, picked ->
+                val editing = editingBook
+                if (editing == null) vm.addBook(name, picked)
+                else vm.updateBook(editing.id, name, picked)
+                showBookDialog = false
+            }
+        )
+    }
+}
+
+/** 新建 / 编辑单词书：名称 + 包含的等级 */
+@Composable
+private fun BookEditDialog(
+    initial: WordBook?,
+    onDismiss: () -> Unit,
+    onConfirm: (String, Set<String>) -> Unit
+) {
+    var name by remember(initial) { mutableStateOf(initial?.name ?: "") }
+    var picked by remember(initial) {
+        mutableStateOf(initial?.levels ?: setOf("A1"))
+    }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Text(
+                text = if (initial == null) "新建单词书" else "编辑单词书",
+                fontSize = 17.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+        },
+        text = {
+            Column {
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text("名称", fontSize = 13.sp) },
+                    placeholder = { Text("例如：考试重点词", fontSize = 13.sp) },
+                    singleLine = true,
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(Modifier.height(14.dp))
+                Text(
+                    text = "包含哪些等级",
+                    fontSize = 12.5.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(Modifier.height(8.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(7.dp)) {
+                    AppViewModel.ALL_LEVELS.forEach { lv ->
+                        FilterChip(
+                            selected = picked.contains(lv),
+                            onClick = {
+                                picked = if (picked.contains(lv)) picked - lv else picked + lv
+                            },
+                            label = { Text(lv, fontSize = 12.5.sp) },
+                            colors = FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = ExtraColors.levelColor(lv)
+                                    .copy(alpha = 0.16f),
+                                selectedLabelColor = ExtraColors.levelColor(lv)
+                            )
+                        )
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = { onConfirm(name, picked) },
+                enabled = name.isNotBlank() && picked.isNotEmpty()
+            ) {
+                Text("保存")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text("取消") }
+        }
+    )
 }
 
 @Composable
