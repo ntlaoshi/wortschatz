@@ -518,3 +518,14 @@ PAGE_27 = [
 ]
 
 ALL_PAGES = PAGE_51 + PAGE_33 + PAGE_32 + PAGE_31 + PAGE_30 + PAGE_28 + PAGE_27
+
+# 按页码索引，便于只导出其中几页
+PAGES = {
+    51: PAGE_51,
+    33: PAGE_33,
+    32: PAGE_32,
+    31: PAGE_31,
+    30: PAGE_30,
+    28: PAGE_28,
+    27: PAGE_27,
+}

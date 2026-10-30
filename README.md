@@ -129,8 +129,14 @@ App 支持导入 JSON 词表。**完整格式规范见 [docs/wordbook-format.md]
 { "words": [ { "w": "der Hund", "zh": "狗" } ] }
 ```
 
-仓库内附带一份可直接导入的示例：`docs/wordbooks/menschen-a1-bold.json`
-（教材《Menschen》A1 词汇表中印刷加粗的 463 条词条，A1 等级，标签为「教材」）。
+仓库内附带可直接导入的示例：
+
+| 文件 | 条数 | 内容 |
+|---|---|---|
+| `docs/wordbooks/menschen-a1-bold.json` | 463 | 教材《Menschen》A1 全部 7 页词汇表的加粗词条 |
+| `docs/wordbooks/menschen-a1-p27-28-51.json` | 180 | 其中第 27/28/51 页的加粗词条，单独成书 |
+
+导入后会自动新建一本同名单词书，学习范围随之切换。
 
 导入入口：设置 → 词库 → 导入自定义词表（JSON）。
 导入时按词形去重，词库里已有的词会被跳过，重复导入不会产生重复条目。
