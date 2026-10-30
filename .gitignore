@@ -1,0 +1,30 @@
+# 构建产物
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Gradle
+.gradle/
+
+# IDE
+*.iml
+/.idea/
+
+# 本机路径配置
+local.properties
+
+# 签名材料（严禁提交）
+keystore.properties
+*.jks
+*.keystore
+
+# 词库原始数据（体积数百 MB，不入库）
+data_src/raw/
+
+# 验证截图
+screenshots/
+
+# 系统文件
+.DS_Store
+Thumbs.db

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 风格化字母 W -->
+    <path
+        android:pathData="M38,40 L44.5,68 L54,51 L63.5,68 L70,40"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="6.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- 底部短横线，呼应词条分隔 -->
+    <path
+        android:pathData="M44,78 L64,78"
+        android:strokeColor="#FFF2C078"
+        android:strokeWidth="5"
+        android:strokeLineCap="round" />
+</vector>
