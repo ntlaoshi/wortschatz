@@ -46,6 +46,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.wortschatz.app.AppViewModel
+import de.wortschatz.app.data.PluralStyle
 import de.wortschatz.app.data.Word
 import de.wortschatz.app.ui.theme.ExtraColors
 import kotlinx.coroutines.delay
@@ -190,6 +191,7 @@ fun BookDetailScreen(vm: AppViewModel, onBack: () -> Unit) {
                         val inBook = if (showResults) vm.isInCurrentBook(word.id) else true
                         BookWordRow(
                             word = word,
+                            pluralStyle = vm.pluralStyle,
                             inBook = inBook,
                             showResults = showResults,
                             onAdd = {
@@ -207,6 +209,7 @@ fun BookDetailScreen(vm: AppViewModel, onBack: () -> Unit) {
 @Composable
 private fun BookWordRow(
     word: Word,
+    pluralStyle: PluralStyle,
     inBook: Boolean,
     showResults: Boolean,
     onAdd: () -> Unit,
@@ -242,7 +245,7 @@ private fun BookWordRow(
                     fontSize = 12.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                word.pluralNote?.let { note ->
+                word.pluralNote(pluralStyle)?.let { note ->
                     Spacer(Modifier.height(2.dp))
                     Text(
                         text = note,

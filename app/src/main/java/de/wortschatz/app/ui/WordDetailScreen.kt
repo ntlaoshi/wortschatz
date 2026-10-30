@@ -115,7 +115,7 @@ fun WordDetailScreen(
                         )
                     }
 
-                    word.grammarNote?.let { note ->
+                    word.grammarNote(vm.pluralStyle)?.let { note ->
                         Spacer(Modifier.height(8.dp))
                         Text(
                             text = note,

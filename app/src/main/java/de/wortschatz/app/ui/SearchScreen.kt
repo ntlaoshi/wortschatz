@@ -168,6 +168,7 @@ fun SearchScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                         WordListItem(
                             word = word,
                             starred = vm.isStarred(word.id),
+                            pluralStyle = vm.pluralStyle,
                             onClick = {
                                 keyboard?.hide()
                                 detail = word

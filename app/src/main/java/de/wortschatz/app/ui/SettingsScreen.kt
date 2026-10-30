@@ -58,6 +58,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.wortschatz.app.AppViewModel
+import de.wortschatz.app.data.Word
 import de.wortschatz.app.data.WordBook
 import de.wortschatz.app.tts.Speaker
 import de.wortschatz.app.ui.theme.ExtraColors
@@ -360,6 +361,74 @@ fun SettingsScreen(
             }
         }
 
+        // ---------------- 复数显示
+        item {
+            SettingCard(title = "名词复数") {
+                Text(
+                    text = "名词卡片与列表里的复数怎么显示",
+                    fontSize = 11.5.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(Modifier.height(10.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    listOf(false to "完整形式", true to "只显示词尾").forEach { (suffixOnly, label) ->
+                        FilterChip(
+                            selected = vm.pluralSuffixOnly == suffixOnly,
+                            onClick = { vm.updatePluralSuffixOnly(suffixOnly) },
+                            label = {
+                                Text(
+                                    text = label,
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Medium
+                                )
+                            },
+                            colors = FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = MaterialTheme.colorScheme.primary
+                                    .copy(alpha = 0.14f),
+                                selectedLabelColor = MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    }
+                }
+                Spacer(Modifier.height(12.dp))
+                // 预览直接用真实词条的格式化结果，避免与卡片上的写法不一致
+                val sample = remember {
+                    Word(
+                        word = "der Mann", lemma = "Mann", pos = "n", gender = "m",
+                        plural = "die Männer", zh = "男人", en = null, example = null,
+                        exampleZh = null, level = "A1", tags = null
+                    )
+                }
+                Surface(
+                    shape = RoundedCornerShape(10.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)
+                ) {
+                    Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 9.dp)) {
+                        Text(
+                            text = sample.word,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(Modifier.height(2.dp))
+                        Text(
+                            text = sample.pluralNote(vm.pluralStyle) ?: "",
+                            fontFamily = FontFamily.Default,
+                            fontSize = 13.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+                Spacer(Modifier.height(7.dp))
+                Text(
+                    text = "词尾写法与教材一致：¨ 表示变音，-er 表示词尾；复数与单数同形时显示「同形」",
+                    fontSize = 11.sp,
+                    lineHeight = 16.sp,
+                    color = MaterialTheme.colorScheme.outline
+                )
+            }
+        }
+
         // ---------------- 外观
         item {
             SettingCard(title = "外观") {
@@ -654,7 +723,7 @@ fun SettingsScreen(
                     Spacer(Modifier.width(8.dp))
                     Column {
                         Text(
-                            text = "德语单词 Wortschatz 1.9",
+                            text = "德语单词 Wortschatz 1.10",
                             fontSize = 13.sp,
                             color = MaterialTheme.colorScheme.onSurface
                         )

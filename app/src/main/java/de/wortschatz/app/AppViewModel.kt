@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import de.wortschatz.app.data.Calendar0
 import de.wortschatz.app.data.OnlineDict
+import de.wortschatz.app.data.PluralStyle
 import de.wortschatz.app.data.Progress
 import de.wortschatz.app.data.Rating
 import de.wortschatz.app.data.SeedLoader
@@ -61,6 +62,14 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     /** 学完一轮后是否进入拼写测试 */
     var spellTestEnabled by mutableStateOf(prefs.getBoolean(KEY_SPELL_TEST, true))
         private set
+
+    /** 复数展示：false = 完整形式（die Männer），true = 教材式词尾（¨-er） */
+    var pluralSuffixOnly by mutableStateOf(prefs.getBoolean(KEY_PLURAL_SUFFIX, false))
+        private set
+
+    /** 供界面直接使用的复数展示方式 */
+    val pluralStyle: PluralStyle
+        get() = if (pluralSuffixOnly) PluralStyle.SUFFIX else PluralStyle.FULL
 
     // ---- 查词
     var query by mutableStateOf("")
@@ -620,6 +629,12 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         prefs.edit().putBoolean(KEY_SPELL_TEST, v).apply()
     }
 
+    /** 切换复数展示方式：完整形式 / 教材式词尾 */
+    fun updatePluralSuffixOnly(v: Boolean) {
+        pluralSuffixOnly = v
+        prefs.edit().putBoolean(KEY_PLURAL_SUFFIX, v).apply()
+    }
+
     fun updateAutoSpeak(v: Boolean) {
         autoSpeak = v
         prefs.edit().putBoolean(KEY_AUTO_SPEAK, v).apply()
@@ -711,6 +726,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         private const val KEY_SPEED = "tts_speed"
         private const val KEY_THEME = "theme_mode"
         private const val KEY_SPELL_TEST = "spell_test"
+        private const val KEY_PLURAL_SUFFIX = "plural_suffix_only"
         private const val KEY_BOOKS = "custom_books"
         private const val KEY_CURRENT_BOOK = "current_book_id"
         val ALL_LEVELS = listOf("A1", "A2", "B1", "B2")

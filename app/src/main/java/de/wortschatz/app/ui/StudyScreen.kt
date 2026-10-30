@@ -62,6 +62,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.wortschatz.app.AppViewModel
+import de.wortschatz.app.data.PluralStyle
 import de.wortschatz.app.data.Rating
 import de.wortschatz.app.data.Word
 import de.wortschatz.app.data.WordWithProgress
@@ -157,6 +158,7 @@ fun StudyScreen(vm: AppViewModel, onExit: () -> Unit) {
                     item = current,
                     revealed = vm.revealed,
                     starred = vm.isStarred(current.word.id),
+                    pluralStyle = vm.pluralStyle,
                     speaker = { vm.speak(it) },
                     onReveal = { vm.reveal() },
                     onRate = { vm.rate(it) },
@@ -191,6 +193,7 @@ private fun StudyCard(
     item: WordWithProgress,
     revealed: Boolean,
     starred: Boolean,
+    pluralStyle: PluralStyle,
     speaker: (String) -> Unit,
     onReveal: () -> Unit,
     onRate: (Rating) -> Unit,
@@ -319,10 +322,11 @@ private fun StudyCard(
                 label = "card",
                 modifier = Modifier.fillMaxSize()
             ) { showBack ->
-                if (showBack) BackFace(word = word, speaker = speaker)
+                if (showBack) BackFace(word = word, pluralStyle = pluralStyle, speaker = speaker)
                 else FrontFace(
                     word = word,
                     speaker = speaker,
+                    pluralStyle = pluralStyle,
                     isNew = item.progress.state == 0,
                     starred = starred
                 )
@@ -430,6 +434,7 @@ private fun SwipeHint() {
 private fun FrontFace(
     word: Word,
     speaker: (String) -> Unit,
+    pluralStyle: PluralStyle,
     isNew: Boolean,
     starred: Boolean
 ) {
@@ -487,7 +492,7 @@ private fun FrontFace(
             color = MaterialTheme.colorScheme.onSurface
         )
         // 名词复数与单数一起记，正面就要看得到，不能只放在背面
-        word.pluralNote?.let {
+        word.pluralNote(pluralStyle)?.let {
             Spacer(Modifier.height(8.dp))
             Text(
                 text = it,
@@ -514,7 +519,7 @@ private fun FrontFace(
 }
 
 @Composable
-private fun BackFace(word: Word, speaker: (String) -> Unit) {
+private fun BackFace(word: Word, pluralStyle: PluralStyle, speaker: (String) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -534,7 +539,7 @@ private fun BackFace(word: Word, speaker: (String) -> Unit) {
             SpeakButton(onClick = { speaker(word.word) }, size = 34.dp)
         }
 
-        word.grammarNote?.let {
+        word.grammarNote(pluralStyle)?.let {
             Spacer(Modifier.height(6.dp))
             Text(
                 text = it,

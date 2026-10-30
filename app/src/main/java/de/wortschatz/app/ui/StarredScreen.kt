@@ -73,6 +73,7 @@ fun StarredScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                     WordListItem(
                         word = word,
                         starred = true,
+                        pluralStyle = vm.pluralStyle,
                         onClick = { vm.speakWord(word) },
                         onSpeak = { vm.speakWord(word) },
                         onStar = { vm.toggleStar(word.id) }

@@ -40,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.wortschatz.app.AppViewModel
+import de.wortschatz.app.data.PluralStyle
 import de.wortschatz.app.data.Word
 import de.wortschatz.app.ui.theme.ExtraColors
 
@@ -134,6 +135,7 @@ fun LearningRecordsScreen(vm: AppViewModel, onBack: () -> Unit) {
                     items(words, key = { it.id }) { word ->
                         RecordRow(
                             word = word,
+                            pluralStyle = vm.pluralStyle,
                             mastered = tab == 1,
                             onMaster = { vm.setMastered(word, true) },
                             onUnmaster = { vm.setMastered(word, false) },
@@ -180,6 +182,7 @@ private fun SegmentChip(
 @Composable
 private fun RecordRow(
     word: Word,
+    pluralStyle: PluralStyle,
     mastered: Boolean,
     onMaster: () -> Unit,
     onUnmaster: () -> Unit,
@@ -215,7 +218,7 @@ private fun RecordRow(
                     fontSize = 12.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                word.pluralNote?.let { note ->
+                word.pluralNote(pluralStyle)?.let { note ->
                     Spacer(Modifier.height(2.dp))
                     Text(
                         text = note,

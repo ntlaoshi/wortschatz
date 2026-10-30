@@ -36,6 +36,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import de.wortschatz.app.data.PluralStyle
 import de.wortschatz.app.data.Word
 import de.wortschatz.app.ui.theme.ExtraColors
 
@@ -133,6 +134,7 @@ fun StarButton(starred: Boolean, onClick: () -> Unit, modifier: Modifier = Modif
 fun WordListItem(
     word: Word,
     starred: Boolean,
+    pluralStyle: PluralStyle,
     onClick: () -> Unit,
     onSpeak: () -> Unit,
     onStar: () -> Unit,
@@ -169,7 +171,7 @@ fun WordListItem(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-            word.pluralNote?.let { note ->
+            word.pluralNote(pluralStyle)?.let { note ->
                 Spacer(Modifier.height(3.dp))
                 Text(
                     text = note,

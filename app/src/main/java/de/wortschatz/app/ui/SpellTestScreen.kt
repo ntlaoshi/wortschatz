@@ -215,7 +215,7 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
                 }
             }
             // 拼错时顺带把复数一起复习，避免只记住单数
-            word.pluralNote?.let { note ->
+            word.pluralNote(vm.pluralStyle)?.let { note ->
                 Spacer(Modifier.height(6.dp))
                 Text(
                     text = note,
