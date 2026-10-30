@@ -202,6 +202,21 @@ class WordDb private constructor(context: Context) :
         }
     }
 
+    /** 查询这批 lemma 中已存在于词库的（统一小写比对），用于导入时避免重复词条 */
+    fun existingLemmas(lemmas: List<String>): Set<String> {
+        if (lemmas.isEmpty()) return emptySet()
+        val out = mutableSetOf<String>()
+        lemmas.chunked(300).forEach { chunk ->
+            val list = chunk.joinToString(",") { "'${it.replace("'", "''")}'" }
+            readableDatabase.rawQuery(
+                "SELECT DISTINCT LOWER(lemma) FROM words WHERE LOWER(lemma) IN ($list)", null
+            ).use { c ->
+                while (c.moveToNext()) out.add(c.getString(0))
+            }
+        }
+        return out
+    }
+
     fun deleteWordsBySource(source: String): Int =
         writableDatabase.delete("words", "source = ?", arrayOf(source))
 

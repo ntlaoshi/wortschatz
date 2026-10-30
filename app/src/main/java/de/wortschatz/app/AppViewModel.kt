@@ -651,7 +651,16 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     val words = SeedLoader.parseJson(jsonText).map {
                         it.copy(source = Word.SRC_CUSTOM)
                     }
-                    if (words.isEmpty()) -1 else db.insertWords(words)
+                    if (words.isEmpty()) {
+                        -1
+                    } else {
+                        // 词库里已有的词（按词形比对）直接跳过，避免同一词出现两遍
+                        val existing = db.existingLemmas(
+                            words.map { it.lemma.lowercase() }.distinct()
+                        )
+                        val fresh = words.filter { it.lemma.lowercase() !in existing }
+                        db.insertWords(fresh)
+                    }
                 } catch (e: Exception) {
                     -1
                 }
