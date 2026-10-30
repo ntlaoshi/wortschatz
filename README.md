@@ -135,6 +135,7 @@ App 支持导入 JSON 词表。**完整格式规范见 [docs/wordbook-format.md]
 |---|---|---|
 | `docs/wordbooks/menschen-a1-bold.json` | 463 | 教材《Menschen》A1 全部 7 页词汇表的加粗词条 |
 | `docs/wordbooks/menschen-a1-p27-28-51.json` | 180 | 其中第 27/28/51 页的加粗词条，单独成书 |
+| `docs/wordbooks/menschen-a1-p27-51-visible.json` | 118 | 第 27、51 页两页照片中列出的全部词条（不限字重） |
 
 导入后会自动新建一本同名单词书，学习范围随之切换。
 

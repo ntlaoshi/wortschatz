@@ -170,12 +170,13 @@ fun WordListItem(
                 overflow = TextOverflow.Ellipsis
             )
             word.pluralNote?.let { note ->
-                Spacer(Modifier.height(2.dp))
+                Spacer(Modifier.height(3.dp))
                 Text(
                     text = note,
                     fontFamily = FontFamily.Default,
-                    fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.outline,
+                    fontSize = 13.5.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )

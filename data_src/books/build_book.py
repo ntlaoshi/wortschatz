@@ -65,6 +65,71 @@ def split_article(w: str):
     return None, w
 
 
+def build_payload(source, book_name: str, note_pages: str) -> dict:
+    """把 (词形, 释义, 词性, 复数) 四元组列表整理成可导入的 payload。
+
+    供 build_book.py 与 build_visible.py 共用，保证两份词单的规范化规则一致。
+    """
+    seen = set()
+    words = []
+
+    for raw, zh, pos, plural in source:
+        w = clean_word(raw)
+        if not w:
+            continue
+        gender, lemma = split_article(w)
+
+        # 词根去掉首尾标点：词库里 "Auf Wiedersehen" 不带感叹号，
+        # 教材写成 "Auf Wiedersehen!"，不统一会导致导入时判为两个不同的词。
+        lemma = lemma.strip().strip(".!?。！？,，;；")
+
+        key = (lemma.lower(), pos)
+        if key in seen:
+            continue
+        seen.add(key)
+
+        # 只写出有值的字段：空值一律省略，文件更小，老版本 App 也不会读出 "null"。
+        entry = {
+            "w": w,
+            "l": lemma,
+            "p": pos,
+            "zh": zh,
+            "lv": "A1",
+            "tg": "教材",
+        }
+        if gender:
+            entry["g"] = gender
+        if plural:
+            entry["pl"] = plural
+        words.append(entry)
+
+    return {
+        "v": 1,
+        "name": book_name,
+        "note": "摘自教材词汇表（%s），共 %d 条" % (note_pages, len(words)),
+        "count": len(words),
+        "words": words,
+    }
+
+
+def write_payload(payload: dict, out_file: str) -> None:
+    os.makedirs(os.path.dirname(out_file), exist_ok=True)
+    with open(out_file, "w", encoding="utf-8") as fh:
+        json.dump(payload, fh, ensure_ascii=False, indent=1)
+
+    words = payload["words"]
+    size = os.path.getsize(out_file) / 1024
+    print(f"书名：{payload['name']}")
+    print(f"生成 {len(words)} 条 -> {os.path.relpath(out_file, ROOT)} ({size:.1f} KB)")
+
+    from collections import Counter
+    print("词性分布:", dict(Counter(w["p"] for w in words)))
+    print("无冠词的名词:", sum(1 for w in words if w["p"] == "n" and not w.get("g")))
+    print("\n样例:")
+    for w in words[:6]:
+        print(" ", w["w"], "|", w["zh"], "|", w["p"], "|", w.get("g"), "|", w.get("pl"))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pages", default="", help="只导出指定页码，逗号分隔，如 51,28,27")
@@ -85,7 +150,7 @@ def main():
         page_tag = "/".join(str(p) for p in wanted)
         default_name = f"Menschen A1 · 第 {page_tag} 页"
         default_out = "docs/wordbooks/menschen-a1-p" + "-".join(str(p) for p in wanted) + ".json"
-        note_pages = page_tag
+        note_pages = "第 %s 页" % page_tag
     else:
         source = ALL_PAGES
         default_name = "Menschen A1 · 加粗词条"
@@ -94,69 +159,9 @@ def main():
 
     out_rel = args.out or default_out
     out_file = out_rel if os.path.isabs(out_rel) else os.path.join(ROOT, out_rel)
-    os.makedirs(os.path.dirname(out_file), exist_ok=True)
-    book_name = args.name or default_name
 
-    seen = set()
-    words = []
-
-    for raw, zh, pos, plural in source:
-        w = clean_word(raw)
-        if not w:
-            continue
-        gender, lemma = split_article(w)
-
-        # 名词统一补上冠词，便于 App 里显示性别
-        if pos == "n" and gender is None:
-            # 专有名词/国名没有冠词，保持原样
-            pass
-
-        # 词根去掉首尾标点：词库里 "Auf Wiedersehen" 不带感叹号，
-        # 教材写成 "Auf Wiedersehen!"，不统一会导致导入时判为两个不同的词。
-        lemma = lemma.strip().strip(".!?。！？,，;；")
-
-        key = (lemma.lower(), pos)
-        if key in seen:
-            continue
-        seen.add(key)
-
-        # 只写出有值的字段：Android 的 optString 会把 JSON null 读成字符串 "null"，
-        # 那样复数会显示成「复数 null」，因此空值一律省略。
-        entry = {
-            "w": w,
-            "l": lemma,
-            "p": pos,
-            "zh": zh,
-            "lv": "A1",
-            "tg": "教材",
-        }
-        if gender:
-            entry["g"] = gender
-        if plural:
-            entry["pl"] = plural
-        words.append(entry)
-
-    payload = {
-        "v": 1,
-        "name": book_name,
-        "note": "摘自教材词汇表（%s）中印刷加粗的条目，共 %d 条" % (note_pages, len(words)),
-        "count": len(words),
-        "words": words,
-    }
-
-    with open(out_file, "w", encoding="utf-8") as fh:
-        json.dump(payload, fh, ensure_ascii=False, indent=1)
-
-    size = os.path.getsize(out_file) / 1024
-    print(f"书名：{book_name}")
-    print(f"生成 {len(words)} 条 -> {os.path.relpath(out_file, ROOT)} ({size:.1f} KB)")
-
-    from collections import Counter
-    print("词性分布:", dict(Counter(w["p"] for w in words)))
-    print("无冠词的名词:", sum(1 for w in words if w["p"] == "n" and not w.get("g")))
-    print("\n样例:")
-    for w in words[:6]:
-        print(" ", w["w"], "|", w["zh"], "|", w["p"], "|", w.get("g"), "|", w.get("pl"))
+    payload = build_payload(source, args.name or default_name, note_pages)
+    write_payload(payload, out_file)
 
 
 if __name__ == "__main__":

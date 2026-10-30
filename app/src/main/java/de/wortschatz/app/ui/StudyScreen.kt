@@ -488,11 +488,13 @@ private fun FrontFace(
         )
         // 名词复数与单数一起记，正面就要看得到，不能只放在背面
         word.pluralNote?.let {
-            Spacer(Modifier.height(6.dp))
+            Spacer(Modifier.height(8.dp))
             Text(
                 text = it,
                 fontFamily = FontFamily.Default,
-                fontSize = 16.sp,
+                fontSize = 22.sp,
+                lineHeight = 28.sp,
+                fontWeight = FontWeight.Medium,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -533,10 +535,12 @@ private fun BackFace(word: Word, speaker: (String) -> Unit) {
         }
 
         word.grammarNote?.let {
-            Spacer(Modifier.height(5.dp))
+            Spacer(Modifier.height(6.dp))
             Text(
                 text = it,
-                fontSize = 12.sp,
+                fontFamily = FontFamily.Default,
+                fontSize = 14.sp,
+                lineHeight = 20.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }

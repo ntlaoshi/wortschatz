@@ -664,7 +664,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             }
             val (words, jsonName) = parsed
             val bookName = jsonName?.takeIf { it.isNotBlank() } ?: "导入词表"
-            val lemmas = words.map { it.lemma.lowercase() }.distinct()
+            // 保留原始大小写：sie（他们）与 Sie（您）是两个词，
+            // 统一转小写会少建一条关联（实测 118 条只入书 117 条）
+            val lemmas = words.map { it.lemma }.distinct()
 
             val inserted = withContext(Dispatchers.IO) {
                 val existing = db.existingLemmas(lemmas)

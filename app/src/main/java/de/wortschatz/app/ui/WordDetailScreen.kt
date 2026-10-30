@@ -119,7 +119,9 @@ fun WordDetailScreen(
                         Spacer(Modifier.height(8.dp))
                         Text(
                             text = note,
-                            fontSize = 13.sp,
+                            fontFamily = FontFamily.Default,
+                            fontSize = 15.sp,
+                            lineHeight = 22.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }

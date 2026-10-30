@@ -215,7 +215,10 @@ class WordDb private constructor(context: Context) :
         if (lemmas.isEmpty()) return emptySet()
         val out = mutableSetOf<String>()
         lemmas.chunked(300).forEach { chunk ->
-            val list = chunk.joinToString(",") { "'${it.replace("'", "''")}'" }
+            // 入参可能保留原始大小写，这里统一转小写再比对，避免判成「新词」重复入库
+            val list = chunk.joinToString(",") {
+                "'${it.lowercase().replace("'", "''")}'"
+            }
             readableDatabase.rawQuery(
                 "SELECT DISTINCT LOWER(lemma) FROM words WHERE LOWER(lemma) IN ($list)", null
             ).use { c ->
@@ -236,8 +239,27 @@ class WordDb private constructor(context: Context) :
     fun wordIdsByLemmas(lemmas: List<String>): List<Long> {
         if (lemmas.isEmpty()) return emptyList()
         val out = mutableListOf<Long>()
+        val rest = mutableListOf<String>()
+
         lemmas.chunked(300).forEach { chunk ->
             val list = chunk.joinToString(",") { "'${it.replace("'", "''")}'" }
+            // 先按原样匹配：sie（他们）与 Sie（您）只差大小写，LOWER 会把它们并成一条，
+            // 导致导入后书里少词（实测 118 条只剩 117）。
+            val matched = mutableSetOf<String>()
+            readableDatabase.rawQuery(
+                "SELECT lemma, MIN(id) FROM words WHERE lemma IN ($list) GROUP BY lemma", null
+            ).use { c ->
+                while (c.moveToNext()) {
+                    matched.add(c.getString(0))
+                    out.add(c.getLong(1))
+                }
+            }
+            rest += chunk.filter { it !in matched }
+        }
+
+        // 原样没匹配到的（词库里写法大小写不同）再退化为忽略大小写匹配
+        rest.chunked(300).forEach { chunk ->
+            val list = chunk.joinToString(",") { "'${it.lowercase().replace("'", "''")}'" }
             readableDatabase.rawQuery(
                 "SELECT MIN(id) FROM words WHERE LOWER(lemma) IN ($list) " +
                     "GROUP BY LOWER(lemma)", null

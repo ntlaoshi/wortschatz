@@ -220,7 +220,8 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
                 Text(
                     text = note,
                     fontFamily = FontFamily.Default,
-                    fontSize = 12.5.sp,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }

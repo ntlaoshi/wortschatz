@@ -1,0 +1,1045 @@
+{
+ "v": 1,
+ "name": "Menschen A1 · 第 27/51 页",
+ "note": "摘自教材词汇表（第 27/51 页照片中列出的全部词条），共 118 条",
+ "count": 118,
+ "words": [
+  {
+   "w": "die Mutter",
+   "l": "Mutter",
+   "p": "n",
+   "zh": "母亲",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Mütter"
+  },
+  {
+   "w": "der Vater",
+   "l": "Vater",
+   "p": "n",
+   "zh": "父亲",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Väter"
+  },
+  {
+   "w": "die Schwester",
+   "l": "Schwester",
+   "p": "n",
+   "zh": "姐姐；妹妹",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Schwestern"
+  },
+  {
+   "w": "der Bruder",
+   "l": "Bruder",
+   "p": "n",
+   "zh": "哥哥；弟弟",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Brüder"
+  },
+  {
+   "w": "die Großmutter",
+   "l": "Großmutter",
+   "p": "n",
+   "zh": "祖母；外祖母",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Großmütter"
+  },
+  {
+   "w": "sein aus",
+   "l": "sein aus",
+   "p": "v",
+   "zh": "来自……",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "China",
+   "l": "China",
+   "p": "n",
+   "zh": "中国",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Peking",
+   "l": "Peking",
+   "p": "n",
+   "zh": "北京",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "der Großvater",
+   "l": "Großvater",
+   "p": "n",
+   "zh": "祖父；外祖父",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Großväter"
+  },
+  {
+   "w": "die Eltern",
+   "l": "Eltern",
+   "p": "n",
+   "zh": "父母（复数）",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f"
+  },
+  {
+   "w": "die Großeltern",
+   "l": "Großeltern",
+   "p": "n",
+   "zh": "祖父母；外祖父母（复数）",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f"
+  },
+  {
+   "w": "die Geschwister",
+   "l": "Geschwister",
+   "p": "n",
+   "zh": "兄弟姐妹（复数）",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f"
+  },
+  {
+   "w": "die App",
+   "l": "App",
+   "p": "n",
+   "zh": "应用软件",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Apps"
+  },
+  {
+   "w": "das Pony",
+   "l": "Pony",
+   "p": "n",
+   "zh": "小马",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "n",
+   "pl": "die Ponys"
+  },
+  {
+   "w": "raten",
+   "l": "raten",
+   "p": "v",
+   "zh": "猜",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "dein",
+   "l": "dein",
+   "p": "pron",
+   "zh": "你的",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "es",
+   "l": "es",
+   "p": "pron",
+   "zh": "它（中性名词的代词）",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "sie",
+   "l": "sie",
+   "p": "pron",
+   "zh": "她（阴性名词的代词）；他们；她们；它们（复数名词的代词）",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "die Gruppe",
+   "l": "Gruppe",
+   "p": "n",
+   "zh": "组",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Gruppen"
+  },
+  {
+   "w": "zeichnen",
+   "l": "zeichnen",
+   "p": "v",
+   "zh": "画画",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "das Smartphone",
+   "l": "Smartphone",
+   "p": "n",
+   "zh": "智能手机",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "n",
+   "pl": "die Smartphones"
+  },
+  {
+   "w": "von Ihrer Familie",
+   "l": "von Ihrer Familie",
+   "p": "phr",
+   "zh": "您家庭的",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "arbeiten",
+   "l": "arbeiten",
+   "p": "v",
+   "zh": "工作",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Wer ist das?",
+   "l": "Wer ist das",
+   "p": "phr",
+   "zh": "这是谁？",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Wer sind die?",
+   "l": "Wer sind die",
+   "p": "phr",
+   "zh": "他们是谁？",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "wählen",
+   "l": "wählen",
+   "p": "v",
+   "zh": "选择",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "groß",
+   "l": "groß",
+   "p": "adj",
+   "zh": "大的",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "klein",
+   "l": "klein",
+   "p": "adj",
+   "zh": "小的",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "fünfundvierzig",
+   "l": "fünfundvierzig",
+   "p": "num",
+   "zh": "四十五",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "sechsundvierzig",
+   "l": "sechsundvierzig",
+   "p": "num",
+   "zh": "四十六",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Wie alt ist ...?",
+   "l": "Wie alt ist ",
+   "p": "phr",
+   "zh": "……几岁了？",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "siebenundzwanzig",
+   "l": "siebenundzwanzig",
+   "p": "num",
+   "zh": "二十七",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "der Mann",
+   "l": "Mann",
+   "p": "n",
+   "zh": "男人；丈夫",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Männer"
+  },
+  {
+   "w": "einunddreißig",
+   "l": "einunddreißig",
+   "p": "num",
+   "zh": "三十一",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "die Frau",
+   "l": "Frau",
+   "p": "n",
+   "zh": "女人；妻子",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Frauen"
+  },
+  {
+   "w": "unter",
+   "l": "unter",
+   "p": "prep",
+   "zh": "在……下面",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "das Hobby",
+   "l": "Hobby",
+   "p": "n",
+   "zh": "爱好",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "n",
+   "pl": "die Hobbys"
+  },
+  {
+   "w": "der Job",
+   "l": "Job",
+   "p": "n",
+   "zh": "工作",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Jobs"
+  },
+  {
+   "w": "nur",
+   "l": "nur",
+   "p": "adv",
+   "zh": "仅仅；只有",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "der Freund",
+   "l": "Freund",
+   "p": "n",
+   "zh": "此处：男朋友",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Freunde"
+  },
+  {
+   "w": "die Freundin",
+   "l": "Freundin",
+   "p": "n",
+   "zh": "此处：女朋友",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Freundinnen"
+  },
+  {
+   "w": "zweiundzwanzig",
+   "l": "zweiundzwanzig",
+   "p": "num",
+   "zh": "二十二",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "sein",
+   "l": "sein",
+   "p": "v",
+   "zh": "我们是……→是；他的",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "der Friseur",
+   "l": "Friseur",
+   "p": "n",
+   "zh": "理发师",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Friseure"
+  },
+  {
+   "w": "die Friseurin",
+   "l": "Friseurin",
+   "p": "n",
+   "zh": "女理发师",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Friseurinnen"
+  },
+  {
+   "w": "der Kollege",
+   "l": "Kollege",
+   "p": "n",
+   "zh": "同事",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Kollegen"
+  },
+  {
+   "w": "die Kollegin",
+   "l": "Kollegin",
+   "p": "n",
+   "zh": "女同事",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Kolleginnen"
+  },
+  {
+   "w": "der Chef",
+   "l": "Chef",
+   "p": "n",
+   "zh": "老板；领导",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Chefs"
+  },
+  {
+   "w": "die Chefin",
+   "l": "Chefin",
+   "p": "n",
+   "zh": "女老板；女领导",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Chefinnen"
+  },
+  {
+   "w": "vierundzwanzig",
+   "l": "vierundzwanzig",
+   "p": "num",
+   "zh": "二十四",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Ihr",
+   "l": "Ihr",
+   "p": "pron",
+   "zh": "您的；她的",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "der Architekt",
+   "l": "Architekt",
+   "p": "n",
+   "zh": "建筑师",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Architekten"
+  },
+  {
+   "w": "die Architektin",
+   "l": "Architektin",
+   "p": "n",
+   "zh": "女建筑师",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Architektinnen"
+  },
+  {
+   "w": "Fußball spielen",
+   "l": "Fußball spielen",
+   "p": "phr",
+   "zh": "踢足球",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Yoga machen",
+   "l": "Yoga machen",
+   "p": "phr",
+   "zh": "做瑜伽",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "das Yoga",
+   "l": "Yoga",
+   "p": "n",
+   "zh": "瑜伽",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "n"
+  },
+  {
+   "w": "Wie geht's?",
+   "l": "Wie geht's",
+   "p": "phr",
+   "zh": "你好吗？",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Und dir?",
+   "l": "Und dir",
+   "p": "phr",
+   "zh": "那你呢？",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Sehr gut.",
+   "l": "Sehr gut",
+   "p": "phr",
+   "zh": "很好。",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Wie geht es Ihnen?",
+   "l": "Wie geht es Ihnen",
+   "p": "phr",
+   "zh": "您好吗？",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Danke, gut.",
+   "l": "Danke, gut",
+   "p": "phr",
+   "zh": "谢谢；我很好。",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Und Ihnen?",
+   "l": "Und Ihnen",
+   "p": "phr",
+   "zh": "那您呢？",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Na ja. So lala.",
+   "l": "Na ja. So lala",
+   "p": "phr",
+   "zh": "嗯；还行吧。",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Es geht.",
+   "l": "Es geht",
+   "p": "phr",
+   "zh": "还行；一般般。；还行。",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "der Text",
+   "l": "Text",
+   "p": "n",
+   "zh": "课文",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Texte"
+  },
+  {
+   "w": "die Überschrift",
+   "l": "Überschrift",
+   "p": "n",
+   "zh": "标题",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Überschriften"
+  },
+  {
+   "w": "cool",
+   "l": "cool",
+   "p": "adj",
+   "zh": "酷的",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Wie geht's denn so?",
+   "l": "Wie geht's denn so",
+   "p": "phr",
+   "zh": "你过得怎么样？",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "die Welt",
+   "l": "Welt",
+   "p": "n",
+   "zh": "世界",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Welten"
+  },
+  {
+   "w": "Europa",
+   "l": "Europa",
+   "p": "n",
+   "zh": "欧洲",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "die Kultur",
+   "l": "Kultur",
+   "p": "n",
+   "zh": "文化",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Kulturen"
+  },
+  {
+   "w": "das Leben",
+   "l": "Leben",
+   "p": "n",
+   "zh": "生活",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "n"
+  },
+  {
+   "w": "die Studie",
+   "l": "Studie",
+   "p": "n",
+   "zh": "研究",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Studien"
+  },
+  {
+   "w": "fragen",
+   "l": "fragen",
+   "p": "v",
+   "zh": "问",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "der Mensch",
+   "l": "Mensch",
+   "p": "n",
+   "zh": "人；人们",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Menschen"
+  },
+  {
+   "w": "die Stadt",
+   "l": "Stadt",
+   "p": "n",
+   "zh": "城市",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Städte"
+  },
+  {
+   "w": "weltweit",
+   "l": "weltweit",
+   "p": "adj",
+   "zh": "世界范围的",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "die Top 5 Städte",
+   "l": "Top 5 Städte",
+   "p": "phr",
+   "zh": "排名前五的城市",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f"
+  },
+  {
+   "w": "New York",
+   "l": "New York",
+   "p": "n",
+   "zh": "纽约",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Auckland",
+   "l": "Auckland",
+   "p": "n",
+   "zh": "奥克兰",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Vancouver",
+   "l": "Vancouver",
+   "p": "n",
+   "zh": "温哥华",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Tja!",
+   "l": "Tja",
+   "p": "int",
+   "zh": "好吧！",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "kommen",
+   "l": "kommen",
+   "p": "v",
+   "zh": "来",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "auf Platz 16",
+   "l": "auf Platz 16",
+   "p": "phr",
+   "zh": "位列第 16 位",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "der Platz",
+   "l": "Platz",
+   "p": "n",
+   "zh": "位置",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Plätze"
+  },
+  {
+   "w": "doch",
+   "l": "doch",
+   "p": "adv",
+   "zh": "加强否定语气的语气词；此处：加强否定语气的语气词",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "kein",
+   "l": "kein",
+   "p": "pron",
+   "zh": "没有",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "der Laptop",
+   "l": "Laptop",
+   "p": "n",
+   "zh": "笔记本电脑",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Laptops"
+  },
+  {
+   "w": "ein",
+   "l": "ein",
+   "p": "pron",
+   "zh": "一个",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "das Handy",
+   "l": "Handy",
+   "p": "n",
+   "zh": "手机",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "n",
+   "pl": "die Handys"
+  },
+  {
+   "w": "Hm!",
+   "l": "Hm",
+   "p": "int",
+   "zh": "嗯（表示思考）；嗯（此处：表示思考问题）",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "die Katze",
+   "l": "Katze",
+   "p": "n",
+   "zh": "猫",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Katzen"
+  },
+  {
+   "w": "der Hund",
+   "l": "Hund",
+   "p": "n",
+   "zh": "狗",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Hunde"
+  },
+  {
+   "w": "Na, was ist denn das?",
+   "l": "Na, was ist denn das",
+   "p": "phr",
+   "zh": "那么；这是什么呢？",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Was?",
+   "l": "Was",
+   "p": "phr",
+   "zh": "什么？",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "der Junge",
+   "l": "Junge",
+   "p": "n",
+   "zh": "男孩",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m",
+   "pl": "die Jungen"
+  },
+  {
+   "w": "das Mädchen",
+   "l": "Mädchen",
+   "p": "n",
+   "zh": "女孩",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "n",
+   "pl": "die Mädchen"
+  },
+  {
+   "w": "die Familie",
+   "l": "Familie",
+   "p": "n",
+   "zh": "家庭",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Familien"
+  },
+  {
+   "w": "Frankfurt",
+   "l": "Frankfurt",
+   "p": "n",
+   "zh": "法兰克福",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "lieben",
+   "l": "lieben",
+   "p": "v",
+   "zh": "爱",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "okay",
+   "l": "okay",
+   "p": "adj",
+   "zh": "好；行；可以",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "möchten",
+   "l": "möchten",
+   "p": "v",
+   "zh": "想要",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "oder",
+   "l": "oder",
+   "p": "conj",
+   "zh": "或",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Viel Spaß!",
+   "l": "Viel Spaß",
+   "p": "phr",
+   "zh": "玩得开心！",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "das Hotel",
+   "l": "Hotel",
+   "p": "n",
+   "zh": "酒店",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "n",
+   "pl": "die Hotels"
+  },
+  {
+   "w": "und",
+   "l": "und",
+   "p": "conj",
+   "zh": "和",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "die Frage",
+   "l": "Frage",
+   "p": "n",
+   "zh": "问题",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Fragen"
+  },
+  {
+   "w": "Oh!",
+   "l": "Oh",
+   "p": "int",
+   "zh": "噢！",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Auf Wiedersehen!",
+   "l": "Auf Wiedersehen",
+   "p": "phr",
+   "zh": "再见！",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Bis bald!",
+   "l": "Bis bald",
+   "p": "phr",
+   "zh": "待会儿见！",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "mein Vater",
+   "l": "mein Vater",
+   "p": "phr",
+   "zh": "我的父亲",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "meine Mutter",
+   "l": "meine Mutter",
+   "p": "phr",
+   "zh": "我的母亲",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "der Possessivartikel",
+   "l": "Possessivartikel",
+   "p": "n",
+   "zh": "物主冠词",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "m"
+  },
+  {
+   "w": "die Familien-Cloud",
+   "l": "Familien-Cloud",
+   "p": "n",
+   "zh": "家庭云",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "f",
+   "pl": "die Familien-Clouds"
+  },
+  {
+   "w": "erkennen",
+   "l": "erkennen",
+   "p": "v",
+   "zh": "认出",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "Was heißt ... in Ihrer Sprache?",
+   "l": "Was heißt ... in Ihrer Sprache",
+   "p": "phr",
+   "zh": "在您的语言中……怎么说？",
+   "lv": "A1",
+   "tg": "教材"
+  },
+  {
+   "w": "das Familien-Wort",
+   "l": "Familien-Wort",
+   "p": "n",
+   "zh": "和家庭相关的单词",
+   "lv": "A1",
+   "tg": "教材",
+   "g": "n",
+   "pl": "die Familien-Wörter"
+  },
+  {
+   "w": "mein",
+   "l": "mein",
+   "p": "pron",
+   "zh": "我的",
+   "lv": "A1",
+   "tg": "教材"
+  }
+ ]
+}

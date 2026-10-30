@@ -216,12 +216,13 @@ private fun RecordRow(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 word.pluralNote?.let { note ->
-                    Spacer(Modifier.height(1.dp))
+                    Spacer(Modifier.height(2.dp))
                     Text(
                         text = note,
                         fontFamily = FontFamily.Default,
-                        fontSize = 11.sp,
-                        color = MaterialTheme.colorScheme.outline
+                        fontSize = 12.5.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
