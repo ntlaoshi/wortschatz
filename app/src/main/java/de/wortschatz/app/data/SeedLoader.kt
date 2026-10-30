@@ -51,6 +51,16 @@ object SeedLoader {
     }
 
     /**
+     * 读取词表顶层的 name 字段，导入时用作新单词书的名称。
+     * 没有该字段则返回 null，由调用方给出默认名。
+     */
+    fun parseName(text: String): String? = try {
+        JSONObject(text).optString("name").ifBlank { null }
+    } catch (e: Exception) {
+        null
+    }
+
+    /**
      * 解析词条 JSON。兼容两种写法：短键名（内置数据）与全名键（用户导入）。
      */
     fun parseJson(text: String): List<Word> {

@@ -89,10 +89,12 @@ fun SettingsScreen(
             Toast.makeText(context, "读取文件失败", Toast.LENGTH_SHORT).show()
             return@rememberLauncherForActivityResult
         }
-        vm.importCustomWords(text) { count ->
-            val msg = if (count < 0) "格式不正确，需要 {\"words\":[...]} 结构"
-            else if (count == 0) "没有新增词条（可能已存在）"
-            else "已导入 $count 个词条"
+        vm.importCustomWords(text) { count, bookName ->
+            val msg = when {
+                count < 0 -> "格式不正确，需要 {\"words\":[...]} 结构"
+                count == 0 -> "已新建单词书《$bookName》，词条词库里都有"
+                else -> "已导入 $count 个词条，新建单词书《$bookName》"
+            }
             Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
         }
     }
@@ -553,7 +555,7 @@ fun SettingsScreen(
                         )
                         Spacer(Modifier.width(8.dp))
                         Text(
-                            text = "导入自定义词表（JSON）",
+                            text = "导入词表并新建单词书",
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Medium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -562,7 +564,8 @@ fun SettingsScreen(
                 }
                 Spacer(Modifier.height(6.dp))
                 Text(
-                    text = "格式：{\"words\":[{\"w\":\"der Hund\",\"zh\":\"狗\",\"p\":\"n\",\"g\":\"m\",\"lv\":\"A1\"}]}",
+                    text = "选一个 JSON 词表，会新建一本同名单词书并把词放进去；" +
+                        "格式：{\"name\":\"书名\",\"words\":[{\"w\":\"der Hund\",\"zh\":\"狗\"}]}",
                     fontSize = 10.5.sp,
                     lineHeight = 16.sp,
                     color = MaterialTheme.colorScheme.outline
@@ -651,7 +654,7 @@ fun SettingsScreen(
                     Spacer(Modifier.width(8.dp))
                     Column {
                         Text(
-                            text = "德语单词 Wortschatz 1.6",
+                            text = "德语单词 Wortschatz 1.7",
                             fontSize = 13.sp,
                             color = MaterialTheme.colorScheme.onSurface
                         )

@@ -220,6 +220,26 @@ class WordDb private constructor(context: Context) :
     fun deleteWordsBySource(source: String): Int =
         writableDatabase.delete("words", "source = ?", arrayOf(source))
 
+    /**
+     * 按词根批量取词条 id，用于把导入的词挂到单词书上。
+     * 同一词根可能对应多条记录（不同词性或释义），每个词根只取一条，
+     * 避免书里的词数比词表条目多出一截。
+     */
+    fun wordIdsByLemmas(lemmas: List<String>): List<Long> {
+        if (lemmas.isEmpty()) return emptyList()
+        val out = mutableListOf<Long>()
+        lemmas.chunked(300).forEach { chunk ->
+            val list = chunk.joinToString(",") { "'${it.replace("'", "''")}'" }
+            readableDatabase.rawQuery(
+                "SELECT MIN(id) FROM words WHERE LOWER(lemma) IN ($list) " +
+                    "GROUP BY LOWER(lemma)", null
+            ).use { c ->
+                while (c.moveToNext()) out.add(c.getLong(0))
+            }
+        }
+        return out
+    }
+
     /** 清除单个词的学习进度，使其回到「未学」状态 */
     fun resetWordProgress(wordId: Long): Int =
         writableDatabase.delete("progress", "word_id = ?", arrayOf(wordId.toString()))

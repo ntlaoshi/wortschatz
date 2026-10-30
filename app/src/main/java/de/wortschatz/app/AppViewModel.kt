@@ -643,30 +643,50 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    /** 导入用户自定义词表（JSON 格式），返回新增条数，失败返回 -1 */
-    fun importCustomWords(jsonText: String, onDone: (Int) -> Unit) {
+    /**
+     * 导入词表并**新建一本单词书**，词全部挂到这本书下。
+     *
+     * 返回 (新增词条数, 书名)；解析失败时词条数为 -1。
+     * 同名书已存在时复用，避免反复导入产生一堆同名词书。
+     */
+    fun importCustomWords(jsonText: String, onDone: (Int, String) -> Unit) {
         viewModelScope.launch {
-            val count = withContext(Dispatchers.IO) {
-                try {
-                    val words = SeedLoader.parseJson(jsonText).map {
-                        it.copy(source = Word.SRC_CUSTOM)
-                    }
-                    if (words.isEmpty()) {
-                        -1
-                    } else {
-                        // 词库里已有的词（按词形比对）直接跳过，避免同一词出现两遍
-                        val existing = db.existingLemmas(
-                            words.map { it.lemma.lowercase() }.distinct()
-                        )
-                        val fresh = words.filter { it.lemma.lowercase() !in existing }
-                        db.insertWords(fresh)
-                    }
-                } catch (e: Exception) {
-                    -1
-                }
+            val parsed = withContext(Dispatchers.IO) {
+                runCatching {
+                    val words = SeedLoader.parseJson(jsonText)
+                        .map { it.copy(source = Word.SRC_CUSTOM) }
+                    words to SeedLoader.parseName(jsonText)
+                }.getOrNull()
             }
+            if (parsed == null || parsed.first.isEmpty()) {
+                onDone(-1, "")
+                return@launch
+            }
+            val (words, jsonName) = parsed
+            val bookName = jsonName?.takeIf { it.isNotBlank() } ?: "导入词表"
+            val lemmas = words.map { it.lemma.lowercase() }.distinct()
+
+            val inserted = withContext(Dispatchers.IO) {
+                val existing = db.existingLemmas(lemmas)
+                val fresh = words.filter { it.lemma.lowercase() !in existing }
+                db.insertWords(fresh)
+                fresh.size
+            }
+
+            // 词条 id 包含词库里本来就有的，这样整份词表都能归到书里
+            val ids = withContext(Dispatchers.IO) { db.wordIdsByLemmas(lemmas) }
+
+            val book = customBooks.firstOrNull { it.name == bookName } ?: run {
+                val created = WordBook(java.util.UUID.randomUUID().toString(), bookName)
+                customBooks = customBooks + created
+                saveBooks()
+                created
+            }
+
+            withContext(Dispatchers.IO) { db.addWordsToBook(book.id, ids) }
+            selectBook(book)
             refresh()
-            onDone(count)
+            onDone(inserted, book.name)
         }
     }
 
