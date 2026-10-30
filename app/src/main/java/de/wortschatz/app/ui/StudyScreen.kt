@@ -2,6 +2,10 @@ package de.wortschatz.app.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
@@ -9,6 +13,7 @@ import androidx.compose.animation.scaleOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,10 +43,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -52,6 +65,8 @@ import de.wortschatz.app.data.Rating
 import de.wortschatz.app.data.Word
 import de.wortschatz.app.data.WordWithProgress
 import de.wortschatz.app.ui.theme.ExtraColors
+import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 @Composable
 fun StudyScreen(vm: AppViewModel, onExit: () -> Unit) {
@@ -116,12 +131,16 @@ fun StudyScreen(vm: AppViewModel, onExit: () -> Unit) {
                 StudyCard(
                     item = current,
                     revealed = vm.revealed,
+                    starred = vm.isStarred(current.word.id),
                     speaker = { vm.speak(it) },
                     onReveal = { vm.reveal() },
+                    onRate = { vm.rate(it) },
+                    onStar = { vm.toggleStar(current.word.id) },
                     modifier = Modifier.weight(1f)
                 )
+                SwipeHint()
                 RatingBar(
-                    enabled = vm.revealed,
+                    enabled = true,
                     onRate = { vm.rate(it) }
                 )
             }
@@ -129,15 +148,88 @@ fun StudyScreen(vm: AppViewModel, onExit: () -> Unit) {
     }
 }
 
+/** 滑动手势方向与其对应的操作 */
+private enum class SwipeDir(
+    val rating: Rating?,
+    val label: String,
+    val color: Color
+) {
+    LEFT(Rating.GOOD, "认识", Color(0xFF2E7D5B)),
+    RIGHT(Rating.AGAIN, "忘了", Color(0xFFC0392B)),
+    UP(Rating.HARD, "模糊", Color(0xFF9A6B00)),
+    DOWN(null, "收藏", Color(0xFFB8860B))
+}
+
 @Composable
 private fun StudyCard(
     item: WordWithProgress,
     revealed: Boolean,
+    starred: Boolean,
     speaker: (String) -> Unit,
     onReveal: () -> Unit,
+    onRate: (Rating) -> Unit,
+    onStar: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val word = item.word
+    val density = LocalDensity.current
+    val scope = rememberCoroutineScope()
+
+    val offsetX = remember { Animatable(0f) }
+    val offsetY = remember { Animatable(0f) }
+    var busy by remember { mutableStateOf(false) }
+
+    val threshold = with(density) { 92.dp.toPx() }
+    val flyDistance = with(density) { 1400.dp.toPx() }
+
+    // 换卡时复位位置，避免沿用上一张的偏移
+    LaunchedEffect(word.id) {
+        offsetX.snapTo(0f)
+        offsetY.snapTo(0f)
+        busy = false
+    }
+
+    fun settle() {
+        scope.launch {
+            launch { offsetX.animateTo(0f, spring(dampingRatio = 0.72f, stiffness = 420f)) }
+            offsetY.animateTo(0f, spring(dampingRatio = 0.72f, stiffness = 420f))
+        }
+    }
+
+    fun commit(dir: SwipeDir) {
+        if (busy) return
+        busy = true
+        scope.launch {
+            val spec = tween<Float>(durationMillis = 230, easing = FastOutLinearInEasing)
+            when (dir) {
+                SwipeDir.LEFT -> offsetX.animateTo(-flyDistance, spec)
+                SwipeDir.RIGHT -> offsetX.animateTo(flyDistance, spec)
+                SwipeDir.UP -> offsetY.animateTo(-flyDistance, spec)
+                SwipeDir.DOWN -> offsetY.animateTo(flyDistance, spec)
+            }
+            // 飞出后再提交，保证动画期间卡片内容不变
+            val rating = dir.rating
+            if (rating != null) {
+                onRate(rating)
+                offsetX.snapTo(0f)
+                offsetY.snapTo(0f)
+            } else {
+                onStar()
+                offsetY.animateTo(0f, spring(dampingRatio = 0.6f, stiffness = 520f))
+            }
+            busy = false
+        }
+    }
+
+    val dir = when {
+        abs(offsetX.value) < 6f && abs(offsetY.value) < 6f -> null
+        abs(offsetX.value) > abs(offsetY.value) ->
+            if (offsetX.value < 0) SwipeDir.LEFT else SwipeDir.RIGHT
+        else -> if (offsetY.value < 0) SwipeDir.UP else SwipeDir.DOWN
+    }
+    val dragDistance = maxOf(abs(offsetX.value), abs(offsetY.value))
+    val badgeAlpha = (dragDistance / threshold).coerceIn(0f, 1f)
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -146,6 +238,44 @@ private fun StudyCard(
         Surface(
             modifier = Modifier
                 .fillMaxSize()
+                .graphicsLayer {
+                    translationX = offsetX.value
+                    translationY = offsetY.value
+                    rotationZ = (offsetX.value / 58f).coerceIn(-13f, 13f)
+                    // 拖动时轻微放大，强化「拿起来」的手感
+                    val lift = (dragDistance / (threshold * 3)).coerceIn(0f, 0.035f)
+                    scaleX = 1f + lift
+                    scaleY = 1f + lift
+                }
+                .pointerInput(revealed, busy) {
+                    if (busy) return@pointerInput
+                    detectDragGestures(
+                        onDrag = { change, drag ->
+                            change.consume()
+                            scope.launch {
+                                offsetX.snapTo(offsetX.value + drag.x)
+                                offsetY.snapTo(offsetY.value + drag.y)
+                            }
+                        },
+                        onDragEnd = {
+                            val dx = offsetX.value
+                            val dy = offsetY.value
+                            val target = when {
+                                abs(dx) > abs(dy) && abs(dx) > threshold ->
+                                    if (dx < 0) SwipeDir.LEFT else SwipeDir.RIGHT
+                                abs(dy) > threshold ->
+                                    if (dy < 0) SwipeDir.UP else SwipeDir.DOWN
+                                else -> null
+                            }
+                            if (target == null) {
+                                settle()
+                            } else {
+                                commit(target)
+                            }
+                        },
+                        onDragCancel = { settle() }
+                    )
+                }
                 .clickable(enabled = !revealed) { onReveal() },
             shape = RoundedCornerShape(24.dp),
             color = MaterialTheme.colorScheme.surface,
@@ -163,14 +293,78 @@ private fun StudyCard(
                 modifier = Modifier.fillMaxSize()
             ) { showBack ->
                 if (showBack) BackFace(word = word, speaker = speaker)
-                else FrontFace(word = word, speaker = speaker, isNew = item.progress.state == 0)
+                else FrontFace(
+                    word = word,
+                    speaker = speaker,
+                    isNew = item.progress.state == 0,
+                    starred = starred
+                )
+            }
+        }
+
+        // 拖动方向提示：印章式徽章，随拖动距离淡入
+        if (dir != null && badgeAlpha > 0.12f) {
+            val isDown = dir == SwipeDir.DOWN
+            val label = if (isDown && starred) "已收藏" else dir.label
+            Box(
+                modifier = Modifier
+                    .align(
+                        when (dir) {
+                            SwipeDir.LEFT -> Alignment.CenterEnd
+                            SwipeDir.RIGHT -> Alignment.CenterStart
+                            SwipeDir.UP -> Alignment.BottomCenter
+                            SwipeDir.DOWN -> Alignment.TopCenter
+                        }
+                    )
+                    .padding(26.dp)
+                    .graphicsLayer {
+                        alpha = badgeAlpha
+                        rotationZ = if (dir == SwipeDir.LEFT) 10f
+                        else if (dir == SwipeDir.RIGHT) -10f else 0f
+                        scaleX = 0.85f + badgeAlpha * 0.15f
+                        scaleY = 0.85f + badgeAlpha * 0.15f
+                    }
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = dir.color.copy(alpha = 0.12f),
+                    border = androidx.compose.foundation.BorderStroke(
+                        2.dp, dir.color.copy(alpha = 0.75f)
+                    )
+                ) {
+                    Text(
+                        text = label,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 7.dp),
+                        fontSize = 19.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = dir.color
+                    )
+                }
             }
         }
     }
 }
 
 @Composable
-private fun FrontFace(word: Word, speaker: (String) -> Unit, isNew: Boolean) {
+private fun SwipeHint() {
+    Text(
+        text = "左滑认识 · 右滑忘了 · 上滑模糊 · 下滑收藏",
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 2.dp, bottom = 2.dp),
+        textAlign = TextAlign.Center,
+        fontSize = 11.sp,
+        color = MaterialTheme.colorScheme.outline
+    )
+}
+
+@Composable
+private fun FrontFace(
+    word: Word,
+    speaker: (String) -> Unit,
+    isNew: Boolean,
+    starred: Boolean
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -192,6 +386,21 @@ private fun FrontFace(word: Word, speaker: (String) -> Unit, isNew: Boolean) {
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp)
+                    )
+                }
+            }
+            if (starred) {
+                Spacer(Modifier.width(6.dp))
+                Surface(
+                    shape = RoundedCornerShape(6.dp),
+                    color = ExtraColors.starContainer
+                ) {
+                    Text(
+                        text = "已收藏",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = ExtraColors.star,
                         modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp)
                     )
                 }
@@ -288,8 +497,7 @@ private fun RatingBar(enabled: Boolean, onRate: (Rating) -> Unit) {
     val items = listOf(
         Triple(Rating.AGAIN, MaterialTheme.colorScheme.error, "忘了"),
         Triple(Rating.HARD, Color(0xFF9A6B00), "模糊"),
-        Triple(Rating.GOOD, Color(0xFF2E7D5B), "认识"),
-        Triple(Rating.EASY, MaterialTheme.colorScheme.primary, "太简单")
+        Triple(Rating.GOOD, Color(0xFF2E7D5B), "认识")
     )
     Row(
         modifier = Modifier

@@ -80,6 +80,8 @@ object ExtraColors {
     val successContainer = Color(0xFFD7EBDC)
     val warning = Color(0xFF9A6B00)
     val warningContainer = Color(0xFFFDEFC7)
+    val star = Color(0xFFB8860B)
+    val starContainer = Color(0xFFFBF0D2)
     val levelA1 = Color(0xFF2E7D5B)
     val levelA2 = Color(0xFF2C5F8A)
     val levelB1 = Color(0xFF7A5A2E)

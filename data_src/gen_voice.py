@@ -22,6 +22,7 @@ TMP = os.path.join(ROOT, ".tmpvoice")
 
 VOICE = "de-DE-KatjaNeural"   # 女声，吐字清晰；男声备选 de-DE-ConradNeural
 RATE = "-8%"                  # 略慢于常速，便于跟读
+BITRATE = "32k"               # mp3 码率，可用 --bitrate 覆盖
 
 
 def norm(name: str) -> str:
@@ -35,13 +36,15 @@ def norm(name: str) -> str:
     return s.lower()
 
 
-def collect_words():
+def collect_words(levels=None):
     """从词库 JSON 中收集需要发音的唯一词形。"""
     words = {}
     for path in sorted(glob.glob(os.path.join(ASSETS, "words_*.json"))):
         with open(path, encoding="utf-8") as fh:
             data = json.load(fh)
         for entry in data.get("words", []):
+            if levels and entry.get("lv") not in levels:
+                continue
             lemma = (entry.get("l") or entry.get("w") or "").strip()
             if not lemma:
                 continue
@@ -70,7 +73,7 @@ async def synth_one(sem, idx, total, key, text, stats):
                 # 转码：单声道 22.05kHz 32kbps，体积约为原始的 1/3
                 subprocess.run(
                     ["ffmpeg", "-y", "-loglevel", "error", "-i", raw,
-                     "-ac", "1", "-ar", "22050", "-b:a", "32k", dst],
+                     "-ac", "1", "-ar", "22050", "-b:a", BITRATE, dst],
                     check=True,
                 )
                 # 中间文件留在 TMP 目录，由调用方在收尾时统一清理
@@ -104,13 +107,19 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--concurrency", type=int, default=8)
     ap.add_argument("--limit", type=int, default=0, help="仅生成前 N 个，用于试跑")
+    ap.add_argument("--levels", default="", help="只生成指定等级，如 A1,A2,B1")
+    ap.add_argument("--bitrate", default="32k", help="转码码率，默认 32k")
     args = ap.parse_args()
 
-    words = collect_words()
+    global BITRATE
+    BITRATE = args.bitrate
+    levels = {x.strip().upper() for x in args.levels.split(",") if x.strip()} or None
+
+    words = collect_words(levels)
     items = sorted(words.items())
     if args.limit:
         items = items[: args.limit]
-    print(f"待生成 {len(items)} 个词，语音 {VOICE}，并发 {args.concurrency}")
+    print(f"待生成 {len(items)} 个词，语音 {VOICE}，码率 {BITRATE}，并发 {args.concurrency}")
 
     stats = asyncio.run(run(dict(items), args.concurrency))
 

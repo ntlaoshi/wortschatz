@@ -69,7 +69,11 @@ class Speaker(context: Context) {
     private val mainHandler = android.os.Handler(android.os.Looper.getMainLooper())
 
     fun init() {
-        offlineCount = clips.size
+        // 音频索引有数千个文件名，放在后台读取，避免拖慢冷启动
+        thread(name = "voice-index") {
+            val count = clips.size
+            mainHandler.post { offlineCount = count }
+        }
         if (tts != null) return
         tts = TextToSpeech(appContext) { status ->
             if (status == TextToSpeech.SUCCESS) {
@@ -242,6 +246,10 @@ class Speaker(context: Context) {
                     } else {
                         lastError = "该词暂无发音"
                         speaking = false
+                        // 未内置音频且联网也没取到时，明确告知，避免用户以为卡住
+                        android.widget.Toast.makeText(
+                            appContext, "该词暂无发音，换个词试试", android.widget.Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }

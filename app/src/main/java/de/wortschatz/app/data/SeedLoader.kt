@@ -14,13 +14,15 @@ object SeedLoader {
 
     private const val PREFS = "wortschatz_prefs"
     private const val KEY_SEED_VERSION = "seed_version"
-    const val SEED_VERSION = 4
+    const val SEED_VERSION = 5
 
     private val ASSET_FILES = listOf(
         "words_a1.json",
         "words_a2.json",
         "words_b1.json",
-        "words_b2.json"
+        "words_b2.json",
+        // 由中文维基词典扩充的词条，见 data_src/merge_ext.py
+        "words_ext.json"
     )
 
     data class ImportResult(val imported: Int, val skipped: Boolean)
