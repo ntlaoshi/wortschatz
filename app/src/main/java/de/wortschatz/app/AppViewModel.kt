@@ -13,6 +13,7 @@ import de.wortschatz.app.data.Progress
 import de.wortschatz.app.data.Rating
 import de.wortschatz.app.data.SeedLoader
 import de.wortschatz.app.data.Sm2
+import de.wortschatz.app.data.SpellTest
 import de.wortschatz.app.data.StudyStats
 import de.wortschatz.app.data.Word
 import de.wortschatz.app.data.WordDb
@@ -41,11 +42,21 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     // ---- 设置（持久化）
     var levels by mutableStateOf(loadLevels())
         private set
-    var dailyNewTarget by mutableStateOf(prefs.getInt(KEY_DAILY_NEW, 20))
+
+    /** 每轮学习的词数（到期复习优先，不足部分补新词） */
+    var sessionSize by mutableStateOf(prefs.getInt(KEY_SESSION_SIZE, 20))
         private set
     var autoSpeak by mutableStateOf(prefs.getBoolean(KEY_AUTO_SPEAK, true))
         private set
     var ttsSpeed by mutableStateOf(prefs.getFloat(KEY_SPEED, 0.9f))
+        private set
+
+    /** 主题：0 跟随系统 / 1 浅色 / 2 深色 */
+    var themeMode by mutableStateOf(prefs.getInt(KEY_THEME, 0))
+        private set
+
+    /** 学完一轮后是否进入拼写测试 */
+    var spellTestEnabled by mutableStateOf(prefs.getBoolean(KEY_SPELL_TEST, true))
         private set
 
     // ---- 查词
@@ -71,10 +82,37 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     var sessionTotal by mutableStateOf(0)
         private set
 
-    // ---- 收藏
+    /** 正在组装学习队列，用于避免切换到学习页时闪出完成页 */
+    var sessionLoading by mutableStateOf(false)
+        private set
+
+    /** 本轮学过的词，用于结束后的拼写测试 */
+    var sessionWords by mutableStateOf<List<Word>>(emptyList())
+        private set
+
+    // ---- 拼写测试
+    var spellActive by mutableStateOf(false)
+        private set
+    var spellIndex by mutableStateOf(0)
+        private set
+    var spellInput by mutableStateOf("")
+        private set
+    /** 当前题是否已提交判定 */
+    var spellChecked by mutableStateOf(false)
+        private set
+    var spellLastCorrect by mutableStateOf(false)
+        private set
+    var spellResults by mutableStateOf<List<Boolean>>(emptyList())
+        private set
+
+    /** 收藏 */
     var starred by mutableStateOf<List<Word>>(emptyList())
         private set
     var starState by mutableStateOf<Set<Long>>(emptySet())
+        private set
+
+    /** 已打卡日期（yyyy-MM-dd），用于日历 */
+    var checkinDays by mutableStateOf<Set<String>>(emptySet())
         private set
 
     init {
@@ -100,6 +138,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             levelCounts = snapshot.second
             totalWords = snapshot.third
             loadStarred()
+            loadCheckins()
         }
     }
 
@@ -111,6 +150,12 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             }
             starred = list
             starState = ids
+        }
+    }
+
+    fun loadCheckins() {
+        viewModelScope.launch {
+            checkinDays = withContext(Dispatchers.IO) { db.loggedDays() }
         }
     }
 
@@ -180,20 +225,40 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     // ---------------------------------------------------------------- 学习
 
-    /** 开始一轮学习：先复习到期词，再按每日目标补新词 */
-    fun startSession() {
+    /** 学习会话模式：只复习、只学新词、或两者混合 */
+    enum class SessionMode { MIXED, REVIEW, NEW }
+
+    /**
+     * 开始一轮学习。
+     * REVIEW 只取到期词，NEW 只取新词，MIXED 先复习再用新词补足每轮词数。
+     */
+    fun startSession(mode: SessionMode = SessionMode.MIXED) {
+        if (sessionLoading) return
+        sessionLoading = true
         viewModelScope.launch {
             val items = withContext(Dispatchers.IO) {
                 val now = System.currentTimeMillis()
-                val due = db.dueWords(now, levels, 200)
-                val fresh = if (due.size >= dailyNewTarget) emptyList()
-                else db.newWords(levels, dailyNewTarget - due.size)
-                due + fresh.map { WordWithProgress(it, Progress(it.id)) }
+                when (mode) {
+                    SessionMode.REVIEW -> db.dueWords(now, levels, sessionSize)
+                    SessionMode.NEW -> db.newWords(levels, sessionSize)
+                        .map { WordWithProgress(it, Progress(it.id)) }
+                    SessionMode.MIXED -> {
+                        val due = db.dueWords(now, levels, sessionSize)
+                        val remaining = (sessionSize - due.size).coerceAtLeast(0)
+                        val fresh = if (remaining == 0) emptyList()
+                        else db.newWords(levels, remaining)
+                        due + fresh.map { WordWithProgress(it, Progress(it.id)) }
+                    }
+                }
             }
+            sessionLoading = false
+            if (items.isEmpty()) return@launch
             queue.clear()
             queue.addAll(items)
             sessionDone = 0
             sessionTotal = queue.size
+            sessionWords = emptyList()
+            spellActive = false
             revealed = false
             nextCard()
         }
@@ -205,6 +270,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         if (item == null) {
             revealed = false
             refresh()
+            // 一轮学完，按设置进入拼写测试
+            if (spellTestEnabled && sessionWords.isNotEmpty()) beginSpelling()
         }
     }
 
@@ -226,6 +293,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 queue.add(WordWithProgress(item.word, updated))
                 sessionTotal = sessionTotal.coerceAtLeast(sessionDone + queue.size + 1)
             }
+            if (sessionWords.none { it.id == item.word.id }) {
+                sessionWords = sessionWords + item.word
+            }
             sessionDone++
             revealed = false
             nextCard()
@@ -239,6 +309,76 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         speaker.speak(w.word)
     }
 
+    // ---------------------------------------------------------------- 拼写测试
+
+    /** 当前要拼写的词 */
+    val spellWord: Word? get() = sessionWords.getOrNull(spellIndex)
+
+    val spellTotal: Int get() = sessionWords.size
+
+    val spellCorrect: Int get() = spellResults.count { it }
+
+    /** 是否已完成全部拼写题 */
+    val spellFinished: Boolean get() = spellIndex >= sessionWords.size
+
+    fun beginSpelling() {
+        if (sessionWords.isEmpty()) return
+        spellActive = true
+        spellIndex = 0
+        spellInput = ""
+        spellChecked = false
+        spellLastCorrect = false
+        spellResults = emptyList()
+    }
+
+    fun onSpellInput(text: String) {
+        spellInput = text
+    }
+
+    fun checkSpelling() {
+        if (spellChecked) return
+        val w = spellWord ?: return
+        val ok = SpellTest.matches(spellInput, w)
+        spellLastCorrect = ok
+        spellChecked = true
+        spellResults = spellResults + ok
+    }
+
+    fun nextSpelling() {
+        if (!spellChecked) return
+        spellIndex++
+        spellInput = ""
+        spellChecked = false
+        spellLastCorrect = false
+    }
+
+    fun exitSpelling() {
+        spellActive = false
+        spellIndex = 0
+        spellInput = ""
+        spellChecked = false
+        spellResults = emptyList()
+    }
+
+    // ---------------------------------------------------------------- 学习记录
+
+    /** 清除全部学习进度，所有词回到「未学」状态。返回清除的条数。 */
+    fun resetAllProgress(onDone: (Int) -> Unit) {
+        viewModelScope.launch {
+            val n = withContext(Dispatchers.IO) { db.resetAllProgress() }
+            refresh()
+            onDone(n)
+        }
+    }
+
+    /** 清除单个词的学习进度 */
+    fun resetWordProgress(wordId: Long) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) { db.resetWordProgress(wordId) }
+            refresh()
+        }
+    }
+
     // ---------------------------------------------------------------- 设置
 
     fun toggleLevel(level: String) {
@@ -249,9 +389,27 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         refresh()
     }
 
-    fun setDailyNew(n: Int) {
-        dailyNewTarget = n.coerceIn(5, 100)
-        prefs.edit().putInt(KEY_DAILY_NEW, dailyNewTarget).apply()
+    /** 选择单词书：整本替换当前学习范围 */
+    fun selectBook(bookLevels: Set<String>) {
+        if (bookLevels.isEmpty()) return
+        levels = bookLevels
+        prefs.edit().putString(KEY_LEVELS, bookLevels.joinToString(",")).apply()
+        refresh()
+    }
+
+    fun updateSessionSize(n: Int) {
+        sessionSize = n.coerceIn(5, 100)
+        prefs.edit().putInt(KEY_SESSION_SIZE, sessionSize).apply()
+    }
+
+    fun updateThemeMode(mode: Int) {
+        themeMode = mode.coerceIn(0, 2)
+        prefs.edit().putInt(KEY_THEME, themeMode).apply()
+    }
+
+    fun updateSpellTest(v: Boolean) {
+        spellTestEnabled = v
+        prefs.edit().putBoolean(KEY_SPELL_TEST, v).apply()
     }
 
     fun updateAutoSpeak(v: Boolean) {
@@ -309,9 +467,11 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     companion object {
         private const val PREFS_NAME = "wortschatz_prefs"
         private const val KEY_LEVELS = "levels"
-        private const val KEY_DAILY_NEW = "daily_new"
+        private const val KEY_SESSION_SIZE = "session_size"
         private const val KEY_AUTO_SPEAK = "auto_speak"
         private const val KEY_SPEED = "tts_speed"
+        private const val KEY_THEME = "theme_mode"
+        private const val KEY_SPELL_TEST = "spell_test"
         val ALL_LEVELS = listOf("A1", "A2", "B1", "B2")
         val DEFAULT_LEVELS = setOf("A1", "A2", "B1", "B2")
     }

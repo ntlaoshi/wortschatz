@@ -34,6 +34,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -70,7 +71,31 @@ import kotlin.math.abs
 
 @Composable
 fun StudyScreen(vm: AppViewModel, onExit: () -> Unit) {
+    // 一轮学完后进入拼写自测（设置中可关闭）
+    if (vm.spellActive) {
+        val quit = {
+            vm.exitSpelling()
+            onExit()
+        }
+        BackHandler { quit() }
+        SpellTestScreen(vm = vm, onExit = quit)
+        return
+    }
+
     val current = vm.current
+
+    if (vm.sessionLoading) {
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(
+                    strokeWidth = 2.dp,
+                    modifier = Modifier.size(26.dp),
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
+        return
+    }
 
     // 进入每张卡片时自动朗读
     LaunchedEffect(current?.word?.id) {

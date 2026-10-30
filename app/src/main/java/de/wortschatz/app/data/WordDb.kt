@@ -178,6 +178,24 @@ class WordDb private constructor(context: Context) :
     fun deleteWordsBySource(source: String): Int =
         writableDatabase.delete("words", "source = ?", arrayOf(source))
 
+    /** 清除单个词的学习进度，使其回到「未学」状态 */
+    fun resetWordProgress(wordId: Long): Int =
+        writableDatabase.delete("progress", "word_id = ?", arrayOf(wordId.toString()))
+
+    /** 清除全部学习进度，返回受影响的词条数 */
+    fun resetAllProgress(): Int = writableDatabase.delete("progress", null, null)
+
+    /** 有练习记录的日期集合（yyyy-MM-dd），供打卡日历使用 */
+    fun loggedDays(): Set<String> {
+        val set = mutableSetOf<String>()
+        readableDatabase.rawQuery(
+            "SELECT day FROM daily_log WHERE reviews > 0 ORDER BY day DESC LIMIT 800", null
+        ).use { c ->
+            while (c.moveToNext()) set.add(c.getString(0))
+        }
+        return set
+    }
+
     // ---------------------------------------------------------------- 查询
 
     fun countWords(): Int = rawInt("SELECT COUNT(*) FROM words")

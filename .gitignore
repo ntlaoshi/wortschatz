@@ -31,3 +31,6 @@ screenshots/
 # 系统文件
 .DS_Store
 Thumbs.db
+
+# Kotlin 编译器临时文件
+.kotlin/

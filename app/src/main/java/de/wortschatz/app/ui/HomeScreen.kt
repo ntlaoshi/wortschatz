@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.LocalFireDepartment
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.Button
@@ -47,7 +48,9 @@ fun HomeScreen(
     totalWords: Int,
     activeLevels: Set<String>,
     dailyTarget: Int,
-    onStart: () -> Unit,
+    onStartReview: () -> Unit,
+    onStartNew: () -> Unit,
+    onOpenCalendar: () -> Unit,
     onOpenLevels: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -56,13 +59,14 @@ fun HomeScreen(
         contentPadding = PaddingValues(bottom = 24.dp)
     ) {
         item {
-            Header(stats = stats)
+            Header(stats = stats, onOpenCalendar = onOpenCalendar)
         }
         item {
             TodayCard(
                 stats = stats,
                 dailyTarget = dailyTarget,
-                onStart = onStart,
+                onStartReview = onStartReview,
+                onStartNew = onStartNew,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
             )
         }
@@ -85,7 +89,7 @@ fun HomeScreen(
                 )
                 MiniStatCard(
                     value = stats.starred.toString(),
-                    label = "生词本",
+                    label = "收藏",
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -106,7 +110,7 @@ fun HomeScreen(
 }
 
 @Composable
-private fun Header(stats: StudyStats) {
+private fun Header(stats: StudyStats, onOpenCalendar: () -> Unit) {
     val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     val greeting = when (hour) {
         in 5..11 -> "Guten Morgen"
@@ -131,29 +135,28 @@ private fun Header(stats: StudyStats) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            if (stats.streak > 0) {
-                Surface(
-                    shape = RoundedCornerShape(20.dp),
-                    color = MaterialTheme.colorScheme.secondaryContainer
+            Surface(
+                shape = RoundedCornerShape(20.dp),
+                color = MaterialTheme.colorScheme.secondaryContainer,
+                onClick = onOpenCalendar
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 11.dp, vertical = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 11.dp, vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Rounded.LocalFireDepartment,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.secondary,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(Modifier.width(3.dp))
-                        Text(
-                            text = "${stats.streak} 天",
-                            fontSize = 13.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = MaterialTheme.colorScheme.onSecondaryContainer
-                        )
-                    }
+                    Icon(
+                        imageVector = Icons.Rounded.LocalFireDepartment,
+                        contentDescription = "打卡记录",
+                        tint = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Spacer(Modifier.width(3.dp))
+                    Text(
+                        text = if (stats.streak > 0) "${stats.streak} 天" else "打卡",
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
                 }
             }
         }
@@ -164,10 +167,12 @@ private fun Header(stats: StudyStats) {
 private fun TodayCard(
     stats: StudyStats,
     dailyTarget: Int,
-    onStart: () -> Unit,
+    onStartReview: () -> Unit,
+    onStartNew: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val hasWork = stats.dueToday > 0 || stats.newAvailable > 0
+    val due = stats.dueToday
+    val newPool = stats.newAvailable
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(22.dp),
@@ -192,60 +197,127 @@ private fun TodayCard(
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.72f)
                 )
-                Spacer(Modifier.height(10.dp))
-                Row(verticalAlignment = Alignment.Bottom) {
-                    Text(
-                        text = stats.dueToday.toString(),
-                        fontFamily = FontFamily.Default,
-                        fontSize = 42.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onPrimary
+                Spacer(Modifier.height(12.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    TaskFigure(
+                        value = due,
+                        label = "待复习",
+                        modifier = Modifier.weight(1f)
                     )
-                    Spacer(Modifier.width(6.dp))
-                    Text(
-                        text = "个待复习",
-                        fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.85f),
-                        modifier = Modifier.padding(bottom = 9.dp)
+                    Box(
+                        modifier = Modifier
+                            .width(1.dp)
+                            .height(42.dp)
+                            .background(MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.18f))
+                    )
+                    TaskFigure(
+                        value = newPool,
+                        label = "待学习",
+                        modifier = Modifier.weight(1f)
                     )
                 }
-                Spacer(Modifier.height(2.dp))
+                Spacer(Modifier.height(6.dp))
                 Text(
-                    text = "另有 ${stats.newAvailable} 个新词可取，每日目标 $dailyTarget 个",
-                    fontSize = 12.5.sp,
-                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.72f)
+                    text = "每轮 $dailyTarget 个 · 复习优先安排到期词",
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
                 )
-                Spacer(Modifier.height(18.dp))
-                Button(
-                    onClick = onStart,
-                    enabled = hasWork,
-                    shape = RoundedCornerShape(14.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.onPrimary,
-                        contentColor = MaterialTheme.colorScheme.primary,
-                        disabledContainerColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f),
-                        disabledContentColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(48.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.PlayArrow,
-                        contentDescription = null,
-                        modifier = Modifier.size(20.dp)
+                Spacer(Modifier.height(16.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    TaskButton(
+                        text = "开始复习",
+                        enabled = due > 0,
+                        filled = true,
+                        onClick = onStartReview,
+                        icon = Icons.Rounded.PlayArrow,
+                        modifier = Modifier.weight(1f)
                     )
-                    Spacer(Modifier.width(6.dp))
-                    Text(
-                        text = when {
-                            !hasWork -> "今天的词都练完了"
-                            stats.dueToday > 0 -> "开始复习"
-                            else -> "开始学新词"
-                        },
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 15.sp
+                    TaskButton(
+                        text = "学新词",
+                        enabled = newPool > 0,
+                        filled = false,
+                        onClick = onStartNew,
+                        icon = Icons.Rounded.Add,
+                        modifier = Modifier.weight(1f)
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TaskFigure(value: Int, label: String, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = value.toString(),
+            fontFamily = FontFamily.Default,
+            fontSize = 36.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onPrimary
+        )
+        Spacer(Modifier.height(1.dp))
+        Text(
+            text = label,
+            fontSize = 12.5.sp,
+            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.78f)
+        )
+    }
+}
+
+@Composable
+private fun TaskButton(
+    text: String,
+    enabled: Boolean,
+    filled: Boolean,
+    onClick: () -> Unit,
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    modifier: Modifier = Modifier
+) {
+    val fg = MaterialTheme.colorScheme.primary
+    val onSurface = MaterialTheme.colorScheme.onPrimary
+    Surface(
+        modifier = modifier.height(46.dp),
+        shape = RoundedCornerShape(14.dp),
+        color = when {
+            filled && enabled -> onSurface
+            filled -> onSurface.copy(alpha = 0.28f)
+            else -> androidx.compose.ui.graphics.Color.Transparent
+        },
+        border = if (filled) null else androidx.compose.foundation.BorderStroke(
+            1.2.dp,
+            onSurface.copy(alpha = if (enabled) 0.55f else 0.22f)
+        ),
+        onClick = { if (enabled) onClick() }
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.size(17.dp),
+                    tint = when {
+                        filled && enabled -> fg
+                        filled -> fg.copy(alpha = 0.45f)
+                        enabled -> onSurface
+                        else -> onSurface.copy(alpha = 0.4f)
+                    }
+                )
+                Spacer(Modifier.width(5.dp))
+                Text(
+                    text = text,
+                    fontSize = 14.5.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = when {
+                        filled && enabled -> fg
+                        filled -> fg.copy(alpha = 0.45f)
+                        enabled -> onSurface
+                        else -> onSurface.copy(alpha = 0.4f)
+                    }
+                )
             }
         }
     }

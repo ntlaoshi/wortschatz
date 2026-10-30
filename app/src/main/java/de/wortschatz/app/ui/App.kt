@@ -57,6 +57,12 @@ fun WortschatzApp(vm: AppViewModel) {
 
     var tab by rememberSaveable { mutableIntStateOf(0) }
     var showStudy by remember { mutableStateOf(false) }
+    var showCalendar by remember { mutableStateOf(false) }
+
+    if (showCalendar) {
+        CheckinCalendarScreen(vm = vm, onBack = { showCalendar = false })
+        return
+    }
 
     if (showStudy) {
         StudyScreen(vm = vm, onExit = {
@@ -69,7 +75,7 @@ fun WortschatzApp(vm: AppViewModel) {
     val tabs = listOf(
         TabItem("首页", Icons.Rounded.Home, Icons.Outlined.Home),
         TabItem("查词", Icons.Rounded.Search, Icons.Outlined.Search),
-        TabItem("生词本", Icons.Rounded.Star, Icons.Outlined.StarBorder),
+        TabItem("收藏", Icons.Rounded.Star, Icons.Outlined.StarBorder),
         TabItem("设置", Icons.Rounded.Settings, Icons.Outlined.Settings)
     )
 
@@ -114,11 +120,16 @@ fun WortschatzApp(vm: AppViewModel) {
                         levelCounts = vm.levelCounts,
                         totalWords = vm.totalWords,
                         activeLevels = vm.levels,
-                        dailyTarget = vm.dailyNewTarget,
-                        onStart = {
-                            vm.startSession()
+                        dailyTarget = vm.sessionSize,
+                        onStartReview = {
+                            vm.startSession(AppViewModel.SessionMode.REVIEW)
                             showStudy = true
                         },
+                        onStartNew = {
+                            vm.startSession(AppViewModel.SessionMode.NEW)
+                            showStudy = true
+                        },
+                        onOpenCalendar = { showCalendar = true },
                         onOpenLevels = { tab = 3 }
                     )
 

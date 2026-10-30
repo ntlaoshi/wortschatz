@@ -37,7 +37,7 @@ fun StarredScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "生词本",
+                text = "收藏",
                 fontFamily = FontFamily.Default,
                 fontSize = 26.sp,
                 fontWeight = FontWeight.SemiBold,
@@ -54,7 +54,7 @@ fun StarredScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
         if (vm.starred.isEmpty()) {
             EmptyState(
                 title = "还没有收藏的词",
-                subtitle = "查词时点右侧星标即可加入生词本，方便集中复习",
+                subtitle = "查词时点右侧星标即可收藏，背单词时下滑卡片也能收藏，方便集中回看",
                 icon = {
                     Icon(
                         Icons.Rounded.StarBorder,

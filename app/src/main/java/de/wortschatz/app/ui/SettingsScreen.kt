@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,11 +23,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.FileOpen
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.RecordVoiceOver
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
@@ -35,8 +39,13 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -51,6 +60,7 @@ import kotlin.math.roundToInt
 fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val levels = AppViewModel.ALL_LEVELS
+    var showResetConfirm by remember { mutableStateOf(false) }
 
     val importLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument()
@@ -94,9 +104,69 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             }
         }
 
+        // ---------------- 单词书
+        item {
+            SettingCard(title = "单词书") {
+                Text(
+                    text = "选一本，学习与复习都只从这本书取词",
+                    fontSize = 12.5.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(Modifier.height(6.dp))
+                val books = listOf(
+                    Triple("A1 入门", setOf("A1"), "基础词汇与日常表达"),
+                    Triple("A2 基础", setOf("A2"), "生活场景与简单交流"),
+                    Triple("B1 进阶", setOf("B1"), "工作、社会与观点表达"),
+                    Triple("B2 提高", setOf("B2"), "抽象话题与书面表达"),
+                    Triple("全部词库", setOf("A1", "A2", "B1", "B2"), "所有等级混合")
+                )
+                books.forEach { (title, set, desc) ->
+                    val selected = vm.levels == set
+                    val count = set.sumOf { vm.levelCounts[it] ?: 0 }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(10.dp))
+                            .clickable { vm.selectBook(set) }
+                            .padding(vertical = 7.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selected,
+                            onClick = { vm.selectBook(set) },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = MaterialTheme.colorScheme.primary
+                            )
+                        )
+                        Spacer(Modifier.width(6.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = title,
+                                fontSize = 13.5.sp,
+                                fontWeight = if (selected) FontWeight.Medium
+                                else FontWeight.Normal,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                            Text(
+                                text = desc,
+                                fontSize = 11.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        Text(
+                            text = "$count 词",
+                            fontSize = 12.sp,
+                            color = if (selected) MaterialTheme.colorScheme.primary
+                            else MaterialTheme.colorScheme.outline
+                        )
+                    }
+                }
+            }
+        }
+
         // ---------------- 学习
         item {
-            SettingCard(title = "学习范围") {
+            SettingCard(title = "自定义学习范围") {
                 Text(
                     text = "选择要学习的等级，未选中的等级不会出现在学习队列里",
                     fontSize = 12.5.sp,
@@ -129,29 +199,97 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
         }
 
         item {
-            SettingCard(title = "每日新词") {
+            SettingCard(title = "每轮词数") {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "每天最多学 ${vm.dailyNewTarget} 个新词",
+                        text = "每轮背 ${vm.sessionSize} 个词",
                         fontSize = 13.5.sp,
                         color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.weight(1f)
                     )
                     Text(
-                        text = "建议 15–25",
+                        text = "含复习与新词",
                         fontSize = 11.5.sp,
                         color = MaterialTheme.colorScheme.outline
                     )
                 }
                 Slider(
-                    value = vm.dailyNewTarget.toFloat(),
-                    onValueChange = { vm.setDailyNew(it.roundToInt()) },
-                    valueRange = 5f..60f,
+                    value = vm.sessionSize.toFloat(),
+                    onValueChange = { vm.updateSessionSize(it.roundToInt()) },
+                    valueRange = 5f..100f,
                     colors = SliderDefaults.colors(
                         thumbColor = MaterialTheme.colorScheme.primary,
                         activeTrackColor = MaterialTheme.colorScheme.primary
                     )
                 )
+                Text(
+                    text = "到期复习的词优先排入，不足的部分补新词",
+                    fontSize = 11.5.sp,
+                    lineHeight = 17.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        item {
+            SettingCard(title = "拼写测试") {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = "学完一轮后拼写自测",
+                            fontSize = 13.5.sp,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(Modifier.height(2.dp))
+                        Text(
+                            text = "看中文写出德语单词，变音字母可用 ae/oe/ue 代替",
+                            fontSize = 11.5.sp,
+                            lineHeight = 17.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Switch(
+                        checked = vm.spellTestEnabled,
+                        onCheckedChange = { vm.updateSpellTest(it) },
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = MaterialTheme.colorScheme.onPrimary,
+                            checkedTrackColor = MaterialTheme.colorScheme.primary
+                        )
+                    )
+                }
+            }
+        }
+
+        // ---------------- 外观
+        item {
+            SettingCard(title = "外观") {
+                Text(
+                    text = "主题",
+                    fontSize = 13.5.sp,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(Modifier.height(10.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    val modes = listOf(0 to "跟随系统", 1 to "浅色", 2 to "深色")
+                    modes.forEach { (value, label) ->
+                        FilterChip(
+                            selected = vm.themeMode == value,
+                            onClick = { vm.updateThemeMode(value) },
+                            label = {
+                                Text(
+                                    text = label,
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Medium
+                                )
+                            },
+                            colors = FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = MaterialTheme.colorScheme.primary
+                                    .copy(alpha = 0.14f),
+                                selectedLabelColor = MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    }
+                }
             }
         }
 
@@ -334,6 +472,45 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             }
         }
 
+        // ---------------- 学习记录
+        item {
+            SettingCard(title = "学习记录") {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = "已学 ${vm.stats.totalLearned} 个词 · 连续 ${vm.stats.streak} 天",
+                            fontSize = 13.5.sp,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(Modifier.height(2.dp))
+                        Text(
+                            text = "清除后这些词回到「未学」状态，可重新进入学习队列；收藏不受影响",
+                            fontSize = 11.5.sp,
+                            lineHeight = 17.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+                Spacer(Modifier.height(12.dp))
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f),
+                    border = androidx.compose.foundation.BorderStroke(
+                        1.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.35f)
+                    ),
+                    onClick = { if (vm.stats.totalLearned > 0) showResetConfirm = true }
+                ) {
+                    Text(
+                        text = "清除全部学习记录",
+                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+            }
+        }
+
         // ---------------- 关于
         item {
             SettingCard(title = "关于") {
@@ -347,14 +524,14 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                     Spacer(Modifier.width(8.dp))
                     Column {
                         Text(
-                            text = "德语单词 Wortschatz 1.0",
+                            text = "德语单词 Wortschatz 1.3",
                             fontSize = 13.sp,
                             color = MaterialTheme.colorScheme.onSurface
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
-                            text = "离线词库 + 系统语音朗读。学习进度基于 SM-2 间隔重复算法，" +
-                                "每天优先复习到期词条，再补充新词。",
+                            text = "离线词库 + 内置德语发音。学习进度基于 SM-2 间隔重复算法，" +
+                                "每轮优先复习到期词条，再补充新词，学完可做拼写自测。",
                             fontSize = 11.5.sp,
                             lineHeight = 18.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -363,6 +540,34 @@ fun SettingsScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                 }
             }
         }
+    }
+
+    if (showResetConfirm) {
+        AlertDialog(
+            onDismissRequest = { showResetConfirm = false },
+            title = { Text("清除全部学习记录？", fontSize = 17.sp, fontWeight = FontWeight.SemiBold) },
+            text = {
+                Text(
+                    text = "已学的 ${vm.stats.totalLearned} 个词会重置为未学，" +
+                        "复习计划与掌握程度一并清空。此操作不可撤销，收藏的词不会被删除。",
+                    fontSize = 13.5.sp,
+                    lineHeight = 21.sp
+                )
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    showResetConfirm = false
+                    vm.resetAllProgress { n ->
+                        Toast.makeText(context, "已清除 $n 个词的学习记录", Toast.LENGTH_SHORT).show()
+                    }
+                }) {
+                    Text("清除", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showResetConfirm = false }) { Text("取消") }
+            }
+        )
     }
 }
 
