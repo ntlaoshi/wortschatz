@@ -387,8 +387,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 db.logReview(Calendar0.todayString(), isNew)
             }
 
-            // 「认识」与「太简单」都算一次通过；「模糊」「忘了」把连续计数清零
-            val positive = rating == Rating.GOOD || rating == Rating.EASY
+            // 只有「认识」算一次通过；「模糊」「忘了」把连续计数清零
+            val positive = rating == Rating.GOOD
             val streak = if (positive) (streakMap[item.word.id] ?: 0) + 1 else 0
             streakMap[item.word.id] = streak
 

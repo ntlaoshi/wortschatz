@@ -146,6 +146,5 @@ data class StudyStats(
 enum class Rating(val quality: Int, val label: String) {
     AGAIN(0, "忘了"),
     HARD(3, "模糊"),
-    GOOD(4, "认识"),
-    EASY(5, "太简单")
+    GOOD(4, "认识")
 }

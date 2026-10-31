@@ -14,8 +14,10 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -59,6 +61,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.wortschatz.app.AppViewModel
@@ -210,6 +213,8 @@ private fun StudyCard(
     val offsetX = remember { Animatable(0f) }
     val offsetY = remember { Animatable(0f) }
     var busy by remember { mutableStateOf(false) }
+    // 背面内容是否超出卡片：超出才滚动，否则竖直手势留给上滑/下滑评分
+    var backOverflows by remember(word.id) { mutableStateOf(false) }
 
     val threshold = with(density) { 92.dp.toPx() }
     val flyDistance = with(density) { 1400.dp.toPx() }
@@ -279,34 +284,54 @@ private fun StudyCard(
                     scaleX = 1f + lift
                     scaleY = 1f + lift
                 }
-                .pointerInput(revealed, busy) {
+                .pointerInput(revealed, busy, backOverflows) {
                     if (busy) return@pointerInput
-                    detectDragGestures(
-                        onDrag = { change, drag ->
-                            change.consume()
-                            scope.launch {
-                                offsetX.snapTo(offsetX.value + drag.x)
-                                offsetY.snapTo(offsetY.value + drag.y)
-                            }
-                        },
-                        onDragEnd = {
-                            val dx = offsetX.value
-                            val dy = offsetY.value
-                            val target = when {
-                                abs(dx) > abs(dy) && abs(dx) > threshold ->
-                                    if (dx < 0) SwipeDir.LEFT else SwipeDir.RIGHT
-                                abs(dy) > threshold ->
-                                    if (dy < 0) SwipeDir.UP else SwipeDir.DOWN
-                                else -> null
-                            }
-                            if (target == null) {
-                                settle()
-                            } else {
-                                commit(target)
-                            }
-                        },
-                        onDragCancel = { settle() }
-                    )
+                    if (revealed && backOverflows) {
+                        // 背面内容可能比卡片长，竖直手势必须留给内部的 verticalScroll，
+                        // 否则释义或例句会被截断且滑不动。这里只接管水平拖动做左右评分。
+                        detectHorizontalDragGestures(
+                            onHorizontalDrag = { change, drag ->
+                                change.consume()
+                                scope.launch { offsetX.snapTo(offsetX.value + drag) }
+                            },
+                            onDragEnd = {
+                                val dx = offsetX.value
+                                if (abs(dx) > threshold) {
+                                    commit(if (dx < 0) SwipeDir.LEFT else SwipeDir.RIGHT)
+                                } else {
+                                    settle()
+                                }
+                            },
+                            onDragCancel = { settle() }
+                        )
+                    } else {
+                        detectDragGestures(
+                            onDrag = { change, drag ->
+                                change.consume()
+                                scope.launch {
+                                    offsetX.snapTo(offsetX.value + drag.x)
+                                    offsetY.snapTo(offsetY.value + drag.y)
+                                }
+                            },
+                            onDragEnd = {
+                                val dx = offsetX.value
+                                val dy = offsetY.value
+                                val target = when {
+                                    abs(dx) > abs(dy) && abs(dx) > threshold ->
+                                        if (dx < 0) SwipeDir.LEFT else SwipeDir.RIGHT
+                                    abs(dy) > threshold ->
+                                        if (dy < 0) SwipeDir.UP else SwipeDir.DOWN
+                                    else -> null
+                                }
+                                if (target == null) {
+                                    settle()
+                                } else {
+                                    commit(target)
+                                }
+                            },
+                            onDragCancel = { settle() }
+                        )
+                    }
                 }
                 .clickable(enabled = !revealed) { onReveal() },
             shape = RoundedCornerShape(24.dp),
@@ -326,7 +351,11 @@ private fun StudyCard(
             ) { showBack ->
                 if (showBack) {
                     BackFace(
-                        word = word, pluralStyle = pluralStyle, streak = streak, speaker = speaker
+                        word = word,
+                        pluralStyle = pluralStyle,
+                        streak = streak,
+                        speaker = speaker,
+                        onOverflowChange = { backOverflows = it }
                     )
                 } else {
                     FrontFace(
@@ -563,14 +592,31 @@ private fun BackFace(
     word: Word,
     pluralStyle: PluralStyle,
     streak: Int,
-    speaker: (String) -> Unit
+    speaker: (String) -> Unit,
+    onOverflowChange: (Boolean) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(24.dp)
-    ) {
+    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+        val viewportPx = constraints.maxHeight.toFloat()
+        // 内容比卡片短时关闭滚动，竖直手势才能交给外层做「上滑模糊 / 下滑收藏」
+        var scrollable by remember(word.id) { mutableStateOf(false) }
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState(), enabled = scrollable)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onSizeChanged { size ->
+                        val overflows = size.height > viewportPx
+                        if (overflows != scrollable) {
+                            scrollable = overflows
+                            onOverflowChange(overflows)
+                        }
+                    }
+                    .padding(24.dp)
+            ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = word.word,
@@ -624,7 +670,9 @@ private fun BackFace(
                 onSpeak = { speaker(word.example!!) }
             )
         }
-        Spacer(Modifier.height(12.dp))
+                Spacer(Modifier.height(12.dp))
+            }
+        }
     }
 }
 
