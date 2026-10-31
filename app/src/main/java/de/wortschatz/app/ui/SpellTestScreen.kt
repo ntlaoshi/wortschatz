@@ -30,6 +30,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -262,6 +263,23 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
 
         Spacer(Modifier.weight(1f))
 
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            TextButton(
+                onClick = { vm.skipSpelling() },
+                enabled = !vm.spellChecked
+            ) {
+                Text(
+                    text = "跳过这个词",
+                    fontSize = 12.5.sp,
+                    color = if (vm.spellChecked) MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
+                    else MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
@@ -282,6 +300,7 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
                 Text(
                     text = when {
                         !vm.spellChecked -> "检查"
+                        vm.spellLastCorrect && vm.spellRemaining <= 1 -> "查看结果"
                         vm.spellLastCorrect -> "下一题"
                         else -> "继续测试"
                     },
@@ -302,6 +321,8 @@ private fun SpellResult(vm: AppViewModel, onExit: () -> Unit, modifier: Modifier
     val total = vm.spellTotal
     val firstTry = vm.spellFirstTry
     val attempts = vm.spellAttempts
+    val skipped = vm.spellSkipped
+    val passed = vm.spellPassed
     val ratio = if (total == 0) 0f else firstTry.toFloat() / total
     val title = when {
         ratio >= 0.9f -> "拼写很稳"
@@ -317,11 +338,12 @@ private fun SpellResult(vm: AppViewModel, onExit: () -> Unit, modifier: Modifier
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "全部拼对",
+            text = if (skipped == 0 && passed >= total) "全部拼对" else "本轮完成",
             fontFamily = FontFamily.Default,
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
-            color = ExtraColors.success
+            color = if (skipped == 0 && passed >= total) ExtraColors.success
+            else MaterialTheme.colorScheme.onBackground
         )
         Spacer(Modifier.height(10.dp))
         Text(
@@ -329,6 +351,14 @@ private fun SpellResult(vm: AppViewModel, onExit: () -> Unit, modifier: Modifier
             fontSize = 14.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
+        if (skipped > 0) {
+            Spacer(Modifier.height(4.dp))
+            Text(
+                text = "跳过 $skipped 个，未计入通过",
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.error
+            )
+        }
         if (attempts > total) {
             Spacer(Modifier.height(4.dp))
             Text(

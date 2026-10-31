@@ -3,6 +3,7 @@ package de.wortschatz.app
 import android.app.Application
 import android.content.Context
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
@@ -133,9 +134,17 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     /** 累计尝试次数 */
     var spellAttempts by mutableStateOf(0)
         private set
+    /** 被跳过的词数 */
+    var spellSkipped by mutableStateOf(0)
+        private set
 
-    /** 待拼写队列：拼错的词会挪到队尾重测，直到拼对 */
-    private val spellQueue = mutableListOf<Word>()
+    /**
+     * 待拼写队列：拼错的词会挪到队尾重测，直到拼对。
+     *
+     * 必须用 SnapshotStateList：普通 MutableList 改动不会触发重组，
+     * 界面会一直停在旧词上，而比对却已经换成新词，表现就是「怎么拼都判错」。
+     */
+    private val spellQueue = mutableStateListOf<Word>()
     private val spellFailed = mutableSetOf<Long>()
 
     /** 收藏 */
@@ -449,8 +458,11 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     val spellTotal: Int get() = sessionWords.size
 
-    /** 全部词都拼对才算完成 */
-    val spellFinished: Boolean get() = spellTotal > 0 && spellPassed >= spellTotal
+    /** 剩余待测词数，用于最后一题的按钮文案 */
+    val spellRemaining: Int get() = spellQueue.size
+
+    /** 队列清空即结束：拼对出队、跳过的也出队 */
+    val spellFinished: Boolean get() = spellTotal > 0 && spellQueue.isEmpty()
 
     fun beginSpelling() {
         if (sessionWords.isEmpty()) return
@@ -461,6 +473,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         spellPassed = 0
         spellFirstTry = 0
         spellAttempts = 0
+        spellSkipped = 0
         spellInput = ""
         spellChecked = false
         spellLastCorrect = false
@@ -501,6 +514,16 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         spellLastCorrect = false
     }
 
+    /** 跳过当前词：不计入通过，直接出队，结果页会统计跳过数量 */
+    fun skipSpelling() {
+        if (spellQueue.isEmpty()) return
+        spellSkipped++
+        spellQueue.removeAt(0)
+        spellInput = ""
+        spellChecked = false
+        spellLastCorrect = false
+    }
+
     fun exitSpelling() {
         spellActive = false
         spellQueue.clear()
@@ -508,6 +531,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         spellPassed = 0
         spellFirstTry = 0
         spellAttempts = 0
+        spellSkipped = 0
         spellInput = ""
         spellChecked = false
         spellLastCorrect = false
