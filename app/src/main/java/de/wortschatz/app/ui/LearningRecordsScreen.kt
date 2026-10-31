@@ -1,5 +1,7 @@
 package de.wortschatz.app.ui
 
+import androidx.activity.compose.BackHandler
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -49,6 +51,7 @@ import de.wortschatz.app.ui.theme.ExtraColors
  */
 @Composable
 fun LearningRecordsScreen(vm: AppViewModel, onBack: () -> Unit) {
+    BackHandler { onBack() }
     LaunchedEffect(Unit) { vm.loadRecords() }
     var tab by remember { mutableIntStateOf(0) }
 

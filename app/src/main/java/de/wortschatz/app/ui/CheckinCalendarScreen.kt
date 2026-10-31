@@ -1,5 +1,7 @@
 package de.wortschatz.app.ui
 
+import androidx.activity.compose.BackHandler
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -49,6 +51,7 @@ import java.util.Locale
  */
 @Composable
 fun CheckinCalendarScreen(vm: AppViewModel, onBack: () -> Unit) {
+    BackHandler { onBack() }
     val now = remember { Calendar.getInstance() }
     var year by remember { mutableIntStateOf(now.get(Calendar.YEAR)) }
     var month by remember { mutableIntStateOf(now.get(Calendar.MONTH)) }

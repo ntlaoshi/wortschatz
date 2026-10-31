@@ -244,24 +244,6 @@ private fun SearchHint(modifier: Modifier = Modifier, onPick: (String) -> Unit) 
             lineHeight = 21.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
-        Spacer(Modifier.height(18.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            listOf("Hund", "gehen", "schön", "die Arbeit").forEach { example ->
-                Surface(
-                    shape = RoundedCornerShape(9.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f),
-                    onClick = { onPick(example) }
-                ) {
-                    Text(
-                        text = example,
-                        modifier = Modifier.padding(horizontal = 11.dp, vertical = 6.dp),
-                        fontSize = 13.sp,
-                        fontFamily = FontFamily.Default,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        }
     }
 }
 

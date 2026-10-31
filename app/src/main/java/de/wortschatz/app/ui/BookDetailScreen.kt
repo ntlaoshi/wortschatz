@@ -1,5 +1,7 @@
 package de.wortschatz.app.ui
 
+import androidx.activity.compose.BackHandler
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -57,6 +59,7 @@ import kotlinx.coroutines.delay
  */
 @Composable
 fun BookDetailScreen(vm: AppViewModel, onBack: () -> Unit) {
+    BackHandler { onBack() }
     val book = vm.currentBook
     var query by remember { mutableStateOf("") }
     var results by remember { mutableStateOf<List<Word>>(emptyList()) }
