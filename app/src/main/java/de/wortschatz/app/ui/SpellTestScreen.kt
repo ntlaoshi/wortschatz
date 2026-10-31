@@ -180,6 +180,37 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
             )
         )
 
+        // 多数手机键盘没有德语变音字母，这里给四个可点的按键；
+        // 即便不用，也可以写 ae / oe / ue / ss，判定时两者等价
+        Spacer(Modifier.height(10.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            listOf("ä", "ö", "ü", "ß").forEach { ch ->
+                Surface(
+                    shape = RoundedCornerShape(10.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    enabled = !vm.spellChecked,
+                    onClick = { vm.onSpellInput(vm.spellInput + ch) }
+                ) {
+                    Text(
+                        text = ch,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 7.dp),
+                        fontFamily = FontFamily.Default,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = if (vm.spellChecked)
+                            MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+                        else MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+        }
+        Spacer(Modifier.height(6.dp))
+        Text(
+            text = "打不出变音字母时，也可以写 ae / oe / ue / ss",
+            fontSize = 10.5.sp,
+            color = MaterialTheme.colorScheme.outline
+        )
+
         Spacer(Modifier.height(14.dp))
 
         if (vm.spellChecked) {

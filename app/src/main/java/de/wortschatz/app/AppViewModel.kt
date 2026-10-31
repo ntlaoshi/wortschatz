@@ -377,18 +377,21 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
      */
     fun masterCurrent() {
         val item = current ?: return
+        revealed = false
         viewModelScope.launch {
             withContext(Dispatchers.IO) { db.setMastered(item.word.id, true) }
             queue.removeAll { it.word.id == item.word.id }
             // 已掌握的词不再参与拼写测试
             sessionDone++
-            revealed = false
             nextCard()
         }
     }
 
     fun rate(rating: Rating) {
         val item = current ?: return
+        // 先同步合上背面：评分要写数据库，若等写完再复位，
+        // 卡片会弹回原位并停留几百毫秒，期间释义一直露着
+        revealed = false
         viewModelScope.launch {
             val isNew = item.progress.state == 0
             val updated = Sm2.update(item.progress, rating)
@@ -412,7 +415,6 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 // 没达标：随机插回队列靠后的位置，隔几张卡再判一次
                 enqueueLater(WordWithProgress(item.word, updated))
             }
-            revealed = false
             nextCard()
         }
     }

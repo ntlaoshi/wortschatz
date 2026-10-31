@@ -2,6 +2,8 @@ package de.wortschatz.app.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.spring
@@ -341,14 +343,22 @@ private fun StudyCard(
             )
         ) {
             AnimatedContent(
-                targetState = revealed,
+                // 动画状态带上词条 id：换词时如果只按 revealed 做动画，
+                // 旧状态会用**新单词**重绘背面，导致下一张短暂露出释义
+                targetState = word.id to revealed,
                 transitionSpec = {
-                    (fadeIn() + scaleIn(initialScale = 0.96f)) togetherWith
-                        (fadeOut() + scaleOut(targetScale = 1.02f))
+                    if (initialState.first != targetState.first) {
+                        // 换词直接切换，不做补间
+                        EnterTransition.None togetherWith ExitTransition.None
+                    } else {
+                        (fadeIn() + scaleIn(initialScale = 0.96f)) togetherWith
+                            (fadeOut() + scaleOut(targetScale = 1.02f))
+                    }
                 },
                 label = "card",
                 modifier = Modifier.fillMaxSize()
-            ) { showBack ->
+            ) { state ->
+                val showBack = state.second
                 if (showBack) {
                     BackFace(
                         word = word,
