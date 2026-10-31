@@ -116,8 +116,6 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     // ---- 拼写测试
     var spellActive by mutableStateOf(false)
         private set
-    var spellIndex by mutableStateOf(0)
-        private set
     var spellInput by mutableStateOf("")
         private set
     /** 当前题是否已提交判定 */
@@ -125,8 +123,20 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         private set
     var spellLastCorrect by mutableStateOf(false)
         private set
-    var spellResults by mutableStateOf<List<Boolean>>(emptyList())
+
+    /** 已拼写通过的词数（拼对才算过） */
+    var spellPassed by mutableStateOf(0)
         private set
+    /** 第一次就拼对的词数 */
+    var spellFirstTry by mutableStateOf(0)
+        private set
+    /** 累计尝试次数 */
+    var spellAttempts by mutableStateOf(0)
+        private set
+
+    /** 待拼写队列：拼错的词会挪到队尾重测，直到拼对 */
+    private val spellQueue = mutableListOf<Word>()
+    private val spellFailed = mutableSetOf<Long>()
 
     /** 收藏 */
     var starred by mutableStateOf<List<Word>>(emptyList())
@@ -433,23 +443,25 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     // ---------------------------------------------------------------- 拼写测试
 
     /** 当前要拼写的词 */
-    val spellWord: Word? get() = sessionWords.getOrNull(spellIndex)
+    val spellWord: Word? get() = spellQueue.firstOrNull()
 
     val spellTotal: Int get() = sessionWords.size
 
-    val spellCorrect: Int get() = spellResults.count { it }
-
-    /** 是否已完成全部拼写题 */
-    val spellFinished: Boolean get() = spellIndex >= sessionWords.size
+    /** 全部词都拼对才算完成 */
+    val spellFinished: Boolean get() = spellTotal > 0 && spellPassed >= spellTotal
 
     fun beginSpelling() {
         if (sessionWords.isEmpty()) return
         spellActive = true
-        spellIndex = 0
+        spellQueue.clear()
+        spellQueue.addAll(sessionWords)
+        spellFailed.clear()
+        spellPassed = 0
+        spellFirstTry = 0
+        spellAttempts = 0
         spellInput = ""
         spellChecked = false
         spellLastCorrect = false
-        spellResults = emptyList()
     }
 
     fun onSpellInput(text: String) {
@@ -462,12 +474,26 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         val ok = SpellTest.matches(spellInput, w)
         spellLastCorrect = ok
         spellChecked = true
-        spellResults = spellResults + ok
+        spellAttempts++
+        if (ok) {
+            spellPassed++
+            if (w.id !in spellFailed) spellFirstTry++
+        } else {
+            spellFailed.add(w.id)
+        }
     }
 
+    /** 提交后推进：拼对的出队，拼错的挪到队尾稍后重测 */
     fun nextSpelling() {
         if (!spellChecked) return
-        spellIndex++
+        val w = spellQueue.firstOrNull() ?: return
+        if (spellLastCorrect) {
+            spellQueue.removeAt(0)
+        } else {
+            // 拼错：移到队尾，继续测下一个，等这轮其余词测完再回来
+            spellQueue.removeAt(0)
+            spellQueue.add(w)
+        }
         spellInput = ""
         spellChecked = false
         spellLastCorrect = false
@@ -475,10 +501,14 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     fun exitSpelling() {
         spellActive = false
-        spellIndex = 0
+        spellQueue.clear()
+        spellFailed.clear()
+        spellPassed = 0
+        spellFirstTry = 0
+        spellAttempts = 0
         spellInput = ""
         spellChecked = false
-        spellResults = emptyList()
+        spellLastCorrect = false
     }
 
     // ---------------------------------------------------------------- 学习记录

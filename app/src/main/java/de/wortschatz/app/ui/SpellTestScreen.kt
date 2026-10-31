@@ -79,7 +79,7 @@ fun SpellTestScreen(vm: AppViewModel, onExit: () -> Unit) {
                 LinearProgressIndicator(
                     progress = {
                         if (vm.spellTotal == 0) 0f
-                        else vm.spellIndex.toFloat() / vm.spellTotal
+                        else vm.spellPassed.toFloat() / vm.spellTotal
                     },
                     modifier = Modifier
                         .weight(1f)
@@ -90,7 +90,7 @@ fun SpellTestScreen(vm: AppViewModel, onExit: () -> Unit) {
                 )
                 Spacer(Modifier.width(12.dp))
                 Text(
-                    text = "${(vm.spellIndex + 1).coerceAtMost(vm.spellTotal)}/${vm.spellTotal}",
+                    text = "${vm.spellPassed}/${vm.spellTotal}",
                     fontSize = 12.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -113,7 +113,7 @@ fun SpellTestScreen(vm: AppViewModel, onExit: () -> Unit) {
 @Composable
 private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Modifier) {
     // 提交后自动朗读正确读音，强化记忆
-    LaunchedEffect(vm.spellIndex, vm.spellChecked) {
+    LaunchedEffect(word.id, vm.spellChecked) {
         if (vm.spellChecked) vm.speakWord(word)
     }
 
@@ -231,7 +231,6 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
 
         Spacer(Modifier.weight(1f))
 
-        val isLast = vm.spellIndex == vm.spellTotal - 1
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
@@ -251,9 +250,9 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
             Box(contentAlignment = Alignment.Center) {
                 Text(
                     text = when {
-                        vm.spellChecked && isLast -> "查看结果"
-                        vm.spellChecked -> "下一题"
-                        else -> "检查"
+                        !vm.spellChecked -> "检查"
+                        vm.spellLastCorrect -> "下一题"
+                        else -> "继续测试"
                     },
                     fontSize = 14.5.sp,
                     fontWeight = FontWeight.Medium,
@@ -270,12 +269,13 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
 @Composable
 private fun SpellResult(vm: AppViewModel, onExit: () -> Unit, modifier: Modifier = Modifier) {
     val total = vm.spellTotal
-    val correct = vm.spellCorrect
-    val ratio = if (total == 0) 0f else correct.toFloat() / total
-    val (title, tip) = when {
-        ratio >= 0.9f -> "拼写很稳" to "这轮词掌握得不错，明天按时复习即可。"
-        ratio >= 0.6f -> "基本记住了" to "错的几个词会更容易再次忘记，建议回看一遍。"
-        else -> "还需要再练" to "别急，错的词已经记录，明天的复习会优先安排它们。"
+    val firstTry = vm.spellFirstTry
+    val attempts = vm.spellAttempts
+    val ratio = if (total == 0) 0f else firstTry.toFloat() / total
+    val title = when {
+        ratio >= 0.9f -> "拼写很稳"
+        ratio >= 0.6f -> "基本记住了"
+        else -> "还需要再练"
     }
 
     Column(
@@ -286,17 +286,28 @@ private fun SpellResult(vm: AppViewModel, onExit: () -> Unit, modifier: Modifier
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "$correct",
+            text = "全部拼对",
             fontFamily = FontFamily.Default,
-            fontSize = 56.sp,
+            fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
-            color = if (ratio >= 0.6f) ExtraColors.success else MaterialTheme.colorScheme.error
+            color = ExtraColors.success
         )
+        Spacer(Modifier.height(10.dp))
         Text(
-            text = "/ $total 拼写正确",
+            text = "$firstTry / $total 第一次就拼对",
             fontSize = 14.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
+        if (attempts > total) {
+            Spacer(Modifier.height(4.dp))
+            Text(
+                text = "共尝试 $attempts 次，拼错的词已当场重测到拼对为止",
+                fontSize = 12.sp,
+                lineHeight = 19.sp,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.outline
+            )
+        }
         Spacer(Modifier.height(18.dp))
         Text(
             text = title,
@@ -307,7 +318,7 @@ private fun SpellResult(vm: AppViewModel, onExit: () -> Unit, modifier: Modifier
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = tip,
+            text = "全部拼对后才算通过。错的词已重新测过，下次复习会优先安排。",
             fontSize = 13.sp,
             lineHeight = 21.sp,
             textAlign = TextAlign.Center,
