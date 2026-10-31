@@ -21,6 +21,7 @@ import de.wortschatz.app.data.WordBook
 import de.wortschatz.app.data.WordDb
 import de.wortschatz.app.data.WordWithProgress
 import de.wortschatz.app.tts.Speaker
+import kotlin.random.Random
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -92,6 +93,16 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     var sessionDone by mutableStateOf(0)
         private set
     var sessionTotal by mutableStateOf(0)
+        private set
+
+    /**
+     * 本次学习中每个词「连续认识」的次数。
+     * 只存在内存里：换一轮学习重新计，跨会话不保留。
+     */
+    private val streakMap = mutableMapOf<Long, Int>()
+
+    /** 当前卡片的连续认识次数，供卡片上的进度点使用 */
+    var currentStreak by mutableStateOf(0)
         private set
 
     /** 正在组装学习队列，用于避免切换到学习页时闪出完成页 */
@@ -323,6 +334,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             if (items.isEmpty()) return@launch
             queue.clear()
             queue.addAll(items)
+            streakMap.clear()
+            currentStreak = 0
             sessionDone = 0
             sessionTotal = queue.size
             sessionWords = emptyList()
@@ -335,6 +348,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     private fun nextCard() {
         val item = queue.removeFirstOrNull()
         current = item
+        currentStreak = item?.let { streakMap[it.word.id] ?: 0 } ?: 0
         if (item == null) {
             revealed = false
             refresh()
@@ -372,18 +386,41 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 db.saveProgress(updated)
                 db.logReview(Calendar0.todayString(), isNew)
             }
-            // 忘记的词在本轮末尾再出现一次，强化记忆
-            if (rating == Rating.AGAIN) {
-                queue.add(WordWithProgress(item.word, updated))
-                sessionTotal = sessionTotal.coerceAtLeast(sessionDone + queue.size + 1)
+
+            // 「认识」与「太简单」都算一次通过；「模糊」「忘了」把连续计数清零
+            val positive = rating == Rating.GOOD || rating == Rating.EASY
+            val streak = if (positive) (streakMap[item.word.id] ?: 0) + 1 else 0
+            streakMap[item.word.id] = streak
+
+            if (positive && streak >= PASS_STREAK) {
+                // 连续认识达标，本词才算过：移出队列，计入进度与拼写测试
+                if (sessionWords.none { it.id == item.word.id }) {
+                    sessionWords = sessionWords + item.word
+                }
+                sessionDone++
+            } else {
+                // 没达标：随机插回队列靠后的位置，隔几张卡再判一次
+                enqueueLater(WordWithProgress(item.word, updated))
             }
-            if (sessionWords.none { it.id == item.word.id }) {
-                sessionWords = sessionWords + item.word
-            }
-            sessionDone++
             revealed = false
             nextCard()
         }
+    }
+
+    /**
+     * 把未达标的词随机插回队列。
+     *
+     * 位置取在当前词之后至少隔一个的位置，避免同一张卡紧接着重复出现；
+     * 越靠后越容易再次遇到，但不固定顺序，防止靠位置记忆单词。
+     */
+    private fun enqueueLater(item: WordWithProgress) {
+        if (queue.isEmpty()) {
+            queue.add(item)
+            return
+        }
+        val min = 1.coerceAtMost(queue.size)
+        val index = min + Random.nextInt(queue.size - min + 1)
+        queue.add(index, item)
     }
 
     fun speak(text: String) = speaker.speak(text)
@@ -719,6 +756,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     companion object {
+        /** 一个词需要连续认识多少次才算通过 */
+        const val PASS_STREAK = 3
+
         private const val PREFS_NAME = "wortschatz_prefs"
         private const val KEY_LEVELS = "levels"
         private const val KEY_SESSION_SIZE = "session_size"

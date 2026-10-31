@@ -159,6 +159,7 @@ fun StudyScreen(vm: AppViewModel, onExit: () -> Unit) {
                     revealed = vm.revealed,
                     starred = vm.isStarred(current.word.id),
                     pluralStyle = vm.pluralStyle,
+                    streak = vm.currentStreak,
                     speaker = { vm.speak(it) },
                     onReveal = { vm.reveal() },
                     onRate = { vm.rate(it) },
@@ -194,6 +195,7 @@ private fun StudyCard(
     revealed: Boolean,
     starred: Boolean,
     pluralStyle: PluralStyle,
+    streak: Int,
     speaker: (String) -> Unit,
     onReveal: () -> Unit,
     onRate: (Rating) -> Unit,
@@ -322,14 +324,20 @@ private fun StudyCard(
                 label = "card",
                 modifier = Modifier.fillMaxSize()
             ) { showBack ->
-                if (showBack) BackFace(word = word, pluralStyle = pluralStyle, speaker = speaker)
-                else FrontFace(
-                    word = word,
-                    speaker = speaker,
-                    pluralStyle = pluralStyle,
-                    isNew = item.progress.state == 0,
-                    starred = starred
-                )
+                if (showBack) {
+                    BackFace(
+                        word = word, pluralStyle = pluralStyle, streak = streak, speaker = speaker
+                    )
+                } else {
+                    FrontFace(
+                        word = word,
+                        speaker = speaker,
+                        pluralStyle = pluralStyle,
+                        streak = streak,
+                        isNew = item.progress.state == 0,
+                        starred = starred
+                    )
+                }
             }
         }
 
@@ -418,14 +426,41 @@ private fun StudyCard(
 }
 
 @Composable
+private fun StreakDots(streak: Int, modifier: Modifier = Modifier) {
+    val target = AppViewModel.PASS_STREAK
+    Row(verticalAlignment = Alignment.CenterVertically, modifier = modifier) {
+        repeat(target) { i ->
+            Box(
+                modifier = Modifier
+                    .padding(end = 5.dp)
+                    .size(9.dp)
+                    .background(
+                        color = if (i < streak) MaterialTheme.colorScheme.primary
+                        else MaterialTheme.colorScheme.outlineVariant,
+                        shape = CircleShape
+                    )
+            )
+        }
+        Spacer(Modifier.width(4.dp))
+        Text(
+            text = "连续认识 $streak/$target",
+            fontSize = 11.5.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+}
+
+@Composable
 private fun SwipeHint() {
     Text(
-        text = "左滑认识 · 右滑忘了 · 上滑模糊 · 下滑收藏",
+        text = "左滑认识 · 右滑忘了 · 上滑模糊 · 下滑收藏" +
+            "\n连续认识 ${AppViewModel.PASS_STREAK} 次才算过，模糊或忘了清零",
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 2.dp, bottom = 2.dp),
         textAlign = TextAlign.Center,
         fontSize = 11.sp,
+        lineHeight = 15.sp,
         color = MaterialTheme.colorScheme.outline
     )
 }
@@ -435,6 +470,7 @@ private fun FrontFace(
     word: Word,
     speaker: (String) -> Unit,
     pluralStyle: PluralStyle,
+    streak: Int,
     isNew: Boolean,
     starred: Boolean
 ) {
@@ -480,6 +516,10 @@ private fun FrontFace(
             }
         }
 
+        // 连续认识进度：背词时随时能看到还差几次才算过
+        Spacer(Modifier.height(12.dp))
+        StreakDots(streak = streak)
+
         Spacer(Modifier.weight(1f))
 
         Text(
@@ -519,7 +559,12 @@ private fun FrontFace(
 }
 
 @Composable
-private fun BackFace(word: Word, pluralStyle: PluralStyle, speaker: (String) -> Unit) {
+private fun BackFace(
+    word: Word,
+    pluralStyle: PluralStyle,
+    streak: Int,
+    speaker: (String) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -549,6 +594,9 @@ private fun BackFace(word: Word, pluralStyle: PluralStyle, speaker: (String) -> 
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
+
+        Spacer(Modifier.height(12.dp))
+        StreakDots(streak = streak)
 
         Spacer(Modifier.height(16.dp))
         Text(
