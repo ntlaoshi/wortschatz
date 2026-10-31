@@ -384,15 +384,15 @@ private fun StudyCard(
         if (dragDistance < threshold * 0.6f) {
             Box(
                 modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(12.dp)
+                    .align(Alignment.BottomEnd)
+                    .padding(14.dp)
                     .graphicsLayer {
                         translationX = offsetX.value
                         translationY = offsetY.value
                     }
             ) {
                 Surface(
-                    shape = RoundedCornerShape(10.dp),
+                    shape = RoundedCornerShape(11.dp),
                     color = ExtraColors.successContainer,
                     border = androidx.compose.foundation.BorderStroke(
                         1.dp, ExtraColors.success.copy(alpha = 0.32f)
@@ -400,19 +400,19 @@ private fun StudyCard(
                     onClick = { if (!busy) onMastered() }
                 ) {
                     Row(
-                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                        modifier = Modifier.padding(horizontal = 13.dp, vertical = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
                             Icons.Rounded.Check,
                             contentDescription = null,
-                            modifier = Modifier.size(13.dp),
+                            modifier = Modifier.size(14.dp),
                             tint = ExtraColors.success
                         )
-                        Spacer(Modifier.width(3.dp))
+                        Spacer(Modifier.width(4.dp))
                         Text(
                             text = "已掌握",
-                            fontSize = 11.5.sp,
+                            fontSize = 12.5.sp,
                             fontWeight = FontWeight.Medium,
                             color = ExtraColors.success
                         )
