@@ -78,6 +78,10 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         private set
     var results by mutableStateOf<List<Word>>(emptyList())
         private set
+
+    /** 最近查过的词（最近在前），存本地偏好 */
+    var searchHistory by mutableStateOf(loadSearchHistory())
+        private set
     var searching by mutableStateOf(false)
         private set
     var onlineResult by mutableStateOf<OnlineDict.Result?>(null)
@@ -257,6 +261,20 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     fun isMastered(wordId: Long): Boolean = masteredWords.any { it.id == wordId }
 
     // ---------------------------------------------------------------- 查词
+
+    /** 记录一次查词（去重、最近在前、最多保留 20 条） */
+    fun recordSearch(term: String) {
+        val t = term.trim()
+        if (t.isEmpty()) return
+        val next = (listOf(t) + searchHistory.filter { !it.equals(t, ignoreCase = true) }).take(20)
+        searchHistory = next
+        prefs.edit().putString(KEY_SEARCH_HISTORY, next.joinToString(HISTORY_SEP)).apply()
+    }
+
+    fun clearSearchHistory() {
+        searchHistory = emptyList()
+        prefs.edit().remove(KEY_SEARCH_HISTORY).apply()
+    }
 
     fun onQueryChange(text: String) {
         query = text
@@ -707,6 +725,11 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }.getOrDefault(emptyList())
     }
 
+    private fun loadSearchHistory(): List<String> {
+        val raw = prefs.getString(KEY_SEARCH_HISTORY, null) ?: return emptyList()
+        return raw.split(HISTORY_SEP).filter { it.isNotBlank() }
+    }
+
     fun updateSessionSize(n: Int) {
         sessionSize = n.coerceIn(5, 100)
         prefs.edit().putInt(KEY_SESSION_SIZE, sessionSize).apply()
@@ -824,6 +847,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         private const val KEY_SPELL_TEST = "spell_test"
         private const val KEY_PLURAL_SUFFIX = "plural_suffix_only"
         private const val KEY_BOOKS = "custom_books"
+        private const val KEY_SEARCH_HISTORY = "search_history"
+        private const val HISTORY_SEP = "\u001F"
         private const val KEY_CURRENT_BOOK = "current_book_id"
         val ALL_LEVELS = listOf("A1", "A2", "B1", "B2")
         val DEFAULT_LEVELS = setOf("A1", "A2", "B1", "B2")

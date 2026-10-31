@@ -8,6 +8,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +20,8 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -120,14 +124,28 @@ fun SearchScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                     focusedContainerColor = MaterialTheme.colorScheme.surface
                 ),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                keyboardActions = KeyboardActions(onSearch = { keyboard?.hide() })
+                keyboardActions = KeyboardActions(onSearch = {
+                    keyboard?.hide()
+                    vm.recordSearch(vm.query)
+                })
             )
 
             when {
-                vm.query.isBlank() -> SearchHint(
-                    modifier = Modifier.weight(1f),
-                    onPick = { vm.onQueryChange(it) }
-                )
+                vm.query.isBlank() -> Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    SearchHint(onPick = { vm.onQueryChange(it) })
+                    if (vm.searchHistory.isNotEmpty()) {
+                        SearchHistoryBlock(
+                            history = vm.searchHistory,
+                            onPick = { vm.onQueryChange(it) },
+                            onClear = { vm.clearSearchHistory() }
+                        )
+                    }
+                }
 
                 vm.searching -> Box(
                     modifier = Modifier.weight(1f).fillMaxWidth(),
@@ -171,6 +189,7 @@ fun SearchScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                             pluralStyle = vm.pluralStyle,
                             onClick = {
                                 keyboard?.hide()
+                                vm.recordSearch(vm.query)
                                 detail = word
                             },
                             onSpeak = { vm.speakWord(word) },
@@ -235,6 +254,54 @@ private fun SearchHint(modifier: Modifier = Modifier, onPick: (String) -> Unit) 
                 ) {
                     Text(
                         text = example,
+                        modifier = Modifier.padding(horizontal = 11.dp, vertical = 6.dp),
+                        fontSize = 13.sp,
+                        fontFamily = FontFamily.Default,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun SearchHistoryBlock(
+    history: List<String>,
+    onPick: (String) -> Unit,
+    onClear: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp, vertical = 6.dp)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = "最近查过",
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.weight(1f)
+            )
+            TextButton(onClick = onClear) {
+                Text(text = "清除", fontSize = 12.sp)
+            }
+        }
+        Spacer(Modifier.height(8.dp))
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            history.forEach { term ->
+                Surface(
+                    shape = RoundedCornerShape(9.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f),
+                    onClick = { onPick(term) }
+                ) {
+                    Text(
+                        text = term,
                         modifier = Modifier.padding(horizontal = 11.dp, vertical = 6.dp),
                         fontSize = 13.sp,
                         fontFamily = FontFamily.Default,
