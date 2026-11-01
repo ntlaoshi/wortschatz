@@ -35,6 +35,20 @@ gradle assembleDebug      # 调试包（包名 de.wortschatz.app.debug）
 gradle assembleRelease    # 正式包，用本地 keystore 签名
 ```
 
+### 重新生成语音（可选）
+
+内置音频已随仓库提供，正常构建无需此步。若要重新生成，先下载模型：
+
+- https://huggingface.co/rhasspy/piper-voices/tree/main/de/de_DE/thorsten/medium
+- 取 `de_DE-thorsten-medium.onnx` 与同名 `.onnx.json`，放入 `data_src/models/`
+
+```bash
+pip install piper-tts
+python data_src/gen_voice_piper.py --workers 8    # 约 40 分钟，8 进程
+```
+
+产物先写入 `assets/voice_piper/`，确认无失败后再替换 `assets/voice/`。
+
 产物路径：
 
 - `app/build/outputs/apk/debug/app-debug.apk`
