@@ -34,3 +34,6 @@ Thumbs.db
 
 # Kotlin 编译器临时文件
 .kotlin/
+
+# Piper 语音模型（约 60MB，本地按需下载，不入库）
+data_src/models/
