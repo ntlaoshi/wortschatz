@@ -66,7 +66,7 @@ D:/Projects/GermanVocab/
 │   ├── analyze_zhwik.py             统计中文维基词典的德语词条规模
 │   ├── build_zhwik.py               提取并清洗维基词条 → zhwik_extract.jsonl
 │   ├── merge_ext.py                 补性别/复数、去重合并 → assets/words_ext.json
-│   ├── gen_voice.py                 批量合成离线发音 → assets/voice/*.mp3
+│   ├── gen_voice_piper.py           批量合成离线发音（Piper 本地模型）→ assets/voice/*.mp3
 │   └── build_dict.py                从 FreeDict 构建大词库的实验脚本（未采用，见下文）
 ├── screenshots/                     验证截图
 ├── keystore.properties              签名口令（不入版本库）
@@ -133,11 +133,13 @@ App 支持导入 JSON 词表。**完整格式规范见 [docs/wordbook-format.md]
 
 | 文件 | 条数 | 内容 |
 |---|---|---|
-| `docs/wordbooks/menschen-a1-bold.json` | 463 | 教材《Menschen》A1 全部 7 页词汇表的加粗词条 |
-| `docs/wordbooks/menschen-a1-p27-28-51.json` | 180 | 其中第 27/28/51 页的加粗词条，单独成书 |
-| `docs/wordbooks/menschen-a1-p27-51-visible.json` | 118 | 第 27、51 页两页照片中列出的全部词条（不限字重） |
+| `docs/wordbooks/a1-core.json` | 936 | A1 核心词汇：词库 A1 全部词条 + 标准 A1 高频词，顺序已打散 |
 
 导入后会自动新建一本同名单词书，学习范围随之切换。
+
+> 说明：早期版本曾附带按教材页面转录的词表，因选词与编排对应他人教材存在版权风险，
+> 已改为由 `data_src/books/build_a1_core.py` 生成：以词库自身 A1 词条为主体，
+> 仅并入词库缺失的标准 A1 词汇，并统一打散顺序。旧文件保留在 git 历史中。
 
 导入入口：设置 → 词库 → 导入自定义词表（JSON）。
 导入时按词形去重，词库里已有的词会被跳过，重复导入不会产生重复条目。
@@ -145,17 +147,27 @@ App 支持导入 JSON 词表。**完整格式规范见 [docs/wordbook-format.md]
 ## 七、已知限制
 
 - 在线兜底依赖 MyMemory 免费接口，匿名额度约 1000 次/天，无网络或超限时会提示失败
-- 内置发音覆盖 A1–B1 词条，B2 及低频词未内置音频，需联网获取；取不到时会明确提示而不是静默失败
+- 内置发音由本地 Piper 模型预先生成，覆盖词库全部 9642 个词形；模型不可达时仍可回退在线合成
 - 例句朗读没有内置音频，设备未装德语语音包时需要联网（单词发音不受影响）
 - 维基来源的释义未经逐条校对，个别词条存在义项偏窄或词频定级偏差，建议与权威词典交叉验证
 
 ## 八、数据来源与许可
 
-精编词条为项目自行整理。扩充词条的释义取自**中文维基词典**（CC BY-SA 3.0），
-名词性别与复数形式取自**英文维基词典**，经 kaikki.org 的 Wiktextract 结构化提取。
-词频分级使用 [FrequencyWords](https://github.com/hermitdave/FrequencyWords) 的德语字幕语料词频表（MIT）。
+精编词条为项目自行整理。扩充词条涉及第三方数据，完整署名与条款见 **[NOTICE.md](NOTICE.md)**：
 
-单词音频由微软 Edge 神经网络语音（`de-DE-KatjaNeural`）离线合成，
-生成脚本见 `data_src/gen_voice.py`，仅限个人学习用途。
+| 内容 | 来源 | 许可 |
+|---|---|---|
+| 中文释义 | [中文维基词典](https://zh.wiktionary.org) | CC BY-SA 3.0 |
+| 名词性别与复数 | 英文维基词典，经 [Wiktextract](https://kaikki.org) 提取 | CC BY-SA 3.0 |
+| 词频分级 | [FrequencyWords](https://github.com/hermitdave/FrequencyWords) | MIT |
+| 离线发音 | [Piper](https://github.com/rhasspy/piper) + Thorsten-Voice 模型 | MIT / CC0 |
+| 在线兜底 | [MyMemory](https://mymemory.translated.net) | 免费 API，需署名 |
+| 图标 | Material Icons | Apache 2.0 |
+
+维基数据按 CC BY-SA 3.0 使用：本项目对其释义做了简体化与精简整理，
+衍生数据同样以 CC BY-SA 3.0 提供；应用内「设置 → 数据来源与许可」页同步展示。
+
+发音音频由本地 Piper 模型（Thorsten-Voice 数据集，CC0）离线合成，
+9642 个词形全部内置，不与任何在线语音服务绑定，可随 APK 自由分发。
 
 `data_src/raw/` 下的原始数据（约 1.3 GB）仅用于本地构建，不入版本库。

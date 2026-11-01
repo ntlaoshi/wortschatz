@@ -723,7 +723,7 @@ fun SettingsScreen(
                     Spacer(Modifier.width(8.dp))
                     Column {
                         Text(
-                            text = "德语单词 Wortschatz 1.18",
+                            text = "德语单词 Wortschatz 1.19",
                             fontSize = 13.sp,
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -737,6 +737,45 @@ fun SettingsScreen(
                         )
                     }
                 }
+            }
+        }
+
+        // ---------------- 数据来源与许可
+        item {
+            SettingCard(title = "数据来源与许可") {
+                val sources = listOf(
+                    "词库释义" to "中文维基词典 · CC BY-SA 3.0",
+                    "性别与复数" to "英文维基词典 / Wiktextract · CC BY-SA 3.0",
+                    "词频分级" to "FrequencyWords · MIT",
+                    "离线发音" to "Piper + Thorsten-Voice · MIT / CC0",
+                    "在线兜底" to "MyMemory 翻译 API",
+                    "图标" to "Material Icons · Apache 2.0"
+                )
+                sources.forEachIndexed { index, (label, license) ->
+                    if (index > 0) Spacer(Modifier.height(7.dp))
+                    Row {
+                        Text(
+                            text = label,
+                            fontSize = 12.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.width(84.dp)
+                        )
+                        Text(
+                            text = license,
+                            fontSize = 12.sp,
+                            lineHeight = 18.sp,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    text = "维基数据按 CC BY-SA 3.0 提供，本项目对其释义做了简体化与精简整理；" +
+                        "完整许可条款与署名信息见仓库 NOTICE.md。",
+                    fontSize = 11.sp,
+                    lineHeight = 17.sp,
+                    color = MaterialTheme.colorScheme.outline
+                )
             }
         }
     }

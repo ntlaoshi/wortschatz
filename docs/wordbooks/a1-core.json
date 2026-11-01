@@ -1,0 +1,9301 @@
+{
+ "v": 1,
+ "name": "A1 核心词汇",
+ "note": "词库 A1 词条 + 标准 A1 高频词，打散顺序，不含教材页面结构",
+ "count": 936,
+ "words": [
+  {
+   "w": "die EU",
+   "zh": "欧盟",
+   "lv": "A1",
+   "l": "EU",
+   "p": "n",
+   "g": "f"
+  },
+  {
+   "w": "die Aussprache",
+   "zh": "发音",
+   "lv": "A1",
+   "l": "Aussprache",
+   "p": "n",
+   "g": "f",
+   "pl": "die Aussprachen",
+   "en": "pronunciation",
+   "ex": "Meine Aussprache wird besser.",
+   "exZh": "我的发音在变好。"
+  },
+  {
+   "w": "Auckland",
+   "zh": "奥克兰",
+   "lv": "A1",
+   "l": "Auckland",
+   "p": "n"
+  },
+  {
+   "w": "die Toilette",
+   "zh": "厕所",
+   "lv": "A1",
+   "l": "Toilette",
+   "p": "n",
+   "g": "f",
+   "pl": "die Toiletten",
+   "en": "toilet",
+   "ex": "Wo ist die Toilette, bitte?",
+   "exZh": "请问厕所在哪里？"
+  },
+  {
+   "w": "von Ihrer Familie",
+   "zh": "您家庭的",
+   "lv": "A1",
+   "l": "von Ihrer Familie",
+   "p": "phr"
+  },
+  {
+   "w": "der Blogpost",
+   "zh": "博客信息",
+   "lv": "A1",
+   "l": "Blogpost",
+   "p": "n",
+   "g": "m",
+   "pl": "die Blogposts"
+  },
+  {
+   "w": "das Workout",
+   "zh": "锻炼",
+   "lv": "A1",
+   "l": "Workout",
+   "p": "n",
+   "g": "n",
+   "pl": "die Workouts"
+  },
+  {
+   "w": "gelb",
+   "zh": "黄色的",
+   "lv": "A1",
+   "l": "gelb",
+   "p": "adj",
+   "en": "yellow",
+   "ex": "Die Banane ist gelb.",
+   "exZh": "香蕉是黄色的。"
+  },
+  {
+   "w": "Marseille",
+   "zh": "马赛",
+   "lv": "A1",
+   "l": "Marseille",
+   "p": "n"
+  },
+  {
+   "w": "Mein Name ist ...",
+   "zh": "我的名字是……",
+   "lv": "A1",
+   "l": "Mein Name ist ",
+   "p": "phr"
+  },
+  {
+   "w": "der Formel-1-Pilot",
+   "zh": "一级方程式赛车手",
+   "lv": "A1",
+   "l": "Formel-1-Pilot",
+   "p": "n",
+   "g": "m",
+   "pl": "die Formel-1-Piloten"
+  },
+  {
+   "w": "noch einmal",
+   "zh": "再一次",
+   "lv": "A1",
+   "l": "noch einmal",
+   "p": "phr"
+  },
+  {
+   "w": "das Tal",
+   "zh": "山谷",
+   "lv": "A1",
+   "l": "Tal",
+   "p": "n",
+   "g": "n",
+   "pl": "die Täler",
+   "en": "valley",
+   "ex": "Das Tal liegt tief.",
+   "exZh": "山谷很低。"
+  },
+  {
+   "w": "die Bedeutung",
+   "zh": "意义；含义",
+   "lv": "A1",
+   "l": "Bedeutung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Bedeutungen",
+   "en": "meaning",
+   "ex": "Was ist die Bedeutung dieses Wortes?",
+   "exZh": "这个词是什么意思？"
+  },
+  {
+   "w": "der",
+   "zh": "这，那（阳性定冠词）",
+   "lv": "A1",
+   "l": "der",
+   "p": "pron"
+  },
+  {
+   "w": "Warschau",
+   "zh": "华沙",
+   "lv": "A1",
+   "l": "Warschau",
+   "p": "n"
+  },
+  {
+   "w": "die Gruppe",
+   "zh": "组",
+   "lv": "A1",
+   "l": "Gruppe",
+   "p": "n",
+   "g": "f",
+   "pl": "die Gruppen"
+  },
+  {
+   "w": "diktieren",
+   "zh": "口述",
+   "lv": "A1",
+   "l": "diktieren",
+   "p": "v"
+  },
+  {
+   "w": "buchen",
+   "zh": "预订",
+   "lv": "A1",
+   "l": "buchen",
+   "p": "v",
+   "en": "to book",
+   "ex": "Ich buche ein Hotelzimmer.",
+   "exZh": "我订一间酒店房间。"
+  },
+  {
+   "w": "der Mai",
+   "zh": "五月",
+   "lv": "A1",
+   "l": "Mai",
+   "p": "n",
+   "g": "m",
+   "pl": "die Maie",
+   "en": "May",
+   "ex": "Im Mai blühen die Blumen.",
+   "exZh": "五月花开。"
+  },
+  {
+   "w": "die Ärztin",
+   "zh": "医生（女）",
+   "lv": "A1",
+   "l": "Ärztin",
+   "p": "n",
+   "g": "f",
+   "pl": "die Ärztinnen",
+   "en": "doctor",
+   "ex": "Die Ärztin untersucht den Patienten.",
+   "exZh": "女医生给病人做检查。"
+  },
+  {
+   "w": "das Fleisch",
+   "zh": "肉",
+   "lv": "A1",
+   "l": "Fleisch",
+   "p": "n",
+   "g": "n",
+   "en": "meat",
+   "ex": "Ich esse kein Fleisch.",
+   "exZh": "我不吃肉。"
+  },
+  {
+   "w": "die Ecke",
+   "zh": "角落；拐角",
+   "lv": "A1",
+   "l": "Ecke",
+   "p": "n",
+   "g": "f",
+   "pl": "die Ecken",
+   "en": "corner",
+   "ex": "Das Café ist um die Ecke.",
+   "exZh": "咖啡馆就在拐角处。"
+  },
+  {
+   "w": "der Regen",
+   "zh": "雨",
+   "lv": "A1",
+   "l": "Regen",
+   "p": "n",
+   "g": "m",
+   "en": "rain",
+   "ex": "Wir haben viel Regen im April.",
+   "exZh": "四月雨水很多。"
+  },
+  {
+   "w": "das Jahr",
+   "zh": "年",
+   "lv": "A1",
+   "l": "Jahr",
+   "p": "n",
+   "g": "n",
+   "pl": "die Jahre",
+   "en": "year",
+   "ex": "Ich bin dreißig Jahre alt.",
+   "exZh": "我三十岁。"
+  },
+  {
+   "w": "der Wald",
+   "zh": "森林",
+   "lv": "A1",
+   "l": "Wald",
+   "p": "n",
+   "g": "m",
+   "pl": "die Wälder",
+   "en": "forest",
+   "ex": "Wir wandern durch den Wald.",
+   "exZh": "我们在森林中徒步。"
+  },
+  {
+   "w": "die Cousine",
+   "zh": "表姐妹",
+   "lv": "A1",
+   "l": "Cousine",
+   "p": "n",
+   "g": "f",
+   "pl": "die Cousinen",
+   "en": "cousin",
+   "ex": "Meine Cousine studiert in Wien.",
+   "exZh": "我表姐在维也纳上学。"
+  },
+  {
+   "w": "der Verkäufer",
+   "zh": "售货员",
+   "lv": "A1",
+   "l": "Verkäufer",
+   "p": "n",
+   "g": "m",
+   "pl": "die Verkäufer",
+   "en": "salesperson",
+   "ex": "Der Verkäufer hilft mir beim Suchen.",
+   "exZh": "售货员帮我找东西。"
+  },
+  {
+   "w": "die Pflanze",
+   "zh": "植物",
+   "lv": "A1",
+   "l": "Pflanze",
+   "p": "n",
+   "g": "f",
+   "pl": "die Pflanzen",
+   "en": "plant",
+   "ex": "Die Pflanze braucht Wasser.",
+   "exZh": "植物需要水。"
+  },
+  {
+   "w": "neunzig",
+   "zh": "九十",
+   "lv": "A1",
+   "l": "neunzig",
+   "p": "num"
+  },
+  {
+   "w": "gegen",
+   "zh": "反对；朝（支配第四格）",
+   "lv": "A1",
+   "l": "gegen",
+   "p": "prep",
+   "en": "against",
+   "ex": "Er ist gegen den Plan.",
+   "exZh": "他反对这个计划。"
+  },
+  {
+   "w": "der Absatz",
+   "zh": "段落",
+   "lv": "A1",
+   "l": "Absatz",
+   "p": "n",
+   "g": "m",
+   "pl": "die Absätze",
+   "en": "paragraph",
+   "ex": "Der erste Absatz ist wichtig.",
+   "exZh": "第一段很重要。"
+  },
+  {
+   "w": "Wechseln Sie zwischen vorne und hinten.",
+   "zh": "请交替使用名牌的正反面。",
+   "lv": "A1",
+   "l": "Wechseln Sie zwischen vorne und hinten",
+   "p": "phr"
+  },
+  {
+   "w": "die Zeit",
+   "zh": "时间",
+   "lv": "A1",
+   "l": "Zeit",
+   "p": "n",
+   "g": "f",
+   "pl": "die Zeiten",
+   "en": "time",
+   "ex": "Ich habe heute keine Zeit.",
+   "exZh": "我今天没有时间。"
+  },
+  {
+   "w": "die Computer-Datei",
+   "zh": "计算机文件",
+   "lv": "A1",
+   "l": "Computer-Datei",
+   "p": "n",
+   "g": "f",
+   "pl": "die Computer-Dateien"
+  },
+  {
+   "w": "der März",
+   "zh": "三月",
+   "lv": "A1",
+   "l": "März",
+   "p": "n",
+   "g": "m",
+   "pl": "die Märze",
+   "en": "March",
+   "ex": "Im März beginnt der Frühling.",
+   "exZh": "三月春天开始。"
+  },
+  {
+   "w": "kalt",
+   "zh": "冷的",
+   "lv": "A1",
+   "l": "kalt",
+   "p": "adj",
+   "en": "cold",
+   "ex": "Im Winter ist es kalt.",
+   "exZh": "冬天很冷。"
+  },
+  {
+   "w": "die Ente",
+   "zh": "鸭子",
+   "lv": "A1",
+   "l": "Ente",
+   "p": "n",
+   "g": "f",
+   "pl": "die Enten",
+   "en": "duck",
+   "ex": "Die Enten schwimmen im Teich.",
+   "exZh": "鸭子在池塘里游泳。"
+  },
+  {
+   "w": "das Sofa",
+   "zh": "沙发",
+   "lv": "A1",
+   "l": "Sofa",
+   "p": "n",
+   "g": "n",
+   "pl": "die Sofas",
+   "en": "sofa",
+   "ex": "Das Sofa ist grau.",
+   "exZh": "沙发是灰色的。"
+  },
+  {
+   "w": "die Freude",
+   "zh": "快乐",
+   "lv": "A1",
+   "l": "Freude",
+   "p": "n",
+   "g": "f",
+   "pl": "die Freuden",
+   "en": "joy",
+   "ex": "Es macht mir Freude.",
+   "exZh": "这让我很快乐。"
+  },
+  {
+   "w": "das Regal",
+   "zh": "架子",
+   "lv": "A1",
+   "l": "Regal",
+   "p": "n",
+   "g": "n",
+   "pl": "die Regale",
+   "en": "shelf",
+   "ex": "Die Bücher stehen im Regal.",
+   "exZh": "书在架子上。"
+  },
+  {
+   "w": "Spielen Sie mit dem Ball.",
+   "zh": "请进行抛球游戏。",
+   "lv": "A1",
+   "l": "Spielen Sie mit dem Ball",
+   "p": "phr"
+  },
+  {
+   "w": "der Preis",
+   "zh": "价格",
+   "lv": "A1",
+   "l": "Preis",
+   "p": "n",
+   "g": "m",
+   "pl": "die Preise",
+   "en": "price",
+   "ex": "Der Preis ist zu hoch.",
+   "exZh": "价格太高了。"
+  },
+  {
+   "w": "Oh!",
+   "zh": "噢！",
+   "lv": "A1",
+   "l": "Oh",
+   "p": "int"
+  },
+  {
+   "w": "helfen",
+   "zh": "帮助",
+   "lv": "A1",
+   "l": "helfen",
+   "p": "v",
+   "en": "to help",
+   "ex": "Kannst du mir helfen?",
+   "exZh": "你能帮我吗？"
+  },
+  {
+   "w": "die Information",
+   "zh": "信息",
+   "lv": "A1",
+   "l": "Information",
+   "p": "n",
+   "g": "f",
+   "pl": "die Informationen",
+   "en": "information",
+   "ex": "Danke für die Information.",
+   "exZh": "谢谢提供信息。"
+  },
+  {
+   "w": "die Zahl",
+   "zh": "数字",
+   "lv": "A1",
+   "l": "Zahl",
+   "p": "n",
+   "g": "f",
+   "pl": "die Zahlen"
+  },
+  {
+   "w": "der Winter",
+   "zh": "冬天",
+   "lv": "A1",
+   "l": "Winter",
+   "p": "n",
+   "g": "m",
+   "pl": "die Winter",
+   "en": "winter",
+   "ex": "Der Winter ist hier sehr kalt.",
+   "exZh": "这里的冬天很冷。"
+  },
+  {
+   "w": "der Bruder",
+   "zh": "哥哥；弟弟",
+   "lv": "A1",
+   "l": "Bruder",
+   "p": "n",
+   "g": "m",
+   "pl": "die Brüder",
+   "en": "brother",
+   "ex": "Ich habe einen Bruder.",
+   "exZh": "我有一个兄弟。"
+  },
+  {
+   "w": "das Kino",
+   "zh": "电影院",
+   "lv": "A1",
+   "l": "Kino",
+   "p": "n",
+   "g": "n",
+   "pl": "die Kinos",
+   "en": "cinema",
+   "ex": "Gehen wir ins Kino?",
+   "exZh": "我们去看电影吧？"
+  },
+  {
+   "w": "voll",
+   "zh": "满的",
+   "lv": "A1",
+   "l": "voll",
+   "p": "adj",
+   "en": "full",
+   "ex": "Der Bus ist ganz voll.",
+   "exZh": "公交车挤满了人。"
+  },
+  {
+   "w": "der Nachbar",
+   "zh": "邻居（男）",
+   "lv": "A1",
+   "l": "Nachbar",
+   "p": "n",
+   "g": "m",
+   "pl": "die Nachbarn",
+   "en": "neighbour",
+   "ex": "Unser Nachbar ist sehr freundlich.",
+   "exZh": "我们的邻居很友好。"
+  },
+  {
+   "w": "online",
+   "zh": "网上的，线上的",
+   "lv": "A1",
+   "l": "online",
+   "p": "adj"
+  },
+  {
+   "w": "das Schaf",
+   "zh": "羊",
+   "lv": "A1",
+   "l": "Schaf",
+   "p": "n",
+   "g": "n",
+   "pl": "die Schafe",
+   "en": "sheep",
+   "ex": "Die Schafe fressen Gras.",
+   "exZh": "羊吃草。"
+  },
+  {
+   "w": "wechseln",
+   "zh": "更换；兑换",
+   "lv": "A1",
+   "l": "wechseln",
+   "p": "v",
+   "en": "to change",
+   "ex": "Ich möchte Geld wechseln.",
+   "exZh": "我想兑换钱。"
+  },
+  {
+   "w": "das Konzert",
+   "zh": "音乐会",
+   "lv": "A1",
+   "l": "Konzert",
+   "p": "n",
+   "g": "n",
+   "pl": "die Konzerte",
+   "en": "concert",
+   "ex": "Das Konzert beginnt um acht.",
+   "exZh": "音乐会八点开始。"
+  },
+  {
+   "w": "neunzehn",
+   "zh": "十九",
+   "lv": "A1",
+   "l": "neunzehn",
+   "p": "num"
+  },
+  {
+   "w": "Willkommen!",
+   "zh": "欢迎！",
+   "lv": "A1",
+   "l": "Willkommen",
+   "p": "phr"
+  },
+  {
+   "w": "der Verwandte",
+   "zh": "亲戚",
+   "lv": "A1",
+   "l": "Verwandte",
+   "p": "n",
+   "g": "m",
+   "pl": "die Verwandten",
+   "en": "relative",
+   "ex": "Viele Verwandte kommen zur Feier.",
+   "exZh": "很多亲戚来参加庆祝。"
+  },
+  {
+   "w": "Spanisch",
+   "zh": "西班牙语",
+   "lv": "A1",
+   "l": "Spanisch",
+   "p": "n"
+  },
+  {
+   "w": "Viel Glück!",
+   "zh": "祝好运！",
+   "lv": "A1",
+   "l": "Viel Glück",
+   "p": "phr",
+   "en": "good luck",
+   "ex": "Viel Glück bei der Prüfung!",
+   "exZh": "考试好运！"
+  },
+  {
+   "w": "kennen",
+   "zh": "认识；熟悉",
+   "lv": "A1",
+   "l": "kennen",
+   "p": "v",
+   "en": "to know",
+   "ex": "Kennst du diesen Mann?",
+   "exZh": "你认识这个人吗？"
+  },
+  {
+   "w": "die Bewegung",
+   "zh": "运动",
+   "lv": "A1",
+   "l": "Bewegung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Bewegungen",
+   "en": "movement",
+   "ex": "Bewegung hilft beim Abnehmen.",
+   "exZh": "运动有助于减肥。"
+  },
+  {
+   "w": "der Flur",
+   "zh": "走廊",
+   "lv": "A1",
+   "l": "Flur",
+   "p": "n",
+   "g": "m",
+   "pl": "die Flure",
+   "en": "hallway",
+   "ex": "Die Schuhe stehen im Flur.",
+   "exZh": "鞋放在走廊里。"
+  },
+  {
+   "w": "das Feuer",
+   "zh": "火",
+   "lv": "A1",
+   "l": "Feuer",
+   "p": "n",
+   "g": "n",
+   "pl": "die Feuer",
+   "en": "fire",
+   "ex": "Mach das Feuer aus!",
+   "exZh": "把火关掉！"
+  },
+  {
+   "w": "wollen",
+   "zh": "想要（情态动词）",
+   "lv": "A1",
+   "l": "wollen",
+   "p": "v",
+   "en": "to want",
+   "ex": "Wir wollen nach Italien fahren.",
+   "exZh": "我们想去意大利。"
+  },
+  {
+   "w": "Ordnen Sie zu.",
+   "zh": "请配对。",
+   "lv": "A1",
+   "l": "Ordnen Sie zu",
+   "p": "phr"
+  },
+  {
+   "w": "hoch",
+   "zh": "高的",
+   "lv": "A1",
+   "l": "hoch",
+   "p": "adj",
+   "en": "high",
+   "ex": "Der Turm ist sehr hoch.",
+   "exZh": "这座塔很高。"
+  },
+  {
+   "w": "Wer sind die?",
+   "zh": "他们是谁？",
+   "lv": "A1",
+   "l": "Wer sind die",
+   "p": "phr"
+  },
+  {
+   "w": "der Sohn",
+   "zh": "儿子",
+   "lv": "A1",
+   "l": "Sohn",
+   "p": "n",
+   "g": "m",
+   "pl": "die Söhne",
+   "en": "son",
+   "ex": "Ihr Sohn geht schon zur Schule.",
+   "exZh": "她的儿子已经上学了。"
+  },
+  {
+   "w": "Das ist ...",
+   "zh": "这是……",
+   "lv": "A1",
+   "l": "ist ",
+   "p": "phr",
+   "g": "n"
+  },
+  {
+   "w": "ruhig",
+   "zh": "安静的",
+   "lv": "A1",
+   "l": "ruhig",
+   "p": "adj",
+   "en": "quiet",
+   "ex": "Die Straße ist sehr ruhig.",
+   "exZh": "这条街很安静。"
+  },
+  {
+   "w": "das Salz",
+   "zh": "盐",
+   "lv": "A1",
+   "l": "Salz",
+   "p": "n",
+   "g": "n",
+   "en": "salt",
+   "ex": "Gib mir bitte das Salz.",
+   "exZh": "请把盐递给我。"
+  },
+  {
+   "w": "die Garage",
+   "zh": "车库",
+   "lv": "A1",
+   "l": "Garage",
+   "p": "n",
+   "g": "f",
+   "pl": "die Garagen",
+   "en": "garage",
+   "ex": "Das Auto steht in der Garage.",
+   "exZh": "车在车库里。"
+  },
+  {
+   "w": "über",
+   "zh": "在……上方；关于",
+   "lv": "A1",
+   "l": "über",
+   "p": "prep",
+   "en": "over",
+   "ex": "Die Lampe hängt über dem Tisch.",
+   "exZh": "灯挂在桌子上方。"
+  },
+  {
+   "w": "das Hemd",
+   "zh": "衬衫",
+   "lv": "A1",
+   "l": "Hemd",
+   "p": "n",
+   "g": "n",
+   "pl": "die Hemden",
+   "en": "shirt",
+   "ex": "Das Hemd ist weiß.",
+   "exZh": "衬衫是白色的。"
+  },
+  {
+   "w": "der Wunsch",
+   "zh": "愿望",
+   "lv": "A1",
+   "l": "Wunsch",
+   "p": "n",
+   "g": "m",
+   "pl": "die Wünsche",
+   "en": "wish",
+   "ex": "Hast du einen Wunsch?",
+   "exZh": "你有什么愿望吗？"
+  },
+  {
+   "w": "das Bier",
+   "zh": "啤酒",
+   "lv": "A1",
+   "l": "Bier",
+   "p": "n",
+   "g": "n",
+   "pl": "die Biere",
+   "en": "beer",
+   "ex": "In Bayern trinkt man viel Bier.",
+   "exZh": "在巴伐利亚人们喝很多啤酒。"
+  },
+  {
+   "w": "der Mann",
+   "zh": "男人；丈夫",
+   "lv": "A1",
+   "l": "Mann",
+   "p": "n",
+   "g": "m",
+   "pl": "die Männer",
+   "en": "man",
+   "ex": "Der Mann liest eine Zeitung.",
+   "exZh": "这个男人在看报纸。"
+  },
+  {
+   "w": "leise",
+   "zh": "轻声的；安静的",
+   "lv": "A1",
+   "l": "leise",
+   "p": "adj",
+   "en": "quiet",
+   "ex": "Sprich bitte leise!",
+   "exZh": "请小声说！"
+  },
+  {
+   "w": "im Bild",
+   "zh": "图片中",
+   "lv": "A1",
+   "l": "im Bild",
+   "p": "phr"
+  },
+  {
+   "w": "Wie geht es Ihnen?",
+   "zh": "您好吗？（正式）",
+   "lv": "A1",
+   "l": "Wie geht es Ihnen",
+   "p": "phr",
+   "en": "how are you",
+   "ex": "Guten Tag! Wie geht es Ihnen?",
+   "exZh": "您好！您近来怎么样？"
+  },
+  {
+   "w": "der Garten",
+   "zh": "花园",
+   "lv": "A1",
+   "l": "Garten",
+   "p": "n",
+   "g": "m",
+   "pl": "die Gärten",
+   "en": "garden",
+   "ex": "Im Garten wachsen Blumen.",
+   "exZh": "花园里长着花。"
+  },
+  {
+   "w": "das Brötchen",
+   "zh": "小面包",
+   "lv": "A1",
+   "l": "Brötchen",
+   "p": "n",
+   "g": "n",
+   "pl": "die Brötchen",
+   "en": "roll",
+   "ex": "Zum Frühstück esse ich ein Brötchen.",
+   "exZh": "早餐我吃一个小面包。"
+  },
+  {
+   "w": "zwanzig",
+   "zh": "二十",
+   "lv": "A1",
+   "l": "zwanzig",
+   "p": "num",
+   "en": "twenty",
+   "ex": "Ich bin zwanzig Jahre alt.",
+   "exZh": "我二十岁。"
+  },
+  {
+   "w": "fünfzig",
+   "zh": "五十",
+   "lv": "A1",
+   "l": "fünfzig",
+   "p": "num",
+   "en": "fifty",
+   "ex": "Es dauert fünfzig Minuten.",
+   "exZh": "需要五十分钟。"
+  },
+  {
+   "w": "öffnen",
+   "zh": "打开",
+   "lv": "A1",
+   "l": "öffnen",
+   "p": "v",
+   "en": "to open",
+   "ex": "Bitte öffne das Fenster.",
+   "exZh": "请打开窗户。"
+  },
+  {
+   "w": "tausend",
+   "zh": "千",
+   "lv": "A1",
+   "l": "tausend",
+   "p": "num",
+   "en": "thousand",
+   "ex": "Die Stadt hat tausend Einwohner.",
+   "exZh": "这座城市有一千居民。"
+  },
+  {
+   "w": "die Tomate",
+   "zh": "西红柿",
+   "lv": "A1",
+   "l": "Tomate",
+   "p": "n",
+   "g": "f",
+   "pl": "die Tomaten"
+  },
+  {
+   "w": "der Kopf",
+   "zh": "头",
+   "lv": "A1",
+   "l": "Kopf",
+   "p": "n",
+   "g": "m",
+   "pl": "die Köpfe",
+   "en": "head",
+   "ex": "Mir tut der Kopf weh.",
+   "exZh": "我头疼。"
+  },
+  {
+   "w": "kommen aus",
+   "zh": "来自……",
+   "lv": "A1",
+   "l": "kommen aus",
+   "p": "v"
+  },
+  {
+   "w": "unter",
+   "zh": "在……下面",
+   "lv": "A1",
+   "l": "unter",
+   "p": "prep",
+   "en": "under",
+   "ex": "Die Katze schläft unter dem Stuhl.",
+   "exZh": "猫在椅子下面睡觉。"
+  },
+  {
+   "w": "die Lektion",
+   "zh": "课",
+   "lv": "A1",
+   "l": "Lektion",
+   "p": "n",
+   "g": "f",
+   "pl": "die Lektionen"
+  },
+  {
+   "w": "interessant",
+   "zh": "有趣的",
+   "lv": "A1",
+   "l": "interessant",
+   "p": "adj",
+   "en": "interesting",
+   "ex": "Das Buch ist sehr interessant.",
+   "exZh": "这本书很有趣。"
+  },
+  {
+   "w": "der Flughafen",
+   "zh": "机场",
+   "lv": "A1",
+   "l": "Flughafen",
+   "p": "n",
+   "g": "m",
+   "pl": "die Flughäfen",
+   "en": "airport",
+   "ex": "Der Flughafen liegt weit außerhalb.",
+   "exZh": "机场离市区很远。"
+  },
+  {
+   "w": "Super!",
+   "zh": "太棒了！",
+   "lv": "A1",
+   "l": "Super",
+   "p": "phr"
+  },
+  {
+   "w": "gesund",
+   "zh": "健康的",
+   "lv": "A1",
+   "l": "gesund",
+   "p": "adj",
+   "en": "healthy",
+   "ex": "Obst ist gesund.",
+   "exZh": "水果有益健康。"
+  },
+  {
+   "w": "der Wein",
+   "zh": "葡萄酒",
+   "lv": "A1",
+   "l": "Wein",
+   "p": "n",
+   "g": "m",
+   "pl": "die Weine",
+   "en": "wine",
+   "ex": "Der Wein schmeckt sehr gut.",
+   "exZh": "这葡萄酒味道很好。"
+  },
+  {
+   "w": "die Zitrone",
+   "zh": "柠檬",
+   "lv": "A1",
+   "l": "Zitrone",
+   "p": "n",
+   "g": "f",
+   "pl": "die Zitronen",
+   "en": "lemon",
+   "ex": "Der Tee mit Zitrone ist lecker.",
+   "exZh": "柠檬茶很好喝。"
+  },
+  {
+   "w": "leicht",
+   "zh": "轻的；容易的",
+   "lv": "A1",
+   "l": "leicht",
+   "p": "adj",
+   "en": "easy",
+   "ex": "Die Prüfung war leicht.",
+   "exZh": "考试很容易。"
+  },
+  {
+   "w": "hier",
+   "zh": "这里",
+   "lv": "A1",
+   "l": "hier",
+   "p": "adv",
+   "en": "here",
+   "ex": "Hier ist mein Platz.",
+   "exZh": "这是我的位置。"
+  },
+  {
+   "w": "Deutschland",
+   "zh": "德国",
+   "lv": "A1",
+   "l": "Deutschland",
+   "p": "n"
+  },
+  {
+   "w": "die Sorge",
+   "zh": "忧虑",
+   "lv": "A1",
+   "l": "Sorge",
+   "p": "n",
+   "g": "f",
+   "pl": "die Sorgen",
+   "en": "worry",
+   "ex": "Mach dir keine Sorgen!",
+   "exZh": "别担心！"
+  },
+  {
+   "w": "finden",
+   "zh": "找到；认为",
+   "lv": "A1",
+   "l": "finden",
+   "p": "v",
+   "en": "to find",
+   "ex": "Ich finde den Weg nicht.",
+   "exZh": "我找不到路。"
+  },
+  {
+   "w": "Das bin ich.",
+   "zh": "这就是我。",
+   "lv": "A1",
+   "l": "bin ich",
+   "p": "phr",
+   "g": "n"
+  },
+  {
+   "w": "feminin",
+   "zh": "阴性的",
+   "lv": "A1",
+   "l": "feminin",
+   "p": "adj"
+  },
+  {
+   "w": "der Text",
+   "zh": "文本；课文",
+   "lv": "A1",
+   "l": "Text",
+   "p": "n",
+   "g": "m",
+   "pl": "die Texte",
+   "en": "text",
+   "ex": "Lies den Text laut vor.",
+   "exZh": "把课文大声读出来。"
+  },
+  {
+   "w": "der Stift",
+   "zh": "笔",
+   "lv": "A1",
+   "l": "Stift",
+   "p": "n",
+   "g": "m",
+   "pl": "die Stifte",
+   "en": "pen",
+   "ex": "Hast du einen Stift für mich?",
+   "exZh": "你有笔借我吗？"
+  },
+  {
+   "w": "der Ingenieur",
+   "zh": "工程师",
+   "lv": "A1",
+   "l": "Ingenieur",
+   "p": "n",
+   "g": "m",
+   "pl": "die Ingenieure",
+   "en": "engineer",
+   "ex": "Er ist Ingenieur bei BMW.",
+   "exZh": "他是宝马公司的工程师。"
+  },
+  {
+   "w": "oft",
+   "zh": "经常",
+   "lv": "A1",
+   "l": "oft",
+   "p": "adv",
+   "en": "often",
+   "ex": "Wir sehen uns oft.",
+   "exZh": "我们经常见面。"
+  },
+  {
+   "w": "die Überschrift",
+   "zh": "标题",
+   "lv": "A1",
+   "l": "Überschrift",
+   "p": "n",
+   "g": "f",
+   "pl": "die Überschriften"
+  },
+  {
+   "w": "Wie geht's?",
+   "zh": "你好吗？",
+   "lv": "A1",
+   "l": "Wie geht's",
+   "p": "phr"
+  },
+  {
+   "w": "die Apotheke",
+   "zh": "药店",
+   "lv": "A1",
+   "l": "Apotheke",
+   "p": "n",
+   "g": "f",
+   "pl": "die Apotheken",
+   "en": "pharmacy",
+   "ex": "Die Apotheke hat Notdienst.",
+   "exZh": "这家药店有急诊服务。"
+  },
+  {
+   "w": "immer",
+   "zh": "总是；一直",
+   "lv": "A1",
+   "l": "immer",
+   "p": "adv",
+   "en": "always",
+   "ex": "Er ist immer freundlich.",
+   "exZh": "他总是很友好。"
+  },
+  {
+   "w": "der Herr",
+   "zh": "先生；男士",
+   "lv": "A1",
+   "l": "Herr",
+   "p": "n",
+   "g": "m",
+   "pl": "die Herren",
+   "en": "gentleman",
+   "ex": "Guten Tag, Herr Müller!",
+   "exZh": "您好，米勒先生！"
+  },
+  {
+   "w": "Bis bald!",
+   "zh": "待会儿见！",
+   "lv": "A1",
+   "l": "Bis bald",
+   "p": "phr"
+  },
+  {
+   "w": "das Haus",
+   "zh": "房子；住宅",
+   "lv": "A1",
+   "l": "Haus",
+   "p": "n",
+   "g": "n",
+   "pl": "die Häuser",
+   "en": "house",
+   "ex": "Das Haus hat einen großen Garten.",
+   "exZh": "这栋房子有一个大花园。"
+  },
+  {
+   "w": "der Abend",
+   "zh": "晚上",
+   "lv": "A1",
+   "l": "Abend",
+   "p": "n",
+   "g": "m",
+   "pl": "die Abende",
+   "en": "evening",
+   "ex": "Am Abend sehe ich fern.",
+   "exZh": "晚上我看电视。"
+  },
+  {
+   "w": "Hurra!",
+   "zh": "哇哦！",
+   "lv": "A1",
+   "l": "Hurra",
+   "p": "int"
+  },
+  {
+   "w": "die Meinung",
+   "zh": "看法",
+   "lv": "A1",
+   "l": "Meinung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Meinungen",
+   "en": "opinion",
+   "ex": "Ich bin deiner Meinung.",
+   "exZh": "我同意你的看法。"
+  },
+  {
+   "w": "Wo ist das?",
+   "zh": "这是哪里？",
+   "lv": "A1",
+   "l": "Wo ist das",
+   "p": "phr"
+  },
+  {
+   "w": "das Blatt",
+   "zh": "叶子；一张（纸）",
+   "lv": "A1",
+   "l": "Blatt",
+   "p": "n",
+   "g": "n",
+   "pl": "die Blätter",
+   "en": "leaf",
+   "ex": "Die Blätter werden bunt.",
+   "exZh": "树叶变黄了。"
+  },
+  {
+   "w": "sitzen",
+   "zh": "坐",
+   "lv": "A1",
+   "l": "sitzen",
+   "p": "v",
+   "en": "to sit",
+   "ex": "Wir sitzen am Fenster.",
+   "exZh": "我们坐在窗边。"
+  },
+  {
+   "w": "lang",
+   "zh": "长的",
+   "lv": "A1",
+   "l": "lang",
+   "p": "adj",
+   "en": "long",
+   "ex": "Der Film ist zwei Stunden lang.",
+   "exZh": "这部电影两小时长。"
+  },
+  {
+   "w": "die Nacht",
+   "zh": "夜晚",
+   "lv": "A1",
+   "l": "Nacht",
+   "p": "n",
+   "g": "f",
+   "pl": "die Nächte",
+   "en": "night",
+   "ex": "Gute Nacht!",
+   "exZh": "晚安！"
+  },
+  {
+   "w": "lernen",
+   "zh": "学习",
+   "lv": "A1",
+   "l": "lernen",
+   "p": "v",
+   "en": "to learn",
+   "ex": "Ich lerne jeden Tag Deutsch.",
+   "exZh": "我每天学德语。"
+  },
+  {
+   "w": "inzwischen",
+   "zh": "其间；与此同时",
+   "lv": "A1",
+   "l": "inzwischen",
+   "p": "adv",
+   "en": "meanwhile",
+   "ex": "Inzwischen ist es dunkel geworden.",
+   "exZh": "天已经黑了。"
+  },
+  {
+   "w": "die Tante",
+   "zh": "阿姨；姑妈",
+   "lv": "A1",
+   "l": "Tante",
+   "p": "n",
+   "g": "f",
+   "pl": "die Tanten",
+   "en": "aunt",
+   "ex": "Meine Tante kommt zu Besuch.",
+   "exZh": "我姑妈来拜访。"
+  },
+  {
+   "w": "Prost!",
+   "zh": "干杯！",
+   "lv": "A1",
+   "l": "Prost",
+   "p": "int",
+   "en": "cheers",
+   "ex": "Prost! Auf dein Wohl!",
+   "exZh": "干杯！祝你健康！"
+  },
+  {
+   "w": "das Flugzeug",
+   "zh": "飞机",
+   "lv": "A1",
+   "l": "Flugzeug",
+   "p": "n",
+   "g": "n",
+   "pl": "die Flugzeuge",
+   "en": "aeroplane",
+   "ex": "Das Flugzeug landet um neun.",
+   "exZh": "飞机九点降落。"
+  },
+  {
+   "w": "braten",
+   "zh": "煎；烤",
+   "lv": "A1",
+   "l": "braten",
+   "p": "v",
+   "en": "to fry",
+   "ex": "Ich brate ein Ei.",
+   "exZh": "我煎一个鸡蛋。"
+  },
+  {
+   "w": "die Kleidung",
+   "zh": "衣服（总称）",
+   "lv": "A1",
+   "l": "Kleidung",
+   "p": "n",
+   "g": "f",
+   "en": "clothing",
+   "ex": "Warme Kleidung ist wichtig.",
+   "exZh": "保暖的衣物很重要。"
+  },
+  {
+   "w": "anziehen",
+   "zh": "穿（衣服）",
+   "lv": "A1",
+   "l": "anziehen",
+   "p": "v",
+   "en": "to dress",
+   "ex": "Ich ziehe mich schnell an.",
+   "exZh": "我很快穿好衣服。"
+  },
+  {
+   "w": "der Kellner",
+   "zh": "服务员（男）",
+   "lv": "A1",
+   "l": "Kellner",
+   "p": "n",
+   "g": "m",
+   "pl": "die Kellner",
+   "en": "waiter",
+   "ex": "Der Kellner bringt die Speisekarte.",
+   "exZh": "服务员拿来了菜单。"
+  },
+  {
+   "w": "schwer",
+   "zh": "重的；难的",
+   "lv": "A1",
+   "l": "schwer",
+   "p": "adj",
+   "en": "difficult",
+   "ex": "Deutsch ist nicht so schwer.",
+   "exZh": "德语没那么难。"
+  },
+  {
+   "w": "er hält sein Blatt hoch",
+   "zh": "他高举自己的纸张",
+   "lv": "A1",
+   "l": "er hält sein Blatt hoch",
+   "p": "phr"
+  },
+  {
+   "w": "auf die Fotos",
+   "zh": "到照片上",
+   "lv": "A1",
+   "l": "auf die Fotos",
+   "p": "phr"
+  },
+  {
+   "w": "die Freundin",
+   "zh": "朋友（女）；女朋友",
+   "lv": "A1",
+   "l": "Freundin",
+   "p": "n",
+   "g": "f",
+   "pl": "die Freundinnen",
+   "en": "friend",
+   "ex": "Meine Freundin kommt aus China.",
+   "exZh": "我的女性朋友来自中国。"
+  },
+  {
+   "w": "das Promi-Quiz",
+   "zh": "名人小测试",
+   "lv": "A1",
+   "l": "Promi-Quiz",
+   "p": "n",
+   "g": "n",
+   "pl": "die Promi-Quiz"
+  },
+  {
+   "w": "der Grund",
+   "zh": "原因",
+   "lv": "A1",
+   "l": "Grund",
+   "p": "n",
+   "g": "m",
+   "pl": "die Gründe",
+   "en": "reason",
+   "ex": "Aus welchem Grund?",
+   "exZh": "出于什么原因？"
+  },
+  {
+   "w": "das Baby",
+   "zh": "婴儿",
+   "lv": "A1",
+   "l": "Baby",
+   "p": "n",
+   "g": "n",
+   "pl": "die Babys",
+   "en": "baby",
+   "ex": "Das Baby schläft jetzt.",
+   "exZh": "婴儿现在睡着了。"
+  },
+  {
+   "w": "die Hose",
+   "zh": "裤子",
+   "lv": "A1",
+   "l": "Hose",
+   "p": "n",
+   "g": "f",
+   "pl": "die Hosen",
+   "en": "trousers",
+   "ex": "Die Hose passt gut.",
+   "exZh": "这条裤子很合身。"
+  },
+  {
+   "w": "der Tipp",
+   "zh": "提示",
+   "lv": "A1",
+   "l": "Tipp",
+   "p": "n",
+   "g": "m",
+   "pl": "die Tipps"
+  },
+  {
+   "w": "raten",
+   "zh": "猜",
+   "lv": "A1",
+   "l": "raten",
+   "p": "v"
+  },
+  {
+   "w": "die Post",
+   "zh": "邮局；邮件",
+   "lv": "A1",
+   "l": "Post",
+   "p": "n",
+   "g": "f",
+   "en": "post office",
+   "ex": "Die Post ist neben der Bank.",
+   "exZh": "邮局在银行旁边。"
+  },
+  {
+   "w": "begrüßen",
+   "zh": "问候",
+   "lv": "A1",
+   "l": "begrüßen",
+   "p": "v"
+  },
+  {
+   "w": "der Negativartikel",
+   "zh": "否定冠词",
+   "lv": "A1",
+   "l": "Negativartikel",
+   "p": "n",
+   "g": "m",
+   "pl": "die Negativartikel"
+  },
+  {
+   "w": "die Architektin",
+   "zh": "女建筑师",
+   "lv": "A1",
+   "l": "Architektin",
+   "p": "n",
+   "g": "f",
+   "pl": "die Architektinnen"
+  },
+  {
+   "w": "das Schlafzimmer",
+   "zh": "卧室",
+   "lv": "A1",
+   "l": "Schlafzimmer",
+   "p": "n",
+   "g": "n",
+   "pl": "die Schlafzimmer",
+   "en": "bedroom",
+   "ex": "Im Schlafzimmer steht ein großes Bett.",
+   "exZh": "卧室里有一张大床。"
+  },
+  {
+   "w": "das Auge",
+   "zh": "眼睛",
+   "lv": "A1",
+   "l": "Auge",
+   "p": "n",
+   "g": "n",
+   "pl": "die Augen",
+   "en": "eye",
+   "ex": "Sie hat blaue Augen.",
+   "exZh": "她有蓝眼睛。"
+  },
+  {
+   "w": "Können Sie das wiederholen?",
+   "zh": "您能再说一遍吗？",
+   "lv": "A1",
+   "l": "Können Sie das wiederholen",
+   "p": "phr",
+   "en": "could you repeat that",
+   "ex": "Entschuldigung, können Sie das wiederholen?",
+   "exZh": "抱歉，您能再说一遍吗？"
+  },
+  {
+   "w": "die Hilfe",
+   "zh": "帮助",
+   "lv": "A1",
+   "l": "Hilfe",
+   "p": "n",
+   "g": "f",
+   "pl": "die Hilfen",
+   "en": "help",
+   "ex": "Danke für deine Hilfe.",
+   "exZh": "谢谢你的帮助。"
+  },
+  {
+   "w": "Kreuzen Sie an.",
+   "zh": "请画叉选择。",
+   "lv": "A1",
+   "l": "Kreuzen Sie an",
+   "p": "phr"
+  },
+  {
+   "w": "die Geschwister",
+   "zh": "兄弟姐妹",
+   "lv": "A1",
+   "l": "Geschwister",
+   "p": "n",
+   "g": "pl",
+   "pl": "die Geschwister",
+   "en": "siblings",
+   "ex": "Hast du Geschwister?",
+   "exZh": "你有兄弟姐妹吗？"
+  },
+  {
+   "w": "die Tasse",
+   "zh": "杯子（带把）",
+   "lv": "A1",
+   "l": "Tasse",
+   "p": "n",
+   "g": "f",
+   "pl": "die Tassen",
+   "en": "cup",
+   "ex": "Eine Tasse Kaffee, bitte.",
+   "exZh": "请来一杯咖啡。"
+  },
+  {
+   "w": "die Zeile",
+   "zh": "行",
+   "lv": "A1",
+   "l": "Zeile",
+   "p": "n",
+   "g": "f",
+   "pl": "die Zeilen",
+   "en": "line",
+   "ex": "Lies die dritte Zeile vor.",
+   "exZh": "读第三行。"
+  },
+  {
+   "w": "die Schlange",
+   "zh": "蛇；队伍",
+   "lv": "A1",
+   "l": "Schlange",
+   "p": "n",
+   "g": "f",
+   "pl": "die Schlangen",
+   "en": "snake",
+   "ex": "Die Schlange ist gefährlich.",
+   "exZh": "这条蛇很危险。"
+  },
+  {
+   "w": "ihr",
+   "zh": "你们",
+   "lv": "A1",
+   "l": "ihr",
+   "p": "pron",
+   "en": "you",
+   "ex": "Woher kommt ihr?",
+   "exZh": "你们从哪里来？"
+  },
+  {
+   "w": "fünfundvierzig",
+   "zh": "四十五",
+   "lv": "A1",
+   "l": "fünfundvierzig",
+   "p": "num"
+  },
+  {
+   "w": "der Papa",
+   "zh": "爸爸",
+   "lv": "A1",
+   "l": "Papa",
+   "p": "n",
+   "g": "m",
+   "pl": "die Papas"
+  },
+  {
+   "w": "Zürich",
+   "zh": "苏黎世",
+   "lv": "A1",
+   "l": "Zürich",
+   "p": "n"
+  },
+  {
+   "w": "zwölf",
+   "zh": "十二",
+   "lv": "A1",
+   "l": "zwölf",
+   "p": "num",
+   "en": "twelve",
+   "ex": "Das Jahr hat zwölf Monate.",
+   "exZh": "一年有十二个月。"
+  },
+  {
+   "w": "das Herz",
+   "zh": "心脏；心",
+   "lv": "A1",
+   "l": "Herz",
+   "p": "n",
+   "g": "n",
+   "pl": "die Herzen",
+   "en": "heart",
+   "ex": "Mein Herz schlägt schnell.",
+   "exZh": "我的心跳得很快。"
+  },
+  {
+   "w": "die Maus",
+   "zh": "老鼠",
+   "lv": "A1",
+   "l": "Maus",
+   "p": "n",
+   "g": "f",
+   "pl": "die Mäuse",
+   "en": "mouse",
+   "ex": "Die Katze fängt eine Maus.",
+   "exZh": "猫抓到一只老鼠。"
+  },
+  {
+   "w": "müde",
+   "zh": "疲倦的",
+   "lv": "A1",
+   "l": "müde",
+   "p": "adj",
+   "en": "tired",
+   "ex": "Ich bin heute sehr müde.",
+   "exZh": "我今天很累。"
+  },
+  {
+   "w": "der Nachname",
+   "zh": "姓，姓氏",
+   "lv": "A1",
+   "l": "Nachname",
+   "p": "n",
+   "g": "m",
+   "pl": "die Nachnamen"
+  },
+  {
+   "w": "schnell",
+   "zh": "快的",
+   "lv": "A1",
+   "l": "schnell",
+   "p": "adj",
+   "en": "fast",
+   "ex": "Der Zug ist sehr schnell.",
+   "exZh": "这列火车很快。"
+  },
+  {
+   "w": "sich freuen",
+   "zh": "感到高兴",
+   "lv": "A1",
+   "l": "freuen",
+   "p": "v",
+   "en": "to be pleased",
+   "ex": "Ich freue mich sehr.",
+   "exZh": "我很高兴。"
+  },
+  {
+   "w": "fahren",
+   "zh": "乘车；驾驶",
+   "lv": "A1",
+   "l": "fahren",
+   "p": "v",
+   "en": "to drive",
+   "ex": "Wir fahren mit dem Zug nach Hamburg.",
+   "exZh": "我们坐火车去汉堡。"
+  },
+  {
+   "w": "die Mitte",
+   "zh": "中间",
+   "lv": "A1",
+   "l": "Mitte",
+   "p": "n",
+   "g": "f",
+   "pl": "die Mitten",
+   "en": "middle",
+   "ex": "Wir treffen uns in der Mitte.",
+   "exZh": "我们在中间见面。"
+  },
+  {
+   "w": "hallo",
+   "zh": "你好；喂",
+   "lv": "A1",
+   "l": "hallo",
+   "p": "int",
+   "en": "hello",
+   "ex": "Hallo, wie geht es dir?",
+   "exZh": "你好，你怎么样？"
+  },
+  {
+   "w": "das Foto",
+   "zh": "照片",
+   "lv": "A1",
+   "l": "Foto",
+   "p": "n",
+   "g": "n",
+   "pl": "die Fotos",
+   "en": "photo",
+   "ex": "Machst du ein Foto von uns?",
+   "exZh": "你给我们拍张照好吗？"
+  },
+  {
+   "w": "reich",
+   "zh": "富有的",
+   "lv": "A1",
+   "l": "reich",
+   "p": "adj",
+   "en": "rich",
+   "ex": "Er ist sehr reich.",
+   "exZh": "他很富有。"
+  },
+  {
+   "w": "der Bleistift",
+   "zh": "铅笔",
+   "lv": "A1",
+   "l": "Bleistift",
+   "p": "n",
+   "g": "m",
+   "pl": "die Bleistifte",
+   "en": "pencil",
+   "ex": "Ich schreibe mit Bleistift.",
+   "exZh": "我用铅笔写。"
+  },
+  {
+   "w": "dann",
+   "zh": "然后",
+   "lv": "A1",
+   "l": "dann",
+   "p": "adv"
+  },
+  {
+   "w": "das Gebäude",
+   "zh": "建筑物",
+   "lv": "A1",
+   "l": "Gebäude",
+   "p": "n",
+   "g": "n",
+   "pl": "die Gebäude",
+   "en": "building",
+   "ex": "Das Gebäude ist neu.",
+   "exZh": "这栋楼是新的。"
+  },
+  {
+   "w": "das Frühstück",
+   "zh": "早餐",
+   "lv": "A1",
+   "l": "Frühstück",
+   "p": "n",
+   "g": "n",
+   "pl": "die Frühstücke",
+   "en": "breakfast",
+   "ex": "Das Frühstück ist um sieben Uhr.",
+   "exZh": "早餐是七点。"
+  },
+  {
+   "w": "die Etage",
+   "zh": "楼层",
+   "lv": "A1",
+   "l": "Etage",
+   "p": "n",
+   "g": "f",
+   "pl": "die Etagen",
+   "en": "floor",
+   "ex": "Wir wohnen in der dritten Etage.",
+   "exZh": "我们住在三层。"
+  },
+  {
+   "w": "dass",
+   "zh": "（引导宾语从句）……",
+   "lv": "A1",
+   "l": "dass",
+   "p": "conj",
+   "en": "that",
+   "ex": "Ich glaube, dass er recht hat.",
+   "exZh": "我认为他是对的。"
+  },
+  {
+   "w": "der Chef",
+   "zh": "老板，领导",
+   "lv": "A1",
+   "l": "Chef",
+   "p": "n",
+   "g": "m",
+   "pl": "die Chefs"
+  },
+  {
+   "w": "grün",
+   "zh": "绿色的",
+   "lv": "A1",
+   "l": "grün",
+   "p": "adj",
+   "en": "green",
+   "ex": "Die Blätter sind grün.",
+   "exZh": "叶子是绿色的。"
+  },
+  {
+   "w": "Stellen Sie sich alphabetisch auf.",
+   "zh": "请按照字母顺序列队。",
+   "lv": "A1",
+   "l": "Stellen Sie sich alphabetisch auf",
+   "p": "phr"
+  },
+  {
+   "w": "das IT Engineering",
+   "zh": "IT 工程",
+   "lv": "A1",
+   "l": "IT Engineering",
+   "p": "n",
+   "g": "n"
+  },
+  {
+   "w": "ins Heft",
+   "zh": "到本子上",
+   "lv": "A1",
+   "l": "ins Heft",
+   "p": "phr"
+  },
+  {
+   "w": "die Großeltern",
+   "zh": "祖父母",
+   "lv": "A1",
+   "l": "Großeltern",
+   "p": "n",
+   "g": "pl",
+   "pl": "die Großeltern",
+   "en": "grandparents",
+   "ex": "Wir besuchen die Großeltern am Sonntag.",
+   "exZh": "周日我们去看望祖父母。"
+  },
+  {
+   "w": "die Speisekarte",
+   "zh": "菜单",
+   "lv": "A1",
+   "l": "Speisekarte",
+   "p": "n",
+   "g": "f",
+   "pl": "die Speisekarten",
+   "en": "menu",
+   "ex": "Wir hätten gern die Speisekarte.",
+   "exZh": "我们想要菜单。"
+  },
+  {
+   "w": "im Arbeitsbuch",
+   "zh": "在练习册里",
+   "lv": "A1",
+   "l": "im Arbeitsbuch",
+   "p": "phr"
+  },
+  {
+   "w": "die Idee",
+   "zh": "想法",
+   "lv": "A1",
+   "l": "Idee",
+   "p": "n",
+   "g": "f",
+   "pl": "die Ideen",
+   "en": "idea",
+   "ex": "Das ist eine gute Idee.",
+   "exZh": "这是个好想法。"
+  },
+  {
+   "w": "Variieren Sie.",
+   "zh": "请作相应改动。",
+   "lv": "A1",
+   "l": "Variieren Sie",
+   "p": "phr"
+  },
+  {
+   "w": "der Kollege",
+   "zh": "同事",
+   "lv": "A1",
+   "l": "Kollege",
+   "p": "n",
+   "g": "m",
+   "pl": "die Kollegen"
+  },
+  {
+   "w": "der Sturm",
+   "zh": "风暴",
+   "lv": "A1",
+   "l": "Sturm",
+   "p": "n",
+   "g": "m",
+   "pl": "die Stürme",
+   "en": "storm",
+   "ex": "Der Sturm hat Bäume umgeworfen.",
+   "exZh": "风暴刮倒了树木。"
+  },
+  {
+   "w": "die Milch",
+   "zh": "牛奶",
+   "lv": "A1",
+   "l": "Milch",
+   "p": "n",
+   "g": "f",
+   "en": "milk",
+   "ex": "Ich trinke Milch zum Frühstück.",
+   "exZh": "我早餐喝牛奶。"
+  },
+  {
+   "w": "die Woche",
+   "zh": "星期；周",
+   "lv": "A1",
+   "l": "Woche",
+   "p": "n",
+   "g": "f",
+   "pl": "die Wochen",
+   "en": "week",
+   "ex": "Nächste Woche fahre ich nach Berlin.",
+   "exZh": "下周我去柏林。"
+  },
+  {
+   "w": "nur",
+   "zh": "只；仅仅",
+   "lv": "A1",
+   "l": "nur",
+   "p": "adv",
+   "en": "only",
+   "ex": "Ich habe nur zehn Euro.",
+   "exZh": "我只有十欧元。"
+  },
+  {
+   "w": "die Musik",
+   "zh": "音乐（复习）",
+   "lv": "A1",
+   "l": "Musik",
+   "p": "n",
+   "g": "f",
+   "en": "music",
+   "ex": "Musik macht mich glücklich.",
+   "exZh": "音乐让我快乐。"
+  },
+  {
+   "w": "der Sport",
+   "zh": "运动",
+   "lv": "A1",
+   "l": "Sport",
+   "p": "n",
+   "g": "m"
+  },
+  {
+   "w": "kein",
+   "zh": "没有",
+   "lv": "A1",
+   "l": "kein",
+   "p": "pron"
+  },
+  {
+   "w": "Ihre Top-5-Wörter",
+   "zh": "大家最喜欢的 5 个单词",
+   "lv": "A1",
+   "l": "Ihre Top-5-Wörter",
+   "p": "phr"
+  },
+  {
+   "w": "die Erdbeere",
+   "zh": "草莓",
+   "lv": "A1",
+   "l": "Erdbeere",
+   "p": "n",
+   "g": "f",
+   "pl": "die Erdbeeren",
+   "en": "strawberry",
+   "ex": "Erdbeeren sind süß.",
+   "exZh": "草莓很甜。"
+  },
+  {
+   "w": "sich waschen",
+   "zh": "洗澡；洗脸（反身）",
+   "lv": "A1",
+   "l": "waschen",
+   "p": "v",
+   "en": "to wash oneself",
+   "ex": "Ich wasche mich morgens.",
+   "exZh": "我早上洗漱。"
+  },
+  {
+   "w": "das Wörterbuch",
+   "zh": "词典",
+   "lv": "A1",
+   "l": "Wörterbuch",
+   "p": "n",
+   "g": "n",
+   "pl": "die Wörterbücher",
+   "en": "dictionary",
+   "ex": "Ich schaue im Wörterbuch nach.",
+   "exZh": "我查一下词典。"
+  },
+  {
+   "w": "die Rechnung",
+   "zh": "账单",
+   "lv": "A1",
+   "l": "Rechnung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Rechnungen",
+   "en": "bill",
+   "ex": "Die Rechnung, bitte!",
+   "exZh": "请结账！"
+  },
+  {
+   "w": "die Spinne",
+   "zh": "蜘蛛",
+   "lv": "A1",
+   "l": "Spinne",
+   "p": "n",
+   "g": "f",
+   "pl": "die Spinnen",
+   "en": "spider",
+   "ex": "Ich habe Angst vor Spinnen.",
+   "exZh": "我怕蜘蛛。"
+  },
+  {
+   "w": "sie",
+   "zh": "她；他们",
+   "lv": "A1",
+   "l": "sie",
+   "p": "pron",
+   "en": "she",
+   "ex": "Sie arbeitet viel.",
+   "exZh": "她工作很努力。"
+  },
+  {
+   "w": "der Nachmittag",
+   "zh": "下午",
+   "lv": "A1",
+   "l": "Nachmittag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Nachmittage",
+   "en": "afternoon",
+   "ex": "Am Nachmittag gehe ich schwimmen.",
+   "exZh": "下午我去游泳。"
+  },
+  {
+   "w": "der Ausweis",
+   "zh": "证件",
+   "lv": "A1",
+   "l": "Ausweis",
+   "p": "n",
+   "g": "m",
+   "pl": "die Ausweise",
+   "en": "ID card",
+   "ex": "Bitte zeigen Sie Ihren Ausweis.",
+   "exZh": "请出示您的证件。"
+  },
+  {
+   "w": "New York",
+   "zh": "纽约",
+   "lv": "A1",
+   "l": "New York",
+   "p": "n"
+  },
+  {
+   "w": "hundert",
+   "zh": "百",
+   "lv": "A1",
+   "l": "hundert",
+   "p": "num",
+   "en": "hundred",
+   "ex": "Das kostet hundert Euro.",
+   "exZh": "这个要一百欧元。"
+  },
+  {
+   "w": "der Saft",
+   "zh": "果汁",
+   "lv": "A1",
+   "l": "Saft",
+   "p": "n",
+   "g": "m",
+   "pl": "die Säfte",
+   "en": "juice",
+   "ex": "Ich möchte einen Apfelsaft.",
+   "exZh": "我想要一杯苹果汁。"
+  },
+  {
+   "w": "das Gespräch",
+   "zh": "谈话",
+   "lv": "A1",
+   "l": "Gespräch",
+   "p": "n",
+   "g": "n",
+   "pl": "die Gespräche",
+   "en": "conversation",
+   "ex": "Wir hatten ein gutes Gespräch.",
+   "exZh": "我们谈得很好。"
+  },
+  {
+   "w": "sprechen über",
+   "zh": "谈论",
+   "lv": "A1",
+   "l": "sprechen über",
+   "p": "v"
+  },
+  {
+   "w": "rund",
+   "zh": "圆的",
+   "lv": "A1",
+   "l": "rund",
+   "p": "adj",
+   "en": "round",
+   "ex": "Der Tisch ist rund.",
+   "exZh": "桌子是圆的。"
+  },
+  {
+   "w": "vor",
+   "zh": "在……前面；……之前",
+   "lv": "A1",
+   "l": "vor",
+   "p": "prep",
+   "en": "before",
+   "ex": "Das Auto steht vor dem Haus.",
+   "exZh": "车停在房前。"
+  },
+  {
+   "w": "Danke, gut.",
+   "zh": "谢谢，我很好。",
+   "lv": "A1",
+   "l": "Danke, gut",
+   "p": "phr"
+  },
+  {
+   "w": "bei der Taxi-App",
+   "zh": "在打车软件上",
+   "lv": "A1",
+   "l": "bei der Taxi-App",
+   "p": "phr"
+  },
+  {
+   "w": "Yoga machen",
+   "zh": "做瑜伽",
+   "lv": "A1",
+   "l": "Yoga machen",
+   "p": "phr"
+  },
+  {
+   "w": "die Schere",
+   "zh": "剪刀",
+   "lv": "A1",
+   "l": "Schere",
+   "p": "n",
+   "g": "f",
+   "pl": "die Scheren",
+   "en": "scissors",
+   "ex": "Die Schere ist scharf.",
+   "exZh": "剪刀很锋利。"
+  },
+  {
+   "w": "beim Sprechen",
+   "zh": "在说话时",
+   "lv": "A1",
+   "l": "beim Sprechen",
+   "p": "phr"
+  },
+  {
+   "w": "der Dialog",
+   "zh": "对话",
+   "lv": "A1",
+   "l": "Dialog",
+   "p": "n",
+   "g": "m",
+   "pl": "die Dialoge"
+  },
+  {
+   "w": "das Shetlandpony",
+   "zh": "设得兰矮种马",
+   "lv": "A1",
+   "l": "Shetlandpony",
+   "p": "n",
+   "g": "n",
+   "pl": "die Shetlandponys"
+  },
+  {
+   "w": "die Enkelin",
+   "zh": "孙女；外孙女",
+   "lv": "A1",
+   "l": "Enkelin",
+   "p": "n",
+   "g": "f",
+   "pl": "die Enkelinnen",
+   "en": "granddaughter",
+   "ex": "Die Enkelin hilft der Oma.",
+   "exZh": "孙女帮奶奶的忙。"
+  },
+  {
+   "w": "auch",
+   "zh": "也",
+   "lv": "A1",
+   "l": "auch",
+   "p": "adv",
+   "en": "also",
+   "ex": "Ich komme auch mit.",
+   "exZh": "我也一起来。"
+  },
+  {
+   "w": "England",
+   "zh": "英国",
+   "lv": "A1",
+   "l": "England",
+   "p": "n"
+  },
+  {
+   "w": "fliegen",
+   "zh": "飞；乘飞机",
+   "lv": "A1",
+   "l": "fliegen",
+   "p": "v",
+   "en": "to fly",
+   "ex": "Sie fliegt morgen nach Wien.",
+   "exZh": "她明天飞往维也纳。"
+  },
+  {
+   "w": "null",
+   "zh": "零",
+   "lv": "A1",
+   "l": "null",
+   "p": "num"
+  },
+  {
+   "w": "das Taschentuch",
+   "zh": "纸巾；手帕",
+   "lv": "A1",
+   "l": "Taschentuch",
+   "p": "n",
+   "g": "n",
+   "pl": "die Taschentücher",
+   "en": "tissue",
+   "ex": "Hast du ein Taschentuch?",
+   "exZh": "你有纸巾吗？"
+  },
+  {
+   "w": "die E-Mail-Adresse",
+   "zh": "电子邮箱地址",
+   "lv": "A1",
+   "l": "E-Mail-Adresse",
+   "p": "n",
+   "g": "f",
+   "pl": "die E-Mail-Adressen"
+  },
+  {
+   "w": "die Lampe",
+   "zh": "灯",
+   "lv": "A1",
+   "l": "Lampe",
+   "p": "n",
+   "g": "f",
+   "pl": "die Lampen",
+   "en": "lamp",
+   "ex": "Mach bitte die Lampe an.",
+   "exZh": "请把灯打开。"
+  },
+  {
+   "w": "reif",
+   "zh": "成熟的",
+   "lv": "A1",
+   "l": "reif",
+   "p": "adj",
+   "en": "ripe",
+   "ex": "Die Äpfel sind noch nicht reif.",
+   "exZh": "苹果还没熟。"
+  },
+  {
+   "w": "das Glas",
+   "zh": "玻璃杯",
+   "lv": "A1",
+   "l": "Glas",
+   "p": "n",
+   "g": "n",
+   "pl": "die Gläser",
+   "en": "glass",
+   "ex": "Ein Glas Wasser, bitte.",
+   "exZh": "请来一杯水。"
+  },
+  {
+   "w": "das Personalpronomen",
+   "zh": "人称代词",
+   "lv": "A1",
+   "l": "Personalpronomen",
+   "p": "n",
+   "g": "n",
+   "pl": "die Personalpronomen"
+  },
+  {
+   "w": "der Anfang",
+   "zh": "开始",
+   "lv": "A1",
+   "l": "Anfang",
+   "p": "n",
+   "g": "m",
+   "pl": "die Anfänge",
+   "en": "start",
+   "ex": "Der Anfang ist immer schwer.",
+   "exZh": "开始总是很难。"
+  },
+  {
+   "w": "einunddreißig",
+   "zh": "三十一",
+   "lv": "A1",
+   "l": "einunddreißig",
+   "p": "num"
+  },
+  {
+   "w": "krank",
+   "zh": "生病的",
+   "lv": "A1",
+   "l": "krank",
+   "p": "adj",
+   "en": "ill",
+   "ex": "Er ist seit gestern krank.",
+   "exZh": "他从昨天起就病了。"
+  },
+  {
+   "w": "winken",
+   "zh": "招手",
+   "lv": "A1",
+   "l": "winken",
+   "p": "v",
+   "en": "to wave",
+   "ex": "Er winkt mir zu.",
+   "exZh": "他向我招手。"
+  },
+  {
+   "w": "sechzehn",
+   "zh": "十六",
+   "lv": "A1",
+   "l": "sechzehn",
+   "p": "num"
+  },
+  {
+   "w": "der Laptop",
+   "zh": "笔记本电脑",
+   "lv": "A1",
+   "l": "Laptop",
+   "p": "n",
+   "g": "m",
+   "pl": "die Laptops"
+  },
+  {
+   "w": "Wien",
+   "zh": "维也纳",
+   "lv": "A1",
+   "l": "Wien",
+   "p": "n"
+  },
+  {
+   "w": "groß",
+   "zh": "大的；高的",
+   "lv": "A1",
+   "l": "groß",
+   "p": "adj",
+   "en": "big",
+   "ex": "Berlin ist eine große Stadt.",
+   "exZh": "柏林是一座大城市。"
+  },
+  {
+   "w": "der Export",
+   "zh": "出口",
+   "lv": "A1",
+   "l": "Export",
+   "p": "n",
+   "g": "m",
+   "pl": "die Exporte"
+  },
+  {
+   "w": "haben",
+   "zh": "有；拥有",
+   "lv": "A1",
+   "l": "haben",
+   "p": "v",
+   "en": "to have",
+   "ex": "Wir haben ein Haus.",
+   "exZh": "我们有一栋房子。"
+  },
+  {
+   "w": "Ich heiße ...",
+   "zh": "我叫……",
+   "lv": "A1",
+   "l": "Ich heiße ",
+   "p": "phr"
+  },
+  {
+   "w": "schön",
+   "zh": "美的；漂亮的",
+   "lv": "A1",
+   "l": "schön",
+   "p": "adj",
+   "en": "beautiful",
+   "ex": "Der Garten ist sehr schön.",
+   "exZh": "这个花园很漂亮。"
+  },
+  {
+   "w": "Wie geht's denn so?",
+   "zh": "你过得怎么样？",
+   "lv": "A1",
+   "l": "Wie geht's denn so",
+   "p": "phr"
+  },
+  {
+   "w": "alle",
+   "zh": "所有人；全部",
+   "lv": "A1",
+   "l": "alle",
+   "p": "pron",
+   "en": "all",
+   "ex": "Alle sind schon da.",
+   "exZh": "大家都到了。"
+  },
+  {
+   "w": "weich",
+   "zh": "软的",
+   "lv": "A1",
+   "l": "weich",
+   "p": "adj",
+   "en": "soft",
+   "ex": "Das Bett ist zu weich.",
+   "exZh": "床太软了。"
+  },
+  {
+   "w": "die Kollegin",
+   "zh": "女同事",
+   "lv": "A1",
+   "l": "Kollegin",
+   "p": "n",
+   "g": "f",
+   "pl": "die Kolleginnen"
+  },
+  {
+   "w": "vielleicht",
+   "zh": "也许；可能",
+   "lv": "A1",
+   "l": "vielleicht",
+   "p": "adv",
+   "en": "perhaps",
+   "ex": "Vielleicht kommt er später.",
+   "exZh": "也许他晚点会来。"
+  },
+  {
+   "w": "das Nomen",
+   "zh": "名词",
+   "lv": "A1",
+   "l": "Nomen",
+   "p": "n",
+   "g": "n",
+   "pl": "die Nomen"
+  },
+  {
+   "w": "Hey.",
+   "zh": "嘿；嗨。",
+   "lv": "A1",
+   "l": "Hey",
+   "p": "int"
+  },
+  {
+   "w": "der Stern",
+   "zh": "星星",
+   "lv": "A1",
+   "l": "Stern",
+   "p": "n",
+   "g": "m",
+   "pl": "die Sterne",
+   "en": "star",
+   "ex": "Die Sterne leuchten hell.",
+   "exZh": "星星很亮。"
+  },
+  {
+   "w": "Und Ihnen?",
+   "zh": "那您呢？",
+   "lv": "A1",
+   "l": "Und Ihnen",
+   "p": "phr"
+  },
+  {
+   "w": "Großbritannien",
+   "zh": "英国",
+   "lv": "A1",
+   "l": "Großbritannien",
+   "p": "n"
+  },
+  {
+   "w": "der Punkt",
+   "zh": "点",
+   "lv": "A1",
+   "l": "Punkt",
+   "p": "n",
+   "g": "m",
+   "pl": "die Punkte"
+  },
+  {
+   "w": "Madrid",
+   "zh": "马德里",
+   "lv": "A1",
+   "l": "Madrid",
+   "p": "n"
+  },
+  {
+   "w": "sauber",
+   "zh": "干净的",
+   "lv": "A1",
+   "l": "sauber",
+   "p": "adj",
+   "en": "clean",
+   "ex": "Die Küche ist sauber.",
+   "exZh": "厨房很干净。"
+  },
+  {
+   "w": "Alles klar!",
+   "zh": "明白了！",
+   "lv": "A1",
+   "l": "Alles klar",
+   "p": "phr"
+  },
+  {
+   "w": "die Sonne",
+   "zh": "太阳；阳光",
+   "lv": "A1",
+   "l": "Sonne",
+   "p": "n",
+   "g": "f",
+   "pl": "die Sonnen",
+   "en": "sun",
+   "ex": "Die Sonne scheint.",
+   "exZh": "阳光灿烂。"
+  },
+  {
+   "w": "gestern",
+   "zh": "昨天",
+   "lv": "A1",
+   "l": "gestern",
+   "p": "adv",
+   "en": "yesterday",
+   "ex": "Gestern war ich im Kino.",
+   "exZh": "昨天我去看电影了。"
+  },
+  {
+   "w": "nichts",
+   "zh": "什么都没有",
+   "lv": "A1",
+   "l": "nichts",
+   "p": "pron",
+   "en": "nothing",
+   "ex": "Ich habe nichts gesagt.",
+   "exZh": "我什么都没说。"
+  },
+  {
+   "w": "jung",
+   "zh": "年轻的",
+   "lv": "A1",
+   "l": "jung",
+   "p": "adj",
+   "en": "young",
+   "ex": "Sie ist noch sehr jung.",
+   "exZh": "她还很年轻。"
+  },
+  {
+   "w": "aber",
+   "zh": "但是",
+   "lv": "A1",
+   "l": "aber",
+   "p": "conj",
+   "en": "but",
+   "ex": "Ich bin müde, aber glücklich.",
+   "exZh": "我累但开心。"
+  },
+  {
+   "w": "oder",
+   "zh": "或者",
+   "lv": "A1",
+   "l": "oder",
+   "p": "conj",
+   "en": "or",
+   "ex": "Tee oder Kaffee?",
+   "exZh": "茶还是咖啡？"
+  },
+  {
+   "w": "möchten",
+   "zh": "想要（客气说法）",
+   "lv": "A1",
+   "l": "möchten",
+   "p": "v",
+   "en": "would like",
+   "ex": "Ich möchte einen Tee, bitte.",
+   "exZh": "我想要一杯茶。"
+  },
+  {
+   "w": "warten",
+   "zh": "等待",
+   "lv": "A1",
+   "l": "warten",
+   "p": "v",
+   "en": "to wait",
+   "ex": "Ich warte auf den Bus.",
+   "exZh": "我在等公交车。"
+  },
+  {
+   "w": "maskulin",
+   "zh": "阳性的",
+   "lv": "A1",
+   "l": "maskulin",
+   "p": "adj"
+  },
+  {
+   "w": "perfekt",
+   "zh": "完美的",
+   "lv": "A1",
+   "l": "perfekt",
+   "p": "adj"
+  },
+  {
+   "w": "dreißig",
+   "zh": "三十",
+   "lv": "A1",
+   "l": "dreißig",
+   "p": "num",
+   "en": "thirty",
+   "ex": "Der Kurs kostet dreißig Euro.",
+   "exZh": "课程三十欧元。"
+  },
+  {
+   "w": "der Apfel",
+   "zh": "苹果",
+   "lv": "A1",
+   "l": "Apfel",
+   "p": "n",
+   "g": "m",
+   "pl": "die Äpfel",
+   "en": "apple",
+   "ex": "Der Apfel ist rot und süß.",
+   "exZh": "这个苹果又红又甜。"
+  },
+  {
+   "w": "weltweit",
+   "zh": "世界范围的",
+   "lv": "A1",
+   "l": "weltweit",
+   "p": "adj"
+  },
+  {
+   "w": "der Mond",
+   "zh": "月亮",
+   "lv": "A1",
+   "l": "Mond",
+   "p": "n",
+   "g": "m",
+   "pl": "die Monde",
+   "en": "moon",
+   "ex": "Heute Nacht ist der Mond voll.",
+   "exZh": "今晚是满月。"
+  },
+  {
+   "w": "der Donnerstag",
+   "zh": "星期四",
+   "lv": "A1",
+   "l": "Donnerstag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Donnerstage",
+   "en": "Thursday",
+   "ex": "Am Donnerstag habe ich frei.",
+   "exZh": "周四我休息。"
+  },
+  {
+   "w": "der Rand",
+   "zh": "边缘",
+   "lv": "A1",
+   "l": "Rand",
+   "p": "n",
+   "g": "m",
+   "pl": "die Ränder",
+   "en": "edge",
+   "ex": "Schreib nicht an den Rand!",
+   "exZh": "别写在边上！"
+  },
+  {
+   "w": "joggen",
+   "zh": "慢跑",
+   "lv": "A1",
+   "l": "joggen",
+   "p": "v"
+  },
+  {
+   "w": "die Tüte",
+   "zh": "袋子",
+   "lv": "A1",
+   "l": "Tüte",
+   "p": "n",
+   "g": "f",
+   "pl": "die Tüten",
+   "en": "bag",
+   "ex": "Brauchen Sie eine Tüte?",
+   "exZh": "您需要一个袋子吗？"
+  },
+  {
+   "w": "das Interview",
+   "zh": "采访",
+   "lv": "A1",
+   "l": "Interview",
+   "p": "n",
+   "g": "n",
+   "pl": "die Interviews"
+  },
+  {
+   "w": "Guten Tag!",
+   "zh": "你好（白天问候）",
+   "lv": "A1",
+   "l": "Guten Tag",
+   "p": "phr",
+   "en": "good day",
+   "ex": "Guten Tag, wie kann ich helfen?",
+   "exZh": "您好，我能帮什么忙？"
+  },
+  {
+   "w": "oben",
+   "zh": "上面",
+   "lv": "A1",
+   "l": "oben",
+   "p": "adv",
+   "en": "above",
+   "ex": "Das Buch liegt oben im Regal.",
+   "exZh": "书放在架子上层。"
+  },
+  {
+   "w": "neue Vokabeln",
+   "zh": "新单词",
+   "lv": "A1",
+   "l": "neue Vokabeln",
+   "p": "phr"
+  },
+  {
+   "w": "das Gemüse",
+   "zh": "蔬菜",
+   "lv": "A1",
+   "l": "Gemüse",
+   "p": "n",
+   "g": "n",
+   "en": "vegetables",
+   "ex": "Ich kaufe Gemüse auf dem Markt.",
+   "exZh": "我在市场上买蔬菜。"
+  },
+  {
+   "w": "falsch",
+   "zh": "错误的",
+   "lv": "A1",
+   "l": "falsch",
+   "p": "adj",
+   "en": "wrong",
+   "ex": "Das ist die falsche Straße.",
+   "exZh": "这条路走错了。"
+  },
+  {
+   "w": "das Start-up",
+   "zh": "初创公司",
+   "lv": "A1",
+   "l": "Start-up",
+   "p": "n",
+   "g": "n",
+   "pl": "die Start-ups"
+  },
+  {
+   "w": "Ich wohne in …",
+   "zh": "我住在……",
+   "lv": "A1",
+   "l": "Ich wohne in",
+   "p": "phr",
+   "en": "I live in",
+   "ex": "Ich wohne in Shanghai.",
+   "exZh": "我住在上海。"
+  },
+  {
+   "w": "die Lehrerin",
+   "zh": "老师（女）",
+   "lv": "A1",
+   "l": "Lehrerin",
+   "p": "n",
+   "g": "f",
+   "pl": "die Lehrerinnen",
+   "en": "teacher",
+   "ex": "Die Lehrerin schreibt an die Tafel.",
+   "exZh": "女老师往黑板上写字。"
+  },
+  {
+   "w": "dort",
+   "zh": "那里",
+   "lv": "A1",
+   "l": "dort",
+   "p": "adv",
+   "en": "there",
+   "ex": "Dort ist der Eingang.",
+   "exZh": "入口在那边。"
+  },
+  {
+   "w": "Frankreich",
+   "zh": "法国",
+   "lv": "A1",
+   "l": "Frankreich",
+   "p": "n"
+  },
+  {
+   "w": "du",
+   "zh": "你",
+   "lv": "A1",
+   "l": "du",
+   "p": "pron",
+   "en": "you",
+   "ex": "Woher kommst du?",
+   "exZh": "你从哪里来？"
+  },
+  {
+   "w": "spielen",
+   "zh": "玩；演奏",
+   "lv": "A1",
+   "l": "spielen",
+   "p": "v",
+   "en": "to play",
+   "ex": "Die Kinder spielen Fußball.",
+   "exZh": "孩子们在踢足球。"
+  },
+  {
+   "w": "sollen",
+   "zh": "应该（情态动词）",
+   "lv": "A1",
+   "l": "sollen",
+   "p": "v",
+   "en": "should",
+   "ex": "Du sollst mehr schlafen.",
+   "exZh": "你应该多睡一点。"
+  },
+  {
+   "w": "der Sonntag",
+   "zh": "星期日",
+   "lv": "A1",
+   "l": "Sonntag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Sonntage",
+   "en": "Sunday",
+   "ex": "Sonntags ist alles geschlossen.",
+   "exZh": "周日所有商店都关门。"
+  },
+  {
+   "w": "der Supermarkt",
+   "zh": "超市",
+   "lv": "A1",
+   "l": "Supermarkt",
+   "p": "n",
+   "g": "m",
+   "pl": "die Supermärkte",
+   "en": "supermarket",
+   "ex": "Der Supermarkt liegt um die Ecke.",
+   "exZh": "超市就在拐角处。"
+  },
+  {
+   "w": "das Fenster",
+   "zh": "窗户",
+   "lv": "A1",
+   "l": "Fenster",
+   "p": "n",
+   "g": "n",
+   "pl": "die Fenster",
+   "en": "window",
+   "ex": "Das Fenster ist offen.",
+   "exZh": "窗户开着。"
+  },
+  {
+   "w": "der Herd",
+   "zh": "炉灶",
+   "lv": "A1",
+   "l": "Herd",
+   "p": "n",
+   "g": "m",
+   "pl": "die Herde",
+   "en": "stove",
+   "ex": "Der Topf steht auf dem Herd.",
+   "exZh": "锅在炉子上。"
+  },
+  {
+   "w": "erkennen",
+   "zh": "认出",
+   "lv": "A1",
+   "l": "erkennen",
+   "p": "v"
+  },
+  {
+   "w": "die Taxifahrerin",
+   "zh": "女出租车司机",
+   "lv": "A1",
+   "l": "Taxifahrerin",
+   "p": "n",
+   "g": "f",
+   "pl": "die Taxifahrerinnen"
+  },
+  {
+   "w": "neu",
+   "zh": "新的",
+   "lv": "A1",
+   "l": "neu",
+   "p": "adj",
+   "en": "new",
+   "ex": "Ich habe ein neues Handy.",
+   "exZh": "我有一部新手机。"
+  },
+  {
+   "w": "die Adresse",
+   "zh": "地址",
+   "lv": "A1",
+   "l": "Adresse",
+   "p": "n",
+   "g": "f",
+   "pl": "die Adressen",
+   "en": "address",
+   "ex": "Wie ist deine Adresse?",
+   "exZh": "你的地址是什么？"
+  },
+  {
+   "w": "auf die Rückseite des Namensschildes",
+   "zh": "到名牌的反面上",
+   "lv": "A1",
+   "l": "auf die Rückseite des Namensschildes",
+   "p": "phr"
+  },
+  {
+   "w": "kaufen",
+   "zh": "买",
+   "lv": "A1",
+   "l": "kaufen",
+   "p": "v",
+   "en": "to buy",
+   "ex": "Ich kaufe ein Brot.",
+   "exZh": "我买一个面包。"
+  },
+  {
+   "w": "schlecht",
+   "zh": "坏的；差的",
+   "lv": "A1",
+   "l": "schlecht",
+   "p": "adj",
+   "en": "bad",
+   "ex": "Das Wetter ist heute schlecht.",
+   "exZh": "今天天气不好。"
+  },
+  {
+   "w": "arbeiten",
+   "zh": "工作",
+   "lv": "A1",
+   "l": "arbeiten",
+   "p": "v",
+   "en": "to work",
+   "ex": "Sie arbeitet bei einer Bank.",
+   "exZh": "她在一家银行工作。"
+  },
+  {
+   "w": "der Sitz",
+   "zh": "座位",
+   "lv": "A1",
+   "l": "Sitz",
+   "p": "n",
+   "g": "m",
+   "pl": "die Sitze",
+   "en": "seat",
+   "ex": "Der Sitz ist bequem.",
+   "exZh": "座位很舒服。"
+  },
+  {
+   "w": "lieben",
+   "zh": "爱",
+   "lv": "A1",
+   "l": "lieben",
+   "p": "v"
+  },
+  {
+   "w": "der indefinite Artikel",
+   "zh": "不定冠词",
+   "lv": "A1",
+   "l": "indefinite Artikel",
+   "p": "n",
+   "g": "m"
+  },
+  {
+   "w": "der Kühlschrank",
+   "zh": "冰箱",
+   "lv": "A1",
+   "l": "Kühlschrank",
+   "p": "n",
+   "g": "m",
+   "pl": "die Kühlschränke",
+   "en": "fridge",
+   "ex": "Die Milch ist im Kühlschrank.",
+   "exZh": "牛奶在冰箱里。"
+  },
+  {
+   "w": "der Unterricht",
+   "zh": "课程；上课",
+   "lv": "A1",
+   "l": "Unterricht",
+   "p": "n",
+   "g": "m",
+   "en": "lesson",
+   "ex": "Der Unterricht beginnt um neun.",
+   "exZh": "课程九点开始。"
+  },
+  {
+   "w": "Lesen Sie vor.",
+   "zh": "请朗读。",
+   "lv": "A1",
+   "l": "Lesen Sie vor",
+   "p": "phr"
+  },
+  {
+   "w": "der Arm",
+   "zh": "胳膊",
+   "lv": "A1",
+   "l": "Arm",
+   "p": "n",
+   "g": "m",
+   "pl": "die Arme",
+   "en": "arm",
+   "ex": "Mein Arm tut weh.",
+   "exZh": "我胳膊疼。"
+  },
+  {
+   "w": "Vancouver",
+   "zh": "温哥华",
+   "lv": "A1",
+   "l": "Vancouver",
+   "p": "n"
+  },
+  {
+   "w": "bis",
+   "zh": "直到；到……为止",
+   "lv": "A1",
+   "l": "bis",
+   "p": "prep"
+  },
+  {
+   "w": "der Schinken",
+   "zh": "火腿",
+   "lv": "A1",
+   "l": "Schinken",
+   "p": "n",
+   "g": "m",
+   "pl": "die Schinken",
+   "en": "ham",
+   "ex": "Ich möchte ein Brötchen mit Schinken.",
+   "exZh": "我要一个火腿小面包。"
+  },
+  {
+   "w": "Wer spricht?",
+   "zh": "谁在说话？",
+   "lv": "A1",
+   "l": "Wer spricht",
+   "p": "phr"
+  },
+  {
+   "w": "das Bad",
+   "zh": "浴室",
+   "lv": "A1",
+   "l": "Bad",
+   "p": "n",
+   "g": "n",
+   "pl": "die Bäder",
+   "en": "bathroom",
+   "ex": "Das Bad ist neben dem Schlafzimmer.",
+   "exZh": "浴室在卧室旁边。"
+  },
+  {
+   "w": "es",
+   "zh": "它（中性名词的代词）",
+   "lv": "A1",
+   "l": "es",
+   "p": "pron"
+  },
+  {
+   "w": "der Juli",
+   "zh": "七月",
+   "lv": "A1",
+   "l": "Juli",
+   "p": "n",
+   "g": "m",
+   "pl": "die Julis",
+   "en": "July",
+   "ex": "Im Juli fahren wir in Urlaub.",
+   "exZh": "七月我们去度假。"
+  },
+  {
+   "w": "der Balkon",
+   "zh": "阳台",
+   "lv": "A1",
+   "l": "Balkon",
+   "p": "n",
+   "g": "m",
+   "pl": "die Balkons",
+   "en": "balcony",
+   "ex": "Wir frühstücken auf dem Balkon.",
+   "exZh": "我们在阳台上吃早餐。"
+  },
+  {
+   "w": "Paris",
+   "zh": "巴黎",
+   "lv": "A1",
+   "l": "Paris",
+   "p": "n"
+  },
+  {
+   "w": "der Topf",
+   "zh": "锅",
+   "lv": "A1",
+   "l": "Topf",
+   "p": "n",
+   "g": "m",
+   "pl": "die Töpfe",
+   "en": "pot",
+   "ex": "Der Topf ist heiß.",
+   "exZh": "锅很烫。"
+  },
+  {
+   "w": "der Nebel",
+   "zh": "雾",
+   "lv": "A1",
+   "l": "Nebel",
+   "p": "n",
+   "g": "m",
+   "pl": "die Nebel",
+   "en": "fog",
+   "ex": "Am Morgen war viel Nebel.",
+   "exZh": "早上雾很大。"
+  },
+  {
+   "w": "sehr",
+   "zh": "很；非常",
+   "lv": "A1",
+   "l": "sehr",
+   "p": "adv",
+   "en": "very",
+   "ex": "Das ist sehr wichtig.",
+   "exZh": "这非常重要。"
+  },
+  {
+   "w": "da",
+   "zh": "那儿",
+   "lv": "A1",
+   "l": "da",
+   "p": "adv"
+  },
+  {
+   "w": "der Partner",
+   "zh": "伙伴；搭档",
+   "lv": "A1",
+   "l": "Partner",
+   "p": "n",
+   "g": "m",
+   "pl": "die Partner"
+  },
+  {
+   "w": "das Lieblingsauto",
+   "zh": "最爱的汽车",
+   "lv": "A1",
+   "l": "Lieblingsauto",
+   "p": "n",
+   "g": "n",
+   "pl": "die Lieblingsautos"
+  },
+  {
+   "w": "die Medizin",
+   "zh": "医学",
+   "lv": "A1",
+   "l": "Medizin",
+   "p": "n",
+   "g": "f"
+  },
+  {
+   "w": "das Gewitter",
+   "zh": "雷雨",
+   "lv": "A1",
+   "l": "Gewitter",
+   "p": "n",
+   "g": "n",
+   "pl": "die Gewitter",
+   "en": "thunderstorm",
+   "ex": "Wir bekommen heute ein Gewitter.",
+   "exZh": "今天有雷雨。"
+  },
+  {
+   "w": "Ich hätte gern …",
+   "zh": "我想要……（点单用语）",
+   "lv": "A1",
+   "l": "Ich hätte gern",
+   "p": "phr",
+   "en": "I would like",
+   "ex": "Ich hätte gern einen Kaffee.",
+   "exZh": "我想要一杯咖啡。"
+  },
+  {
+   "w": "acht",
+   "zh": "八",
+   "lv": "A1",
+   "l": "acht",
+   "p": "num",
+   "en": "eight",
+   "ex": "Der Zug fährt um acht.",
+   "exZh": "火车八点开。"
+  },
+  {
+   "w": "die Grammatik",
+   "zh": "语法",
+   "lv": "A1",
+   "l": "Grammatik",
+   "p": "n",
+   "g": "f",
+   "pl": "die Grammatiken",
+   "en": "grammar",
+   "ex": "Deutsche Grammatik ist nicht leicht.",
+   "exZh": "德语语法不容易。"
+  },
+  {
+   "w": "Englisch",
+   "zh": "英语",
+   "lv": "A1",
+   "l": "Englisch",
+   "p": "n"
+  },
+  {
+   "w": "der Satzanfang",
+   "zh": "句首",
+   "lv": "A1",
+   "l": "Satzanfang",
+   "p": "n",
+   "g": "m",
+   "pl": "die Satzanfänge"
+  },
+  {
+   "w": "roh",
+   "zh": "生的",
+   "lv": "A1",
+   "l": "roh",
+   "p": "adj",
+   "en": "raw",
+   "ex": "Ich esse das Fleisch nicht roh.",
+   "exZh": "我不吃生肉。"
+  },
+  {
+   "w": "das Fest",
+   "zh": "节日；庆典",
+   "lv": "A1",
+   "l": "Fest",
+   "p": "n",
+   "g": "n",
+   "pl": "die Feste",
+   "en": "festival",
+   "ex": "Das Fest dauert drei Tage.",
+   "exZh": "庆典持续三天。"
+  },
+  {
+   "w": "lecker",
+   "zh": "好吃的",
+   "lv": "A1",
+   "l": "lecker",
+   "p": "adj",
+   "en": "tasty",
+   "ex": "Der Kuchen ist sehr lecker.",
+   "exZh": "蛋糕很好吃。"
+  },
+  {
+   "w": "die Vokabeln",
+   "zh": "单词",
+   "lv": "A1",
+   "l": "Vokabeln",
+   "p": "n",
+   "g": "f"
+  },
+  {
+   "w": "der Regenbogen",
+   "zh": "彩虹",
+   "lv": "A1",
+   "l": "Regenbogen",
+   "p": "n",
+   "g": "m",
+   "pl": "die Regenbögen",
+   "en": "rainbow",
+   "ex": "Nach dem Regen kam ein Regenbogen.",
+   "exZh": "雨后出现了彩虹。"
+  },
+  {
+   "w": "die Welt",
+   "zh": "世界",
+   "lv": "A1",
+   "l": "Welt",
+   "p": "n",
+   "g": "f",
+   "pl": "die Welten"
+  },
+  {
+   "w": "das Badminton",
+   "zh": "羽毛球",
+   "lv": "A1",
+   "l": "Badminton",
+   "p": "n",
+   "g": "n"
+  },
+  {
+   "w": "der Gast",
+   "zh": "客人",
+   "lv": "A1",
+   "l": "Gast",
+   "p": "n",
+   "g": "m",
+   "pl": "die Gäste",
+   "en": "guest",
+   "ex": "Wir haben heute Gäste.",
+   "exZh": "我们今天有客人。"
+  },
+  {
+   "w": "der Elefant",
+   "zh": "大象",
+   "lv": "A1",
+   "l": "Elefant",
+   "p": "n",
+   "g": "m",
+   "pl": "die Elefanten",
+   "en": "elephant",
+   "ex": "Elefanten haben ein gutes Gedächtnis.",
+   "exZh": "大象记忆很好。"
+  },
+  {
+   "w": "der Hunger",
+   "zh": "饥饿",
+   "lv": "A1",
+   "l": "Hunger",
+   "p": "n",
+   "g": "m",
+   "en": "hunger",
+   "ex": "Ich habe großen Hunger.",
+   "exZh": "我很饿。"
+  },
+  {
+   "w": "die Seife",
+   "zh": "肥皂",
+   "lv": "A1",
+   "l": "Seife",
+   "p": "n",
+   "g": "f",
+   "pl": "die Seifen",
+   "en": "soap",
+   "ex": "Wo ist die Seife?",
+   "exZh": "肥皂在哪里？"
+  },
+  {
+   "w": "bringen",
+   "zh": "带来；送来",
+   "lv": "A1",
+   "l": "bringen",
+   "p": "v",
+   "en": "to bring",
+   "ex": "Bringst du mir Wasser mit?",
+   "exZh": "你能给我带点水吗？"
+  },
+  {
+   "w": "die Psychologie",
+   "zh": "心理学",
+   "lv": "A1",
+   "l": "Psychologie",
+   "p": "n",
+   "g": "f"
+  },
+  {
+   "w": "das Wochenende",
+   "zh": "周末",
+   "lv": "A1",
+   "l": "Wochenende",
+   "p": "n",
+   "g": "n",
+   "pl": "die Wochenenden",
+   "en": "weekend",
+   "ex": "Schönes Wochenende!",
+   "exZh": "周末愉快！"
+  },
+  {
+   "w": "bremsen",
+   "zh": "刹车",
+   "lv": "A1",
+   "l": "bremsen",
+   "p": "v",
+   "en": "to brake",
+   "ex": "Er hat zu spät gebremst.",
+   "exZh": "他刹车太晚了。"
+  },
+  {
+   "w": "die Tür",
+   "zh": "门",
+   "lv": "A1",
+   "l": "Tür",
+   "p": "n",
+   "g": "f",
+   "pl": "die Türen",
+   "en": "door",
+   "ex": "Bitte mach die Tür zu.",
+   "exZh": "请把门关上。"
+  },
+  {
+   "w": "der Wohnort",
+   "zh": "居住地",
+   "lv": "A1",
+   "l": "Wohnort",
+   "p": "n",
+   "g": "m",
+   "pl": "die Wohnorte"
+  },
+  {
+   "w": "der Bauch",
+   "zh": "肚子",
+   "lv": "A1",
+   "l": "Bauch",
+   "p": "n",
+   "g": "m",
+   "pl": "die Bäuche",
+   "en": "belly",
+   "ex": "Mein Bauch tut weh.",
+   "exZh": "我肚子疼。"
+  },
+  {
+   "w": "heißen",
+   "zh": "名叫",
+   "lv": "A1",
+   "l": "heißen",
+   "p": "v",
+   "en": "to be called",
+   "ex": "Ich heiße Anna.",
+   "exZh": "我叫安娜。"
+  },
+  {
+   "w": "leben",
+   "zh": "生活；活着",
+   "lv": "A1",
+   "l": "leben",
+   "p": "v",
+   "en": "to live",
+   "ex": "Sie lebt seit drei Jahren hier.",
+   "exZh": "她在这里住了三年。"
+  },
+  {
+   "w": "die Eltern",
+   "zh": "父母（复数）",
+   "lv": "A1",
+   "l": "Eltern",
+   "p": "n",
+   "g": "pl",
+   "pl": "die Eltern",
+   "en": "parents",
+   "ex": "Meine Eltern wohnen in Berlin.",
+   "exZh": "我父母住在柏林。"
+  },
+  {
+   "w": "der Kuchen",
+   "zh": "蛋糕",
+   "lv": "A1",
+   "l": "Kuchen",
+   "p": "n",
+   "g": "m",
+   "pl": "die Kuchen",
+   "en": "cake",
+   "ex": "Der Kuchen ist selbst gemacht.",
+   "exZh": "这个蛋糕是自己做的。"
+  },
+  {
+   "w": "die Sprache",
+   "zh": "语言",
+   "lv": "A1",
+   "l": "Sprache",
+   "p": "n",
+   "g": "f",
+   "pl": "die Sprachen",
+   "en": "language",
+   "ex": "Deutsch ist eine schwere Sprache.",
+   "exZh": "德语是一门难学的语言。"
+  },
+  {
+   "w": "schlafen",
+   "zh": "睡觉",
+   "lv": "A1",
+   "l": "schlafen",
+   "p": "v",
+   "en": "to sleep",
+   "ex": "Das Kind schläft schon.",
+   "exZh": "孩子已经睡了。"
+  },
+  {
+   "w": "Ergänzen Sie die Namen.",
+   "zh": "请填入名字。",
+   "lv": "A1",
+   "l": "Ergänzen Sie die Namen",
+   "p": "phr"
+  },
+  {
+   "w": "hinter",
+   "zh": "在……后面",
+   "lv": "A1",
+   "l": "hinter",
+   "p": "prep",
+   "en": "behind",
+   "ex": "Der Garten ist hinter dem Haus.",
+   "exZh": "花园在房子后面。"
+  },
+  {
+   "w": "Sortieren Sie.",
+   "zh": "请排序。",
+   "lv": "A1",
+   "l": "Sortieren Sie",
+   "p": "phr"
+  },
+  {
+   "w": "immer kleiner werden",
+   "zh": "变得越来越小",
+   "lv": "A1",
+   "l": "immer kleiner werden",
+   "p": "phr"
+  },
+  {
+   "w": "die Partnerin",
+   "zh": "伙伴；搭档（女性）",
+   "lv": "A1",
+   "l": "Partnerin",
+   "p": "n",
+   "g": "f",
+   "pl": "die Partnerinnen"
+  },
+  {
+   "w": "der Trainer",
+   "zh": "教练",
+   "lv": "A1",
+   "l": "Trainer",
+   "p": "n",
+   "g": "m",
+   "pl": "die Trainer"
+  },
+  {
+   "w": "vierundzwanzig",
+   "zh": "二十四",
+   "lv": "A1",
+   "l": "vierundzwanzig",
+   "p": "num"
+  },
+  {
+   "w": "der Fernseher",
+   "zh": "电视机",
+   "lv": "A1",
+   "l": "Fernseher",
+   "p": "n",
+   "g": "m",
+   "pl": "die Fernseher",
+   "en": "television",
+   "ex": "Abends sehen wir Fernseher.",
+   "exZh": "晚上我们看电视。"
+  },
+  {
+   "w": "parken",
+   "zh": "停车",
+   "lv": "A1",
+   "l": "parken",
+   "p": "v",
+   "en": "to park",
+   "ex": "Hier darf man nicht parken.",
+   "exZh": "这里不许停车。"
+  },
+  {
+   "w": "der Check",
+   "zh": "检查；核对",
+   "lv": "A1",
+   "l": "Check",
+   "p": "n",
+   "g": "m",
+   "pl": "die Checks"
+  },
+  {
+   "w": "der Salat",
+   "zh": "沙拉；生菜",
+   "lv": "A1",
+   "l": "Salat",
+   "p": "n",
+   "g": "m",
+   "pl": "die Salate",
+   "en": "salad",
+   "ex": "Ich nehme einen Salat.",
+   "exZh": "我要一份沙拉。"
+  },
+  {
+   "w": "an",
+   "zh": "在……旁；在……上（贴靠）",
+   "lv": "A1",
+   "l": "an",
+   "p": "prep",
+   "en": "at",
+   "ex": "Das Bild hängt an der Wand.",
+   "exZh": "画挂在墙上。"
+  },
+  {
+   "w": "der Zucker",
+   "zh": "糖",
+   "lv": "A1",
+   "l": "Zucker",
+   "p": "n",
+   "g": "m",
+   "en": "sugar",
+   "ex": "Ich trinke Kaffee ohne Zucker.",
+   "exZh": "我喝咖啡不加糖。"
+  },
+  {
+   "w": "Brasilien",
+   "zh": "巴西",
+   "lv": "A1",
+   "l": "Brasilien",
+   "p": "n"
+  },
+  {
+   "w": "heute",
+   "zh": "今天",
+   "lv": "A1",
+   "l": "heute",
+   "p": "adv",
+   "en": "today",
+   "ex": "Heute ist Montag.",
+   "exZh": "今天是周一。"
+  },
+  {
+   "w": "die Frage",
+   "zh": "问题",
+   "lv": "A1",
+   "l": "Frage",
+   "p": "n",
+   "g": "f",
+   "pl": "die Fragen",
+   "en": "question",
+   "ex": "Ich habe eine Frage.",
+   "exZh": "我有个问题。"
+  },
+  {
+   "w": "fragen",
+   "zh": "问；询问",
+   "lv": "A1",
+   "l": "fragen",
+   "p": "v",
+   "en": "to ask",
+   "ex": "Darf ich dich etwas fragen?",
+   "exZh": "我可以问你点事吗？"
+  },
+  {
+   "w": "Machen Sie Namensschilder.",
+   "zh": "大家一起制作名牌。",
+   "lv": "A1",
+   "l": "Machen Sie Namensschilder",
+   "p": "phr"
+  },
+  {
+   "w": "das Abendessen",
+   "zh": "晚餐",
+   "lv": "A1",
+   "l": "Abendessen",
+   "p": "n",
+   "g": "n",
+   "pl": "die Abendessen",
+   "en": "dinner",
+   "ex": "Wir essen um acht Abendessen.",
+   "exZh": "我们八点吃晚饭。"
+  },
+  {
+   "w": "brauchen",
+   "zh": "需要",
+   "lv": "A1",
+   "l": "brauchen",
+   "p": "v",
+   "en": "to need",
+   "ex": "Ich brauche deine Hilfe.",
+   "exZh": "我需要你的帮助。"
+  },
+  {
+   "w": "der Schnee",
+   "zh": "雪",
+   "lv": "A1",
+   "l": "Schnee",
+   "p": "n",
+   "g": "m",
+   "en": "snow",
+   "ex": "Der Schnee bleibt liegen.",
+   "exZh": "雪一直没化。"
+  },
+  {
+   "w": "mehr",
+   "zh": "更多",
+   "lv": "A1",
+   "l": "mehr",
+   "p": "adv",
+   "en": "more",
+   "ex": "Ich brauche mehr Zeit.",
+   "exZh": "我需要更多时间。"
+  },
+  {
+   "w": "klein",
+   "zh": "小的",
+   "lv": "A1",
+   "l": "klein",
+   "p": "adj",
+   "en": "small",
+   "ex": "Wir wohnen in einer kleinen Wohnung.",
+   "exZh": "我们住在一套小公寓里。"
+  },
+  {
+   "w": "auf Position 2",
+   "zh": "位于第二位",
+   "lv": "A1",
+   "l": "auf Position 2",
+   "p": "phr"
+  },
+  {
+   "w": "richtig",
+   "zh": "正确的",
+   "lv": "A1",
+   "l": "richtig",
+   "p": "adj",
+   "en": "correct",
+   "ex": "Deine Antwort ist richtig.",
+   "exZh": "你的答案是对的。"
+  },
+  {
+   "w": "neutral",
+   "zh": "中性的",
+   "lv": "A1",
+   "l": "neutral",
+   "p": "adj"
+  },
+  {
+   "w": "der Computer",
+   "zh": "电脑",
+   "lv": "A1",
+   "l": "Computer",
+   "p": "n",
+   "g": "m",
+   "pl": "die Computer",
+   "en": "computer",
+   "ex": "Der Computer ist neu.",
+   "exZh": "这台电脑是新的。"
+  },
+  {
+   "w": "der Weg",
+   "zh": "路；路程",
+   "lv": "A1",
+   "l": "Weg",
+   "p": "n",
+   "g": "m",
+   "pl": "die Wege",
+   "en": "way",
+   "ex": "Der Weg zum Bahnhof ist kurz.",
+   "exZh": "去火车站的路很近。"
+  },
+  {
+   "w": "das Eis",
+   "zh": "冰；冰淇淋",
+   "lv": "A1",
+   "l": "Eis",
+   "p": "n",
+   "g": "n",
+   "en": "ice",
+   "ex": "Im Winter liegt Eis auf dem See.",
+   "exZh": "冬天湖面结冰。"
+  },
+  {
+   "w": "der Taxifahrer",
+   "zh": "出租车司机",
+   "lv": "A1",
+   "l": "Taxifahrer",
+   "p": "n",
+   "g": "m",
+   "pl": "die Taxifahrer"
+  },
+  {
+   "w": "der Zeitplan",
+   "zh": "时间安排",
+   "lv": "A1",
+   "l": "Zeitplan",
+   "p": "n",
+   "g": "m",
+   "pl": "die Zeitpläne",
+   "en": "schedule",
+   "ex": "Der Zeitplan ist eng.",
+   "exZh": "时间安排很紧。"
+  },
+  {
+   "w": "Das sind ...",
+   "zh": "这些是……",
+   "lv": "A1",
+   "l": "sind ",
+   "p": "phr",
+   "g": "n"
+  },
+  {
+   "w": "der Alpha-Rap",
+   "zh": "字母说唱",
+   "lv": "A1",
+   "l": "Alpha-Rap",
+   "p": "n",
+   "g": "m"
+  },
+  {
+   "w": "der Manager",
+   "zh": "经理；经纪人",
+   "lv": "A1",
+   "l": "Manager",
+   "p": "n",
+   "g": "m",
+   "pl": "die Manager"
+  },
+  {
+   "w": "die Schule",
+   "zh": "学校",
+   "lv": "A1",
+   "l": "Schule",
+   "p": "n",
+   "g": "f",
+   "pl": "die Schulen",
+   "en": "school",
+   "ex": "Die Kinder gehen zur Schule.",
+   "exZh": "孩子们去上学。"
+  },
+  {
+   "w": "Schreiben Sie Ihre Vornamen.",
+   "zh": "请写下您的名字。",
+   "lv": "A1",
+   "l": "Schreiben Sie Ihre Vornamen",
+   "p": "phr"
+  },
+  {
+   "w": "weiterzählen",
+   "zh": "继续往下数",
+   "lv": "A1",
+   "l": "weiterzählen",
+   "p": "v"
+  },
+  {
+   "w": "der Regenschirm",
+   "zh": "雨伞",
+   "lv": "A1",
+   "l": "Regenschirm",
+   "p": "n",
+   "g": "m",
+   "pl": "die Regenschirme",
+   "en": "umbrella",
+   "ex": "Nimm den Regenschirm mit!",
+   "exZh": "带上雨伞！"
+  },
+  {
+   "w": "vier",
+   "zh": "四",
+   "lv": "A1",
+   "l": "vier",
+   "p": "num",
+   "en": "four",
+   "ex": "Das Zimmer hat vier Fenster.",
+   "exZh": "这房间有四扇窗。"
+  },
+  {
+   "w": "manchmal",
+   "zh": "有时",
+   "lv": "A1",
+   "l": "manchmal",
+   "p": "adv",
+   "en": "sometimes",
+   "ex": "Manchmal koche ich selbst.",
+   "exZh": "有时我自己做饭。"
+  },
+  {
+   "w": "der Park",
+   "zh": "公园",
+   "lv": "A1",
+   "l": "Park",
+   "p": "n",
+   "g": "m",
+   "pl": "die Parks",
+   "en": "park",
+   "ex": "Wir spazieren im Park.",
+   "exZh": "我们在公园散步。"
+  },
+  {
+   "w": "das Krankenhaus",
+   "zh": "医院",
+   "lv": "A1",
+   "l": "Krankenhaus",
+   "p": "n",
+   "g": "n",
+   "pl": "die Krankenhäuser",
+   "en": "hospital",
+   "ex": "Sie arbeitet im Krankenhaus.",
+   "exZh": "她在医院工作。"
+  },
+  {
+   "w": "die Top 5 Städte",
+   "zh": "排名前五的城市",
+   "lv": "A1",
+   "l": "Top 5 Städte",
+   "p": "phr",
+   "g": "f"
+  },
+  {
+   "w": "Hi.",
+   "zh": "嗨；你好。",
+   "lv": "A1",
+   "l": "Hi",
+   "p": "int"
+  },
+  {
+   "w": "das Kind",
+   "zh": "孩子",
+   "lv": "A1",
+   "l": "Kind",
+   "p": "n",
+   "g": "n",
+   "pl": "die Kinder",
+   "en": "child",
+   "ex": "Das Kind spielt im Garten.",
+   "exZh": "孩子在花园里玩。"
+  },
+  {
+   "w": "der Zug",
+   "zh": "火车",
+   "lv": "A1",
+   "l": "Zug",
+   "p": "n",
+   "g": "m",
+   "pl": "die Züge",
+   "en": "train",
+   "ex": "Der Zug hat zwanzig Minuten Verspätung.",
+   "exZh": "火车晚点二十分钟。"
+  },
+  {
+   "w": "dein",
+   "zh": "你的",
+   "lv": "A1",
+   "l": "dein",
+   "p": "pron",
+   "en": "your",
+   "ex": "Ist das dein Schlüssel?",
+   "exZh": "这是你的钥匙吗？"
+  },
+  {
+   "w": "der Februar",
+   "zh": "二月",
+   "lv": "A1",
+   "l": "Februar",
+   "p": "n",
+   "g": "m",
+   "pl": "die Februare",
+   "en": "February",
+   "ex": "Der Februar hat 28 Tage.",
+   "exZh": "二月有28天。"
+  },
+  {
+   "w": "die Waschmaschine",
+   "zh": "洗衣机",
+   "lv": "A1",
+   "l": "Waschmaschine",
+   "p": "n",
+   "g": "f",
+   "pl": "die Waschmaschinen",
+   "en": "washing machine",
+   "ex": "Die Waschmaschine läuft schon.",
+   "exZh": "洗衣机已经在洗了。"
+  },
+  {
+   "w": "die Pizza",
+   "zh": "比萨",
+   "lv": "A1",
+   "l": "Pizza",
+   "p": "n",
+   "g": "f",
+   "pl": "die Pizzas"
+  },
+  {
+   "w": "die Klasse",
+   "zh": "班级；等级",
+   "lv": "A1",
+   "l": "Klasse",
+   "p": "n",
+   "g": "f",
+   "pl": "die Klassen",
+   "en": "class",
+   "ex": "Wir sind zwanzig in der Klasse.",
+   "exZh": "我们班有二十人。"
+  },
+  {
+   "w": "spülen",
+   "zh": "冲洗；洗碗",
+   "lv": "A1",
+   "l": "spülen",
+   "p": "v",
+   "en": "to rinse",
+   "ex": "Ich spüle das Geschirr.",
+   "exZh": "我洗碗。"
+  },
+  {
+   "w": "zusammen",
+   "zh": "一起",
+   "lv": "A1",
+   "l": "zusammen",
+   "p": "adv",
+   "en": "together",
+   "ex": "Wir lernen zusammen.",
+   "exZh": "我们一起学习。"
+  },
+  {
+   "w": "bei",
+   "zh": "在……那里；在……时（支配第三格）",
+   "lv": "A1",
+   "l": "bei",
+   "p": "prep",
+   "en": "at",
+   "ex": "Ich wohne bei meinen Eltern.",
+   "exZh": "我住在父母家。"
+  },
+  {
+   "w": "die Straße",
+   "zh": "街道",
+   "lv": "A1",
+   "l": "Straße",
+   "p": "n",
+   "g": "f",
+   "pl": "die Straßen",
+   "en": "street",
+   "ex": "Ich wohne in der Goethestraße.",
+   "exZh": "我住在歌德街。"
+  },
+  {
+   "w": "viel",
+   "zh": "多",
+   "lv": "A1",
+   "l": "viel",
+   "p": "adv",
+   "en": "much",
+   "ex": "Er arbeitet viel.",
+   "exZh": "他工作很多。"
+  },
+  {
+   "w": "der Mittwoch",
+   "zh": "星期三",
+   "lv": "A1",
+   "l": "Mittwoch",
+   "p": "n",
+   "g": "m",
+   "pl": "die Mittwoche",
+   "en": "Wednesday",
+   "ex": "Am Mittwoch ist der Kurs.",
+   "exZh": "周三有课。"
+  },
+  {
+   "w": "zehn",
+   "zh": "十",
+   "lv": "A1",
+   "l": "zehn",
+   "p": "num",
+   "en": "ten",
+   "ex": "Zehn Euro, bitte.",
+   "exZh": "十欧元。"
+  },
+  {
+   "w": "der Samstag",
+   "zh": "星期六",
+   "lv": "A1",
+   "l": "Samstag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Samstage",
+   "en": "Saturday",
+   "ex": "Am Samstag gehe ich einkaufen.",
+   "exZh": "周六我去购物。"
+  },
+  {
+   "w": "die Suppe",
+   "zh": "汤",
+   "lv": "A1",
+   "l": "Suppe",
+   "p": "n",
+   "g": "f",
+   "pl": "die Suppen",
+   "en": "soup",
+   "ex": "Die Suppe ist heiß.",
+   "exZh": "汤很烫。"
+  },
+  {
+   "w": "Wie bitte?",
+   "zh": "请再说一遍好吗？",
+   "lv": "A1",
+   "l": "Wie bitte",
+   "p": "phr"
+  },
+  {
+   "w": "die Studie",
+   "zh": "研究",
+   "lv": "A1",
+   "l": "Studie",
+   "p": "n",
+   "g": "f",
+   "pl": "die Studien"
+  },
+  {
+   "w": "die Handynummer",
+   "zh": "手机号码",
+   "lv": "A1",
+   "l": "Handynummer",
+   "p": "n",
+   "g": "f",
+   "pl": "die Handynummern"
+  },
+  {
+   "w": "mit",
+   "zh": "和……一起；用（支配第三格）",
+   "lv": "A1",
+   "l": "mit",
+   "p": "prep",
+   "en": "with",
+   "ex": "Ich fahre mit dem Zug.",
+   "exZh": "我坐火车去。"
+  },
+  {
+   "w": "der Monat",
+   "zh": "月",
+   "lv": "A1",
+   "l": "Monat",
+   "p": "n",
+   "g": "m",
+   "pl": "die Monate",
+   "en": "month",
+   "ex": "Der Kurs dauert drei Monate.",
+   "exZh": "课程持续三个月。"
+  },
+  {
+   "w": "Ich verstehe nicht.",
+   "zh": "我不明白。",
+   "lv": "A1",
+   "l": "Ich verstehe nicht",
+   "p": "phr",
+   "en": "I don't understand",
+   "ex": "Langsamer, bitte. Ich verstehe nicht.",
+   "exZh": "请慢一点。我不明白。"
+  },
+  {
+   "w": "der Deutschkurs",
+   "zh": "德语课程",
+   "lv": "A1",
+   "l": "Deutschkurs",
+   "p": "n",
+   "g": "m",
+   "pl": "die Deutschkurse"
+  },
+  {
+   "w": "Guten Morgen!",
+   "zh": "早上好",
+   "lv": "A1",
+   "l": "Guten Morgen",
+   "p": "phr",
+   "en": "good morning",
+   "ex": "Guten Morgen, Frau Schmidt!",
+   "exZh": "早上好，施密特女士！"
+  },
+  {
+   "w": "stehen",
+   "zh": "站立；处于",
+   "lv": "A1",
+   "l": "stehen",
+   "p": "v",
+   "en": "to stand",
+   "ex": "Das Auto steht vor dem Haus.",
+   "exZh": "车停在房子前面。"
+  },
+  {
+   "w": "der Titel",
+   "zh": "标题",
+   "lv": "A1",
+   "l": "Titel",
+   "p": "n",
+   "g": "m",
+   "pl": "die Titel",
+   "en": "title",
+   "ex": "Der Titel gefällt mir.",
+   "exZh": "我喜欢这个标题。"
+  },
+  {
+   "w": "Na, was ist denn das?",
+   "zh": "那么，这是什么呢？",
+   "lv": "A1",
+   "l": "Na, was ist denn das",
+   "p": "phr"
+  },
+  {
+   "w": "der Großvater",
+   "zh": "祖父；外祖父",
+   "lv": "A1",
+   "l": "Großvater",
+   "p": "n",
+   "g": "m",
+   "pl": "die Großväter",
+   "en": "grandfather",
+   "ex": "Mein Großvater ist achtzig Jahre alt.",
+   "exZh": "我祖父八十岁了。"
+  },
+  {
+   "w": "der Platz",
+   "zh": "位置；广场",
+   "lv": "A1",
+   "l": "Platz",
+   "p": "n",
+   "g": "m",
+   "pl": "die Plätze",
+   "en": "place",
+   "ex": "Ist dieser Platz noch frei?",
+   "exZh": "这个位子还空着吗？"
+  },
+  {
+   "w": "Na ja. So lala.",
+   "zh": "嗯，还行吧。",
+   "lv": "A1",
+   "l": "Na ja. So lala",
+   "p": "phr"
+  },
+  {
+   "w": "glücklich",
+   "zh": "幸福的；高兴的",
+   "lv": "A1",
+   "l": "glücklich",
+   "p": "adj",
+   "en": "happy",
+   "ex": "Sie ist sehr glücklich.",
+   "exZh": "她很幸福。"
+  },
+  {
+   "w": "der Dienstag",
+   "zh": "星期二",
+   "lv": "A1",
+   "l": "Dienstag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Dienstage",
+   "en": "Tuesday",
+   "ex": "Dienstag habe ich einen Termin.",
+   "exZh": "周二我有个预约。"
+  },
+  {
+   "w": "der Freund",
+   "zh": "朋友（男）；男朋友",
+   "lv": "A1",
+   "l": "Freund",
+   "p": "n",
+   "g": "m",
+   "pl": "die Freunde",
+   "en": "friend",
+   "ex": "Er ist mein bester Freund.",
+   "exZh": "他是我最好的朋友。"
+  },
+  {
+   "w": "der Affe",
+   "zh": "猴子",
+   "lv": "A1",
+   "l": "Affe",
+   "p": "n",
+   "g": "m",
+   "pl": "die Affen",
+   "en": "monkey",
+   "ex": "Der Affe klettert schnell.",
+   "exZh": "猴子爬得很快。"
+  },
+  {
+   "w": "zu dritt",
+   "zh": "三人一组",
+   "lv": "A1",
+   "l": "zu dritt",
+   "p": "phr"
+  },
+  {
+   "w": "der Frühling",
+   "zh": "春天",
+   "lv": "A1",
+   "l": "Frühling",
+   "p": "n",
+   "g": "m",
+   "pl": "die Frühlinge",
+   "en": "spring",
+   "ex": "Im Frühling blühen die Blumen.",
+   "exZh": "春天花开了。"
+  },
+  {
+   "w": "rot",
+   "zh": "红色的",
+   "lv": "A1",
+   "l": "rot",
+   "p": "adj",
+   "en": "red",
+   "ex": "Ich möchte das rote Hemd.",
+   "exZh": "我想要那件红衬衫。"
+  },
+  {
+   "w": "das Wort",
+   "zh": "词；单词",
+   "lv": "A1",
+   "l": "Wort",
+   "p": "n",
+   "g": "n",
+   "pl": "die Wörter",
+   "en": "word",
+   "ex": "Ich kenne dieses Wort nicht.",
+   "exZh": "我不认识这个词。"
+  },
+  {
+   "w": "der November",
+   "zh": "十一月",
+   "lv": "A1",
+   "l": "November",
+   "p": "n",
+   "g": "m",
+   "pl": "die November",
+   "en": "November",
+   "ex": "Der November ist oft grau.",
+   "exZh": "十一月常常阴沉。"
+  },
+  {
+   "w": "das Zimmer",
+   "zh": "房间",
+   "lv": "A1",
+   "l": "Zimmer",
+   "p": "n",
+   "g": "n",
+   "pl": "die Zimmer",
+   "en": "room",
+   "ex": "Ich suche ein Zimmer in der Stadt.",
+   "exZh": "我在城里找一间房。"
+  },
+  {
+   "w": "Wo ist die Toilette?",
+   "zh": "厕所在哪里？",
+   "lv": "A1",
+   "l": "Wo ist die Toilette",
+   "p": "phr",
+   "en": "where is the toilet",
+   "ex": "Entschuldigung, wo ist die Toilette?",
+   "exZh": "打扰一下，厕所在哪里？"
+  },
+  {
+   "w": "um",
+   "zh": "在（钟点）；围绕（支配第四格）",
+   "lv": "A1",
+   "l": "um",
+   "p": "prep",
+   "en": "at",
+   "ex": "Der Kurs beginnt um neun Uhr.",
+   "exZh": "课程九点开始。"
+  },
+  {
+   "w": "in",
+   "zh": "在……里；到……中（支配第三/四格）",
+   "lv": "A1",
+   "l": "in",
+   "p": "prep",
+   "en": "in",
+   "ex": "Ich wohne in Berlin.",
+   "exZh": "我住在柏林。"
+  },
+  {
+   "w": "der Keller",
+   "zh": "地下室",
+   "lv": "A1",
+   "l": "Keller",
+   "p": "n",
+   "g": "m",
+   "pl": "die Keller",
+   "en": "cellar",
+   "ex": "Die Fahrräder stehen im Keller.",
+   "exZh": "自行车在地下室。"
+  },
+  {
+   "w": "vier Freunde",
+   "zh": "四位朋友",
+   "lv": "A1",
+   "l": "vier Freunde",
+   "p": "phr"
+  },
+  {
+   "w": "die Küche",
+   "zh": "厨房",
+   "lv": "A1",
+   "l": "Küche",
+   "p": "n",
+   "g": "f",
+   "pl": "die Küchen",
+   "en": "kitchen",
+   "ex": "Die Küche ist klein, aber schön.",
+   "exZh": "厨房虽小但很漂亮。"
+  },
+  {
+   "w": "das Alter",
+   "zh": "年龄",
+   "lv": "A1",
+   "l": "Alter",
+   "p": "n",
+   "g": "n",
+   "pl": "die Alter"
+  },
+  {
+   "w": "siehe",
+   "zh": "看；参见",
+   "lv": "A1",
+   "l": "siehe",
+   "p": "v"
+  },
+  {
+   "w": "Guten Appetit!",
+   "zh": "祝用餐愉快！",
+   "lv": "A1",
+   "l": "Guten Appetit",
+   "p": "phr",
+   "en": "enjoy your meal",
+   "ex": "Guten Appetit, lass es dir schmecken!",
+   "exZh": "用餐愉快，好好享用！"
+  },
+  {
+   "w": "schneien",
+   "zh": "下雪",
+   "lv": "A1",
+   "l": "schneien",
+   "p": "v",
+   "en": "to snow",
+   "ex": "Morgen soll es schneien.",
+   "exZh": "明天据说会下雪。"
+  },
+  {
+   "w": "der Pullover",
+   "zh": "毛衣",
+   "lv": "A1",
+   "l": "Pullover",
+   "p": "n",
+   "g": "m",
+   "pl": "die Pullover",
+   "en": "sweater",
+   "ex": "Der Pullover ist warm.",
+   "exZh": "这件毛衣很暖和。"
+  },
+  {
+   "w": "Athen",
+   "zh": "雅典",
+   "lv": "A1",
+   "l": "Athen",
+   "p": "n"
+  },
+  {
+   "w": "alt",
+   "zh": "老的；旧的",
+   "lv": "A1",
+   "l": "alt",
+   "p": "adj",
+   "en": "old",
+   "ex": "Wie alt bist du?",
+   "exZh": "你多大了？"
+  },
+  {
+   "w": "die Dame",
+   "zh": "女士",
+   "lv": "A1",
+   "l": "Dame",
+   "p": "n",
+   "g": "f",
+   "pl": "die Damen",
+   "en": "lady",
+   "ex": "Die Dame dort ist meine Chefin.",
+   "exZh": "那边那位女士是我的上司。"
+  },
+  {
+   "w": "er",
+   "zh": "他",
+   "lv": "A1",
+   "l": "er",
+   "p": "pron",
+   "en": "he",
+   "ex": "Er wohnt in Wien.",
+   "exZh": "他住在维也纳。"
+  },
+  {
+   "w": "das Problem",
+   "zh": "问题",
+   "lv": "A1",
+   "l": "Problem",
+   "p": "n",
+   "g": "n",
+   "pl": "die Probleme",
+   "en": "issue",
+   "ex": "Kein Problem!",
+   "exZh": "没问题！"
+  },
+  {
+   "w": "entschuldigung",
+   "zh": "对不起；打扰一下",
+   "lv": "A1",
+   "l": "Entschuldigung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Entschuldigungen",
+   "en": "excuse me",
+   "ex": "Entschuldigung, wo ist der Bahnhof?",
+   "exZh": "打扰一下，火车站在哪里？"
+  },
+  {
+   "w": "Lesen Sie.",
+   "zh": "请阅读。",
+   "lv": "A1",
+   "l": "Lesen Sie",
+   "p": "phr"
+  },
+  {
+   "w": "sechs",
+   "zh": "六",
+   "lv": "A1",
+   "l": "sechs",
+   "p": "num",
+   "en": "six",
+   "ex": "Ich stehe um sechs auf.",
+   "exZh": "我六点起床。"
+  },
+  {
+   "w": "müssen",
+   "zh": "必须（情态动词）",
+   "lv": "A1",
+   "l": "müssen",
+   "p": "v",
+   "en": "must",
+   "ex": "Ich muss jetzt gehen.",
+   "exZh": "我必须走了。"
+  },
+  {
+   "w": "wir",
+   "zh": "我们",
+   "lv": "A1",
+   "l": "wir",
+   "p": "pron",
+   "en": "we",
+   "ex": "Wir lernen zusammen.",
+   "exZh": "我们一起学习。"
+  },
+  {
+   "w": "die Stadt",
+   "zh": "城市",
+   "lv": "A1",
+   "l": "Stadt",
+   "p": "n",
+   "g": "f",
+   "pl": "die Städte",
+   "en": "city",
+   "ex": "München ist eine schöne Stadt.",
+   "exZh": "慕尼黑是一座美丽的城市。"
+  },
+  {
+   "w": "der Tisch",
+   "zh": "桌子",
+   "lv": "A1",
+   "l": "Tisch",
+   "p": "n",
+   "g": "m",
+   "pl": "die Tische",
+   "en": "table",
+   "ex": "Das Essen steht auf dem Tisch.",
+   "exZh": "饭菜在桌子上。"
+  },
+  {
+   "w": "dreizehn",
+   "zh": "十三",
+   "lv": "A1",
+   "l": "dreizehn",
+   "p": "num"
+  },
+  {
+   "w": "billig",
+   "zh": "便宜的",
+   "lv": "A1",
+   "l": "billig",
+   "p": "adj",
+   "en": "cheap",
+   "ex": "Die Schuhe waren billig.",
+   "exZh": "这双鞋很便宜。"
+  },
+  {
+   "w": "das Pilates",
+   "zh": "普拉提",
+   "lv": "A1",
+   "l": "Pilates",
+   "p": "n",
+   "g": "n"
+  },
+  {
+   "w": "der Satz",
+   "zh": "句子",
+   "lv": "A1",
+   "l": "Satz",
+   "p": "n",
+   "g": "m",
+   "pl": "die Sätze",
+   "en": "sentence",
+   "ex": "Bitte lies den Satz laut vor.",
+   "exZh": "请把这句话大声读出来。"
+  },
+  {
+   "w": "trinken",
+   "zh": "喝",
+   "lv": "A1",
+   "l": "trinken",
+   "p": "v",
+   "en": "to drink",
+   "ex": "Sie trinkt einen Kaffee.",
+   "exZh": "她喝一杯咖啡。"
+  },
+  {
+   "w": "der Tag",
+   "zh": "天；白天",
+   "lv": "A1",
+   "l": "Tag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Tage",
+   "en": "day",
+   "ex": "Schönen Tag noch!",
+   "exZh": "祝你今天愉快！"
+  },
+  {
+   "w": "die Jacke",
+   "zh": "夹克；外套",
+   "lv": "A1",
+   "l": "Jacke",
+   "p": "n",
+   "g": "f",
+   "pl": "die Jacken",
+   "en": "jacket",
+   "ex": "Nimm eine Jacke mit!",
+   "exZh": "带件外套！"
+  },
+  {
+   "w": "schließen",
+   "zh": "关闭",
+   "lv": "A1",
+   "l": "schließen",
+   "p": "v",
+   "en": "to close",
+   "ex": "Der Laden schließt um acht.",
+   "exZh": "商店八点关门。"
+  },
+  {
+   "w": "das Ei",
+   "zh": "鸡蛋",
+   "lv": "A1",
+   "l": "Ei",
+   "p": "n",
+   "g": "n",
+   "pl": "die Eier",
+   "en": "egg",
+   "ex": "Ich möchte zwei Eier.",
+   "exZh": "我想要两个鸡蛋。"
+  },
+  {
+   "w": "die Zahnbürste",
+   "zh": "牙刷",
+   "lv": "A1",
+   "l": "Zahnbürste",
+   "p": "n",
+   "g": "f",
+   "pl": "die Zahnbürsten",
+   "en": "toothbrush",
+   "ex": "Ich brauche eine neue Zahnbürste.",
+   "exZh": "我需要一把新牙刷。"
+  },
+  {
+   "w": "der Montag",
+   "zh": "星期一",
+   "lv": "A1",
+   "l": "Montag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Montage",
+   "en": "Monday",
+   "ex": "Am Montag beginnt die Arbeit.",
+   "exZh": "周一工作开始。"
+  },
+  {
+   "w": "die Übung",
+   "zh": "练习",
+   "lv": "A1",
+   "l": "Übung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Übungen",
+   "en": "exercise",
+   "ex": "Übung macht den Meister.",
+   "exZh": "熟能生巧。"
+  },
+  {
+   "w": "kochen",
+   "zh": "煮；做饭",
+   "lv": "A1",
+   "l": "kochen",
+   "p": "v",
+   "en": "to cook",
+   "ex": "Meine Mutter kocht gut.",
+   "exZh": "我母亲做饭很好吃。"
+  },
+  {
+   "w": "auf",
+   "zh": "在……上面",
+   "lv": "A1",
+   "l": "auf",
+   "p": "prep",
+   "en": "on",
+   "ex": "Das Buch liegt auf dem Tisch.",
+   "exZh": "书在桌子上。"
+  },
+  {
+   "w": "die Party",
+   "zh": "聚会",
+   "lv": "A1",
+   "l": "Party",
+   "p": "n",
+   "g": "f",
+   "pl": "die Partys",
+   "en": "party",
+   "ex": "Wir machen am Samstag eine Party.",
+   "exZh": "我们周六办聚会。"
+  },
+  {
+   "w": "der Oktober",
+   "zh": "十月",
+   "lv": "A1",
+   "l": "Oktober",
+   "p": "n",
+   "g": "m",
+   "pl": "die Oktober",
+   "en": "October",
+   "ex": "Im Oktober wird es kühler.",
+   "exZh": "十月天气转凉。"
+  },
+  {
+   "w": "das Profil",
+   "zh": "个人简历",
+   "lv": "A1",
+   "l": "Profil",
+   "p": "n",
+   "g": "n",
+   "pl": "die Profile"
+  },
+  {
+   "w": "zwischen",
+   "zh": "在……之间",
+   "lv": "A1",
+   "l": "zwischen",
+   "p": "prep",
+   "en": "between",
+   "ex": "Der Stuhl steht zwischen Tisch und Sofa.",
+   "exZh": "椅子在桌子和沙发之间。"
+  },
+  {
+   "w": "für",
+   "zh": "为了；给（支配第四格）",
+   "lv": "A1",
+   "l": "für",
+   "p": "prep",
+   "en": "for",
+   "ex": "Das Geschenk ist für dich.",
+   "exZh": "这份礼物是给你的。"
+  },
+  {
+   "w": "Italienisch",
+   "zh": "意大利语",
+   "lv": "A1",
+   "l": "Italienisch",
+   "p": "n"
+  },
+  {
+   "w": "nach",
+   "zh": "去（城市/国家）；在……之后",
+   "lv": "A1",
+   "l": "nach",
+   "p": "prep",
+   "en": "after",
+   "ex": "Nach dem Essen gehen wir spazieren.",
+   "exZh": "饭后我们去散步。"
+  },
+  {
+   "w": "Auf Wiedersehen!",
+   "zh": "再见（正式）",
+   "lv": "A1",
+   "l": "Auf Wiedersehen",
+   "p": "phr",
+   "en": "goodbye",
+   "ex": "Auf Wiedersehen und schönen Tag noch!",
+   "exZh": "再见，祝您一天愉快！"
+  },
+  {
+   "w": "cool",
+   "zh": "酷的",
+   "lv": "A1",
+   "l": "cool",
+   "p": "adj"
+  },
+  {
+   "w": "Tja!",
+   "zh": "好吧！",
+   "lv": "A1",
+   "l": "Tja",
+   "p": "int"
+  },
+  {
+   "w": "der Student",
+   "zh": "大学生（男）",
+   "lv": "A1",
+   "l": "Student",
+   "p": "n",
+   "g": "m",
+   "pl": "die Studenten",
+   "en": "student",
+   "ex": "Der Student lernt jeden Tag Deutsch.",
+   "exZh": "这个大学生每天学德语。"
+  },
+  {
+   "w": "der Architekt",
+   "zh": "建筑师",
+   "lv": "A1",
+   "l": "Architekt",
+   "p": "n",
+   "g": "m",
+   "pl": "die Architekten"
+  },
+  {
+   "w": "die Verspätung",
+   "zh": "迟到；晚点",
+   "lv": "A1",
+   "l": "Verspätung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Verspätungen",
+   "en": "delay",
+   "ex": "Entschuldigung für die Verspätung.",
+   "exZh": "抱歉我迟到了。"
+  },
+  {
+   "w": "heiß",
+   "zh": "热的；烫的",
+   "lv": "A1",
+   "l": "heiß",
+   "p": "adj",
+   "en": "hot",
+   "ex": "Der Tee ist noch heiß.",
+   "exZh": "茶还很烫。"
+  },
+  {
+   "w": "jeder",
+   "zh": "每一个",
+   "lv": "A1",
+   "l": "jeder",
+   "p": "pron",
+   "en": "every",
+   "ex": "Jeder Tag ist anders.",
+   "exZh": "每一天都不一样。"
+  },
+  {
+   "w": "der Name",
+   "zh": "名字；姓名",
+   "lv": "A1",
+   "l": "Name",
+   "p": "n",
+   "g": "m",
+   "pl": "die Namen",
+   "en": "name",
+   "ex": "Wie ist Ihr Name?",
+   "exZh": "您叫什么名字？"
+  },
+  {
+   "w": "der Apfelbaum",
+   "zh": "苹果树",
+   "lv": "A1",
+   "l": "Apfelbaum",
+   "p": "n",
+   "g": "m",
+   "pl": "die Apfelbäume",
+   "en": "apple tree",
+   "ex": "Im Garten steht ein Apfelbaum.",
+   "exZh": "花园里有一棵苹果树。"
+  },
+  {
+   "w": "das Kapitel",
+   "zh": "章节",
+   "lv": "A1",
+   "l": "Kapitel",
+   "p": "n",
+   "g": "n",
+   "pl": "die Kapitel",
+   "en": "chapter",
+   "ex": "Das Kapitel ist lang.",
+   "exZh": "这一章很长。"
+  },
+  {
+   "w": "antworten",
+   "zh": "回答",
+   "lv": "A1",
+   "l": "antworten",
+   "p": "v",
+   "en": "to answer",
+   "ex": "Er antwortet nicht.",
+   "exZh": "他没有回答。"
+  },
+  {
+   "w": "die Kasse",
+   "zh": "收银台",
+   "lv": "A1",
+   "l": "Kasse",
+   "p": "n",
+   "g": "f",
+   "pl": "die Kassen",
+   "en": "checkout",
+   "ex": "Bitte zahlen Sie an der Kasse.",
+   "exZh": "请在收银台付款。"
+  },
+  {
+   "w": "Spielen Sie den Dialog.",
+   "zh": "请表演对话。",
+   "lv": "A1",
+   "l": "Spielen Sie den Dialog",
+   "p": "phr"
+  },
+  {
+   "w": "Wie alt ist ...?",
+   "zh": "……几岁了？",
+   "lv": "A1",
+   "l": "Wie alt ist ",
+   "p": "phr"
+  },
+  {
+   "w": "an die Tafel schreiben",
+   "zh": "写到黑板上",
+   "lv": "A1",
+   "l": "an die Tafel schreiben",
+   "p": "phr"
+  },
+  {
+   "w": "die Wohnung",
+   "zh": "公寓；住宅",
+   "lv": "A1",
+   "l": "Wohnung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Wohnungen",
+   "en": "flat",
+   "ex": "Die Wohnung ist sehr hell.",
+   "exZh": "这套公寓非常明亮。"
+  },
+  {
+   "w": "zu",
+   "zh": "到……去；太（支配第三格）",
+   "lv": "A1",
+   "l": "zu",
+   "p": "prep",
+   "en": "to",
+   "ex": "Ich gehe zu Fuß zur Schule.",
+   "exZh": "我步行去学校。"
+  },
+  {
+   "w": "Wie heißen Sie?",
+   "zh": "您叫什么名字？",
+   "lv": "A1",
+   "l": "Wie heißen Sie",
+   "p": "phr",
+   "en": "what is your name",
+   "ex": "Guten Tag, wie heißen Sie?",
+   "exZh": "您好，您叫什么名字？"
+  },
+  {
+   "w": "ich",
+   "zh": "我",
+   "lv": "A1",
+   "l": "ich",
+   "p": "pron",
+   "en": "I",
+   "ex": "Ich bin Student.",
+   "exZh": "我是学生。"
+  },
+  {
+   "w": "eins",
+   "zh": "一",
+   "lv": "A1",
+   "l": "eins",
+   "p": "num",
+   "en": "one",
+   "ex": "Ich nehme eins.",
+   "exZh": "我要一个。"
+  },
+  {
+   "w": "Welcher Dialog?",
+   "zh": "哪个对话？",
+   "lv": "A1",
+   "l": "Welcher Dialog",
+   "p": "phr"
+  },
+  {
+   "w": "gerne",
+   "zh": "乐意地，喜欢",
+   "lv": "A1",
+   "l": "gerne",
+   "p": "adv"
+  },
+  {
+   "w": "allein",
+   "zh": "独自；单独",
+   "lv": "A1",
+   "l": "allein",
+   "p": "adv",
+   "en": "alone",
+   "ex": "Sie wohnt allein.",
+   "exZh": "她一个人住。"
+  },
+  {
+   "w": "das Verbot",
+   "zh": "禁令",
+   "lv": "A1",
+   "l": "Verbot",
+   "p": "n",
+   "g": "n",
+   "pl": "die Verbote",
+   "en": "ban",
+   "ex": "Hier gilt ein Rauchverbot.",
+   "exZh": "这里禁止吸烟。"
+  },
+  {
+   "w": "nehmen",
+   "zh": "拿；乘坐",
+   "lv": "A1",
+   "l": "nehmen",
+   "p": "v",
+   "en": "to take",
+   "ex": "Ich nehme den Bus.",
+   "exZh": "我坐公交车。"
+  },
+  {
+   "w": "das Fahrrad",
+   "zh": "自行车",
+   "lv": "A1",
+   "l": "Fahrrad",
+   "p": "n",
+   "g": "n",
+   "pl": "die Fahrräder",
+   "en": "bicycle",
+   "ex": "Ich fahre mit dem Fahrrad.",
+   "exZh": "我骑自行车。"
+  },
+  {
+   "w": "der Stress",
+   "zh": "压力",
+   "lv": "A1",
+   "l": "Stress",
+   "p": "n",
+   "g": "m",
+   "en": "stress",
+   "ex": "Zu viel Stress ist ungesund.",
+   "exZh": "压力太大不健康。"
+  },
+  {
+   "w": "der Kindergarten",
+   "zh": "幼儿园",
+   "lv": "A1",
+   "l": "Kindergarten",
+   "p": "n",
+   "g": "m",
+   "pl": "die Kindergärten"
+  },
+  {
+   "w": "grüßen",
+   "zh": "问候；打招呼",
+   "lv": "A1",
+   "l": "grüßen",
+   "p": "v"
+  },
+  {
+   "w": "Rom",
+   "zh": "罗马",
+   "lv": "A1",
+   "l": "Rom",
+   "p": "n"
+  },
+  {
+   "w": "weiß",
+   "zh": "白色的",
+   "lv": "A1",
+   "l": "weiß",
+   "p": "adj",
+   "en": "white",
+   "ex": "Der Schnee ist weiß.",
+   "exZh": "雪是白色的。"
+  },
+  {
+   "w": "auf Platz 16",
+   "zh": "位列第 16 位",
+   "lv": "A1",
+   "l": "auf Platz 16",
+   "p": "phr"
+  },
+  {
+   "w": "die U-Bahn",
+   "zh": "地铁",
+   "lv": "A1",
+   "l": "U-Bahn",
+   "p": "n",
+   "g": "f",
+   "pl": "die U-Bahnen",
+   "en": "underground",
+   "ex": "Ich nehme die U-Bahn zur Arbeit.",
+   "exZh": "我坐地铁上班。"
+  },
+  {
+   "w": "das Beispiel",
+   "zh": "例子",
+   "lv": "A1",
+   "l": "Beispiel",
+   "p": "n",
+   "g": "n",
+   "pl": "die Beispiele",
+   "en": "example",
+   "ex": "Zum Beispiel heute.",
+   "exZh": "比如说今天。"
+  },
+  {
+   "w": "wenig",
+   "zh": "少",
+   "lv": "A1",
+   "l": "wenig",
+   "p": "adv",
+   "en": "little",
+   "ex": "Ich habe wenig Zeit.",
+   "exZh": "我时间很少。"
+  },
+  {
+   "w": "kurz",
+   "zh": "短的",
+   "lv": "A1",
+   "l": "kurz",
+   "p": "adj",
+   "en": "short",
+   "ex": "Ich mache eine kurze Pause.",
+   "exZh": "我休息一小会儿。"
+  },
+  {
+   "w": "die Katze",
+   "zh": "猫",
+   "lv": "A1",
+   "l": "Katze",
+   "p": "n",
+   "g": "f",
+   "pl": "die Katzen"
+  },
+  {
+   "w": "täglich",
+   "zh": "每天的",
+   "lv": "A1",
+   "l": "täglich",
+   "p": "adj",
+   "en": "daily",
+   "ex": "Ich lerne täglich Vokabeln.",
+   "exZh": "我每天背单词。"
+  },
+  {
+   "w": "die Haltestelle",
+   "zh": "车站；停靠站",
+   "lv": "A1",
+   "l": "Haltestelle",
+   "p": "n",
+   "g": "f",
+   "pl": "die Haltestellen",
+   "en": "stop",
+   "ex": "Die nächste Haltestelle ist am Markt.",
+   "exZh": "下一站是市场。"
+  },
+  {
+   "w": "die Brille",
+   "zh": "眼镜",
+   "lv": "A1",
+   "l": "Brille",
+   "p": "n",
+   "g": "f",
+   "pl": "die Brillen",
+   "en": "glasses",
+   "ex": "Ich brauche eine neue Brille.",
+   "exZh": "我需要一副新眼镜。"
+  },
+  {
+   "w": "die Antwort",
+   "zh": "回答；答案",
+   "lv": "A1",
+   "l": "Antwort",
+   "p": "n",
+   "g": "f",
+   "pl": "die Antworten",
+   "en": "answer",
+   "ex": "Deine Antwort ist richtig.",
+   "exZh": "你的回答是对的。"
+  },
+  {
+   "w": "der Morgen",
+   "zh": "早晨",
+   "lv": "A1",
+   "l": "Morgen",
+   "p": "n",
+   "g": "m",
+   "pl": "die Morgen",
+   "en": "morning",
+   "ex": "Am Morgen trinke ich Kaffee.",
+   "exZh": "早上我喝咖啡。"
+  },
+  {
+   "w": "traurig",
+   "zh": "悲伤的",
+   "lv": "A1",
+   "l": "traurig",
+   "p": "adj",
+   "en": "sad",
+   "ex": "Warum bist du traurig?",
+   "exZh": "你为什么难过？"
+  },
+  {
+   "w": "so auch",
+   "zh": "同样",
+   "lv": "A1",
+   "l": "so auch",
+   "p": "phr"
+  },
+  {
+   "w": "der Teppich",
+   "zh": "地毯",
+   "lv": "A1",
+   "l": "Teppich",
+   "p": "n",
+   "g": "m",
+   "pl": "die Teppiche",
+   "en": "carpet",
+   "ex": "Der Teppich ist alt.",
+   "exZh": "地毯旧了。"
+  },
+  {
+   "w": "der Reis",
+   "zh": "米饭",
+   "lv": "A1",
+   "l": "Reis",
+   "p": "n",
+   "g": "m",
+   "en": "rice",
+   "ex": "Zum Fisch esse ich Reis.",
+   "exZh": "吃鱼时我配米饭。"
+  },
+  {
+   "w": "die Bank",
+   "zh": "银行",
+   "lv": "A1",
+   "l": "Bank",
+   "p": "n",
+   "g": "f",
+   "pl": "die Banken",
+   "en": "bank",
+   "ex": "Die Bank öffnet um neun Uhr.",
+   "exZh": "银行九点开门。"
+  },
+  {
+   "w": "der Aussagesatz",
+   "zh": "陈述句",
+   "lv": "A1",
+   "l": "Aussagesatz",
+   "p": "n",
+   "g": "m",
+   "pl": "die Aussagesätze"
+  },
+  {
+   "w": "das Familien-Wort",
+   "zh": "和家庭相关的单词",
+   "lv": "A1",
+   "l": "Familien-Wort",
+   "p": "n",
+   "g": "n",
+   "pl": "die Familien-Wörter"
+  },
+  {
+   "w": "der Herbst",
+   "zh": "秋天",
+   "lv": "A1",
+   "l": "Herbst",
+   "p": "n",
+   "g": "m",
+   "pl": "die Herbste",
+   "en": "autumn",
+   "ex": "Im Herbst wird es früher dunkel.",
+   "exZh": "秋天黑得更早。"
+  },
+  {
+   "w": "der Mensch",
+   "zh": "人；人类",
+   "lv": "A1",
+   "l": "Mensch",
+   "p": "n",
+   "g": "m",
+   "pl": "die Menschen",
+   "en": "human",
+   "ex": "Viele Menschen warten auf den Bus.",
+   "exZh": "很多人在等公交车。"
+  },
+  {
+   "w": "für Sie",
+   "zh": "为您",
+   "lv": "A1",
+   "l": "für Sie",
+   "p": "phr"
+  },
+  {
+   "w": "vierzehn",
+   "zh": "十四",
+   "lv": "A1",
+   "l": "vierzehn",
+   "p": "num"
+  },
+  {
+   "w": "sechsundvierzig",
+   "zh": "四十六",
+   "lv": "A1",
+   "l": "sechsundvierzig",
+   "p": "num"
+  },
+  {
+   "w": "die Sekunde",
+   "zh": "秒",
+   "lv": "A1",
+   "l": "Sekunde",
+   "p": "n",
+   "g": "f",
+   "pl": "die Sekunden",
+   "en": "second",
+   "ex": "Warte eine Sekunde!",
+   "exZh": "等一下！"
+  },
+  {
+   "w": "das Geschenk",
+   "zh": "礼物",
+   "lv": "A1",
+   "l": "Geschenk",
+   "p": "n",
+   "g": "n",
+   "pl": "die Geschenke",
+   "en": "gift",
+   "ex": "Das Geschenk ist für dich.",
+   "exZh": "这份礼物是给你的。"
+  },
+  {
+   "w": "bitter",
+   "zh": "苦的",
+   "lv": "A1",
+   "l": "bitter",
+   "p": "adj",
+   "en": "bitter",
+   "ex": "Der Kaffee ist bitter.",
+   "exZh": "咖啡很苦。"
+  },
+  {
+   "w": "neben",
+   "zh": "在……旁边",
+   "lv": "A1",
+   "l": "neben",
+   "p": "prep",
+   "en": "next to",
+   "ex": "Die Apotheke ist neben der Bank.",
+   "exZh": "药店在银行旁边。"
+  },
+  {
+   "w": "einfrieren",
+   "zh": "冷冻（可分动词）",
+   "lv": "A1",
+   "l": "einfrieren",
+   "p": "v",
+   "en": "to freeze",
+   "ex": "Ich friere das Fleisch ein.",
+   "exZh": "我把肉冷冻起来。"
+  },
+  {
+   "w": "langweilig",
+   "zh": "无聊的",
+   "lv": "A1",
+   "l": "langweilig",
+   "p": "adj",
+   "en": "boring",
+   "ex": "Der Film war langweilig.",
+   "exZh": "这部电影很无聊。"
+  },
+  {
+   "w": "der Kamm",
+   "zh": "梳子",
+   "lv": "A1",
+   "l": "Kamm",
+   "p": "n",
+   "g": "m",
+   "pl": "die Kämme",
+   "en": "comb",
+   "ex": "Wo ist mein Kamm?",
+   "exZh": "我的梳子在哪？"
+  },
+  {
+   "w": "das Café",
+   "zh": "咖啡馆",
+   "lv": "A1",
+   "l": "Café",
+   "p": "n",
+   "g": "n",
+   "pl": "die Cafés",
+   "en": "cafe",
+   "ex": "Treffen wir uns im Café?",
+   "exZh": "我们在咖啡馆见面吧？"
+  },
+  {
+   "w": "der Fuß",
+   "zh": "脚",
+   "lv": "A1",
+   "l": "Fuß",
+   "p": "n",
+   "g": "m",
+   "pl": "die Füße",
+   "en": "foot",
+   "ex": "Ich gehe zu Fuß.",
+   "exZh": "我步行。"
+  },
+  {
+   "w": "Wer ist das?",
+   "zh": "这是谁？",
+   "lv": "A1",
+   "l": "Wer ist das",
+   "p": "phr"
+  },
+  {
+   "w": "der Dezember",
+   "zh": "十二月",
+   "lv": "A1",
+   "l": "Dezember",
+   "p": "n",
+   "g": "m",
+   "pl": "die Dezember",
+   "en": "December",
+   "ex": "Im Dezember schneit es oft.",
+   "exZh": "十二月常下雪。"
+  },
+  {
+   "w": "die Familie",
+   "zh": "家庭；家人",
+   "lv": "A1",
+   "l": "Familie",
+   "p": "n",
+   "g": "f",
+   "pl": "die Familien",
+   "en": "family",
+   "ex": "Wir sind eine kleine Familie.",
+   "exZh": "我们是一个小家庭。"
+  },
+  {
+   "w": "achtzehn",
+   "zh": "十八",
+   "lv": "A1",
+   "l": "achtzehn",
+   "p": "num"
+  },
+  {
+   "w": "die Bibliothek",
+   "zh": "图书馆",
+   "lv": "A1",
+   "l": "Bibliothek",
+   "p": "n",
+   "g": "f",
+   "pl": "die Bibliotheken",
+   "en": "library",
+   "ex": "Ich lerne in der Bibliothek.",
+   "exZh": "我在图书馆学习。"
+  },
+  {
+   "w": "zuletzt",
+   "zh": "最后；上次",
+   "lv": "A1",
+   "l": "zuletzt",
+   "p": "adv",
+   "en": "lastly",
+   "ex": "Zuletzt hat er sich bedankt.",
+   "exZh": "最后他表示了感谢。"
+  },
+  {
+   "w": "das Shopping",
+   "zh": "购物",
+   "lv": "A1",
+   "l": "Shopping",
+   "p": "n",
+   "g": "n"
+  },
+  {
+   "w": "das Bild",
+   "zh": "图片；照片",
+   "lv": "A1",
+   "l": "Bild",
+   "p": "n",
+   "g": "n",
+   "pl": "die Bilder"
+  },
+  {
+   "w": "der Stuhl",
+   "zh": "椅子",
+   "lv": "A1",
+   "l": "Stuhl",
+   "p": "n",
+   "g": "m",
+   "pl": "die Stühle",
+   "en": "chair",
+   "ex": "Der Stuhl ist bequem.",
+   "exZh": "这把椅子很舒服。"
+  },
+  {
+   "w": "Hören Sie und unterstreichen Sie.",
+   "zh": "请听音频并划线。",
+   "lv": "A1",
+   "l": "Hören Sie und unterstreichen Sie",
+   "p": "phr"
+  },
+  {
+   "w": "warm",
+   "zh": "温暖的",
+   "lv": "A1",
+   "l": "warm",
+   "p": "adj",
+   "en": "warm",
+   "ex": "Heute ist es warm.",
+   "exZh": "今天很暖和。"
+  },
+  {
+   "w": "sehen",
+   "zh": "看；看见",
+   "lv": "A1",
+   "l": "sehen",
+   "p": "v",
+   "en": "to see",
+   "ex": "Ich sehe den Turm von hier.",
+   "exZh": "我从这儿能看到那座塔。"
+  },
+  {
+   "w": "der Teller",
+   "zh": "盘子",
+   "lv": "A1",
+   "l": "Teller",
+   "p": "n",
+   "g": "m",
+   "pl": "die Teller",
+   "en": "plate",
+   "ex": "Stell die Teller auf den Tisch.",
+   "exZh": "把盘子放到桌上。"
+  },
+  {
+   "w": "bald",
+   "zh": "不久；很快",
+   "lv": "A1",
+   "l": "bald",
+   "p": "adv",
+   "en": "soon",
+   "ex": "Bis bald!",
+   "exZh": "回头见！"
+  },
+  {
+   "w": "gehen",
+   "zh": "走；去",
+   "lv": "A1",
+   "l": "gehen",
+   "p": "v",
+   "en": "to go",
+   "ex": "Ich gehe nach Hause.",
+   "exZh": "我回家去。"
+  },
+  {
+   "w": "das Messer",
+   "zh": "刀",
+   "lv": "A1",
+   "l": "Messer",
+   "p": "n",
+   "g": "n",
+   "pl": "die Messer",
+   "en": "knife",
+   "ex": "Das Messer ist scharf.",
+   "exZh": "刀很锋利。"
+  },
+  {
+   "w": "der Tee",
+   "zh": "茶",
+   "lv": "A1",
+   "l": "Tee",
+   "p": "n",
+   "g": "m",
+   "pl": "die Tees",
+   "en": "tea",
+   "ex": "Möchten Sie einen Tee?",
+   "exZh": "您想喝杯茶吗？"
+  },
+  {
+   "w": "Sehen Sie ... an.",
+   "zh": "请看……",
+   "lv": "A1",
+   "l": "Sehen Sie ... an",
+   "p": "phr"
+  },
+  {
+   "w": "der Enkel",
+   "zh": "孙子；外孙",
+   "lv": "A1",
+   "l": "Enkel",
+   "p": "n",
+   "g": "m",
+   "pl": "die Enkel",
+   "en": "grandson",
+   "ex": "Sie hat drei Enkel.",
+   "exZh": "她有三个孙子。"
+  },
+  {
+   "w": "der Zahn",
+   "zh": "牙齿",
+   "lv": "A1",
+   "l": "Zahn",
+   "p": "n",
+   "g": "m",
+   "pl": "die Zähne",
+   "en": "tooth",
+   "ex": "Ich habe Zahnschmerzen.",
+   "exZh": "我牙疼。"
+  },
+  {
+   "w": "die Hausaufgabe",
+   "zh": "作业",
+   "lv": "A1",
+   "l": "Hausaufgabe",
+   "p": "n",
+   "g": "f",
+   "pl": "die Hausaufgaben",
+   "en": "homework",
+   "ex": "Ich mache meine Hausaufgaben.",
+   "exZh": "我在做作业。"
+  },
+  {
+   "w": "der Fisch",
+   "zh": "鱼",
+   "lv": "A1",
+   "l": "Fisch",
+   "p": "n",
+   "g": "m",
+   "pl": "die Fische",
+   "en": "fish",
+   "ex": "Freitags essen wir Fisch.",
+   "exZh": "周五我们吃鱼。"
+  },
+  {
+   "w": "der Rat",
+   "zh": "建议；忠告",
+   "lv": "A1",
+   "l": "Rat",
+   "p": "n",
+   "g": "m",
+   "pl": "die Räte",
+   "en": "advice",
+   "ex": "Danke für den guten Rat.",
+   "exZh": "谢谢好建议。"
+  },
+  {
+   "w": "die Müdigkeit",
+   "zh": "疲倦",
+   "lv": "A1",
+   "l": "Müdigkeit",
+   "p": "n",
+   "g": "f",
+   "en": "tiredness",
+   "ex": "Ich spüre eine große Müdigkeit.",
+   "exZh": "我感到非常疲倦。"
+  },
+  {
+   "w": "zu dritt sein",
+   "zh": "三个人一起",
+   "lv": "A1",
+   "l": "zu dritt sein",
+   "p": "phr"
+  },
+  {
+   "w": "Hm!",
+   "zh": "嗯（表示思考）",
+   "lv": "A1",
+   "l": "Hm",
+   "p": "int"
+  },
+  {
+   "w": "die Wand",
+   "zh": "墙",
+   "lv": "A1",
+   "l": "Wand",
+   "p": "n",
+   "g": "f",
+   "pl": "die Wände",
+   "en": "wall",
+   "ex": "Das Bild hängt an der Wand.",
+   "exZh": "画挂在墙上。"
+  },
+  {
+   "w": "laut",
+   "zh": "大声的；吵的",
+   "lv": "A1",
+   "l": "laut",
+   "p": "adj",
+   "en": "loud",
+   "ex": "Die Musik ist zu laut.",
+   "exZh": "音乐太吵了。"
+  },
+  {
+   "w": "der Käse",
+   "zh": "奶酪",
+   "lv": "A1",
+   "l": "Käse",
+   "p": "n",
+   "g": "m",
+   "pl": "die Käse",
+   "en": "cheese",
+   "ex": "Der Käse kommt aus der Schweiz.",
+   "exZh": "这奶酪来自瑞士。"
+  },
+  {
+   "w": "der August",
+   "zh": "八月",
+   "lv": "A1",
+   "l": "August",
+   "p": "n",
+   "g": "m",
+   "pl": "die Auguste",
+   "en": "August",
+   "ex": "Der August ist der heißeste Monat.",
+   "exZh": "八月是最热的月份。"
+  },
+  {
+   "w": "das Hobby",
+   "zh": "爱好",
+   "lv": "A1",
+   "l": "Hobby",
+   "p": "n",
+   "g": "n",
+   "pl": "die Hobbys"
+  },
+  {
+   "w": "das Studio",
+   "zh": "健身房",
+   "lv": "A1",
+   "l": "Studio",
+   "p": "n",
+   "g": "n",
+   "pl": "die Studios"
+  },
+  {
+   "w": "das Wasser",
+   "zh": "水",
+   "lv": "A1",
+   "l": "Wasser",
+   "p": "n",
+   "g": "n",
+   "en": "water",
+   "ex": "Ein Glas Wasser, bitte.",
+   "exZh": "请来一杯水。"
+  },
+  {
+   "w": "studieren",
+   "zh": "攻读（大学）；研究",
+   "lv": "A1",
+   "l": "studieren",
+   "p": "v",
+   "en": "to study",
+   "ex": "Er studiert Informatik.",
+   "exZh": "他学计算机。"
+  },
+  {
+   "w": "zu zweit",
+   "zh": "两人一组",
+   "lv": "A1",
+   "l": "zu zweit",
+   "p": "phr"
+  },
+  {
+   "w": "die Chefin",
+   "zh": "女老板，女领导",
+   "lv": "A1",
+   "l": "Chefin",
+   "p": "n",
+   "g": "f",
+   "pl": "die Chefinnen"
+  },
+  {
+   "w": "die Minute",
+   "zh": "分钟",
+   "lv": "A1",
+   "l": "Minute",
+   "p": "n",
+   "g": "f",
+   "pl": "die Minuten",
+   "en": "minute",
+   "ex": "Warte bitte fünf Minuten.",
+   "exZh": "请等五分钟。"
+  },
+  {
+   "w": "Europa",
+   "zh": "欧洲",
+   "lv": "A1",
+   "l": "Europa",
+   "p": "n"
+  },
+  {
+   "w": "die App",
+   "zh": "应用软件",
+   "lv": "A1",
+   "l": "App",
+   "p": "n",
+   "g": "f",
+   "pl": "die Apps"
+  },
+  {
+   "w": "Ich komme aus ...",
+   "zh": "我来自……",
+   "lv": "A1",
+   "l": "Ich komme aus ",
+   "p": "phr"
+  },
+  {
+   "w": "Valentinas Freunde",
+   "zh": "Valentina 的朋友们",
+   "lv": "A1",
+   "l": "Valentinas Freunde",
+   "p": "phr"
+  },
+  {
+   "w": "malen",
+   "zh": "画",
+   "lv": "A1",
+   "l": "malen",
+   "p": "v"
+  },
+  {
+   "w": "der Euro",
+   "zh": "欧元",
+   "lv": "A1",
+   "l": "Euro",
+   "p": "n",
+   "g": "m",
+   "pl": "die Euro",
+   "en": "euro",
+   "ex": "Das kostet zehn Euro.",
+   "exZh": "这个十欧元。"
+  },
+  {
+   "w": "der Ehemann",
+   "zh": "丈夫",
+   "lv": "A1",
+   "l": "Ehemann",
+   "p": "n",
+   "g": "m",
+   "pl": "die Ehemänner",
+   "en": "husband",
+   "ex": "Ihr Ehemann ist Arzt.",
+   "exZh": "她丈夫是医生。"
+  },
+  {
+   "w": "zwei",
+   "zh": "二",
+   "lv": "A1",
+   "l": "zwei",
+   "p": "num",
+   "en": "two",
+   "ex": "Ich habe zwei Brüder.",
+   "exZh": "我有两个兄弟。"
+  },
+  {
+   "w": "der Raum",
+   "zh": "房间；空间",
+   "lv": "A1",
+   "l": "Raum",
+   "p": "n",
+   "g": "m",
+   "pl": "die Räume",
+   "en": "room",
+   "ex": "Der Raum ist zu klein.",
+   "exZh": "这个房间太小了。"
+  },
+  {
+   "w": "der April",
+   "zh": "四月",
+   "lv": "A1",
+   "l": "April",
+   "p": "n",
+   "g": "m",
+   "pl": "die Aprile",
+   "en": "April",
+   "ex": "Im April regnet es viel.",
+   "exZh": "四月雨水多。"
+  },
+  {
+   "w": "zweiunddreißig",
+   "zh": "三十二",
+   "lv": "A1",
+   "l": "zweiunddreißig",
+   "p": "num"
+  },
+  {
+   "w": "Möchtest du ...?",
+   "zh": "你想……吗？",
+   "lv": "A1",
+   "l": "Möchtest du ",
+   "p": "phr"
+  },
+  {
+   "w": "die Nummer",
+   "zh": "号码",
+   "lv": "A1",
+   "l": "Nummer",
+   "p": "n",
+   "g": "f",
+   "pl": "die Nummern",
+   "en": "number",
+   "ex": "Wie ist deine Nummer?",
+   "exZh": "你的号码是多少？"
+  },
+  {
+   "w": "der Kaffee",
+   "zh": "咖啡",
+   "lv": "A1",
+   "l": "Kaffee",
+   "p": "n",
+   "g": "m",
+   "pl": "die Kaffees",
+   "en": "coffee",
+   "ex": "Ich trinke morgens Kaffee.",
+   "exZh": "我早上喝咖啡。"
+  },
+  {
+   "w": "liegen",
+   "zh": "躺；位于",
+   "lv": "A1",
+   "l": "liegen",
+   "p": "v",
+   "en": "to lie",
+   "ex": "Das Buch liegt auf dem Tisch.",
+   "exZh": "书放在桌子上。"
+  },
+  {
+   "w": "geradeaus",
+   "zh": "直着走；一直向前",
+   "lv": "A1",
+   "l": "geradeaus",
+   "p": "adv",
+   "en": "straight ahead",
+   "ex": "Gehen Sie geradeaus.",
+   "exZh": "请一直往前走。"
+  },
+  {
+   "w": "sich setzen",
+   "zh": "坐下（反身）",
+   "lv": "A1",
+   "l": "setzen",
+   "p": "v",
+   "en": "to sit down",
+   "ex": "Setz dich bitte!",
+   "exZh": "请坐！"
+  },
+  {
+   "w": "die Formel 1",
+   "zh": "一级方程式赛车",
+   "lv": "A1",
+   "l": "Formel 1",
+   "p": "n",
+   "g": "f"
+  },
+  {
+   "w": "der Plan",
+   "zh": "计划",
+   "lv": "A1",
+   "l": "Plan",
+   "p": "n",
+   "g": "m",
+   "pl": "die Pläne",
+   "en": "plan",
+   "ex": "Hast du schon einen Plan?",
+   "exZh": "你有计划了吗？"
+  },
+  {
+   "w": "korrigieren",
+   "zh": "修改；改正",
+   "lv": "A1",
+   "l": "korrigieren",
+   "p": "v"
+  },
+  {
+   "w": "der Vorhang",
+   "zh": "窗帘",
+   "lv": "A1",
+   "l": "Vorhang",
+   "p": "n",
+   "g": "m",
+   "pl": "die Vorhänge",
+   "en": "curtain",
+   "ex": "Zieh die Vorhänge zu!",
+   "exZh": "把窗帘拉上！"
+  },
+  {
+   "w": "das Ohr",
+   "zh": "耳朵",
+   "lv": "A1",
+   "l": "Ohr",
+   "p": "n",
+   "g": "n",
+   "pl": "die Ohren",
+   "en": "ear",
+   "ex": "Meine Ohren sind kalt.",
+   "exZh": "我的耳朵很冷。"
+  },
+  {
+   "w": "Wie viel kostet das?",
+   "zh": "这个多少钱？",
+   "lv": "A1",
+   "l": "Wie viel kostet das",
+   "p": "phr",
+   "en": "how much does it cost",
+   "ex": "Entschuldigung, wie viel kostet das?",
+   "exZh": "请问这个多少钱？"
+  },
+  {
+   "w": "die Tasche",
+   "zh": "包；口袋",
+   "lv": "A1",
+   "l": "Tasche",
+   "p": "n",
+   "g": "f",
+   "pl": "die Taschen",
+   "en": "bag",
+   "ex": "Meine Tasche ist schwer.",
+   "exZh": "我的包很重。"
+  },
+  {
+   "w": "Italien",
+   "zh": "意大利",
+   "lv": "A1",
+   "l": "Italien",
+   "p": "n"
+  },
+  {
+   "w": "auf eine Karte",
+   "zh": "到一张卡片上",
+   "lv": "A1",
+   "l": "auf eine Karte",
+   "p": "phr"
+  },
+  {
+   "w": "der Champion",
+   "zh": "冠军",
+   "lv": "A1",
+   "l": "Champion",
+   "p": "n",
+   "g": "m",
+   "pl": "die Champions"
+  },
+  {
+   "w": "Österreich",
+   "zh": "奥地利",
+   "lv": "A1",
+   "l": "Österreich",
+   "p": "n"
+  },
+  {
+   "w": "London",
+   "zh": "伦敦",
+   "lv": "A1",
+   "l": "London",
+   "p": "n"
+  },
+  {
+   "w": "der Freitag",
+   "zh": "星期五",
+   "lv": "A1",
+   "l": "Freitag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Freitage",
+   "en": "Friday",
+   "ex": "Freitag ist mein Lieblingstag.",
+   "exZh": "周五是我最喜欢的一天。"
+  },
+  {
+   "w": "und",
+   "zh": "和；并且",
+   "lv": "A1",
+   "l": "und",
+   "p": "conj",
+   "en": "and",
+   "ex": "Ich trinke Tee und esse Kuchen.",
+   "exZh": "我喝茶吃蛋糕。"
+  },
+  {
+   "w": "das Taxi",
+   "zh": "出租汽车",
+   "lv": "A1",
+   "l": "Taxi",
+   "p": "n",
+   "g": "n",
+   "pl": "die Taxis"
+  },
+  {
+   "w": "das Interesse",
+   "zh": "兴趣",
+   "lv": "A1",
+   "l": "Interesse",
+   "p": "n",
+   "g": "n",
+   "pl": "die Interessen",
+   "en": "interest",
+   "ex": "Ich habe Interesse an Musik.",
+   "exZh": "我对音乐感兴趣。"
+  },
+  {
+   "w": "mit der gleichen Karte",
+   "zh": "拥有同样卡片",
+   "lv": "A1",
+   "l": "mit der gleichen Karte",
+   "p": "phr"
+  },
+  {
+   "w": "nett",
+   "zh": "友善的；可爱的",
+   "lv": "A1",
+   "l": "nett",
+   "p": "adj",
+   "en": "nice",
+   "ex": "Deine Nachbarn sind nett.",
+   "exZh": "你的邻居们很友善。"
+  },
+  {
+   "w": "Wo?",
+   "zh": "哪里？",
+   "lv": "A1",
+   "l": "Wo",
+   "p": "phr"
+  },
+  {
+   "w": "das Papier",
+   "zh": "纸",
+   "lv": "A1",
+   "l": "Papier",
+   "p": "n",
+   "g": "n",
+   "pl": "die Papiere",
+   "en": "paper",
+   "ex": "Ich brauche ein Blatt Papier.",
+   "exZh": "我需要一张纸。"
+  },
+  {
+   "w": "der Lärm",
+   "zh": "噪音",
+   "lv": "A1",
+   "l": "Lärm",
+   "p": "n",
+   "g": "m",
+   "en": "noise",
+   "ex": "Der Lärm stört mich.",
+   "exZh": "噪音打扰我。"
+  },
+  {
+   "w": "bezahlen",
+   "zh": "付款",
+   "lv": "A1",
+   "l": "bezahlen",
+   "p": "v",
+   "en": "to pay",
+   "ex": "Wir möchten bitte bezahlen.",
+   "exZh": "我们要结账。"
+  },
+  {
+   "w": "die Nase",
+   "zh": "鼻子",
+   "lv": "A1",
+   "l": "Nase",
+   "p": "n",
+   "g": "f",
+   "pl": "die Nasen",
+   "en": "nose",
+   "ex": "Meine Nase ist verstopft.",
+   "exZh": "我鼻子堵了。"
+  },
+  {
+   "w": "der Schuh",
+   "zh": "鞋",
+   "lv": "A1",
+   "l": "Schuh",
+   "p": "n",
+   "g": "m",
+   "pl": "die Schuhe",
+   "en": "shoe",
+   "ex": "Die Schuhe sind zu klein.",
+   "exZh": "这双鞋太小了。"
+  },
+  {
+   "w": "Wie heißt du?",
+   "zh": "你叫什么名字？",
+   "lv": "A1",
+   "l": "Wie heißt du",
+   "p": "phr"
+  },
+  {
+   "w": "markieren",
+   "zh": "作标记",
+   "lv": "A1",
+   "l": "markieren",
+   "p": "v"
+  },
+  {
+   "w": "der ICE",
+   "zh": "城际特快列车",
+   "lv": "A1",
+   "l": "ICE",
+   "p": "n",
+   "g": "m",
+   "pl": "die ICEs"
+  },
+  {
+   "w": "alle Verben",
+   "zh": "所有动词",
+   "lv": "A1",
+   "l": "alle Verben",
+   "p": "phr"
+  },
+  {
+   "w": "sprechen",
+   "zh": "说；讲",
+   "lv": "A1",
+   "l": "sprechen",
+   "p": "v",
+   "en": "to speak",
+   "ex": "Sprechen Sie Englisch?",
+   "exZh": "您会说英语吗？"
+  },
+  {
+   "w": "die Fahrkarte",
+   "zh": "车票",
+   "lv": "A1",
+   "l": "Fahrkarte",
+   "p": "n",
+   "g": "f",
+   "pl": "die Fahrkarten",
+   "en": "ticket",
+   "ex": "Ich kaufe eine Fahrkarte nach Köln.",
+   "exZh": "我买一张去科隆的车票。"
+  },
+  {
+   "w": "siebzig",
+   "zh": "七十",
+   "lv": "A1",
+   "l": "siebzig",
+   "p": "num"
+  },
+  {
+   "w": "die Telefonnummer",
+   "zh": "电话号码",
+   "lv": "A1",
+   "l": "Telefonnummer",
+   "p": "n",
+   "g": "f",
+   "pl": "die Telefonnummern"
+  },
+  {
+   "w": "wie",
+   "zh": "如同，像",
+   "lv": "A1",
+   "l": "wie",
+   "p": "adv"
+  },
+  {
+   "w": "das Fitness-Studio",
+   "zh": "健身房",
+   "lv": "A1",
+   "l": "Fitness-Studio",
+   "p": "n",
+   "g": "n",
+   "pl": "die Fitness-Studios"
+  },
+  {
+   "w": "China",
+   "zh": "中国",
+   "lv": "A1",
+   "l": "China",
+   "p": "n"
+  },
+  {
+   "w": "das Verb",
+   "zh": "动词",
+   "lv": "A1",
+   "l": "Verb",
+   "p": "n",
+   "g": "n",
+   "pl": "die Verben"
+  },
+  {
+   "w": "Griechenland",
+   "zh": "希腊",
+   "lv": "A1",
+   "l": "Griechenland",
+   "p": "n"
+  },
+  {
+   "w": "machen",
+   "zh": "做；干",
+   "lv": "A1",
+   "l": "machen",
+   "p": "v",
+   "en": "to do",
+   "ex": "Was machst du heute?",
+   "exZh": "你今天做什么？"
+  },
+  {
+   "w": "der Hund",
+   "zh": "狗",
+   "lv": "A1",
+   "l": "Hund",
+   "p": "n",
+   "g": "m",
+   "pl": "die Hunde"
+  },
+  {
+   "w": "zeichnen",
+   "zh": "画画",
+   "lv": "A1",
+   "l": "zeichnen",
+   "p": "v"
+  },
+  {
+   "w": "Woher kommen Sie?",
+   "zh": "您来自哪里？",
+   "lv": "A1",
+   "l": "Woher kommen Sie",
+   "p": "phr",
+   "en": "where are you from",
+   "ex": "Woher kommen Sie, wenn ich fragen darf?",
+   "exZh": "如果不介意，您来自哪里？"
+  },
+  {
+   "w": "die feminine Form",
+   "zh": "阴性形式",
+   "lv": "A1",
+   "l": "feminine Form",
+   "p": "n",
+   "g": "f"
+  },
+  {
+   "w": "die Hand",
+   "zh": "手",
+   "lv": "A1",
+   "l": "Hand",
+   "p": "n",
+   "g": "f",
+   "pl": "die Hände",
+   "en": "hand",
+   "ex": "Wasch dir bitte die Hände.",
+   "exZh": "请洗洗手。"
+  },
+  {
+   "w": "der Wind",
+   "zh": "风",
+   "lv": "A1",
+   "l": "Wind",
+   "p": "n",
+   "g": "m",
+   "pl": "die Winde",
+   "en": "wind",
+   "ex": "Der Wind ist heute stark.",
+   "exZh": "今天风很大。"
+  },
+  {
+   "w": "fünf",
+   "zh": "五",
+   "lv": "A1",
+   "l": "fünf",
+   "p": "num",
+   "en": "five",
+   "ex": "Der Kurs kostet fünfzig Euro.",
+   "exZh": "课程五十欧元。"
+  },
+  {
+   "w": "die Großmutter",
+   "zh": "祖母；外祖母",
+   "lv": "A1",
+   "l": "Großmutter",
+   "p": "n",
+   "g": "f",
+   "pl": "die Großmütter",
+   "en": "grandmother",
+   "ex": "Die Großmutter backt einen Kuchen.",
+   "exZh": "祖母在烤蛋糕。"
+  },
+  {
+   "w": "die Kartoffel",
+   "zh": "土豆",
+   "lv": "A1",
+   "l": "Kartoffel",
+   "p": "n",
+   "g": "f",
+   "pl": "die Kartoffeln",
+   "en": "potato",
+   "ex": "Die Kartoffeln sind noch nicht gar.",
+   "exZh": "土豆还没熟。"
+  },
+  {
+   "w": "die Einladung",
+   "zh": "邀请",
+   "lv": "A1",
+   "l": "Einladung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Einladungen",
+   "en": "invitation",
+   "ex": "Danke für die Einladung!",
+   "exZh": "谢谢邀请！"
+  },
+  {
+   "w": "die Luft",
+   "zh": "空气",
+   "lv": "A1",
+   "l": "Luft",
+   "p": "n",
+   "g": "f",
+   "pl": "die Lüfte",
+   "en": "air",
+   "ex": "Frische Luft ist gesund.",
+   "exZh": "新鲜空气有益健康。"
+  },
+  {
+   "w": "der Mittag",
+   "zh": "中午",
+   "lv": "A1",
+   "l": "Mittag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Mittage",
+   "en": "noon",
+   "ex": "Zu Mittag esse ich in der Kantine.",
+   "exZh": "中午我在食堂吃饭。"
+  },
+  {
+   "w": "Was hören Sie?",
+   "zh": "您听到了什么？",
+   "lv": "A1",
+   "l": "Was hören Sie",
+   "p": "phr"
+  },
+  {
+   "w": "der Party Talk",
+   "zh": "派对上的对话",
+   "lv": "A1",
+   "l": "Party Talk",
+   "p": "n",
+   "g": "m"
+  },
+  {
+   "w": "der Vormittag",
+   "zh": "上午",
+   "lv": "A1",
+   "l": "Vormittag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Vormittage",
+   "en": "morning",
+   "ex": "Am Vormittag habe ich Unterricht.",
+   "exZh": "上午我有课。"
+  },
+  {
+   "w": "doch",
+   "zh": "加强否定语气的语气词",
+   "lv": "A1",
+   "l": "doch",
+   "p": "adv"
+  },
+  {
+   "w": "das Müsli",
+   "zh": "混合麦片",
+   "lv": "A1",
+   "l": "Müsli",
+   "p": "n",
+   "g": "n",
+   "pl": "die Müslis"
+  },
+  {
+   "w": "die Seite",
+   "zh": "页；侧面",
+   "lv": "A1",
+   "l": "Seite",
+   "p": "n",
+   "g": "f",
+   "pl": "die Seiten",
+   "en": "page",
+   "ex": "Schlag Seite zehn auf.",
+   "exZh": "翻到第十页。"
+  },
+  {
+   "w": "blau",
+   "zh": "蓝色的",
+   "lv": "A1",
+   "l": "blau",
+   "p": "adj",
+   "en": "blue",
+   "ex": "Der Himmel ist blau.",
+   "exZh": "天空是蓝色的。"
+  },
+  {
+   "w": "die Nachricht",
+   "zh": "消息",
+   "lv": "A1",
+   "l": "Nachricht",
+   "p": "n",
+   "g": "f",
+   "pl": "die Nachrichten",
+   "en": "news",
+   "ex": "Ich habe dir eine Nachricht geschickt.",
+   "exZh": "我给你发了消息。"
+  },
+  {
+   "w": "legen",
+   "zh": "把……平放",
+   "lv": "A1",
+   "l": "legen",
+   "p": "v"
+  },
+  {
+   "w": "der Cousin",
+   "zh": "表兄弟",
+   "lv": "A1",
+   "l": "Cousin",
+   "p": "n",
+   "g": "m",
+   "pl": "die Cousins",
+   "en": "cousin",
+   "ex": "Mein Cousin ist älter als ich.",
+   "exZh": "我表哥比我大。"
+  },
+  {
+   "w": "rufen",
+   "zh": "呼喊；叫",
+   "lv": "A1",
+   "l": "rufen",
+   "p": "v",
+   "en": "to call",
+   "ex": "Sie ruft ihre Kinder.",
+   "exZh": "她叫她的孩子。"
+  },
+  {
+   "w": "das Meeting",
+   "zh": "会议",
+   "lv": "A1",
+   "l": "Meeting",
+   "p": "n",
+   "g": "n",
+   "pl": "die Meetings"
+  },
+  {
+   "w": "die Lieblingszeit",
+   "zh": "最喜欢的时间",
+   "lv": "A1",
+   "l": "Lieblingszeit",
+   "p": "n",
+   "g": "f",
+   "pl": "die Lieblingszeiten"
+  },
+  {
+   "w": "formell",
+   "zh": "正式的",
+   "lv": "A1",
+   "l": "formell",
+   "p": "adj"
+  },
+  {
+   "w": "der Kurs",
+   "zh": "课程",
+   "lv": "A1",
+   "l": "Kurs",
+   "p": "n",
+   "g": "m",
+   "pl": "die Kurse"
+  },
+  {
+   "w": "sagen",
+   "zh": "说；讲",
+   "lv": "A1",
+   "l": "sagen",
+   "p": "v",
+   "en": "to say",
+   "ex": "Was hast du gesagt?",
+   "exZh": "你说什么了？"
+  },
+  {
+   "w": "Kennen Sie ... noch?",
+   "zh": "您还记得……吗？",
+   "lv": "A1",
+   "l": "Kennen Sie ... noch",
+   "p": "phr"
+  },
+  {
+   "w": "achtzig",
+   "zh": "八十",
+   "lv": "A1",
+   "l": "achtzig",
+   "p": "num"
+  },
+  {
+   "w": "hören",
+   "zh": "听",
+   "lv": "A1",
+   "l": "hören",
+   "p": "v",
+   "en": "to hear",
+   "ex": "Ich höre gern Musik.",
+   "exZh": "我喜欢听音乐。"
+  },
+  {
+   "w": "der Artikel",
+   "zh": "冠词",
+   "lv": "A1",
+   "l": "Artikel",
+   "p": "n",
+   "g": "m",
+   "pl": "die Artikel"
+  },
+  {
+   "w": "der Arzt",
+   "zh": "医生（男）",
+   "lv": "A1",
+   "l": "Arzt",
+   "p": "n",
+   "g": "m",
+   "pl": "die Ärzte",
+   "en": "doctor",
+   "ex": "Der Arzt kommt gleich.",
+   "exZh": "医生马上就来。"
+  },
+  {
+   "w": "der Star",
+   "zh": "星星；明星",
+   "lv": "A1",
+   "l": "Star",
+   "p": "n",
+   "g": "m",
+   "pl": "die Stars"
+  },
+  {
+   "w": "der Modedesigner",
+   "zh": "时尚设计师",
+   "lv": "A1",
+   "l": "Modedesigner",
+   "p": "n",
+   "g": "m",
+   "pl": "die Modedesigner"
+  },
+  {
+   "w": "nicken",
+   "zh": "点头",
+   "lv": "A1",
+   "l": "nicken",
+   "p": "v",
+   "en": "to nod",
+   "ex": "Sie nickt zustimmend.",
+   "exZh": "她点头同意。"
+  },
+  {
+   "w": "dürfen",
+   "zh": "被允许；可以（情态动词）",
+   "lv": "A1",
+   "l": "dürfen",
+   "p": "v",
+   "en": "may",
+   "ex": "Darf ich hier rauchen?",
+   "exZh": "我可以在这里抽烟吗？"
+  },
+  {
+   "w": "passen zu",
+   "zh": "适合；相配",
+   "lv": "A1",
+   "l": "passen zu",
+   "p": "v"
+  },
+  {
+   "w": "der Teich",
+   "zh": "池塘",
+   "lv": "A1",
+   "l": "Teich",
+   "p": "n",
+   "g": "m",
+   "pl": "die Teiche",
+   "en": "pond",
+   "ex": "Im Teich gibt es Fische.",
+   "exZh": "池塘里有鱼。"
+  },
+  {
+   "w": "Französisch",
+   "zh": "法语",
+   "lv": "A1",
+   "l": "Französisch",
+   "p": "n"
+  },
+  {
+   "w": "der Abschied",
+   "zh": "告别",
+   "lv": "A1",
+   "l": "Abschied",
+   "p": "n",
+   "g": "m",
+   "pl": "die Abschiede",
+   "en": "farewell",
+   "ex": "Der Abschied war schwer.",
+   "exZh": "告别很难。"
+  },
+  {
+   "w": "die Geduld",
+   "zh": "耐心",
+   "lv": "A1",
+   "l": "Geduld",
+   "p": "n",
+   "g": "f",
+   "en": "patience",
+   "ex": "Ich habe keine Geduld mehr.",
+   "exZh": "我没耐心了。"
+  },
+  {
+   "w": "elf",
+   "zh": "十一",
+   "lv": "A1",
+   "l": "elf",
+   "p": "num",
+   "en": "eleven",
+   "ex": "Es ist elf Uhr.",
+   "exZh": "现在十一点。"
+  },
+  {
+   "w": "das Restaurant",
+   "zh": "餐馆",
+   "lv": "A1",
+   "l": "Restaurant",
+   "p": "n",
+   "g": "n",
+   "pl": "die Restaurants",
+   "en": "restaurant",
+   "ex": "Wir essen heute im Restaurant.",
+   "exZh": "我们今天在餐馆吃饭。"
+  },
+  {
+   "w": "Starten wir!",
+   "zh": "开始吧！",
+   "lv": "A1",
+   "l": "Starten wir",
+   "p": "phr"
+  },
+  {
+   "w": "Spanien",
+   "zh": "西班牙",
+   "lv": "A1",
+   "l": "Spanien",
+   "p": "n"
+  },
+  {
+   "w": "Viel Spaß!",
+   "zh": "玩得开心！",
+   "lv": "A1",
+   "l": "Viel Spaß",
+   "p": "phr"
+  },
+  {
+   "w": "links",
+   "zh": "左边",
+   "lv": "A1",
+   "l": "links",
+   "p": "adv",
+   "en": "left",
+   "ex": "Die Bank ist links.",
+   "exZh": "银行在左边。"
+  },
+  {
+   "w": "das Haar",
+   "zh": "头发",
+   "lv": "A1",
+   "l": "Haar",
+   "p": "n",
+   "g": "n",
+   "pl": "die Haare",
+   "en": "hair",
+   "ex": "Sie hat lange Haare.",
+   "exZh": "她留着长发。"
+  },
+  {
+   "w": "Polen",
+   "zh": "波兰",
+   "lv": "A1",
+   "l": "Polen",
+   "p": "n"
+  },
+  {
+   "w": "Woher?",
+   "zh": "从哪儿来？",
+   "lv": "A1",
+   "l": "Woher",
+   "p": "phr"
+  },
+  {
+   "w": "die Kälte",
+   "zh": "寒冷",
+   "lv": "A1",
+   "l": "Kälte",
+   "p": "n",
+   "g": "f",
+   "en": "cold",
+   "ex": "Die Kälte hier ist angenehm.",
+   "exZh": "这里的冷很舒服。"
+  },
+  {
+   "w": "durch",
+   "zh": "穿过；通过（支配第四格）",
+   "lv": "A1",
+   "l": "durch",
+   "p": "prep",
+   "en": "through",
+   "ex": "Wir gehen durch den Park.",
+   "exZh": "我们穿过公园。"
+  },
+  {
+   "w": "der Lehrer",
+   "zh": "老师（男）",
+   "lv": "A1",
+   "l": "Lehrer",
+   "p": "n",
+   "g": "m",
+   "pl": "die Lehrer",
+   "en": "teacher",
+   "ex": "Der Lehrer erklärt die Grammatik.",
+   "exZh": "老师在讲解语法。"
+  },
+  {
+   "w": "der Mercedes",
+   "zh": "奔驰",
+   "lv": "A1",
+   "l": "Mercedes",
+   "p": "n",
+   "g": "m",
+   "pl": "die Mercedes"
+  },
+  {
+   "w": "vorne",
+   "zh": "前面",
+   "lv": "A1",
+   "l": "vorne",
+   "p": "adv",
+   "en": "in front",
+   "ex": "Bitte setzen Sie sich nach vorne.",
+   "exZh": "请坐到前面。"
+  },
+  {
+   "w": "seit",
+   "zh": "自从（支配第三格）",
+   "lv": "A1",
+   "l": "seit",
+   "p": "prep",
+   "en": "since",
+   "ex": "Ich lerne seit einem Jahr Deutsch.",
+   "exZh": "我学德语一年了。"
+  },
+  {
+   "w": "mischen",
+   "zh": "混合",
+   "lv": "A1",
+   "l": "mischen",
+   "p": "v",
+   "en": "to mix",
+   "ex": "Mische Mehl und Milch.",
+   "exZh": "把面粉和牛奶混合。"
+  },
+  {
+   "w": "ja",
+   "zh": "是；对",
+   "lv": "A1",
+   "l": "ja",
+   "p": "adv",
+   "en": "yes",
+   "ex": "Ja, das stimmt.",
+   "exZh": "是的，没错。"
+  },
+  {
+   "w": "die Universität",
+   "zh": "大学",
+   "lv": "A1",
+   "l": "Universität",
+   "p": "n",
+   "g": "f",
+   "pl": "die Universitäten",
+   "en": "university",
+   "ex": "Er studiert an der Universität Heidelberg.",
+   "exZh": "他在海德堡大学读书。"
+  },
+  {
+   "w": "der September",
+   "zh": "九月",
+   "lv": "A1",
+   "l": "September",
+   "p": "n",
+   "g": "m",
+   "pl": "die September",
+   "en": "September",
+   "ex": "Im September beginnt die Schule.",
+   "exZh": "九月开学。"
+  },
+  {
+   "w": "die Straßenbahn",
+   "zh": "有轨电车",
+   "lv": "A1",
+   "l": "Straßenbahn",
+   "p": "n",
+   "g": "f",
+   "pl": "die Straßenbahnen",
+   "en": "tram",
+   "ex": "Die Straßenbahn fährt alle zehn Minuten.",
+   "exZh": "电车每十分钟一班。"
+  },
+  {
+   "w": "egal",
+   "zh": "无所谓的",
+   "lv": "A1",
+   "l": "egal",
+   "p": "adj",
+   "en": "all the same",
+   "ex": "Das ist mir egal.",
+   "exZh": "我无所谓。"
+  },
+  {
+   "w": "wohnen",
+   "zh": "居住",
+   "lv": "A1",
+   "l": "wohnen",
+   "p": "v",
+   "en": "to live",
+   "ex": "Ich wohne in München.",
+   "exZh": "我住在慕尼黑。"
+  },
+  {
+   "w": "Ja, das kann ich ...",
+   "zh": "嗯，这我会……",
+   "lv": "A1",
+   "l": "Ja, das kann ich ",
+   "p": "phr"
+  },
+  {
+   "w": "ein bisschen",
+   "zh": "一点点",
+   "lv": "A1",
+   "l": "ein bisschen",
+   "p": "phr"
+  },
+  {
+   "w": "sieben",
+   "zh": "七",
+   "lv": "A1",
+   "l": "sieben",
+   "p": "num",
+   "en": "seven",
+   "ex": "Die Woche hat sieben Tage.",
+   "exZh": "一周有七天。"
+  },
+  {
+   "w": "die City",
+   "zh": "市中心",
+   "lv": "A1",
+   "l": "City",
+   "p": "n",
+   "g": "f",
+   "pl": "die Citys"
+  },
+  {
+   "w": "die Schwester",
+   "zh": "姐姐；妹妹",
+   "lv": "A1",
+   "l": "Schwester",
+   "p": "n",
+   "g": "f",
+   "pl": "die Schwestern",
+   "en": "sister",
+   "ex": "Meine Schwester studiert Medizin.",
+   "exZh": "我姐姐学医。"
+  },
+  {
+   "w": "meine Mutter",
+   "zh": "我的母亲",
+   "lv": "A1",
+   "l": "meine Mutter",
+   "p": "phr"
+  },
+  {
+   "w": "schlank",
+   "zh": "苗条的",
+   "lv": "A1",
+   "l": "schlank",
+   "p": "adj",
+   "en": "slim",
+   "ex": "Sie ist sehr schlank.",
+   "exZh": "她很苗条。"
+  },
+  {
+   "w": "sexy",
+   "zh": "性感的",
+   "lv": "A1",
+   "l": "sexy",
+   "p": "adj"
+  },
+  {
+   "w": "der Mund",
+   "zh": "嘴",
+   "lv": "A1",
+   "l": "Mund",
+   "p": "n",
+   "g": "m",
+   "pl": "die Münder",
+   "en": "mouth",
+   "ex": "Bitte öffne den Mund.",
+   "exZh": "请张开嘴。"
+  },
+  {
+   "w": "langsam",
+   "zh": "慢的",
+   "lv": "A1",
+   "l": "langsam",
+   "p": "adj",
+   "en": "slow",
+   "ex": "Bitte sprich langsam.",
+   "exZh": "请说慢一点。"
+  },
+  {
+   "w": "geben",
+   "zh": "给",
+   "lv": "A1",
+   "l": "geben",
+   "p": "v",
+   "en": "to give",
+   "ex": "Gib mir bitte das Buch.",
+   "exZh": "请把那本书给我。"
+  },
+  {
+   "w": "teuer",
+   "zh": "贵的",
+   "lv": "A1",
+   "l": "teuer",
+   "p": "adj",
+   "en": "expensive",
+   "ex": "Das Auto ist zu teuer.",
+   "exZh": "这辆车太贵了。"
+  },
+  {
+   "w": "die Birne",
+   "zh": "梨",
+   "lv": "A1",
+   "l": "Birne",
+   "p": "n",
+   "g": "f",
+   "pl": "die Birnen",
+   "en": "pear",
+   "ex": "Die Birnen sind reif.",
+   "exZh": "梨熟了。"
+  },
+  {
+   "w": "der Schlüssel",
+   "zh": "钥匙",
+   "lv": "A1",
+   "l": "Schlüssel",
+   "p": "n",
+   "g": "m",
+   "pl": "die Schlüssel",
+   "en": "key",
+   "ex": "Ich habe meinen Schlüssel verloren.",
+   "exZh": "我把钥匙丢了。"
+  },
+  {
+   "w": "der Fehler",
+   "zh": "错误",
+   "lv": "A1",
+   "l": "Fehler",
+   "p": "n",
+   "g": "m",
+   "pl": "die Fehler",
+   "en": "mistake",
+   "ex": "Jeder macht Fehler.",
+   "exZh": "每个人都会犯错。"
+  },
+  {
+   "w": "die Jeans",
+   "zh": "牛仔裤",
+   "lv": "A1",
+   "l": "Jeans",
+   "p": "n",
+   "g": "f",
+   "pl": "die Jeans"
+  },
+  {
+   "w": "aus",
+   "zh": "从……出来；来自（支配第三格）",
+   "lv": "A1",
+   "l": "aus",
+   "p": "prep",
+   "en": "out of",
+   "ex": "Sie kommt aus Spanien.",
+   "exZh": "她来自西班牙。"
+  },
+  {
+   "w": "mehr Übungen",
+   "zh": "更多练习",
+   "lv": "A1",
+   "l": "mehr Übungen",
+   "p": "phr"
+  },
+  {
+   "w": "das Spiel",
+   "zh": "游戏；比赛",
+   "lv": "A1",
+   "l": "Spiel",
+   "p": "n",
+   "g": "n",
+   "pl": "die Spiele",
+   "en": "game",
+   "ex": "Das Spiel war spannend.",
+   "exZh": "比赛很精彩。"
+  },
+  {
+   "w": "der Berliner",
+   "zh": "柏林人",
+   "lv": "A1",
+   "l": "Berliner",
+   "p": "n",
+   "g": "m",
+   "pl": "die Berliner"
+  },
+  {
+   "w": "wählen",
+   "zh": "选择",
+   "lv": "A1",
+   "l": "wählen",
+   "p": "v"
+  },
+  {
+   "w": "siebzehn",
+   "zh": "十七",
+   "lv": "A1",
+   "l": "siebzehn",
+   "p": "num"
+  },
+  {
+   "w": "die Karte",
+   "zh": "卡片；地图；票",
+   "lv": "A1",
+   "l": "Karte",
+   "p": "n",
+   "g": "f",
+   "pl": "die Karten",
+   "en": "card",
+   "ex": "Ich schreibe ihm eine Karte.",
+   "exZh": "我给他写张卡片。"
+  },
+  {
+   "w": "scharf",
+   "zh": "辣的；锋利的",
+   "lv": "A1",
+   "l": "scharf",
+   "p": "adj",
+   "en": "spicy",
+   "ex": "Das Essen ist zu scharf.",
+   "exZh": "这菜太辣了。"
+  },
+  {
+   "w": "Bern",
+   "zh": "伯尔尼",
+   "lv": "A1",
+   "l": "Bern",
+   "p": "n"
+  },
+  {
+   "w": "das Geschäft",
+   "zh": "商店；生意",
+   "lv": "A1",
+   "l": "Geschäft",
+   "p": "n",
+   "g": "n",
+   "pl": "die Geschäfte",
+   "en": "shop",
+   "ex": "Das Geschäft ist am Sonntag geschlossen.",
+   "exZh": "商店周日关门。"
+  },
+  {
+   "w": "suchen",
+   "zh": "寻找",
+   "lv": "A1",
+   "l": "suchen",
+   "p": "v",
+   "en": "to look for",
+   "ex": "Ich suche meinen Schlüssel.",
+   "exZh": "我在找我的钥匙。"
+  },
+  {
+   "w": "das Yoga",
+   "zh": "瑜伽",
+   "lv": "A1",
+   "l": "Yoga",
+   "p": "n",
+   "g": "n"
+  },
+  {
+   "w": "Wer sagt was?",
+   "zh": "谁说了什么？",
+   "lv": "A1",
+   "l": "Wer sagt was",
+   "p": "phr"
+  },
+  {
+   "w": "der Vorname",
+   "zh": "名，名字",
+   "lv": "A1",
+   "l": "Vorname",
+   "p": "n",
+   "g": "m",
+   "pl": "die Vornamen"
+  },
+  {
+   "w": "der Vater",
+   "zh": "父亲",
+   "lv": "A1",
+   "l": "Vater",
+   "p": "n",
+   "g": "m",
+   "pl": "die Väter",
+   "en": "father",
+   "ex": "Mein Vater kocht am Sonntag.",
+   "exZh": "我父亲周日做饭。"
+  },
+  {
+   "w": "der Polizist",
+   "zh": "警察",
+   "lv": "A1",
+   "l": "Polizist",
+   "p": "n",
+   "g": "m",
+   "pl": "die Polizisten",
+   "en": "policeman",
+   "ex": "Der Polizist zeigt uns den Weg.",
+   "exZh": "警察给我们指路。"
+  },
+  {
+   "w": "unten",
+   "zh": "下面",
+   "lv": "A1",
+   "l": "unten",
+   "p": "adv",
+   "en": "below",
+   "ex": "Unten ist die Küche.",
+   "exZh": "下面是厨房。"
+  },
+  {
+   "w": "informell",
+   "zh": "非正式的",
+   "lv": "A1",
+   "l": "informell",
+   "p": "adj"
+  },
+  {
+   "w": "nie",
+   "zh": "从不",
+   "lv": "A1",
+   "l": "nie",
+   "p": "adv",
+   "en": "never",
+   "ex": "Er kommt nie zu spät.",
+   "exZh": "他从不迟到。"
+  },
+  {
+   "w": "der Löffel",
+   "zh": "勺子",
+   "lv": "A1",
+   "l": "Löffel",
+   "p": "n",
+   "g": "m",
+   "pl": "die Löffel",
+   "en": "spoon",
+   "ex": "Wo ist mein Löffel?",
+   "exZh": "我的勺子在哪儿？"
+  },
+  {
+   "w": "sein aus",
+   "zh": "来自……",
+   "lv": "A1",
+   "l": "sein aus",
+   "p": "v"
+  },
+  {
+   "w": "nein",
+   "zh": "不；不是",
+   "lv": "A1",
+   "l": "nein",
+   "p": "adv",
+   "en": "no",
+   "ex": "Nein, ich habe keine Zeit.",
+   "exZh": "不，我没有时间。"
+  },
+  {
+   "w": "die Kursliste",
+   "zh": "班级名单",
+   "lv": "A1",
+   "l": "Kursliste",
+   "p": "n",
+   "g": "f",
+   "pl": "die Kurslisten"
+  },
+  {
+   "w": "verstehen",
+   "zh": "理解；明白",
+   "lv": "A1",
+   "l": "verstehen",
+   "p": "v",
+   "en": "to understand",
+   "ex": "Ich verstehe die Frage nicht.",
+   "exZh": "我不明白这个问题。"
+  },
+  {
+   "w": "zweiundzwanzig",
+   "zh": "二十二",
+   "lv": "A1",
+   "l": "zweiundzwanzig",
+   "p": "num"
+  },
+  {
+   "w": "das Auto",
+   "zh": "汽车",
+   "lv": "A1",
+   "l": "Auto",
+   "p": "n",
+   "g": "n",
+   "pl": "die Autos",
+   "en": "car",
+   "ex": "Mein Auto ist alt, aber zuverlässig.",
+   "exZh": "我的车虽旧但可靠。"
+  },
+  {
+   "w": "das Schwein",
+   "zh": "猪",
+   "lv": "A1",
+   "l": "Schwein",
+   "p": "n",
+   "g": "n",
+   "pl": "die Schweine",
+   "en": "pig",
+   "ex": "Das Schwein ist dick.",
+   "exZh": "这头猪很肥。"
+  },
+  {
+   "w": "häufig",
+   "zh": "经常的；常见的",
+   "lv": "A1",
+   "l": "häufig",
+   "p": "adj",
+   "en": "frequent",
+   "ex": "Das ist ein häufiger Fehler.",
+   "exZh": "这是常见错误。"
+  },
+  {
+   "w": "Wie heißen die Personen?",
+   "zh": "这些人叫什么名字？",
+   "lv": "A1",
+   "l": "Wie heißen die Personen",
+   "p": "phr"
+  },
+  {
+   "w": "servieren",
+   "zh": "上菜；服务",
+   "lv": "A1",
+   "l": "servieren",
+   "p": "v",
+   "en": "to serve",
+   "ex": "Der Kellner serviert die Suppe.",
+   "exZh": "服务员端上汤。"
+  },
+  {
+   "w": "der Feiertag",
+   "zh": "假日",
+   "lv": "A1",
+   "l": "Feiertag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Feiertage",
+   "en": "public holiday",
+   "ex": "Morgen ist ein Feiertag.",
+   "exZh": "明天是假日。"
+  },
+  {
+   "w": "schwarz",
+   "zh": "黑色的",
+   "lv": "A1",
+   "l": "schwarz",
+   "p": "adj",
+   "en": "black",
+   "ex": "Er trägt eine schwarze Jacke.",
+   "exZh": "他穿一件黑夹克。"
+  },
+  {
+   "w": "in Gruppen sammeln",
+   "zh": "以小组为单位收集",
+   "lv": "A1",
+   "l": "in Gruppen sammeln",
+   "p": "phr"
+  },
+  {
+   "w": "das Alphabet",
+   "zh": "字母表",
+   "lv": "A1",
+   "l": "Alphabet",
+   "p": "n",
+   "g": "n",
+   "pl": "die Alphabete"
+  },
+  {
+   "w": "Es geht.",
+   "zh": "还行；一般般。",
+   "lv": "A1",
+   "l": "Es geht",
+   "p": "phr"
+  },
+  {
+   "w": "tanken",
+   "zh": "加油",
+   "lv": "A1",
+   "l": "tanken",
+   "p": "v",
+   "en": "to refuel",
+   "ex": "Ich muss noch tanken.",
+   "exZh": "我还得加油。"
+  },
+  {
+   "w": "das Handtuch",
+   "zh": "毛巾",
+   "lv": "A1",
+   "l": "Handtuch",
+   "p": "n",
+   "g": "n",
+   "pl": "die Handtücher",
+   "en": "towel",
+   "ex": "Das Handtuch ist nass.",
+   "exZh": "毛巾湿了。"
+  },
+  {
+   "w": "berichten",
+   "zh": "报道；告知",
+   "lv": "A1",
+   "l": "berichten",
+   "p": "v"
+  },
+  {
+   "w": "der Bär",
+   "zh": "熊",
+   "lv": "A1",
+   "l": "Bär",
+   "p": "n",
+   "g": "m",
+   "pl": "die Bären",
+   "en": "bear",
+   "ex": "Vorsicht, ein Bär im Wald!",
+   "exZh": "小心，森林里有熊！"
+  },
+  {
+   "w": "Deutsch",
+   "zh": "德语",
+   "lv": "A1",
+   "l": "Deutsch",
+   "p": "n"
+  },
+  {
+   "w": "sein",
+   "zh": "是；存在（不规则动词）",
+   "lv": "A1",
+   "l": "sein",
+   "p": "v",
+   "en": "to be",
+   "ex": "Ich bin müde.",
+   "exZh": "我累了。"
+  },
+  {
+   "w": "das Dorf",
+   "zh": "村庄",
+   "lv": "A1",
+   "l": "Dorf",
+   "p": "n",
+   "g": "n",
+   "pl": "die Dörfer",
+   "en": "village",
+   "ex": "Sie wohnt in einem kleinen Dorf.",
+   "exZh": "她住在一个小村庄里。"
+  },
+  {
+   "w": "das Bein",
+   "zh": "腿",
+   "lv": "A1",
+   "l": "Bein",
+   "p": "n",
+   "g": "n",
+   "pl": "die Beine",
+   "en": "leg",
+   "ex": "Das Bein ist gebrochen.",
+   "exZh": "腿骨折了。"
+  },
+  {
+   "w": "sehr gern",
+   "zh": "非常乐意；很喜欢",
+   "lv": "A1",
+   "l": "sehr gern",
+   "p": "phr",
+   "en": "very gladly",
+   "ex": "Ich komme sehr gern.",
+   "exZh": "我很乐意来。"
+  },
+  {
+   "w": "der Junge",
+   "zh": "男孩",
+   "lv": "A1",
+   "l": "Junge",
+   "p": "n",
+   "g": "m",
+   "pl": "die Jungen",
+   "en": "boy",
+   "ex": "Der Junge ist zehn Jahre alt.",
+   "exZh": "这个男孩十岁。"
+  },
+  {
+   "w": "das",
+   "zh": "这，那（中性定冠词）",
+   "lv": "A1",
+   "l": "das",
+   "p": "pron"
+  },
+  {
+   "w": "einundzwanzig",
+   "zh": "二十一",
+   "lv": "A1",
+   "l": "einundzwanzig",
+   "p": "num"
+  },
+  {
+   "w": "die Ordnung",
+   "zh": "秩序",
+   "lv": "A1",
+   "l": "Ordnung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Ordnungen",
+   "en": "order",
+   "ex": "Ordnung muss sein.",
+   "exZh": "秩序是必要的。"
+  },
+  {
+   "w": "das Büro",
+   "zh": "办公室",
+   "lv": "A1",
+   "l": "Büro",
+   "p": "n",
+   "g": "n",
+   "pl": "die Büros",
+   "en": "office",
+   "ex": "Mein Büro ist im dritten Stock.",
+   "exZh": "我的办公室在三楼。"
+  },
+  {
+   "w": "Griechisch",
+   "zh": "希腊语",
+   "lv": "A1",
+   "l": "Griechisch",
+   "p": "n"
+  },
+  {
+   "w": "die Begrüßung",
+   "zh": "问候；欢迎",
+   "lv": "A1",
+   "l": "Begrüßung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Begrüßungen",
+   "en": "greeting",
+   "ex": "Die Begrüßung war herzlich.",
+   "exZh": "欢迎很热情。"
+  },
+  {
+   "w": "bügeln",
+   "zh": "熨（衣服）",
+   "lv": "A1",
+   "l": "bügeln",
+   "p": "v",
+   "en": "to iron",
+   "ex": "Ich bügle mein Hemd.",
+   "exZh": "我在熨衬衫。"
+  },
+  {
+   "w": "Fragen und antworten Sie.",
+   "zh": "请进行问答。",
+   "lv": "A1",
+   "l": "Fragen und antworten Sie",
+   "p": "phr"
+  },
+  {
+   "w": "der Sommer",
+   "zh": "夏天",
+   "lv": "A1",
+   "l": "Sommer",
+   "p": "n",
+   "g": "m",
+   "pl": "die Sommer",
+   "en": "summer",
+   "ex": "Im Sommer fahren wir ans Meer.",
+   "exZh": "夏天我们去海边。"
+  },
+  {
+   "w": "ohne",
+   "zh": "没有（支配第四格）",
+   "lv": "A1",
+   "l": "ohne",
+   "p": "prep",
+   "en": "without",
+   "ex": "Ich trinke Kaffee ohne Zucker.",
+   "exZh": "我喝咖啡不加糖。"
+  },
+  {
+   "w": "etwas",
+   "zh": "一些东西；某事",
+   "lv": "A1",
+   "l": "etwas",
+   "p": "pron",
+   "en": "something",
+   "ex": "Ich möchte etwas trinken.",
+   "exZh": "我想喝点什么。"
+  },
+  {
+   "w": "die Kultur",
+   "zh": "文化",
+   "lv": "A1",
+   "l": "Kultur",
+   "p": "n",
+   "g": "f",
+   "pl": "die Kulturen"
+  },
+  {
+   "w": "wissen",
+   "zh": "知道（事实）",
+   "lv": "A1",
+   "l": "wissen",
+   "p": "v",
+   "en": "to know",
+   "ex": "Ich weiß es nicht.",
+   "exZh": "我不知道。"
+  },
+  {
+   "w": "Was heißt ... in Ihrer Sprache?",
+   "zh": "在您的语言中……怎么说？",
+   "lv": "A1",
+   "l": "Was heißt ... in Ihrer Sprache",
+   "p": "phr"
+  },
+  {
+   "w": "das Extra",
+   "zh": "额外的事物",
+   "lv": "A1",
+   "l": "Extra",
+   "p": "n",
+   "g": "n",
+   "pl": "die Extras"
+  },
+  {
+   "w": "die Kuh",
+   "zh": "奶牛",
+   "lv": "A1",
+   "l": "Kuh",
+   "p": "n",
+   "g": "f",
+   "pl": "die Kühe",
+   "en": "cow",
+   "ex": "Die Kuh gibt Milch.",
+   "exZh": "奶牛产奶。"
+  },
+  {
+   "w": "zeigen",
+   "zh": "出示；展示",
+   "lv": "A1",
+   "l": "zeigen",
+   "p": "v"
+  },
+  {
+   "w": "hart",
+   "zh": "硬的；艰难的",
+   "lv": "A1",
+   "l": "hart",
+   "p": "adj",
+   "en": "hard",
+   "ex": "Das Brot ist hart geworden.",
+   "exZh": "面包变硬了。"
+  },
+  {
+   "w": "okay",
+   "zh": "好；行；可以",
+   "lv": "A1",
+   "l": "okay",
+   "p": "adj"
+  },
+  {
+   "w": "Frankfurt",
+   "zh": "法兰克福",
+   "lv": "A1",
+   "l": "Frankfurt",
+   "p": "n"
+  },
+  {
+   "w": "laufen",
+   "zh": "跑；步行",
+   "lv": "A1",
+   "l": "laufen",
+   "p": "v",
+   "en": "to run",
+   "ex": "Er läuft jeden Morgen im Park.",
+   "exZh": "他每天早上在公园跑步。"
+  },
+  {
+   "w": "in der Friedrichstraße",
+   "zh": "在弗里德里希大街上",
+   "lv": "A1",
+   "l": "in der Friedrichstraße",
+   "p": "phr"
+  },
+  {
+   "w": "die Wiese",
+   "zh": "草地",
+   "lv": "A1",
+   "l": "Wiese",
+   "p": "n",
+   "g": "f",
+   "pl": "die Wiesen",
+   "en": "meadow",
+   "ex": "Kinder spielen auf der Wiese.",
+   "exZh": "孩子们在草地上玩。"
+  },
+  {
+   "w": "das Geburtsdatum",
+   "zh": "出生日期",
+   "lv": "A1",
+   "l": "Geburtsdatum",
+   "p": "n",
+   "g": "n",
+   "pl": "die Geburtsdaten"
+  },
+  {
+   "w": "danke",
+   "zh": "谢谢",
+   "lv": "A1",
+   "l": "danke",
+   "p": "int",
+   "en": "thanks",
+   "ex": "Danke für deine Hilfe!",
+   "exZh": "谢谢你的帮助！"
+  },
+  {
+   "w": "die Fliege",
+   "zh": "苍蝇",
+   "lv": "A1",
+   "l": "Fliege",
+   "p": "n",
+   "g": "f",
+   "pl": "die Fliegen",
+   "en": "fly",
+   "ex": "Eine Fliege ist im Zimmer.",
+   "exZh": "房间里有一只苍蝇。"
+  },
+  {
+   "w": "der BMW",
+   "zh": "宝马",
+   "lv": "A1",
+   "l": "BMW",
+   "p": "n",
+   "g": "m",
+   "pl": "die BMWs"
+  },
+  {
+   "w": "der Löwe",
+   "zh": "狮子",
+   "lv": "A1",
+   "l": "Löwe",
+   "p": "n",
+   "g": "m",
+   "pl": "die Löwen",
+   "en": "lion",
+   "ex": "Der Löwe schläft im Gras.",
+   "exZh": "狮子在草丛中睡觉。"
+  },
+  {
+   "w": "die Biene",
+   "zh": "蜜蜂",
+   "lv": "A1",
+   "l": "Biene",
+   "p": "n",
+   "g": "f",
+   "pl": "die Bienen",
+   "en": "bee",
+   "ex": "Die Bienen sammeln Honig.",
+   "exZh": "蜜蜂采蜜。"
+  },
+  {
+   "w": "die Wärme",
+   "zh": "温暖",
+   "lv": "A1",
+   "l": "Wärme",
+   "p": "n",
+   "g": "f",
+   "en": "warmth",
+   "ex": "Ich mag die Wärme im Sommer.",
+   "exZh": "我喜欢夏天的温暖。"
+  },
+  {
+   "w": "das Brot",
+   "zh": "面包",
+   "lv": "A1",
+   "l": "Brot",
+   "p": "n",
+   "g": "n",
+   "pl": "die Brote",
+   "en": "bread",
+   "ex": "Ich kaufe frisches Brot.",
+   "exZh": "我买新鲜面包。"
+  },
+  {
+   "w": "Kopf oder Zahl?",
+   "zh": "国徽还是数字？",
+   "lv": "A1",
+   "l": "Kopf oder Zahl",
+   "p": "phr"
+  },
+  {
+   "w": "der Neffe",
+   "zh": "侄子；外甥",
+   "lv": "A1",
+   "l": "Neffe",
+   "p": "n",
+   "g": "m",
+   "pl": "die Neffen",
+   "en": "nephew",
+   "ex": "Mein Neffe ist fünf Jahre alt.",
+   "exZh": "我侄子五岁。"
+  },
+  {
+   "w": "der Friseur",
+   "zh": "理发师",
+   "lv": "A1",
+   "l": "Friseur",
+   "p": "n",
+   "g": "m",
+   "pl": "die Friseure"
+  },
+  {
+   "w": "der Onkel",
+   "zh": "叔叔；舅舅",
+   "lv": "A1",
+   "l": "Onkel",
+   "p": "n",
+   "g": "m",
+   "pl": "die Onkel",
+   "en": "uncle",
+   "ex": "Mein Onkel wohnt in Hamburg.",
+   "exZh": "我叔叔住在汉堡。"
+  },
+  {
+   "w": "das Thema",
+   "zh": "主题；话题",
+   "lv": "A1",
+   "l": "Thema",
+   "p": "n",
+   "g": "n",
+   "pl": "die Themen",
+   "en": "topic",
+   "ex": "Das Thema interessiert mich.",
+   "exZh": "这个话题让我感兴趣。"
+  },
+  {
+   "w": "die Regel",
+   "zh": "规则",
+   "lv": "A1",
+   "l": "Regel",
+   "p": "n",
+   "g": "f",
+   "pl": "die Regeln",
+   "en": "rule",
+   "ex": "Diese Regel ist wichtig.",
+   "exZh": "这条规则很重要。"
+  },
+  {
+   "w": "ordnen",
+   "zh": "整理",
+   "lv": "A1",
+   "l": "ordnen",
+   "p": "v"
+  },
+  {
+   "w": "die",
+   "zh": "这，那（阴性定冠词）",
+   "lv": "A1",
+   "l": "die",
+   "p": "pron"
+  },
+  {
+   "w": "jetzt",
+   "zh": "现在",
+   "lv": "A1",
+   "l": "jetzt",
+   "p": "adv",
+   "en": "now",
+   "ex": "Ich komme jetzt.",
+   "exZh": "我现在就来。"
+  },
+  {
+   "w": "der Juni",
+   "zh": "六月",
+   "lv": "A1",
+   "l": "Juni",
+   "p": "n",
+   "g": "m",
+   "pl": "die Junis",
+   "en": "June",
+   "ex": "Im Juni ist es warm.",
+   "exZh": "六月很暖和。"
+  },
+  {
+   "w": "auf jeder Karte",
+   "zh": "在每张卡片上",
+   "lv": "A1",
+   "l": "auf jeder Karte",
+   "p": "phr"
+  },
+  {
+   "w": "die Flasche",
+   "zh": "瓶子",
+   "lv": "A1",
+   "l": "Flasche",
+   "p": "n",
+   "g": "f",
+   "pl": "die Flaschen",
+   "en": "bottle",
+   "ex": "Eine Flasche Wasser, bitte.",
+   "exZh": "请来一瓶水。"
+  },
+  {
+   "w": "tschüss",
+   "zh": "再见（口语）",
+   "lv": "A1",
+   "l": "tschüss",
+   "p": "int",
+   "en": "bye",
+   "ex": "Tschüss, bis morgen!",
+   "exZh": "再见，明天见！"
+  },
+  {
+   "w": "das Hotel",
+   "zh": "酒店",
+   "lv": "A1",
+   "l": "Hotel",
+   "p": "n",
+   "g": "n",
+   "pl": "die Hotels",
+   "en": "hotel",
+   "ex": "Das Hotel liegt direkt am Meer.",
+   "exZh": "酒店就在海边。"
+  },
+  {
+   "w": "die Treppe",
+   "zh": "楼梯",
+   "lv": "A1",
+   "l": "Treppe",
+   "p": "n",
+   "g": "f",
+   "pl": "die Treppen",
+   "en": "stairs",
+   "ex": "Die Treppe ist steil.",
+   "exZh": "楼梯很陡。"
+  },
+  {
+   "w": "die Person",
+   "zh": "人",
+   "lv": "A1",
+   "l": "Person",
+   "p": "n",
+   "g": "f",
+   "pl": "die Personen"
+  },
+  {
+   "w": "das Handy",
+   "zh": "手机",
+   "lv": "A1",
+   "l": "Handy",
+   "p": "n",
+   "g": "n",
+   "pl": "die Handys",
+   "en": "mobile phone",
+   "ex": "Mein Handy ist kaputt.",
+   "exZh": "我的手机坏了。"
+  },
+  {
+   "w": "wohnen in",
+   "zh": "住在……",
+   "lv": "A1",
+   "l": "wohnen in",
+   "p": "v"
+  },
+  {
+   "w": "die Zeitung",
+   "zh": "报纸",
+   "lv": "A1",
+   "l": "Zeitung",
+   "p": "n",
+   "g": "f",
+   "pl": "die Zeitungen",
+   "en": "newspaper",
+   "ex": "Er liest jeden Morgen die Zeitung.",
+   "exZh": "他每天早上看报纸。"
+  },
+  {
+   "w": "wenn",
+   "zh": "如果；当……时",
+   "lv": "A1",
+   "l": "wenn",
+   "p": "conj",
+   "en": "if",
+   "ex": "Wenn ich Zeit habe, komme ich.",
+   "exZh": "如果我有时间，我就来。"
+  },
+  {
+   "w": "die Uhrzeit",
+   "zh": "时刻；时间",
+   "lv": "A1",
+   "l": "Uhrzeit",
+   "p": "n",
+   "g": "f",
+   "pl": "die Uhrzeiten",
+   "en": "time of day",
+   "ex": "Wie ist die genaue Uhrzeit?",
+   "exZh": "现在准确几点？"
+  },
+  {
+   "w": "die Tochter",
+   "zh": "女儿",
+   "lv": "A1",
+   "l": "Tochter",
+   "p": "n",
+   "g": "f",
+   "pl": "die Töchter",
+   "en": "daughter",
+   "ex": "Die Tochter hilft der Mutter.",
+   "exZh": "女儿帮母亲的忙。"
+  },
+  {
+   "w": "das Kleid",
+   "zh": "连衣裙",
+   "lv": "A1",
+   "l": "Kleid",
+   "p": "n",
+   "g": "n",
+   "pl": "die Kleider",
+   "en": "dress",
+   "ex": "Sie trägt ein schönes Kleid.",
+   "exZh": "她穿着一条漂亮的连衣裙。"
+  },
+  {
+   "w": "auf dem Smartphone",
+   "zh": "在智能手机上",
+   "lv": "A1",
+   "l": "auf dem Smartphone",
+   "p": "phr"
+  },
+  {
+   "w": "gern",
+   "zh": "乐意地；喜欢",
+   "lv": "A1",
+   "l": "gern",
+   "p": "adv",
+   "en": "gladly",
+   "ex": "Ich trinke gern Tee.",
+   "exZh": "我喜欢喝茶。"
+  },
+  {
+   "w": "leer",
+   "zh": "空的",
+   "lv": "A1",
+   "l": "leer",
+   "p": "adj",
+   "en": "empty",
+   "ex": "Das Glas ist leer.",
+   "exZh": "杯子是空的。"
+  },
+  {
+   "w": "das Pony",
+   "zh": "小马",
+   "lv": "A1",
+   "l": "Pony",
+   "p": "n",
+   "g": "n",
+   "pl": "die Ponys"
+  },
+  {
+   "w": "das Obst",
+   "zh": "水果",
+   "lv": "A1",
+   "l": "Obst",
+   "p": "n",
+   "g": "n",
+   "en": "fruit",
+   "ex": "Obst ist gesund.",
+   "exZh": "水果有益健康。"
+  },
+  {
+   "w": "lesen",
+   "zh": "读；阅读",
+   "lv": "A1",
+   "l": "lesen",
+   "p": "v",
+   "en": "to read",
+   "ex": "Er liest ein Buch.",
+   "exZh": "他在看书。"
+  },
+  {
+   "w": "das Buch",
+   "zh": "书",
+   "lv": "A1",
+   "l": "Buch",
+   "p": "n",
+   "g": "n",
+   "pl": "die Bücher",
+   "en": "book",
+   "ex": "Ich lese gerade ein Buch.",
+   "exZh": "我正在读一本书。"
+  },
+  {
+   "w": "der Step",
+   "zh": "踏板操",
+   "lv": "A1",
+   "l": "Step",
+   "p": "n",
+   "g": "m",
+   "pl": "die Steps"
+  },
+  {
+   "w": "Berlin",
+   "zh": "柏林",
+   "lv": "A1",
+   "l": "Berlin",
+   "p": "n"
+  },
+  {
+   "w": "die Aufgabe",
+   "zh": "任务",
+   "lv": "A1",
+   "l": "Aufgabe",
+   "p": "n",
+   "g": "f",
+   "pl": "die Aufgaben"
+  },
+  {
+   "w": "der Geburtstag",
+   "zh": "生日",
+   "lv": "A1",
+   "l": "Geburtstag",
+   "p": "n",
+   "g": "m",
+   "pl": "die Geburtstage",
+   "en": "birthday",
+   "ex": "Herzlichen Glückwunsch zum Geburtstag!",
+   "exZh": "生日快乐！"
+  },
+  {
+   "w": "Polnisch",
+   "zh": "波兰语",
+   "lv": "A1",
+   "l": "Polnisch",
+   "p": "n"
+  },
+  {
+   "w": "die Insel",
+   "zh": "岛",
+   "lv": "A1",
+   "l": "Insel",
+   "p": "n",
+   "g": "f",
+   "pl": "die Inseln",
+   "en": "island",
+   "ex": "Die Insel ist klein und schön.",
+   "exZh": "这座岛小而美。"
+  },
+  {
+   "w": "Fußball spielen",
+   "zh": "踢足球",
+   "lv": "A1",
+   "l": "Fußball spielen",
+   "p": "phr"
+  },
+  {
+   "w": "mein",
+   "zh": "我的",
+   "lv": "A1",
+   "l": "mein",
+   "p": "pron",
+   "en": "my",
+   "ex": "Das ist mein Buch.",
+   "exZh": "这是我的书。"
+  },
+  {
+   "w": "sechzig",
+   "zh": "六十",
+   "lv": "A1",
+   "l": "sechzig",
+   "p": "num"
+  },
+  {
+   "w": "das Land",
+   "zh": "国家；乡村",
+   "lv": "A1",
+   "l": "Land",
+   "p": "n",
+   "g": "n",
+   "pl": "die Länder",
+   "en": "country",
+   "ex": "Deutschland ist ein Land in Europa.",
+   "exZh": "德国是欧洲的一个国家。"
+  },
+  {
+   "w": "bitte",
+   "zh": "请；不客气；给你",
+   "lv": "A1",
+   "l": "bitte",
+   "p": "adv",
+   "en": "please",
+   "ex": "Einen Kaffee, bitte.",
+   "exZh": "请来一杯咖啡。"
+  },
+  {
+   "w": "der Stein",
+   "zh": "石头",
+   "lv": "A1",
+   "l": "Stein",
+   "p": "n",
+   "g": "m",
+   "pl": "die Steine",
+   "en": "stone",
+   "ex": "Der Stein ist schwer.",
+   "exZh": "石头很重。"
+  },
+  {
+   "w": "das Tier",
+   "zh": "动物",
+   "lv": "A1",
+   "l": "Tier",
+   "p": "n",
+   "g": "n",
+   "pl": "die Tiere"
+  },
+  {
+   "w": "neun",
+   "zh": "九",
+   "lv": "A1",
+   "l": "neun",
+   "p": "num",
+   "en": "nine",
+   "ex": "Ich arbeite neun Stunden.",
+   "exZh": "我工作九小时。"
+  },
+  {
+   "w": "das Museum",
+   "zh": "博物馆",
+   "lv": "A1",
+   "l": "Museum",
+   "p": "n",
+   "g": "n",
+   "pl": "die Museen",
+   "en": "museum",
+   "ex": "Das Museum ist heute geschlossen.",
+   "exZh": "博物馆今天闭馆。"
+  },
+  {
+   "w": "halten",
+   "zh": "拿着；停住",
+   "lv": "A1",
+   "l": "halten",
+   "p": "v",
+   "en": "to hold",
+   "ex": "Halte bitte den Koffer!",
+   "exZh": "请拿着箱子！"
+  },
+  {
+   "w": "gerade",
+   "zh": "直的；刚刚",
+   "lv": "A1",
+   "l": "gerade",
+   "p": "adj",
+   "en": "straight",
+   "ex": "Ich bin gerade nach Hause gekommen.",
+   "exZh": "我刚到家。"
+  },
+  {
+   "w": "drei",
+   "zh": "三",
+   "lv": "A1",
+   "l": "drei",
+   "p": "num",
+   "en": "three",
+   "ex": "Wir sind drei Personen.",
+   "exZh": "我们一共三个人。"
+  },
+  {
+   "w": "wischen",
+   "zh": "擦",
+   "lv": "A1",
+   "l": "wischen",
+   "p": "v",
+   "en": "to wipe",
+   "ex": "Wisch bitte den Tisch ab.",
+   "exZh": "请把桌子擦一下。"
+  },
+  {
+   "w": "die Ruhe",
+   "zh": "安静；平静",
+   "lv": "A1",
+   "l": "Ruhe",
+   "p": "n",
+   "g": "f",
+   "en": "calm",
+   "ex": "Ich brauche etwas Ruhe.",
+   "exZh": "我需要一点安静。"
+  },
+  {
+   "w": "der Markt",
+   "zh": "市场；集市",
+   "lv": "A1",
+   "l": "Markt",
+   "p": "n",
+   "g": "m",
+   "pl": "die Märkte",
+   "en": "market",
+   "ex": "Am Samstag ist Markt in der Stadt.",
+   "exZh": "周六城里有个集市。"
+  },
+  {
+   "w": "die Pause",
+   "zh": "休息；课间",
+   "lv": "A1",
+   "l": "Pause",
+   "p": "n",
+   "g": "f",
+   "pl": "die Pausen",
+   "en": "break",
+   "ex": "Wir machen eine kurze Pause.",
+   "exZh": "我们休息一会儿。"
+  },
+  {
+   "w": "die Bluse",
+   "zh": "（女式）衬衣",
+   "lv": "A1",
+   "l": "Bluse",
+   "p": "n",
+   "g": "f",
+   "pl": "die Blusen"
+  },
+  {
+   "w": "siebenundzwanzig",
+   "zh": "二十七",
+   "lv": "A1",
+   "l": "siebenundzwanzig",
+   "p": "num"
+  },
+  {
+   "w": "das Geld",
+   "zh": "钱",
+   "lv": "A1",
+   "l": "Geld",
+   "p": "n",
+   "g": "n",
+   "en": "money",
+   "ex": "Ich habe kein Geld dabei.",
+   "exZh": "我没带钱。"
+  },
+  {
+   "w": "die Internetseite",
+   "zh": "网页",
+   "lv": "A1",
+   "l": "Internetseite",
+   "p": "n",
+   "g": "f",
+   "pl": "die Internetseiten"
+  },
+  {
+   "w": "der Aufzug",
+   "zh": "电梯",
+   "lv": "A1",
+   "l": "Aufzug",
+   "p": "n",
+   "g": "m",
+   "pl": "die Aufzüge",
+   "en": "lift",
+   "ex": "Der Aufzug ist kaputt.",
+   "exZh": "电梯坏了。"
+  },
+  {
+   "w": "das Level",
+   "zh": "水平；级别",
+   "lv": "A1",
+   "l": "Level",
+   "p": "n",
+   "g": "n",
+   "pl": "die Levels"
+  },
+  {
+   "w": "das Mädchen",
+   "zh": "女孩",
+   "lv": "A1",
+   "l": "Mädchen",
+   "p": "n",
+   "g": "n",
+   "pl": "die Mädchen",
+   "en": "girl",
+   "ex": "Das Mädchen singt sehr schön.",
+   "exZh": "这个女孩唱得很好听。"
+  },
+  {
+   "w": "Russisch",
+   "zh": "俄语",
+   "lv": "A1",
+   "l": "Russisch",
+   "p": "n"
+  },
+  {
+   "w": "testen",
+   "zh": "检验；测试",
+   "lv": "A1",
+   "l": "testen",
+   "p": "v"
+  },
+  {
+   "w": "mein Vater",
+   "zh": "我的父亲",
+   "lv": "A1",
+   "l": "mein Vater",
+   "p": "phr"
+  },
+  {
+   "w": "die Liste",
+   "zh": "清单；列表",
+   "lv": "A1",
+   "l": "Liste",
+   "p": "n",
+   "g": "f",
+   "pl": "die Listen",
+   "en": "list",
+   "ex": "Ich schreibe eine Einkaufsliste.",
+   "exZh": "我写购物清单。"
+  },
+  {
+   "w": "fünfzehn",
+   "zh": "十五",
+   "lv": "A1",
+   "l": "fünfzehn",
+   "p": "num"
+  },
+  {
+   "w": "vierzig",
+   "zh": "四十",
+   "lv": "A1",
+   "l": "vierzig",
+   "p": "num"
+  },
+  {
+   "w": "alle im Kurs",
+   "zh": "全班同学",
+   "lv": "A1",
+   "l": "alle im Kurs",
+   "p": "phr"
+  },
+  {
+   "w": "Gehen Sie umher.",
+   "zh": "请您四处走动。",
+   "lv": "A1",
+   "l": "Gehen Sie umher",
+   "p": "phr"
+  },
+  {
+   "w": "der Kugelschreiber",
+   "zh": "圆珠笔",
+   "lv": "A1",
+   "l": "Kugelschreiber",
+   "p": "n",
+   "g": "m",
+   "pl": "die Kugelschreiber",
+   "en": "ballpoint pen",
+   "ex": "Kannst du mir einen Kugelschreiber leihen?",
+   "exZh": "你能借我一支圆珠笔吗？"
+  },
+  {
+   "w": "Basketball spielen",
+   "zh": "打篮球",
+   "lv": "A1",
+   "l": "Basketball spielen",
+   "p": "phr"
+  },
+  {
+   "w": "die Butter",
+   "zh": "黄油",
+   "lv": "A1",
+   "l": "Butter",
+   "p": "n",
+   "g": "f",
+   "en": "butter",
+   "ex": "Brot mit Butter schmeckt gut.",
+   "exZh": "涂黄油的面包很好吃。"
+  },
+  {
+   "w": "die Gabel",
+   "zh": "叉子",
+   "lv": "A1",
+   "l": "Gabel",
+   "p": "n",
+   "g": "f",
+   "pl": "die Gabeln",
+   "en": "fork",
+   "ex": "Ich brauche noch eine Gabel.",
+   "exZh": "我还需要一把叉子。"
+  },
+  {
+   "w": "das Bett",
+   "zh": "床",
+   "lv": "A1",
+   "l": "Bett",
+   "p": "n",
+   "g": "n",
+   "pl": "die Betten",
+   "en": "bed",
+   "ex": "Ich gehe früh ins Bett.",
+   "exZh": "我很早就上床睡觉。"
+  },
+  {
+   "w": "reisen",
+   "zh": "旅行",
+   "lv": "A1",
+   "l": "reisen",
+   "p": "v",
+   "en": "to travel",
+   "ex": "Ich reise gern allein.",
+   "exZh": "我喜欢独自旅行。"
+  },
+  {
+   "w": "die Tabelle",
+   "zh": "表格",
+   "lv": "A1",
+   "l": "Tabelle",
+   "p": "n",
+   "g": "f",
+   "pl": "die Tabellen"
+  },
+  {
+   "w": "die Erde",
+   "zh": "地球；土地",
+   "lv": "A1",
+   "l": "Erde",
+   "p": "n",
+   "g": "f",
+   "pl": "die Erden",
+   "en": "earth",
+   "ex": "Die Erde braucht Schutz.",
+   "exZh": "地球需要保护。"
+  },
+  {
+   "w": "der Ausgang",
+   "zh": "出口",
+   "lv": "A1",
+   "l": "Ausgang",
+   "p": "n",
+   "g": "m",
+   "pl": "die Ausgänge",
+   "en": "exit",
+   "ex": "Bitte benutzen Sie den hinteren Ausgang.",
+   "exZh": "请使用后门出口。"
+  },
+  {
+   "w": "Wiederholen Sie.",
+   "zh": "请重复。",
+   "lv": "A1",
+   "l": "Wiederholen Sie",
+   "p": "phr"
+  },
+  {
+   "w": "kräftig",
+   "zh": "强壮的",
+   "lv": "A1",
+   "l": "kräftig",
+   "p": "adj",
+   "en": "strong",
+   "ex": "Er hat kräftige Arme.",
+   "exZh": "他胳膊很强壮。"
+  },
+  {
+   "w": "das Telefon",
+   "zh": "电话",
+   "lv": "A1",
+   "l": "Telefon",
+   "p": "n",
+   "g": "n",
+   "pl": "die Telefone"
+  },
+  {
+   "w": "regnen",
+   "zh": "下雨",
+   "lv": "A1",
+   "l": "regnen",
+   "p": "v",
+   "en": "to rain",
+   "ex": "Es regnet schon den ganzen Tag.",
+   "exZh": "已经下了一整天雨。"
+  },
+  {
+   "w": "der Bahnhof",
+   "zh": "火车站",
+   "lv": "A1",
+   "l": "Bahnhof",
+   "p": "n",
+   "g": "m",
+   "pl": "die Bahnhöfe",
+   "en": "station",
+   "ex": "Der Bahnhof ist im Zentrum.",
+   "exZh": "火车站在市中心。"
+  },
+  {
+   "w": "die Nichte",
+   "zh": "侄女；外甥女",
+   "lv": "A1",
+   "l": "Nichte",
+   "p": "n",
+   "g": "f",
+   "pl": "die Nichten",
+   "en": "niece",
+   "ex": "Seine Nichte wohnt bei ihm.",
+   "exZh": "他侄女住在他那里。"
+  },
+  {
+   "w": "der Job",
+   "zh": "工作",
+   "lv": "A1",
+   "l": "Job",
+   "p": "n",
+   "g": "m",
+   "pl": "die Jobs"
+  },
+  {
+   "w": "essen",
+   "zh": "吃",
+   "lv": "A1",
+   "l": "essen",
+   "p": "v",
+   "en": "to eat",
+   "ex": "Wir essen um sieben Uhr.",
+   "exZh": "我们七点吃饭。"
+  },
+  {
+   "w": "Sehr gut.",
+   "zh": "很好。",
+   "lv": "A1",
+   "l": "Sehr gut",
+   "p": "phr"
+  },
+  {
+   "w": "werden",
+   "zh": "成为；将要",
+   "lv": "A1",
+   "l": "werden",
+   "p": "v",
+   "en": "to become",
+   "ex": "Es wird kalt.",
+   "exZh": "天变冷了。"
+  },
+  {
+   "w": "das Huhn",
+   "zh": "鸡",
+   "lv": "A1",
+   "l": "Huhn",
+   "p": "n",
+   "g": "n",
+   "pl": "die Hühner",
+   "en": "chicken",
+   "ex": "Die Hühner legen Eier.",
+   "exZh": "母鸡下蛋。"
+  },
+  {
+   "w": "Es tut mir leid.",
+   "zh": "很抱歉。",
+   "lv": "A1",
+   "l": "Es tut mir leid",
+   "p": "phr",
+   "en": "I am sorry",
+   "ex": "Es tut mir leid, ich komme zu spät.",
+   "exZh": "很抱歉，我迟到了。"
+  },
+  {
+   "w": "besichtigen",
+   "zh": "参观",
+   "lv": "A1",
+   "l": "besichtigen",
+   "p": "v",
+   "en": "to visit",
+   "ex": "Wir besichtigen das Museum.",
+   "exZh": "我们参观博物馆。"
+  },
+  {
+   "w": "wichtig",
+   "zh": "重要的",
+   "lv": "A1",
+   "l": "wichtig",
+   "p": "adj",
+   "en": "important",
+   "ex": "Das ist eine wichtige Frage.",
+   "exZh": "这是一个重要的问题。"
+  },
+  {
+   "w": "das Heft",
+   "zh": "本子；练习本",
+   "lv": "A1",
+   "l": "Heft",
+   "p": "n",
+   "g": "n",
+   "pl": "die Hefte",
+   "en": "notebook",
+   "ex": "Schreib das ins Heft!",
+   "exZh": "把这个写进本子里！"
+  },
+  {
+   "w": "weil",
+   "zh": "因为",
+   "lv": "A1",
+   "l": "weil",
+   "p": "conj",
+   "en": "because",
+   "ex": "Ich bleibe zu Hause, weil es regnet.",
+   "exZh": "我待在家里，因为下雨了。"
+  },
+  {
+   "w": "Herzlich willkommen!",
+   "zh": "热烈欢迎！",
+   "lv": "A1",
+   "l": "Herzlich willkommen",
+   "p": "phr",
+   "en": "warm welcome",
+   "ex": "Herzlich willkommen in Deutschland!",
+   "exZh": "欢迎来到德国！"
+  },
+  {
+   "w": "einfach",
+   "zh": "简单的",
+   "lv": "A1",
+   "l": "einfach",
+   "p": "adj",
+   "en": "simple",
+   "ex": "Das ist ganz einfach.",
+   "exZh": "这非常简单。"
+  },
+  {
+   "w": "die W-Frage",
+   "zh": "特殊疑问句",
+   "lv": "A1",
+   "l": "W-Frage",
+   "p": "n",
+   "g": "f",
+   "pl": "die W-Fragen"
+  },
+  {
+   "w": "der Bus",
+   "zh": "公共汽车",
+   "lv": "A1",
+   "l": "Bus",
+   "p": "n",
+   "g": "m",
+   "pl": "die Busse",
+   "en": "bus",
+   "ex": "Ich fahre mit dem Bus zur Arbeit.",
+   "exZh": "我坐公交去上班。"
+  },
+  {
+   "w": "der Schüler",
+   "zh": "学生（中小学）",
+   "lv": "A1",
+   "l": "Schüler",
+   "p": "n",
+   "g": "m",
+   "pl": "die Schüler",
+   "en": "pupil",
+   "ex": "Die Schüler haben heute frei.",
+   "exZh": "学生们今天放假。"
+  },
+  {
+   "w": "die Schweiz",
+   "zh": "瑞士",
+   "lv": "A1",
+   "l": "Schweiz",
+   "p": "n",
+   "g": "f"
+  },
+  {
+   "w": "der Mantel",
+   "zh": "大衣",
+   "lv": "A1",
+   "l": "Mantel",
+   "p": "n",
+   "g": "m",
+   "pl": "die Mäntel",
+   "en": "coat",
+   "ex": "Im Winter trage ich einen Mantel.",
+   "exZh": "冬天我穿大衣。"
+  },
+  {
+   "w": "rechts",
+   "zh": "右边",
+   "lv": "A1",
+   "l": "rechts",
+   "p": "adv",
+   "en": "right",
+   "ex": "Gehen Sie nach rechts.",
+   "exZh": "请往右走。"
+  },
+  {
+   "w": "der Eingang",
+   "zh": "入口",
+   "lv": "A1",
+   "l": "Eingang",
+   "p": "n",
+   "g": "m",
+   "pl": "die Eingänge",
+   "en": "entrance",
+   "ex": "Der Eingang ist auf der linken Seite.",
+   "exZh": "入口在左侧。"
+  },
+  {
+   "w": "freundlich",
+   "zh": "友好的",
+   "lv": "A1",
+   "l": "freundlich",
+   "p": "adj",
+   "en": "friendly",
+   "ex": "Die Verkäuferin war sehr freundlich.",
+   "exZh": "女售货员非常友好。"
+  },
+  {
+   "w": "der Mercedes-Pilot",
+   "zh": "梅赛德斯奔驰车队赛车手",
+   "lv": "A1",
+   "l": "Mercedes-Pilot",
+   "p": "n",
+   "g": "m",
+   "pl": "die Mercedes-Piloten"
+  },
+  {
+   "w": "die Friseurin",
+   "zh": "女理发师",
+   "lv": "A1",
+   "l": "Friseurin",
+   "p": "n",
+   "g": "f",
+   "pl": "die Friseurinnen"
+  },
+  {
+   "w": "Was?",
+   "zh": "什么？",
+   "lv": "A1",
+   "l": "Was",
+   "p": "phr"
+  },
+  {
+   "w": "der Schrank",
+   "zh": "柜子；衣柜",
+   "lv": "A1",
+   "l": "Schrank",
+   "p": "n",
+   "g": "m",
+   "pl": "die Schränke",
+   "en": "cupboard",
+   "ex": "Die Kleidung ist im Schrank.",
+   "exZh": "衣服在柜子里。"
+  },
+  {
+   "w": "Peking",
+   "zh": "北京",
+   "lv": "A1",
+   "l": "Peking",
+   "p": "n"
+  },
+  {
+   "w": "das Smartphone",
+   "zh": "智能手机",
+   "lv": "A1",
+   "l": "Smartphone",
+   "p": "n",
+   "g": "n",
+   "pl": "die Smartphones"
+  },
+  {
+   "w": "die Lieblingsstadt",
+   "zh": "最喜欢的城市",
+   "lv": "A1",
+   "l": "Lieblingsstadt",
+   "p": "n",
+   "g": "f",
+   "pl": "die Lieblingsstädte"
+  },
+  {
+   "w": "auf einen Tisch",
+   "zh": "到一张桌子上",
+   "lv": "A1",
+   "l": "auf einen Tisch",
+   "p": "phr"
+  },
+  {
+   "w": "die Stunde",
+   "zh": "小时",
+   "lv": "A1",
+   "l": "Stunde",
+   "p": "n",
+   "g": "f",
+   "pl": "die Stunden",
+   "en": "hour",
+   "ex": "Der Kurs dauert zwei Stunden.",
+   "exZh": "课程持续两个小时。"
+  },
+  {
+   "w": "die Mutter",
+   "zh": "母亲",
+   "lv": "A1",
+   "l": "Mutter",
+   "p": "n",
+   "g": "f",
+   "pl": "die Mütter",
+   "en": "mother",
+   "ex": "Meine Mutter ist Lehrerin.",
+   "exZh": "我母亲是老师。"
+  },
+  {
+   "w": "der Himmel",
+   "zh": "天空",
+   "lv": "A1",
+   "l": "Himmel",
+   "p": "n",
+   "g": "m",
+   "pl": "die Himmel",
+   "en": "sky",
+   "ex": "Der Himmel ist blau.",
+   "exZh": "天空是蓝色的。"
+  },
+  {
+   "w": "das Wohnzimmer",
+   "zh": "客厅",
+   "lv": "A1",
+   "l": "Wohnzimmer",
+   "p": "n",
+   "g": "n",
+   "pl": "die Wohnzimmer",
+   "en": "living room",
+   "ex": "Wir sitzen im Wohnzimmer und lesen.",
+   "exZh": "我们坐在客厅看书。"
+  },
+  {
+   "w": "der Stadtplan",
+   "zh": "城市地图",
+   "lv": "A1",
+   "l": "Stadtplan",
+   "p": "n",
+   "g": "m",
+   "pl": "die Stadtpläne",
+   "en": "city map",
+   "ex": "Hast du einen Stadtplan?",
+   "exZh": "你有城市地图吗？"
+  },
+  {
+   "w": "wöchentlich",
+   "zh": "每周的",
+   "lv": "A1",
+   "l": "wöchentlich",
+   "p": "adj",
+   "en": "weekly",
+   "ex": "Es gibt ein wöchentliches Treffen.",
+   "exZh": "每周有一次聚会。"
+  },
+  {
+   "w": "die Studentin",
+   "zh": "大学生（女）",
+   "lv": "A1",
+   "l": "Studentin",
+   "p": "n",
+   "g": "f",
+   "pl": "die Studentinnen",
+   "en": "student",
+   "ex": "Die Studentin wohnt im Wohnheim.",
+   "exZh": "这位女学生住在宿舍。"
+  },
+  {
+   "w": "der Januar",
+   "zh": "一月",
+   "lv": "A1",
+   "l": "Januar",
+   "p": "n",
+   "g": "m",
+   "pl": "die Januare",
+   "en": "January",
+   "ex": "Im Januar ist es kalt.",
+   "exZh": "一月很冷。"
+  },
+  {
+   "w": "die Frau",
+   "zh": "女人；妻子",
+   "lv": "A1",
+   "l": "Frau",
+   "p": "n",
+   "g": "f",
+   "pl": "die Frauen",
+   "en": "woman",
+   "ex": "Die Frau arbeitet im Büro.",
+   "exZh": "这位女士在办公室工作。"
+  },
+  {
+   "w": "ein",
+   "zh": "一个",
+   "lv": "A1",
+   "l": "ein",
+   "p": "pron"
+  },
+  {
+   "w": "das Mittagessen",
+   "zh": "午餐",
+   "lv": "A1",
+   "l": "Mittagessen",
+   "p": "n",
+   "g": "n",
+   "pl": "die Mittagessen",
+   "en": "lunch",
+   "ex": "Zum Mittagessen gibt es Suppe.",
+   "exZh": "午餐有汤。"
+  },
+  {
+   "w": "das Dossier",
+   "zh": "卷宗；案卷",
+   "lv": "A1",
+   "l": "Dossier",
+   "p": "n",
+   "g": "n",
+   "pl": "die Dossiers"
+  },
+  {
+   "w": "selten",
+   "zh": "很少",
+   "lv": "A1",
+   "l": "selten",
+   "p": "adv",
+   "en": "rarely",
+   "ex": "Ich trinke selten Alkohol.",
+   "exZh": "我很少喝酒。"
+  },
+  {
+   "w": "global",
+   "zh": "全球的；大致的",
+   "lv": "A1",
+   "l": "global",
+   "p": "adj"
+  },
+  {
+   "w": "buchstabieren",
+   "zh": "我拼读→拼读",
+   "lv": "A1",
+   "l": "buchstabieren",
+   "p": "v"
+  },
+  {
+   "w": "Prüfen Sie.",
+   "zh": "请检查。",
+   "lv": "A1",
+   "l": "Prüfen Sie",
+   "p": "phr"
+  },
+  {
+   "w": "der Rasierer",
+   "zh": "剃须刀",
+   "lv": "A1",
+   "l": "Rasierer",
+   "p": "n",
+   "g": "m",
+   "pl": "die Rasierer",
+   "en": "razor",
+   "ex": "Der Rasierer liegt im Bad.",
+   "exZh": "剃须刀在浴室里。"
+  },
+  {
+   "w": "die Ehefrau",
+   "zh": "妻子",
+   "lv": "A1",
+   "l": "Ehefrau",
+   "p": "n",
+   "g": "f",
+   "pl": "die Ehefrauen",
+   "en": "wife",
+   "ex": "Seine Ehefrau arbeitet zu Hause.",
+   "exZh": "他妻子在家工作。"
+  },
+  {
+   "w": "die Nudeln",
+   "zh": "面条（复数）",
+   "lv": "A1",
+   "l": "Nudeln",
+   "p": "n",
+   "g": "pl",
+   "pl": "die Nudeln",
+   "en": "noodles",
+   "ex": "Die Kinder mögen Nudeln.",
+   "exZh": "孩子们喜欢吃面条。"
+  },
+  {
+   "w": "die Banane",
+   "zh": "香蕉",
+   "lv": "A1",
+   "l": "Banane",
+   "p": "n",
+   "g": "f",
+   "pl": "die Bananen",
+   "en": "banana",
+   "ex": "Bananen sind billig.",
+   "exZh": "香蕉很便宜。"
+  },
+  {
+   "w": "das Wetter",
+   "zh": "天气",
+   "lv": "A1",
+   "l": "Wetter",
+   "p": "n",
+   "g": "n",
+   "en": "weather",
+   "ex": "Wie ist das Wetter heute?",
+   "exZh": "今天天气怎么样？"
+  },
+  {
+   "w": "von",
+   "zh": "从……；……的（支配第三格）",
+   "lv": "A1",
+   "l": "von",
+   "p": "prep",
+   "en": "from",
+   "ex": "Ich komme von der Arbeit.",
+   "exZh": "我下班回来。"
+  },
+  {
+   "w": "gut",
+   "zh": "好的",
+   "lv": "A1",
+   "l": "gut",
+   "p": "adj",
+   "en": "good",
+   "ex": "Das Essen ist sehr gut.",
+   "exZh": "饭菜很好。"
+  },
+  {
+   "w": "die E-Mail",
+   "zh": "电子邮件",
+   "lv": "A1",
+   "l": "E-Mail",
+   "p": "n",
+   "g": "f",
+   "pl": "die E-Mails"
+  },
+  {
+   "w": "kommen",
+   "zh": "来；到来",
+   "lv": "A1",
+   "l": "kommen",
+   "p": "v",
+   "en": "to come",
+   "ex": "Woher kommen Sie?",
+   "exZh": "您从哪儿来？"
+  },
+  {
+   "w": "Guten Abend!",
+   "zh": "晚上好",
+   "lv": "A1",
+   "l": "Guten Abend",
+   "p": "phr",
+   "en": "good evening",
+   "ex": "Guten Abend, schön dich zu sehen.",
+   "exZh": "晚上好，很高兴见到你。"
+  },
+  {
+   "w": "auf Seite ...",
+   "zh": "在第……页",
+   "lv": "A1",
+   "l": "auf Seite ",
+   "p": "phr"
+  },
+  {
+   "w": "schreiben",
+   "zh": "写",
+   "lv": "A1",
+   "l": "schreiben",
+   "p": "v",
+   "en": "to write",
+   "ex": "Ich schreibe meiner Mutter einen Brief.",
+   "exZh": "我给母亲写一封信。"
+  },
+  {
+   "w": "hinten",
+   "zh": "后面",
+   "lv": "A1",
+   "l": "hinten",
+   "p": "adv",
+   "en": "behind",
+   "ex": "Hinten ist noch frei.",
+   "exZh": "后面还有空位。"
+  },
+  {
+   "w": "der Boden",
+   "zh": "地板；地面",
+   "lv": "A1",
+   "l": "Boden",
+   "p": "n",
+   "g": "m",
+   "pl": "die Böden",
+   "en": "floor",
+   "ex": "Der Boden ist aus Holz.",
+   "exZh": "地板是木头的。"
+  },
+  {
+   "w": "können",
+   "zh": "能；会（情态动词）",
+   "lv": "A1",
+   "l": "können",
+   "p": "v",
+   "en": "can",
+   "ex": "Ich kann gut schwimmen.",
+   "exZh": "我游泳游得好。"
+  },
+  {
+   "w": "singen",
+   "zh": "唱歌",
+   "lv": "A1",
+   "l": "singen",
+   "p": "v"
+  }
+ ]
+}
