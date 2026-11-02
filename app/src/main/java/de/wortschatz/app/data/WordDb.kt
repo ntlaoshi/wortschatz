@@ -211,6 +211,25 @@ class WordDb private constructor(context: Context) :
     }
 
     /** 查询这批 lemma 中已存在于词库的（统一小写比对），用于导入时避免重复词条 */
+    /**
+     * 按词形批量取词条（不分大小写），用于拍照识别后的匹配。
+     * 返回顺序与库内顺序一致，调用方自行按需排序。
+     */
+    fun wordsByLemmas(lemmas: Collection<String>): List<Word> {
+        val uniq = lemmas.map { it.lowercase() }.filter { it.isNotBlank() }.distinct()
+        if (uniq.isEmpty()) return emptyList()
+        val out = mutableListOf<Word>()
+        uniq.chunked(300).forEach { chunk ->
+            val list = chunk.joinToString(",") { "'${it.replace("'", "''")}'" }
+            readableDatabase.rawQuery(
+                "SELECT $COLUMNS FROM words WHERE LOWER(lemma) IN ($list)", null
+            ).use { c ->
+                while (c.moveToNext()) out.add(readWord(c, c.getLong(0)))
+            }
+        }
+        return out
+    }
+
     fun existingLemmas(lemmas: List<String>): Set<String> {
         if (lemmas.isEmpty()) return emptySet()
         val out = mutableSetOf<String>()

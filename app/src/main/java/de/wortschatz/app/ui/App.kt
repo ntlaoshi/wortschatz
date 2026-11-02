@@ -60,6 +60,12 @@ fun WortschatzApp(vm: AppViewModel) {
     var showCalendar by remember { mutableStateOf(false) }
     var showRecords by remember { mutableStateOf(false) }
     var showBook by remember { mutableStateOf(false) }
+    var showPhotoImport by remember { mutableStateOf(false) }
+
+    if (showPhotoImport) {
+        PhotoImportScreen(vm = vm, onBack = { showPhotoImport = false })
+        return
+    }
 
     if (showBook) {
         BookDetailScreen(vm = vm, onBack = {
@@ -156,7 +162,8 @@ fun WortschatzApp(vm: AppViewModel) {
                     else -> SettingsScreen(
                         vm = vm,
                         onOpenRecords = { showRecords = true },
-                        onOpenBook = { showBook = true }
+                        onOpenBook = { showBook = true },
+                        onOpenPhotoImport = { showPhotoImport = true }
                     )
                 }
             }

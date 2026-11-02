@@ -23,8 +23,14 @@ android {
         applicationId = "de.wortschatz.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 20
-        versionName = "1.19"
+        versionCode = 21
+        versionName = "1.20"
+
+        // 只保留实际会用到的 ABI：真机为 arm64/armeabi，x86_64 供模拟器测试；
+        // OCR 原生库每个 ABI 约 10MB，去掉 x86 可省下这份体积
+        ndk {
+            abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64")
+        }
         vectorDrawables { useSupportLibrary = true }
     }
 
@@ -87,5 +93,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    // 拍照/相册导入：内置拉丁字母 OCR 模型，随 APK 分发，不依赖 Google Play 服务
+    implementation("com.google.mlkit:text-recognition:16.0.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

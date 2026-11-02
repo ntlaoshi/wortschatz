@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- 拍照导入的临时图片，存放于 cache/ocr/ -->
+    <cache-path name="ocr" path="ocr/" />
+</paths>

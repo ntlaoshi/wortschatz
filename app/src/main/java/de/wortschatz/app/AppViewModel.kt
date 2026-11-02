@@ -10,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import de.wortschatz.app.data.Calendar0
 import de.wortschatz.app.data.OnlineDict
+import de.wortschatz.app.data.PhotoOcr
 import de.wortschatz.app.data.PluralStyle
 import de.wortschatz.app.data.Progress
 import de.wortschatz.app.data.Rating
@@ -106,6 +107,14 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
      */
     private val streakMap = mutableMapOf<Long, Int>()
 
+    /**
+     * 本轮每个词的吃力程度：评了几次、其中「模糊/忘了」几次。
+     * 通过时据此决定下次复习间隔——越吃力间隔越短。
+     */
+    private class PassStats(var attempts: Int = 0, var fails: Int = 0)
+
+    private val sessionStats = mutableMapOf<Long, PassStats>()
+
     /** 当前卡片的连续认识次数，供卡片上的进度点使用 */
     var currentStreak by mutableStateOf(0)
         private set
@@ -116,6 +125,18 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     /** 本轮学过的词，用于结束后的拼写测试 */
     var sessionWords by mutableStateOf<List<Word>>(emptyList())
+        private set
+
+    // ---- 拍照 / 相册导入
+    var ocrLoading by mutableStateOf(false)
+        private set
+    /** 识别出且在词库中命中的词条 */
+    var ocrWords by mutableStateOf<List<Word>>(emptyList())
+        private set
+    /** 识别到但词库没有的词数 */
+    var ocrMissed by mutableStateOf(0)
+        private set
+    var ocrError by mutableStateOf<String?>(null)
         private set
 
     // ---- 拼写测试
@@ -372,6 +393,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             queue.clear()
             queue.addAll(items)
             streakMap.clear()
+            sessionStats.clear()
             currentStreak = 0
             sessionDone = 0
             sessionTotal = queue.size
@@ -419,20 +441,31 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         // 先同步合上背面：评分要写数据库，若等写完再复位，
         // 卡片会弹回原位并停留几百毫秒，期间释义一直露着
         revealed = false
+
+        val stats = sessionStats.getOrPut(item.word.id) { PassStats() }
+        stats.attempts++
+        // 只有「认识」算一次通过；「模糊」「忘了」把连续计数清零，并计入本轮吃力程度
+        val positive = rating == Rating.GOOD
+        if (!positive) stats.fails++
+        val streak = if (positive) (streakMap[item.word.id] ?: 0) + 1 else 0
+        streakMap[item.word.id] = streak
+        val passed = positive && streak >= PASS_STREAK
+
         viewModelScope.launch {
             val isNew = item.progress.state == 0
-            val updated = Sm2.update(item.progress, rating)
+            // 会话内不推进复习计划，只在连对达标时按吃力程度安排一次
+            val now = System.currentTimeMillis()
+            val updated = if (passed) {
+                Sm2.onPass(item.progress, stats.fails, now)
+            } else {
+                Sm2.inSession(item.progress, now)
+            }
             withContext(Dispatchers.IO) {
                 db.saveProgress(updated)
                 db.logReview(Calendar0.todayString(), isNew)
             }
 
-            // 只有「认识」算一次通过；「模糊」「忘了」把连续计数清零
-            val positive = rating == Rating.GOOD
-            val streak = if (positive) (streakMap[item.word.id] ?: 0) + 1 else 0
-            streakMap[item.word.id] = streak
-
-            if (positive && streak >= PASS_STREAK) {
+            if (passed) {
                 // 连续认识达标，本词才算过：移出队列，计入进度与拼写测试
                 if (sessionWords.none { it.id == item.word.id }) {
                     sessionWords = sessionWords + item.word
@@ -780,6 +813,57 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
      * 返回 (新增词条数, 书名)；解析失败时词条数为 -1。
      * 同名书已存在时复用，避免反复导入产生一堆同名词书。
      */
+    /** 识别一张图片里的德语词，并匹配本地词库 */
+    fun recognizePhoto(uri: android.net.Uri) {
+        viewModelScope.launch {
+            ocrLoading = true
+            ocrError = null
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    val tokens = PhotoOcr.recognize(getApplication(), uri)
+                    val found = db.wordsByLemmas(tokens).distinctBy { it.id }
+                    tokens.size to found
+                }
+            }.onSuccess { (tokenCount, found) ->
+                ocrWords = found
+                ocrMissed = (tokenCount - found.size).coerceAtLeast(0)
+            }.onFailure { e ->
+                ocrWords = emptyList()
+                ocrMissed = 0
+                ocrError = e.message ?: "识别失败，换一张更清晰的图片试试"
+            }
+            ocrLoading = false
+        }
+    }
+
+    fun clearPhotoImport() {
+        ocrWords = emptyList()
+        ocrMissed = 0
+        ocrError = null
+        ocrLoading = false
+    }
+
+    /** 把识别结果存成一本新单词书 */
+    fun importPhotoWords(name: String, words: List<Word>, onDone: (Int, String) -> Unit) {
+        viewModelScope.launch {
+            if (words.isEmpty()) {
+                onDone(0, "")
+                return@launch
+            }
+            val bookName = name.ifBlank { "拍照导入" }
+            val book = customBooks.firstOrNull { it.name == bookName } ?: run {
+                val created = WordBook(java.util.UUID.randomUUID().toString(), bookName)
+                customBooks = customBooks + created
+                saveBooks()
+                created
+            }
+            withContext(Dispatchers.IO) { db.addWordsToBook(book.id, words.map { it.id }) }
+            selectBook(book)
+            refresh()
+            onDone(words.size, book.name)
+        }
+    }
+
     fun importCustomWords(jsonText: String, onDone: (Int, String) -> Unit) {
         viewModelScope.launch {
             val parsed = withContext(Dispatchers.IO) {
