@@ -1,5 +1,22 @@
 package de.wortschatz.app.ui
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.graphicsLayer
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -50,11 +67,28 @@ private data class TabItem(
 
 @Composable
 fun WortschatzApp(vm: AppViewModel) {
-    if (vm.initializing) {
-        Splash()
-        return
-    }
+    Box(modifier = Modifier.fillMaxSize()) {
+        // 加载结束时不直接「啪」地切走，与主界面做一次淡入淡出
+        Crossfade(
+            targetState = vm.initializing,
+            animationSpec = tween(durationMillis = 380, easing = FastOutSlowInEasing),
+            label = "splash"
+        ) { loading ->
+            if (loading) Splash() else MainScaffold(vm)
+        }
 
+        // 撤销条挂在最外层：学习、拼写、导入各个页面都能用
+        UndoBar(
+            vm = vm,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(start = 16.dp, end = 16.dp, bottom = 96.dp)
+        )
+    }
+}
+
+@Composable
+private fun MainScaffold(vm: AppViewModel) {
     var tab by rememberSaveable { mutableIntStateOf(0) }
     var showStudy by remember { mutableStateOf(false) }
     var showCalendar by remember { mutableStateOf(false) }
@@ -197,6 +231,45 @@ fun WortschatzApp(vm: AppViewModel) {
 
 @Composable
 private fun Splash() {
+    val logoAlpha = remember { Animatable(0f) }
+    val logoScale = remember { Animatable(0.88f) }
+    val titleLift = remember { Animatable(16f) }
+    val titleAlpha = remember { Animatable(0f) }
+    val footAlpha = remember { Animatable(0f) }
+
+    // 缓慢的呼吸感，避免界面死板
+    val breathe = rememberInfiniteTransition(label = "breathe")
+    val glow by breathe.animateFloat(
+        initialValue = 0.94f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1500, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "glow"
+    )
+
+    LaunchedEffect(Unit) {
+        launch {
+            logoAlpha.animateTo(1f, tween(420, easing = FastOutSlowInEasing))
+        }
+        launch {
+            logoScale.animateTo(1f, spring(dampingRatio = 0.62f, stiffness = Spring.StiffnessLow))
+        }
+        launch {
+            delay(140)
+            titleAlpha.animateTo(1f, tween(460, easing = FastOutSlowInEasing))
+        }
+        launch {
+            delay(140)
+            titleLift.animateTo(0f, tween(520, easing = FastOutSlowInEasing))
+        }
+        launch {
+            delay(320)
+            footAlpha.animateTo(1f, tween(420, easing = FastOutSlowInEasing))
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -204,32 +277,78 @@ private fun Splash() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(Modifier.weight(1f))
+
+        Box(
+            modifier = Modifier
+                .size(74.dp)
+                .graphicsLayer {
+                    alpha = logoAlpha.value
+                    scaleX = logoScale.value * glow
+                    scaleY = logoScale.value * glow
+                }
+                .clip(CircleShape)
+                .background(
+                    Brush.linearGradient(
+                        listOf(
+                            MaterialTheme.colorScheme.primary,
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+                        )
+                    )
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "W",
+                fontFamily = FontFamily.Default,
+                fontSize = 36.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+        }
+
+        Spacer(Modifier.height(20.dp))
+
         Text(
             text = "Wortschatz",
+            modifier = Modifier.graphicsLayer {
+                alpha = titleAlpha.value
+                translationY = titleLift.value
+            },
             fontFamily = FontFamily.Default,
-            fontSize = 30.sp,
+            fontSize = 27.sp,
             fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(Modifier.height(6.dp))
         Text(
-            text = "德语单词",
-            fontSize = 13.sp,
+            text = "德 语 单 词",
+            modifier = Modifier.graphicsLayer {
+                alpha = titleAlpha.value
+                translationY = titleLift.value
+            },
+            fontSize = 12.sp,
             letterSpacing = 3.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
-        Spacer(Modifier.height(30.dp))
-        CircularProgressIndicator(
-            strokeWidth = 2.dp,
-            modifier = Modifier.size(24.dp),
-            color = MaterialTheme.colorScheme.primary
-        )
+
         Spacer(Modifier.weight(1f))
-        Text(
-            text = "正在准备离线词库…",
-            fontSize = 11.5.sp,
-            color = MaterialTheme.colorScheme.outline,
-            modifier = Modifier.padding(bottom = 36.dp)
-        )
+
+        Column(
+            modifier = Modifier.graphicsLayer { alpha = footAlpha.value },
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CircularProgressIndicator(
+                strokeWidth = 2.dp,
+                modifier = Modifier.size(22.dp),
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.85f)
+            )
+            Spacer(Modifier.height(14.dp))
+            Text(
+                text = "正在准备离线词库…",
+                fontSize = 11.5.sp,
+                color = MaterialTheme.colorScheme.outline
+            )
+            Spacer(Modifier.height(36.dp))
+        }
     }
 }

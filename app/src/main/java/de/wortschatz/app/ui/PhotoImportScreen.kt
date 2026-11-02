@@ -162,7 +162,20 @@ fun PhotoImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) -
                 modifier = Modifier.weight(1f),
                 meanings = meanings,
                 onMeaningChange = { term, zh -> meanings[term] = zh },
-                onLookup = onLookup
+                onLookup = onLookup,
+                onRemove = { id ->
+                    vm.removeImportWord(id)
+                    checked = checked - id
+                },
+                onRemoveMissed = { term ->
+                    meanings.remove(term)
+                    vm.removeImportMissed(term)
+                },
+                onClear = {
+                    meanings.clear()
+                    checked = emptySet()
+                    vm.clearImport(undoable = true)
+                }
             )
 
             if (vm.importWords.isNotEmpty() && !vm.importLoading) {

@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -19,12 +20,16 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.remember
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -58,7 +63,10 @@ fun ImportResultPane(
     modifier: Modifier = Modifier,
     meanings: Map<String, String> = emptyMap(),
     onMeaningChange: ((String, String) -> Unit)? = null,
-    onLookup: ((String) -> Unit)? = null
+    onLookup: ((String) -> Unit)? = null,
+    onRemove: ((Long) -> Unit)? = null,
+    onRemoveMissed: ((String) -> Unit)? = null,
+    onClear: (() -> Unit)? = null
 ) {
     when {
         vm.importLoading -> Box(
@@ -115,6 +123,19 @@ fun ImportResultPane(
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.outline
                     )
+                    Spacer(Modifier.weight(1f))
+                    if (onClear != null) {
+                        TextButton(
+                            onClick = onClear,
+                            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp)
+                        ) {
+                            Text(
+                                text = "清除",
+                                fontSize = 12.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
                 }
             }
 
@@ -153,6 +174,19 @@ fun ImportResultPane(
                                 fontFamily = FontFamily.Default,
                                 fontSize = 10.5.sp,
                                 color = MaterialTheme.colorScheme.outline
+                            )
+                        }
+                    }
+                    if (onRemove != null) {
+                        IconButton(
+                            onClick = { onRemove.invoke(word.id) },
+                            modifier = Modifier.size(32.dp)
+                        ) {
+                            Icon(
+                                Icons.Rounded.Close,
+                                contentDescription = "删除 ${word.word}",
+                                modifier = Modifier.size(16.dp),
+                                tint = MaterialTheme.colorScheme.outline
                             )
                         }
                     }
@@ -233,6 +267,19 @@ fun ImportResultPane(
                                         textStyle = androidx.compose.ui.text.TextStyle(fontSize = 13.sp),
                                         shape = RoundedCornerShape(9.dp)
                                     )
+                                    if (onRemoveMissed != null) {
+                                        IconButton(
+                                            onClick = { onRemoveMissed.invoke(term) },
+                                            modifier = Modifier.size(32.dp)
+                                        ) {
+                                            Icon(
+                                                Icons.Rounded.Close,
+                                                contentDescription = "删除 $term",
+                                                modifier = Modifier.size(15.dp),
+                                                tint = MaterialTheme.colorScheme.outline
+                                            )
+                                        }
+                                    }
                                 }
                             }
                         }

@@ -188,6 +188,16 @@ class WordDb private constructor(context: Context) :
         )
     }
 
+    /** 撤销一次学习记录：把当天的复习/新学计数减回去 */
+    fun undoLogReview(day: String, isNewWord: Boolean) {
+        val esc = day.replace("'", "''")
+        writableDatabase.execSQL(
+            "UPDATE daily_log SET reviews = MAX(reviews - 1, 0)" +
+                (if (isNewWord) ", learned = MAX(learned - 1, 0)" else "") +
+                " WHERE day = '$esc'"
+        )
+    }
+
     /** 切换收藏，返回切换后的状态 */
     fun toggleStar(wordId: Long): Boolean {
         val db = writableDatabase

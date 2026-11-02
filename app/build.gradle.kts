@@ -23,8 +23,8 @@ android {
         applicationId = "de.wortschatz.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 26
-        versionName = "1.25"
+        versionCode = 27
+        versionName = "1.26"
 
         // 只保留实际会用到的 ABI：真机为 arm64/armeabi，x86_64 供模拟器测试；
         // OCR 原生库每个 ABI 约 10MB，去掉 x86 可省下这份体积

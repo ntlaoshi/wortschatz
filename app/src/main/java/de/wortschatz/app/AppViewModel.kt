@@ -111,7 +111,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
      * 本轮每个词的吃力程度：评了几次、其中「模糊/忘了」几次。
      * 通过时据此决定下次复习间隔——越吃力间隔越短。
      */
-    private class PassStats(var attempts: Int = 0, var fails: Int = 0)
+    private class PassStats(var attempts: Int = 0, var fails: Int = 0) {
+        fun copy() = PassStats(attempts, fails)
+    }
 
     private val sessionStats = mutableMapOf<Long, PassStats>()
 
@@ -126,6 +128,60 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     /** 本轮学过的词，用于结束后的拼写测试 */
     var sessionWords by mutableStateOf<List<Word>>(emptyList())
         private set
+
+    // ---------------------------------------------------------------- 撤销
+
+    /** 最近一步可撤销操作的说明，null 表示没有 */
+    var undoLabel by mutableStateOf<String?>(null)
+        private set
+    private var undoRestore: (() -> Unit)? = null
+
+    /**
+     * 登记一步可撤销操作。
+     *
+     * 只保留最近一步：连续操作时，旧的那步自然失效——这符合「撤销上一步」的直觉，
+     * 也避免维护一整个历史栈带来的状态不一致。
+     */
+    private fun offerUndo(label: String, restore: () -> Unit) {
+        undoRestore = restore
+        undoLabel = label
+    }
+
+    fun undo() {
+        val restore = undoRestore
+        undoRestore = null
+        undoLabel = null
+        restore?.invoke()
+    }
+
+    fun clearUndo() {
+        undoRestore = null
+        undoLabel = null
+    }
+
+    private class StudySnapshot(
+        val queue: List<WordWithProgress>,
+        val current: WordWithProgress?,
+        val revealed: Boolean,
+        val done: Int,
+        val words: List<Word>,
+        val streaks: Map<Long, Int>,
+        val stats: Map<Long, PassStats>,
+        val progress: Progress?,
+        val isNew: Boolean
+    )
+
+    private class SpellSnapshot(
+        val queue: List<Word>,
+        val input: String,
+        val checked: Boolean,
+        val lastCorrect: Boolean,
+        val passed: Int,
+        val firstTry: Int,
+        val attempts: Int,
+        val skipped: Int,
+        val failed: Set<Long>
+    )
 
     // ---- 文本 / 拍照导入
     var importLoading by mutableStateOf(false)
@@ -360,6 +416,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             val newState = withContext(Dispatchers.IO) { db.toggleStar(wordId) }
             starState = if (newState) starState + wordId else starState - wordId
             loadStarred()
+            offerUndo(if (newState) "已加入生词本" else "已移出生词本") { toggleStar(wordId) }
         }
     }
 
@@ -432,18 +489,70 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
      */
     fun masterCurrent() {
         val item = current ?: return
+        val snapshot = StudySnapshot(
+            queue = queue.toList(),
+            current = item,
+            revealed = revealed,
+            done = sessionDone,
+            words = sessionWords,
+            streaks = streakMap.toMap(),
+            stats = sessionStats.mapValues { it.value.copy() },
+            progress = item.progress,
+            isNew = false
+        )
         revealed = false
         viewModelScope.launch {
             withContext(Dispatchers.IO) { db.setMastered(item.word.id, true) }
             queue.removeAll { it.word.id == item.word.id }
             // 已掌握的词不再参与拼写测试
             sessionDone++
+            offerUndo("标记为已掌握") {
+                viewModelScope.launch {
+                    withContext(Dispatchers.IO) { db.setMastered(item.word.id, false) }
+                    restoreStudy(snapshot, restoreProgress = false)
+                }
+            }
             nextCard()
+        }
+    }
+
+    /** 回到评分/掌握之前的状态：队列、连对计数、进度全部还原 */
+    private fun restoreStudy(s: StudySnapshot, restoreProgress: Boolean = true) {
+        if (spellActive) exitSpelling()
+        queue.clear()
+        queue.addAll(s.queue)
+        current = s.current
+        revealed = s.revealed
+        sessionDone = s.done
+        sessionWords = s.words
+        streakMap.clear()
+        streakMap.putAll(s.streaks)
+        sessionStats.clear()
+        sessionStats.putAll(s.stats)
+        currentStreak = s.streaks[s.current?.word?.id] ?: 0
+        if (!restoreProgress) return
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                s.progress?.let { db.saveProgress(it) }
+                db.undoLogReview(Calendar0.todayString(), s.isNew)
+            }
         }
     }
 
     fun rate(rating: Rating) {
         val item = current ?: return
+        // 撤销快照必须在改动任何状态之前拍下
+        val snapshot = StudySnapshot(
+            queue = queue.toList(),
+            current = item,
+            revealed = revealed,
+            done = sessionDone,
+            words = sessionWords,
+            streaks = streakMap.toMap(),
+            stats = sessionStats.mapValues { it.value.copy() },
+            progress = item.progress,
+            isNew = item.progress.state == 0
+        )
         // 先同步合上背面：评分要写数据库，若等写完再复位，
         // 卡片会弹回原位并停留几百毫秒，期间释义一直露着
         revealed = false
@@ -481,6 +590,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 // 没达标：随机插回队列靠后的位置，隔几张卡再判一次
                 enqueueLater(WordWithProgress(item.word, updated))
             }
+            offerUndo("评了「${rating.label}」") { restoreStudy(snapshot) }
             nextCard()
         }
     }
@@ -540,9 +650,36 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         spellInput = text
     }
 
+    private fun spellSnapshot() = SpellSnapshot(
+        queue = spellQueue.toList(),
+        input = spellInput,
+        checked = spellChecked,
+        lastCorrect = spellLastCorrect,
+        passed = spellPassed,
+        firstTry = spellFirstTry,
+        attempts = spellAttempts,
+        skipped = spellSkipped,
+        failed = spellFailed.toSet()
+    )
+
+    private fun restoreSpell(s: SpellSnapshot) {
+        spellQueue.clear()
+        spellQueue.addAll(s.queue)
+        spellInput = s.input
+        spellChecked = s.checked
+        spellLastCorrect = s.lastCorrect
+        spellPassed = s.passed
+        spellFirstTry = s.firstTry
+        spellAttempts = s.attempts
+        spellSkipped = s.skipped
+        spellFailed.clear()
+        spellFailed.addAll(s.failed)
+    }
+
     fun checkSpelling() {
         if (spellChecked) return
         val w = spellWord ?: return
+        val snapshot = spellSnapshot()
         val ok = SpellTest.matches(spellInput, w)
         spellLastCorrect = ok
         spellChecked = true
@@ -553,12 +690,14 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         } else {
             spellFailed.add(w.id)
         }
+        offerUndo("提交了「${spellInput.ifBlank { "空答案" }}」") { restoreSpell(snapshot) }
     }
 
     /** 提交后推进：拼对的出队，拼错的挪到队尾稍后重测 */
     fun nextSpelling() {
         if (!spellChecked) return
         val w = spellQueue.firstOrNull() ?: return
+        val snapshot = spellSnapshot()
         if (spellLastCorrect) {
             spellQueue.removeAt(0)
         } else {
@@ -569,16 +708,20 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         spellInput = ""
         spellChecked = false
         spellLastCorrect = false
+        offerUndo("进入下一题") { restoreSpell(snapshot) }
     }
 
     /** 跳过当前词：不计入通过，直接出队，结果页会统计跳过数量 */
     fun skipSpelling() {
         if (spellQueue.isEmpty()) return
+        val snapshot = spellSnapshot()
+        val skippedWord = spellWord?.word ?: ""
         spellSkipped++
         spellQueue.removeAt(0)
         spellInput = ""
         spellChecked = false
         spellLastCorrect = false
+        offerUndo("跳过了「$skippedWord」") { restoreSpell(snapshot) }
     }
 
     fun exitSpelling() {
@@ -883,13 +1026,45 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         importError = message
     }
 
-    fun clearImport() {
+    fun clearImport(undoable: Boolean = false) {
+        val words = importWords
+        val missed = importMissed
+        val tokenOf = importTokenOf
+        val ignored = importIgnored
         importWords = emptyList()
         importMissed = emptyList()
         importTokenOf = emptyMap()
         importIgnored = 0
         importError = null
         importLoading = false
+        if (undoable && (words.isNotEmpty() || missed.isNotEmpty())) {
+            offerUndo("清空了识别结果") {
+                importWords = words
+                importMissed = missed
+                importTokenOf = tokenOf
+                importIgnored = ignored
+            }
+        }
+    }
+
+    /** 从结果里去掉一个命中的词条（识别错了或者这次不想导入） */
+    fun removeImportWord(wordId: Long) {
+        val removed = importWords.firstOrNull { it.id == wordId }
+        val words = importWords
+        val tokenOf = importTokenOf
+        importWords = importWords.filterNot { it.id == wordId }
+        importTokenOf = importTokenOf - wordId
+        offerUndo("删除了「${removed?.word ?: ""}」") {
+            importWords = words
+            importTokenOf = tokenOf
+        }
+    }
+
+    /** 从「未收录」里去掉一个词形 */
+    fun removeImportMissed(term: String) {
+        val missed = importMissed
+        importMissed = importMissed.filterNot { it == term }
+        offerUndo("删除了「$term」") { importMissed = missed }
     }
 
     /**

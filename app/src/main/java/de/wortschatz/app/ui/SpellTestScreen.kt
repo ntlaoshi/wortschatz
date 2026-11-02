@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,10 +32,13 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -118,13 +122,73 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
         if (vm.spellChecked) vm.speakWord(word)
     }
 
+    // 键盘常驻：换题时把焦点要回输入框。不主动 requestFocus 的话，
+    // 点「下一题」后焦点丢失，键盘就自己收起来了。
+    val focusRequester = remember { FocusRequester() }
+    LaunchedEffect(word.id) {
+        runCatching { focusRequester.requestFocus() }
+    }
+    // 判定后也要把焦点留住：否则输入框失焦，键盘会自己收起来
+    LaunchedEffect(vm.spellChecked) {
+        if (vm.spellChecked) runCatching { focusRequester.requestFocus() }
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(Modifier.height(18.dp))
+        // ---- 顶部操作条：主按钮不再压在底部，键盘弹起时也点得到
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            TextButton(
+                onClick = { vm.skipSpelling() },
+                enabled = !vm.spellChecked
+            ) {
+                Text(
+                    text = "跳过这个词",
+                    fontSize = 12.5.sp,
+                    color = if (vm.spellChecked) MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
+                    else MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            Spacer(Modifier.weight(1f))
+            val inputEmpty = vm.spellInput.isBlank() && !vm.spellChecked
+            Surface(
+                modifier = Modifier
+                    .height(40.dp)
+                    .widthIn(min = 112.dp),
+                shape = RoundedCornerShape(12.dp),
+                color = if (inputEmpty) MaterialTheme.colorScheme.surfaceVariant
+                else MaterialTheme.colorScheme.primary,
+                onClick = {
+                    if (vm.spellChecked) vm.nextSpelling() else vm.checkSpelling()
+                }
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Text(
+                        text = when {
+                            !vm.spellChecked -> "检查"
+                            vm.spellLastCorrect && vm.spellRemaining <= 1 -> "查看结果"
+                            vm.spellLastCorrect -> "下一题"
+                            else -> "继续测试"
+                        },
+                        modifier = Modifier.padding(horizontal = 22.dp),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = if (inputEmpty) MaterialTheme.colorScheme.onSurfaceVariant
+                        else MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            }
+        }
+
+        Spacer(Modifier.height(10.dp))
         Text(
             text = "根据释义写出德语",
             fontSize = 12.sp,
@@ -156,14 +220,16 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
             color = MaterialTheme.colorScheme.outline
         )
 
-        Spacer(Modifier.height(28.dp))
+        Spacer(Modifier.height(22.dp))
 
         OutlinedTextField(
             value = vm.spellInput,
-            onValueChange = { vm.onSpellInput(it) },
-            modifier = Modifier.fillMaxWidth(),
+            // 判定后不再锁住输入框：enabled=false 会让它失焦，键盘随之收起
+            onValueChange = { if (!vm.spellChecked) vm.onSpellInput(it) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .focusRequester(focusRequester),
             singleLine = true,
-            enabled = !vm.spellChecked,
             placeholder = { Text("输入德语拼写", fontSize = 14.sp) },
             textStyle = androidx.compose.ui.text.TextStyle(
                 fontSize = 19.sp,
@@ -212,9 +278,8 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
             color = MaterialTheme.colorScheme.outline
         )
 
-        Spacer(Modifier.height(14.dp))
-
         if (vm.spellChecked) {
+            Spacer(Modifier.height(12.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = if (vm.spellLastCorrect) Icons.Rounded.Check
@@ -257,62 +322,10 @@ private fun SpellQuestion(vm: AppViewModel, word: Word, modifier: Modifier = Mod
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-        } else {
-            Spacer(Modifier.height(18.dp))
         }
 
         Spacer(Modifier.weight(1f))
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End
-        ) {
-            TextButton(
-                onClick = { vm.skipSpelling() },
-                enabled = !vm.spellChecked
-            ) {
-                Text(
-                    text = "跳过这个词",
-                    fontSize = 12.5.sp,
-                    color = if (vm.spellChecked) MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
-                    else MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        }
-
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
-            shape = RoundedCornerShape(15.dp),
-            color = if (vm.spellInput.isBlank() && !vm.spellChecked)
-                MaterialTheme.colorScheme.surfaceVariant
-            else MaterialTheme.colorScheme.primary,
-            onClick = {
-                if (vm.spellChecked) {
-                    vm.nextSpelling()
-                } else {
-                    vm.checkSpelling()
-                }
-            }
-        ) {
-            Box(contentAlignment = Alignment.Center) {
-                Text(
-                    text = when {
-                        !vm.spellChecked -> "检查"
-                        vm.spellLastCorrect && vm.spellRemaining <= 1 -> "查看结果"
-                        vm.spellLastCorrect -> "下一题"
-                        else -> "继续测试"
-                    },
-                    fontSize = 14.5.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = if (vm.spellInput.isBlank() && !vm.spellChecked)
-                        MaterialTheme.colorScheme.onSurfaceVariant
-                    else MaterialTheme.colorScheme.onPrimary
-                )
-            }
-        }
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(10.dp))
     }
 }
 

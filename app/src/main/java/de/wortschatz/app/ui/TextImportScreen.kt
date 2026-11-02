@@ -145,13 +145,6 @@ fun TextImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) ->
                     ) {
                         Text("提取单词", fontSize = 14.sp)
                     }
-                    Spacer(Modifier.width(10.dp))
-                    TextButton(onClick = {
-                        text = ""
-                        vm.clearImport()
-                    }) {
-                        Text("清空", fontSize = 12.5.sp)
-                    }
                 }
                 Spacer(Modifier.height(6.dp))
             }
@@ -163,7 +156,21 @@ fun TextImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) ->
                 modifier = Modifier.weight(1f),
                 meanings = meanings,
                 onMeaningChange = { term, zh -> meanings[term] = zh },
-                onLookup = onLookup
+                onLookup = onLookup,
+                onRemove = { id ->
+                    vm.removeImportWord(id)
+                    checked = checked - id
+                },
+                onRemoveMissed = { term ->
+                    meanings.remove(term)
+                    vm.removeImportMissed(term)
+                },
+                onClear = {
+                    text = ""
+                    meanings.clear()
+                    checked = emptySet()
+                    vm.clearImport(undoable = true)
+                }
             )
 
             if (vm.importWords.isNotEmpty() && !vm.importLoading) {
