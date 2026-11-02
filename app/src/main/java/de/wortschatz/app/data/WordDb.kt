@@ -216,19 +216,21 @@ class WordDb private constructor(context: Context) :
      * 返回顺序与库内顺序一致，调用方自行按需排序。
      */
     fun wordsByLemmas(lemmas: Collection<String>): List<Word> {
-        val uniq = lemmas.map { it.lowercase() }.filter { it.isNotBlank() }.distinct()
+        val uniq = lemmas.map { foldUmlaut(it) }.filter { it.isNotBlank() }.distinct()
         if (uniq.isEmpty()) return emptyList()
         val out = mutableListOf<Word>()
         uniq.chunked(300).forEach { chunk ->
             val list = chunk.joinToString(",") { "'${it.replace("'", "''")}'" }
+            // 双向折叠变音字母：文本里写 Gemuese 也能命中词库的 Gemüse
             readableDatabase.rawQuery(
-                "SELECT $COLUMNS FROM words WHERE LOWER(lemma) IN ($list)", null
+                "SELECT $COLUMNS FROM words WHERE $FOLDED_LEMMA IN ($list)", null
             ).use { c ->
                 while (c.moveToNext()) out.add(readWord(c, c.getLong(0)))
             }
         }
         return out
     }
+
 
     fun existingLemmas(lemmas: List<String>): Set<String> {
         if (lemmas.isEmpty()) return emptySet()
@@ -655,6 +657,15 @@ class WordDb private constructor(context: Context) :
     companion object {
         private const val DB_NAME = "wortschatz.db"
         private const val DB_VERSION = 4
+
+        /** 与 [foldUmlaut] 对应的 SQL 表达式，用于变音字母的模糊匹配 */
+        private const val FOLDED_LEMMA =
+            "LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(lemma," +
+                "'ä','ae'),'ö','oe'),'ü','ue'),'ß','ss'),'Ä','ae'),'Ö','oe'),'Ü','ue'))"
+
+        /** 小写并把变音字母转写为 ae/oe/ue/ss */
+        fun foldUmlaut(raw: String): String = raw.trim().lowercase()
+            .replace("ä", "ae").replace("ö", "oe").replace("ü", "ue").replace("ß", "ss")
         private const val COLUMNS =
             "id, word, lemma, pos, gender, plural, zh, en, example, example_zh, level, tags, source"
 

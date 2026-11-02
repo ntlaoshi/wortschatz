@@ -127,16 +127,19 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     var sessionWords by mutableStateOf<List<Word>>(emptyList())
         private set
 
-    // ---- 拍照 / 相册导入
-    var ocrLoading by mutableStateOf(false)
+    // ---- 文本 / 拍照导入
+    var importLoading by mutableStateOf(false)
         private set
-    /** 识别出且在词库中命中的词条 */
-    var ocrWords by mutableStateOf<List<Word>>(emptyList())
+    /** 命中词库的词条 */
+    var importWords by mutableStateOf<List<Word>>(emptyList())
         private set
-    /** 识别到但词库没有的词数 */
-    var ocrMissed by mutableStateOf(0)
+    /** 识别到但词库未收录的词形——展示出来，用户才知道少的几个是什么 */
+    var importMissed by mutableStateOf<List<String>>(emptyList())
         private set
-    var ocrError by mutableStateOf<String?>(null)
+    /** 被当作虚词忽略的数量（der/und/ist 这类，不构成学习对象） */
+    var importIgnored by mutableStateOf(0)
+        private set
+    var importError by mutableStateOf<String?>(null)
         private set
 
     // ---- 拼写测试
@@ -816,35 +819,61 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     /** 识别一张图片里的德语词，并匹配本地词库 */
     fun recognizePhoto(uri: android.net.Uri) {
         viewModelScope.launch {
-            ocrLoading = true
-            ocrError = null
+            importLoading = true
+            importError = null
             runCatching {
-                withContext(Dispatchers.IO) {
-                    val tokens = PhotoOcr.recognize(getApplication(), uri)
-                    val found = db.wordsByLemmas(tokens).distinctBy { it.id }
-                    tokens.size to found
-                }
-            }.onSuccess { (tokenCount, found) ->
-                ocrWords = found
-                ocrMissed = (tokenCount - found.size).coerceAtLeast(0)
+                withContext(Dispatchers.IO) { PhotoOcr.recognize(getApplication(), uri) }
+            }.onSuccess { scan ->
+                applyScan(scan.tokens, scan.ignored)
             }.onFailure { e ->
-                ocrWords = emptyList()
-                ocrMissed = 0
-                ocrError = e.message ?: "识别失败，换一张更清晰的图片试试"
+                failImport(e.message ?: "识别失败，换一张更清晰的图片试试")
             }
-            ocrLoading = false
+            importLoading = false
         }
     }
 
-    fun clearPhotoImport() {
-        ocrWords = emptyList()
-        ocrMissed = 0
-        ocrError = null
-        ocrLoading = false
+    /** 从粘贴的文本里提取德语词 */
+    fun analyzeText(text: String) {
+        val scan = PhotoOcr.scan(text)
+        if (scan.tokens.isEmpty() && scan.ignored == 0) {
+            failImport("没有识别到德语单词，检查一下粘贴的内容")
+            return
+        }
+        viewModelScope.launch {
+            importLoading = true
+            importError = null
+            applyScan(scan.tokens, scan.ignored)
+            importLoading = false
+        }
+    }
+
+    /** 识别结果 → 命中词库的词条 + 未收录的词形 */
+    private suspend fun applyScan(tokens: List<String>, ignored: Int) {
+        val found = withContext(Dispatchers.IO) { db.wordsByLemmas(tokens) }.distinctBy { it.id }
+        // 命中判定同样折叠变音字母，否则 Gemuese 命中了 Gemüse 却仍被算作「未收录」
+        val hit = found.map { WordDb.foldUmlaut(it.lemma) }.toSet()
+        importWords = found
+        importMissed = tokens.filter { WordDb.foldUmlaut(it) !in hit }.distinct()
+        importIgnored = ignored
+    }
+
+    private fun failImport(message: String) {
+        importWords = emptyList()
+        importMissed = emptyList()
+        importIgnored = 0
+        importError = message
+    }
+
+    fun clearImport() {
+        importWords = emptyList()
+        importMissed = emptyList()
+        importIgnored = 0
+        importError = null
+        importLoading = false
     }
 
     /** 把识别结果存成一本新单词书 */
-    fun importPhotoWords(name: String, words: List<Word>, onDone: (Int, String) -> Unit) {
+    fun importAsBook(name: String, words: List<Word>, onDone: (Int, String) -> Unit) {
         viewModelScope.launch {
             if (words.isEmpty()) {
                 onDone(0, "")

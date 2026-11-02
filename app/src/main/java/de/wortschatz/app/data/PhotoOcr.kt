@@ -32,7 +32,10 @@ object PhotoOcr {
         "hier", "dort", "ja", "nein", "bitte", "danke"
     )
 
-    suspend fun recognize(context: Context, uri: Uri): List<String> =
+    /** 扫描结果：候选词 + 被当作虚词忽略的数量 */
+    data class Scan(val tokens: List<String>, val ignored: Int)
+
+    suspend fun recognize(context: Context, uri: Uri): Scan =
         suspendCancellableCoroutine { cont ->
             val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
             try {
@@ -40,7 +43,7 @@ object PhotoOcr {
                 recognizer.process(image)
                     .addOnSuccessListener { result ->
                         recognizer.close()
-                        if (cont.isActive) cont.resume(extractWords(result.text))
+                        if (cont.isActive) cont.resume(scan(result.text))
                     }
                     .addOnFailureListener { e ->
                         recognizer.close()
@@ -53,19 +56,26 @@ object PhotoOcr {
         }
 
     /**
-     * 从识别文本里挑出候选德语词：去重、跳过虚词与纯数字/缩写。
-     * 保序，便于结果列表贴近原图顺序。
+     * 从文本里挑出候选德语词：去重、跳过虚词与纯数字/缩写。
+     *
+     * 被跳过的虚词数量单独返回，用于向用户解释「为什么识别出的词比看到的少」。
      */
-    fun extractWords(text: String): List<String> {
+    fun scan(text: String): Scan {
         val seen = LinkedHashSet<String>()
+        var ignored = 0
         TOKEN.findAll(text).forEach { m ->
             val raw = m.value.trim('-')
             if (raw.length < 2) return@forEach
-            if (raw.lowercase() in STOPWORDS) return@forEach
             // 全大写且很短的多为缩写或等级标记（A1、CD、DVD）
             if (raw.length <= 3 && raw.all { it.isUpperCase() }) return@forEach
+            if (raw.lowercase() in STOPWORDS) {
+                ignored++
+                return@forEach
+            }
             seen.add(raw)
         }
-        return seen.toList()
+        return Scan(seen.toList(), ignored)
     }
+
+    fun extractWords(text: String): List<String> = scan(text).tokens
 }

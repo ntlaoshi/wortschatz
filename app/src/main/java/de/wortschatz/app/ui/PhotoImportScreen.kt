@@ -1,12 +1,10 @@
 package de.wortschatz.app.ui
 
-import android.content.Context
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,20 +16,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.CameraAlt
 import androidx.compose.material.icons.rounded.PhotoLibrary
 import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -55,20 +48,18 @@ import java.io.File
  * 拍照 / 相册导入单词：OCR 识别 → 匹配本地词库 → 存成一本新单词书。
  *
  * 只导入词库里已有的词条，保证导入后每张卡片都有释义可背；
- * 词库没有的词会在底部提示数量，不静默丢失。
+ * 未收录的词会在结果区逐个列出，方便判断是识别误差还是词库缺口。
  */
 @Composable
-fun PhotoImportScreen(vm: AppViewModel, onBack: () -> Unit) {
+fun PhotoImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) -> Unit = {}) {
     val context = LocalContext.current
     var checked by remember { mutableStateOf<Set<Long>>(emptySet()) }
-    var bookName by remember { mutableStateOf("拍照导入") }
+    var pendingUri by remember { mutableStateOf<Uri?>(null) }
 
-    // 识别结果变化时默认全选
-    LaunchedEffect(vm.ocrWords) {
-        checked = vm.ocrWords.map { it.id }.toSet()
+    LaunchedEffect(vm.importWords) {
+        checked = vm.importWords.map { it.id }.toSet()
     }
 
-    var pendingUri by remember { mutableStateOf<Uri?>(null) }
     val cameraLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.TakePicture()
     ) { ok ->
@@ -95,7 +86,6 @@ fun PhotoImportScreen(vm: AppViewModel, onBack: () -> Unit) {
                 .statusBarsPadding()
                 .navigationBarsPadding()
         ) {
-            // 顶栏
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -126,7 +116,7 @@ fun PhotoImportScreen(vm: AppViewModel, onBack: () -> Unit) {
                     lineHeight = 19.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                Spacer(Modifier.height(14.dp))
+                Spacer(Modifier.height(12.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     Button(
                         onClick = { takePhoto() },
@@ -151,134 +141,24 @@ fun PhotoImportScreen(vm: AppViewModel, onBack: () -> Unit) {
                         Text("相册", fontSize = 14.sp)
                     }
                 }
-                Spacer(Modifier.height(14.dp))
+                Spacer(Modifier.height(10.dp))
             }
 
-            when {
-                vm.ocrLoading -> Box(
-                    modifier = Modifier.weight(1f).fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        CircularProgressIndicator(strokeWidth = 2.dp, modifier = Modifier.size(26.dp))
-                        Spacer(Modifier.height(10.dp))
-                        Text("正在识别…", fontSize = 12.5.sp, color = MaterialTheme.colorScheme.outline)
-                    }
-                }
+            ImportResultPane(
+                vm = vm,
+                checked = checked,
+                onCheckedChange = { checked = it },
+                modifier = Modifier.weight(1f),
+                onLookup = onLookup
+            )
 
-                vm.ocrError != null -> Box(
-                    modifier = Modifier.weight(1f).fillMaxWidth().padding(24.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = vm.ocrError ?: "",
-                        fontSize = 13.sp,
-                        lineHeight = 20.sp,
-                        color = MaterialTheme.colorScheme.error
-                    )
-                }
-
-                vm.ocrWords.isEmpty() -> Box(
-                    modifier = Modifier.weight(1f).fillMaxWidth().padding(24.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "还没有识别结果。拍一张单词表，或从相册选一张图片。",
-                        fontSize = 13.sp,
-                        color = MaterialTheme.colorScheme.outline
-                    )
-                }
-
-                else -> LazyColumn(modifier = Modifier.weight(1f)) {
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 20.dp, vertical = 6.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = "识别到 ${vm.ocrWords.size} 个词",
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Medium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                            Spacer(Modifier.width(6.dp))
-                            Text(
-                                text = "已选 ${checked.size}",
-                                fontSize = 12.sp,
-                                color = MaterialTheme.colorScheme.outline
-                            )
-                        }
-                    }
-                    items(vm.ocrWords, key = { it.id }) { word ->
-                        val isChecked = word.id in checked
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Checkbox(
-                                checked = isChecked,
-                                onCheckedChange = { on ->
-                                    checked = if (on) checked + word.id else checked - word.id
-                                }
-                            )
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = word.word,
-                                    fontFamily = FontFamily.Default,
-                                    fontSize = 15.sp,
-                                    fontWeight = FontWeight.Medium,
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
-                                Text(
-                                    text = word.zh,
-                                    fontSize = 12.5.sp,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                        }
-                    }
-                    item { Spacer(Modifier.height(8.dp)) }
-                }
-            }
-
-            if (vm.ocrWords.isNotEmpty() && !vm.ocrLoading) {
-                Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)) {
-                    if (vm.ocrMissed > 0) {
-                        Text(
-                            text = "另有 ${vm.ocrMissed} 个词本地词库没有收录，已跳过",
-                            fontSize = 11.sp,
-                            color = MaterialTheme.colorScheme.outline
-                        )
-                        Spacer(Modifier.height(8.dp))
-                    }
-                    OutlinedTextField(
-                        value = bookName,
-                        onValueChange = { bookName = it },
-                        modifier = Modifier.fillMaxWidth(),
-                        singleLine = true,
-                        label = { Text("单词书名称", fontSize = 12.sp) },
-                        shape = RoundedCornerShape(12.dp)
-                    )
-                    Spacer(Modifier.height(10.dp))
-                    Button(
-                        onClick = {
-                            val words = vm.ocrWords.filter { it.id in checked }
-                            vm.importPhotoWords(bookName, words) { _, _ ->
-                                vm.clearPhotoImport()
-                                onBack()
-                            }
-                        },
-                        enabled = checked.isNotEmpty(),
-                        shape = RoundedCornerShape(14.dp),
-                        modifier = Modifier.fillMaxWidth().height(48.dp)
-                    ) {
-                        Text("导入 ${checked.size} 个词到新单词书", fontSize = 14.5.sp)
-                    }
-                }
+            if (vm.importWords.isNotEmpty() && !vm.importLoading) {
+                ImportConfirmBar(
+                    vm = vm,
+                    checked = checked,
+                    defaultName = "拍照导入",
+                    onDone = onBack
+                )
             }
         }
     }

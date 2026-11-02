@@ -61,9 +61,31 @@ fun WortschatzApp(vm: AppViewModel) {
     var showRecords by remember { mutableStateOf(false) }
     var showBook by remember { mutableStateOf(false) }
     var showPhotoImport by remember { mutableStateOf(false) }
+    var showTextImport by remember { mutableStateOf(false) }
+
+    if (showTextImport) {
+        TextImportScreen(
+            vm = vm,
+            onBack = { showTextImport = false },
+            onLookup = { term ->
+                vm.onQueryChange(term)
+                showTextImport = false
+                tab = 1
+            }
+        )
+        return
+    }
 
     if (showPhotoImport) {
-        PhotoImportScreen(vm = vm, onBack = { showPhotoImport = false })
+        PhotoImportScreen(
+            vm = vm,
+            onBack = { showPhotoImport = false },
+            onLookup = { term ->
+                vm.onQueryChange(term)
+                showPhotoImport = false
+                tab = 1
+            }
+        )
         return
     }
 
@@ -163,7 +185,8 @@ fun WortschatzApp(vm: AppViewModel) {
                         vm = vm,
                         onOpenRecords = { showRecords = true },
                         onOpenBook = { showBook = true },
-                        onOpenPhotoImport = { showPhotoImport = true }
+                        onOpenPhotoImport = { showPhotoImport = true },
+                        onOpenTextImport = { showTextImport = true }
                     )
                 }
             }
