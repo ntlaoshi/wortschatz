@@ -30,6 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -54,10 +55,16 @@ import java.io.File
 fun PhotoImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) -> Unit = {}) {
     val context = LocalContext.current
     var checked by remember { mutableStateOf<Set<Long>>(emptySet()) }
+    // 词库未收录的词：用户自己补的释义，key 为词形
+    val meanings = remember { mutableStateMapOf<String, String>() }
     var pendingUri by remember { mutableStateOf<Uri?>(null) }
 
     LaunchedEffect(vm.importWords) {
         checked = vm.importWords.map { it.id }.toSet()
+    }
+    // 每次新的识别结果都清空上一轮的补填内容
+    LaunchedEffect(vm.importMissed) {
+        meanings.clear()
     }
 
     val cameraLauncher = rememberLauncherForActivityResult(
@@ -149,6 +156,8 @@ fun PhotoImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) -
                 checked = checked,
                 onCheckedChange = { checked = it },
                 modifier = Modifier.weight(1f),
+                meanings = meanings,
+                onMeaningChange = { term, zh -> meanings[term] = zh },
                 onLookup = onLookup
             )
 
@@ -157,7 +166,8 @@ fun PhotoImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) -
                     vm = vm,
                     checked = checked,
                     defaultName = "拍照导入",
-                    onDone = onBack
+                    onDone = onBack,
+                    meanings = meanings
                 )
             }
         }

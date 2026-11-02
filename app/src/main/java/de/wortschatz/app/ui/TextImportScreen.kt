@@ -28,6 +28,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -35,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -50,12 +52,19 @@ import de.wortschatz.app.AppViewModel
 @Composable
 fun TextImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) -> Unit = {}) {
     val clipboard = LocalClipboardManager.current
+    val keyboard = LocalSoftwareKeyboardController.current
     val context = LocalContext.current
     var text by rememberSaveable { mutableStateOf("") }
     var checked by remember { mutableStateOf<Set<Long>>(emptySet()) }
+    // 词库未收录的词：用户自己补的释义，key 为词形
+    val meanings = remember { mutableStateMapOf<String, String>() }
 
     LaunchedEffect(vm.importWords) {
         checked = vm.importWords.map { it.id }.toSet()
+    }
+    // 每次新的识别结果都清空上一轮的补填内容
+    LaunchedEffect(vm.importMissed) {
+        meanings.clear()
     }
 
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
@@ -113,7 +122,7 @@ fun TextImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) ->
                 OutlinedTextField(
                     value = text,
                     onValueChange = { text = it },
-                    modifier = Modifier.fillMaxWidth().height(150.dp),
+                    modifier = Modifier.fillMaxWidth().height(110.dp),
                     placeholder = { Text("der Hund\ndie Katze\ndas Fenster", fontSize = 13.sp) },
                     textStyle = androidx.compose.ui.text.TextStyle(
                         fontSize = 14.sp,
@@ -124,7 +133,10 @@ fun TextImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) ->
                 Spacer(Modifier.height(10.dp))
                 Row {
                     Button(
-                        onClick = { vm.analyzeText(text) },
+                        onClick = {
+                            keyboard?.hide()
+                            vm.analyzeText(text)
+                        },
                         enabled = text.isNotBlank() && !vm.importLoading,
                         shape = RoundedCornerShape(12.dp)
                     ) {
@@ -146,6 +158,8 @@ fun TextImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) ->
                 checked = checked,
                 onCheckedChange = { checked = it },
                 modifier = Modifier.weight(1f),
+                meanings = meanings,
+                onMeaningChange = { term, zh -> meanings[term] = zh },
                 onLookup = onLookup
             )
 
@@ -154,7 +168,8 @@ fun TextImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) ->
                     vm = vm,
                     checked = checked,
                     defaultName = "文本导入",
-                    onDone = onBack
+                    onDone = onBack,
+                    meanings = meanings
                 )
             }
         }

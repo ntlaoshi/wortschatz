@@ -872,10 +872,19 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         importLoading = false
     }
 
-    /** 把识别结果存成一本新单词书 */
-    fun importAsBook(name: String, words: List<Word>, onDone: (Int, String) -> Unit) {
+    /**
+     * 把识别结果存成一本新单词书。
+     *
+     * @param extras 词库里没有、由用户自己填了释义的词（词形 to 释义），会作为自定义词条入库
+     */
+    fun importAsBook(
+        name: String,
+        words: List<Word>,
+        extras: List<Pair<String, String>> = emptyList(),
+        onDone: (Int, String) -> Unit
+    ) {
         viewModelScope.launch {
-            if (words.isEmpty()) {
+            if (words.isEmpty() && extras.isEmpty()) {
                 onDone(0, "")
                 return@launch
             }
@@ -886,10 +895,39 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 saveBooks()
                 created
             }
-            withContext(Dispatchers.IO) { db.addWordsToBook(book.id, words.map { it.id }) }
+            // 用户补填释义的词先入库，再统一挂到书上
+            val extraIds = withContext(Dispatchers.IO) {
+                extras.forEach { (term, zh) ->
+                    val clean = term.trim()
+                    if (clean.isEmpty() || zh.isBlank()) return@forEach
+                    db.insertWords(
+                        listOf(
+                            Word(
+                                word = clean,
+                                lemma = clean,
+                                pos = "",
+                                gender = null,
+                                plural = null,
+                                zh = zh.trim(),
+                                en = null,
+                                example = null,
+                                exampleZh = null,
+                                level = "A1",
+                                tags = null,
+                                source = Word.SRC_CUSTOM
+                            )
+                        )
+                    )
+                }
+                if (extras.isEmpty()) emptyList()
+                else db.wordIdsByLemmas(extras.map { it.first.trim() })
+            }
+
+            val ids = (words.map { it.id } + extraIds).distinct()
+            withContext(Dispatchers.IO) { db.addWordsToBook(book.id, ids) }
             selectBook(book)
             refresh()
-            onDone(words.size, book.name)
+            onDone(ids.size, book.name)
         }
     }
 

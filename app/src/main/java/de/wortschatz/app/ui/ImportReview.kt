@@ -17,6 +17,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.remember
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
@@ -32,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.wortschatz.app.AppViewModel
@@ -49,6 +53,8 @@ fun ImportResultPane(
     checked: Set<Long>,
     onCheckedChange: (Set<Long>) -> Unit,
     modifier: Modifier = Modifier,
+    meanings: Map<String, String> = emptyMap(),
+    onMeaningChange: ((String, String) -> Unit)? = null,
     onLookup: ((String) -> Unit)? = null
 ) {
     when {
@@ -149,42 +155,79 @@ fun ImportResultPane(
                             .padding(horizontal = 20.dp, vertical = 10.dp)
                     ) {
                         Text(
-                            text = "词库未收录 ${vm.importMissed.size} 个，已跳过",
+                            text = "词库未收录 ${vm.importMissed.size} 个",
                             fontSize = 11.5.sp,
                             fontWeight = FontWeight.Medium,
                             color = MaterialTheme.colorScheme.error
                         )
                         Spacer(Modifier.height(6.dp))
-                        FlowRow(
-                            horizontalArrangement = Arrangement.spacedBy(6.dp),
-                            verticalArrangement = Arrangement.spacedBy(6.dp)
-                        ) {
+                        if (onMeaningChange == null) {
+                            // 只读模式：小标签
+                            FlowRow(
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                verticalArrangement = Arrangement.spacedBy(6.dp)
+                            ) {
+                                vm.importMissed.forEach { term ->
+                                    Box(
+                                        modifier = Modifier
+                                            .background(
+                                                MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.35f),
+                                                RoundedCornerShape(7.dp)
+                                            )
+                                            .then(
+                                                if (onLookup != null)
+                                                    Modifier.clickable { onLookup.invoke(term) }
+                                                else Modifier
+                                            )
+                                            .padding(horizontal = 9.dp, vertical = 5.dp)
+                                    ) {
+                                        Text(
+                                            text = term,
+                                            fontSize = 11.5.sp,
+                                            fontFamily = FontFamily.Default,
+                                            color = MaterialTheme.colorScheme.error
+                                        )
+                                    }
+                                }
+                            }
+                        } else {
+                            // 可编辑模式：词形 + 释义输入框，填了就会一起入库
                             vm.importMissed.forEach { term ->
-                                Box(
+                                Row(
                                     modifier = Modifier
-                                        .background(
-                                            MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.35f),
-                                            RoundedCornerShape(7.dp)
-                                        )
-                                        .then(
-                                            if (onLookup != null)
-                                                Modifier.clickable { onLookup.invoke(term) }
-                                            else Modifier
-                                        )
-                                        .padding(horizontal = 9.dp, vertical = 5.dp)
+                                        .fillMaxWidth()
+                                        .padding(vertical = 4.dp),
+                                    verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Text(
                                         text = term,
-                                        fontSize = 11.5.sp,
+                                        modifier = Modifier.width(118.dp),
                                         fontFamily = FontFamily.Default,
+                                        fontSize = 12.5.sp,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
                                         color = MaterialTheme.colorScheme.error
+                                    )
+                                    Spacer(Modifier.width(8.dp))
+                                    OutlinedTextField(
+                                        value = meanings[term] ?: "",
+                                        onValueChange = { onMeaningChange.invoke(term, it) },
+                                        modifier = Modifier.weight(1f),
+                                        singleLine = true,
+                                        placeholder = {
+                                            Text("补填中文释义（可留空）", fontSize = 11.5.sp)
+                                        },
+                                        textStyle = androidx.compose.ui.text.TextStyle(fontSize = 13.sp),
+                                        shape = RoundedCornerShape(9.dp)
                                     )
                                 }
                             }
                         }
                         Spacer(Modifier.height(8.dp))
                         Text(
-                            text = if (onLookup != null)
+                            text = if (onMeaningChange != null)
+                                "这些词本地词库没有。填上释义就会和选中的词一起存进新书；留空则跳过。"
+                            else if (onLookup != null)
                                 "拼写不对多为识别误差；拼写正确却未收录，说明词库缺这个词，点一下可直接去查词。"
                             else
                                 "拼写不对多为识别误差；拼写正确却未收录，说明词库缺这个词。",
@@ -212,38 +255,78 @@ fun ImportResultPane(
     }
 }
 
-/** 底部确认条：书名 + 导入按钮 */
+/**
+ * 底部确认条：只放一个按钮，书名在弹窗里填。
+ * 早前把输入框常驻在底部，键盘一弹就把结果列表挤没了。
+ */
 @Composable
 fun ImportConfirmBar(
     vm: AppViewModel,
     checked: Set<Long>,
     defaultName: String,
-    onDone: () -> Unit
+    onDone: () -> Unit,
+    meanings: Map<String, String> = emptyMap()
 ) {
+    var showDialog by remember { mutableStateOf(false) }
     var bookName by rememberSaveable { mutableStateOf(defaultName) }
+    // 用户补填了释义的词，会作为自定义词条一并入库
+    val extras = meanings.filterKeys { it in vm.importMissed }
+        .filterValues { it.isNotBlank() }
+        .map { (term, zh) -> term to zh }
+    val total = checked.size + extras.size
+
     Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)) {
-        OutlinedTextField(
-            value = bookName,
-            onValueChange = { bookName = it },
-            modifier = Modifier.fillMaxWidth(),
-            singleLine = true,
-            label = { Text("单词书名称", fontSize = 12.sp) },
-            shape = RoundedCornerShape(12.dp)
-        )
-        Spacer(Modifier.height(10.dp))
         Button(
-            onClick = {
-                val words = vm.importWords.filter { it.id in checked }
-                vm.importAsBook(bookName, words) { _, _ ->
-                    vm.clearImport()
-                    onDone()
-                }
-            },
-            enabled = checked.isNotEmpty(),
+            onClick = { showDialog = true },
+            enabled = total > 0,
             shape = RoundedCornerShape(14.dp),
             modifier = Modifier.fillMaxWidth().height(48.dp)
         ) {
-            Text("导入 ${checked.size} 个词到新单词书", fontSize = 14.5.sp)
+            Text(
+                if (extras.isEmpty()) "导入 $total 个词到新单词书"
+                else "导入 $total 个词（含 ${extras.size} 个自填）",
+                fontSize = 14.5.sp
+            )
         }
+    }
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text("存为单词书", fontSize = 16.sp, fontWeight = FontWeight.SemiBold) },
+            text = {
+                Column {
+                    Text(
+                        text = "将导入 $total 个词" +
+                            if (extras.isEmpty()) "" else "，其中 ${extras.size} 个是你补填释义的自定义词",
+                        fontSize = 12.5.sp,
+                        lineHeight = 19.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(Modifier.height(10.dp))
+                    OutlinedTextField(
+                        value = bookName,
+                        onValueChange = { bookName = it },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        label = { Text("单词书名称", fontSize = 12.sp) },
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    showDialog = false
+                    val words = vm.importWords.filter { it.id in checked }
+                    vm.importAsBook(bookName, words, extras) { _, _ ->
+                        vm.clearImport()
+                        onDone()
+                    }
+                }) { Text("导入") }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDialog = false }) { Text("取消") }
+            }
+        )
     }
 }
