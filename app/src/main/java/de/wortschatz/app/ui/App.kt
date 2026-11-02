@@ -67,23 +67,13 @@ private data class TabItem(
 
 @Composable
 fun WortschatzApp(vm: AppViewModel) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        // 加载结束时不直接「啪」地切走，与主界面做一次淡入淡出
-        Crossfade(
-            targetState = vm.initializing,
-            animationSpec = tween(durationMillis = 380, easing = FastOutSlowInEasing),
-            label = "splash"
-        ) { loading ->
-            if (loading) Splash() else MainScaffold(vm)
-        }
-
-        // 撤销条挂在最外层：学习、拼写、导入各个页面都能用
-        UndoBar(
-            vm = vm,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(start = 16.dp, end = 16.dp, bottom = 96.dp)
-        )
+    // 加载结束时不直接「啪」地切走，与主界面做一次淡入淡出
+    Crossfade(
+        targetState = vm.initializing,
+        animationSpec = tween(durationMillis = 380, easing = FastOutSlowInEasing),
+        label = "splash"
+    ) { loading ->
+        if (loading) Splash() else MainScaffold(vm)
     }
 }
 
@@ -188,11 +178,12 @@ private fun MainScaffold(vm: AppViewModel) {
             }
         }
     ) { padding ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
         ) {
+            Box(modifier = Modifier.weight(1f)) {
             Crossfade(targetState = tab, label = "tab") { current ->
                 when (current) {
                     0 -> HomeScreen(
@@ -224,7 +215,10 @@ private fun MainScaffold(vm: AppViewModel) {
                         onOpenBook = { showBook = true }
                     )
                 }
+                }
             }
+            // 收藏等操作的撤销条：贴在底部导航栏上方，占据布局不遮挡列表
+            UndoBar(vm)
         }
     }
 }

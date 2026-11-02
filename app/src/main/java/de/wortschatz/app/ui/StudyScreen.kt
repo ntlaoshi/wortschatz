@@ -172,6 +172,7 @@ fun StudyScreen(vm: AppViewModel, onExit: () -> Unit) {
                     onMastered = { vm.masterCurrent() },
                     modifier = Modifier.weight(1f)
                 )
+                UndoBar(vm)
                 SwipeHint()
                 RatingBar(
                     enabled = true,

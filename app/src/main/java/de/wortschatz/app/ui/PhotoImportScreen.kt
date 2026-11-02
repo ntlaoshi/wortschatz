@@ -178,6 +178,8 @@ fun PhotoImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) -
                 }
             )
 
+            UndoBar(vm)
+
             if (vm.importWords.isNotEmpty() && !vm.importLoading) {
                 ImportConfirmBar(
                     vm = vm,

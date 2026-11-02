@@ -111,6 +111,9 @@ fun SpellTestScreen(vm: AppViewModel, onExit: () -> Unit) {
                     modifier = Modifier.weight(1f)
                 )
             }
+
+            // 撤销条占据布局空间，不会盖住变音字母按键
+            UndoBar(vm)
         }
     }
 }

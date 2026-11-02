@@ -5,9 +5,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -49,17 +46,16 @@ fun UndoBar(vm: AppViewModel, modifier: Modifier = Modifier) {
         }
     }
 
-    // 键盘弹起时把撤销条顶到键盘上方，否则会被挡住
-    val ime = WindowInsets.ime.asPaddingValues().calculateBottomPadding()
-    val bottom = if (ime > 0.dp) ime + 10.dp else 96.dp
-
     AnimatedVisibility(
         visible = label != null,
         enter = fadeIn() + slideInVertically { it / 2 },
         exit = fadeOut() + slideOutVertically { it / 2 },
-        modifier = modifier.padding(bottom = bottom)
+        modifier = modifier
     ) {
         Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 6.dp),
             shape = RoundedCornerShape(14.dp),
             color = MaterialTheme.colorScheme.inverseSurface,
             shadowElevation = 8.dp
