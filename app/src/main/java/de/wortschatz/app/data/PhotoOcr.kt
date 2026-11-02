@@ -37,8 +37,13 @@ object PhotoOcr {
         "hier", "dort"
     )
 
-    /** 扫描结果：候选词 + 被当作虚词忽略的数量 */
-    data class Scan(val tokens: List<String>, val ignored: Int)
+    /**
+     * 扫描结果。
+     *
+     * [tokens] 是全部候选词（含功能词），[stops] 是其中命中停用词表的部分。
+     * 哪些真的丢掉由调用方结合词库决定——见 AppViewModel.applyScan。
+     */
+    data class Scan(val tokens: List<String>, val stops: Set<String>)
 
     suspend fun recognize(context: Context, uri: Uri): Scan =
         suspendCancellableCoroutine { cont ->
@@ -67,20 +72,15 @@ object PhotoOcr {
      */
     fun scan(text: String): Scan {
         val seen = LinkedHashSet<String>()
-        var ignored = 0
+        val stops = mutableSetOf<String>()
         TOKEN.findAll(text).forEach { m ->
             val raw = m.value.trim('-')
             if (raw.length < 2) return@forEach
             // 全大写且很短的多为缩写或等级标记（A1、CD、DVD）
             if (raw.length <= 3 && raw.all { it.isUpperCase() }) return@forEach
-            if (raw.lowercase() in STOPWORDS) {
-                ignored++
-                return@forEach
-            }
+            if (raw.lowercase() in STOPWORDS) stops.add(raw)
             seen.add(raw)
         }
-        return Scan(seen.toList(), ignored)
+        return Scan(seen.toList(), stops)
     }
-
-    fun extractWords(text: String): List<String> = scan(text).tokens
 }

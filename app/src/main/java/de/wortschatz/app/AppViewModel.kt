@@ -827,7 +827,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             runCatching {
                 withContext(Dispatchers.IO) { PhotoOcr.recognize(getApplication(), uri) }
             }.onSuccess { scan ->
-                applyScan(scan.tokens, scan.ignored)
+                applyScan(scan.tokens, scan.stops)
             }.onFailure { e ->
                 failImport(e.message ?: "识别失败，换一张更清晰的图片试试")
             }
@@ -838,20 +838,26 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     /** 从粘贴的文本里提取德语词 */
     fun analyzeText(text: String) {
         val scan = PhotoOcr.scan(text)
-        if (scan.tokens.isEmpty() && scan.ignored == 0) {
+        if (scan.tokens.isEmpty()) {
             failImport("没有识别到德语单词，检查一下粘贴的内容")
             return
         }
         viewModelScope.launch {
             importLoading = true
             importError = null
-            applyScan(scan.tokens, scan.ignored)
+            applyScan(scan.tokens, scan.stops)
             importLoading = false
         }
     }
 
-    /** 识别结果 → 命中词库的词条 + 未收录的词形 */
-    private suspend fun applyScan(tokens: List<String>, ignored: Int) {
+    /**
+     * 识别结果 → 命中词库的词条 + 未收录的词形。
+     *
+     * 停用词表只用来丢弃**词库本身也没有**的功能词（der/die/das/und/ist）；
+     * 只要词库收录（unter、nur、auf、mit…），它就是正经词汇，必须保留。
+     * 早前不看词库一刀切，导致教材里的 unter / nur 这类词永远导不进来。
+     */
+    private suspend fun applyScan(tokens: List<String>, stops: Set<String>) {
         // 逐个匹配：保持原文顺序，每个词元只对应一个词条
         val pairs = withContext(Dispatchers.IO) { db.matchTokens(tokens) }
         val matched = pairs.map { it.second }.distinctBy { it.id }
@@ -860,11 +866,13 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         importTokenOf = pairs
             .filter { (token, w) -> !token.equals(w.lemma, ignoreCase = true) }
             .associate { (token, w) -> w.id to token }
-        val hitKeys = pairs.map { WordDb.foldUmlaut(it.first) }.toSet()
+
+        val hitTokens = pairs.map { it.first }.toSet()
+        val dropped = tokens.filter { it in stops && it !in hitTokens }
         importMissed = tokens
-            .filter { WordDb.foldUmlaut(it) !in hitKeys }
+            .filter { it !in hitTokens && it !in dropped }
             .distinctBy { it.lowercase() }
-        importIgnored = ignored
+        importIgnored = dropped.size
     }
 
     private fun failImport(message: String) {
