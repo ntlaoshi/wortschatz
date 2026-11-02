@@ -127,7 +127,6 @@ fun TextImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) ->
                     value = text,
                     onValueChange = { text = it },
                     modifier = Modifier.fillMaxWidth().height(110.dp),
-                    placeholder = { Text("der Hund\ndie Katze\ndas Fenster", fontSize = 13.sp) },
                     textStyle = androidx.compose.ui.text.TextStyle(
                         fontSize = 14.sp,
                         lineHeight = 21.sp
