@@ -136,6 +136,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     /** 识别到但词库未收录的词形——展示出来，用户才知道少的几个是什么 */
     var importMissed by mutableStateOf<List<String>>(emptyList())
         private set
+    /** 词条 id → 原文里的写法；只在与词库词形不同时才记录（Gemuese → das Gemüse） */
+    var importTokenOf by mutableStateOf<Map<Long, String>>(emptyMap())
+        private set
     /** 被当作虚词忽略的数量（der/und/ist 这类，不构成学习对象） */
     var importIgnored by mutableStateOf(0)
         private set
@@ -849,17 +852,25 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     /** 识别结果 → 命中词库的词条 + 未收录的词形 */
     private suspend fun applyScan(tokens: List<String>, ignored: Int) {
-        val found = withContext(Dispatchers.IO) { db.wordsByLemmas(tokens) }.distinctBy { it.id }
-        // 命中判定同样折叠变音字母，否则 Gemuese 命中了 Gemüse 却仍被算作「未收录」
-        val hit = found.map { WordDb.foldUmlaut(it.lemma) }.toSet()
-        importWords = found
-        importMissed = tokens.filter { WordDb.foldUmlaut(it) !in hit }.distinct()
+        // 逐个匹配：保持原文顺序，每个词元只对应一个词条
+        val pairs = withContext(Dispatchers.IO) { db.matchTokens(tokens) }
+        val matched = pairs.map { it.second }.distinctBy { it.id }
+        importWords = matched
+        // 原文写法与词库词形不同时保留原文，供界面标注（Gemuese → das Gemüse）
+        importTokenOf = pairs
+            .filter { (token, w) -> !token.equals(w.lemma, ignoreCase = true) }
+            .associate { (token, w) -> w.id to token }
+        val hitKeys = pairs.map { WordDb.foldUmlaut(it.first) }.toSet()
+        importMissed = tokens
+            .filter { WordDb.foldUmlaut(it) !in hitKeys }
+            .distinctBy { it.lowercase() }
         importIgnored = ignored
     }
 
     private fun failImport(message: String) {
         importWords = emptyList()
         importMissed = emptyList()
+        importTokenOf = emptyMap()
         importIgnored = 0
         importError = message
     }
@@ -867,9 +878,23 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     fun clearImport() {
         importWords = emptyList()
         importMissed = emptyList()
+        importTokenOf = emptyMap()
         importIgnored = 0
         importError = null
         importLoading = false
+    }
+
+    /**
+     * 生成不重名的书名。
+     *
+     * 早前直接复用同名书，第二次导入会把新词追加进旧书——打开后能看到上次导入的词，
+     * 看起来就像「文本里没有的词冒出来了」。
+     */
+    private fun uniqueBookName(base: String): String {
+        if (customBooks.none { it.name == base }) return base
+        var i = 2
+        while (customBooks.any { it.name == "$base $i" }) i++
+        return "$base $i"
     }
 
     /**
@@ -888,13 +913,11 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 onDone(0, "")
                 return@launch
             }
-            val bookName = name.ifBlank { "拍照导入" }
-            val book = customBooks.firstOrNull { it.name == bookName } ?: run {
-                val created = WordBook(java.util.UUID.randomUUID().toString(), bookName)
-                customBooks = customBooks + created
-                saveBooks()
-                created
-            }
+            val bookName = uniqueBookName(name.ifBlank { "导入" })
+            val created = WordBook(java.util.UUID.randomUUID().toString(), bookName)
+            customBooks = customBooks + created
+            saveBooks()
+            val book = created
             // 用户补填释义的词先入库，再统一挂到书上
             val extraIds = withContext(Dispatchers.IO) {
                 extras.forEach { (term, zh) ->
@@ -960,12 +983,10 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             // 词条 id 包含词库里本来就有的，这样整份词表都能归到书里
             val ids = withContext(Dispatchers.IO) { db.wordIdsByLemmas(lemmas) }
 
-            val book = customBooks.firstOrNull { it.name == bookName } ?: run {
-                val created = WordBook(java.util.UUID.randomUUID().toString(), bookName)
-                customBooks = customBooks + created
-                saveBooks()
-                created
-            }
+            val uniqueName = uniqueBookName(bookName)
+            val book = WordBook(java.util.UUID.randomUUID().toString(), uniqueName)
+            customBooks = customBooks + book
+            saveBooks()
 
             withContext(Dispatchers.IO) { db.addWordsToBook(book.id, ids) }
             selectBook(book)

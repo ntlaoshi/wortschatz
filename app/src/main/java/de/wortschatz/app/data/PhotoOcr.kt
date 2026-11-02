@@ -20,7 +20,12 @@ object PhotoOcr {
     /** 德语词形：字母（含变音字母）、内部可带连字符 */
     private val TOKEN = Regex("[A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß\\-]{1,29}")
 
-    /** 高频虚词，几乎每行都有，识别进来没有学习价值 */
+    /**
+     * 高频虚词，几乎每行都有，识别进来没有学习价值。
+     *
+     * 注意只放纯功能词：`bitte`、`danke` 这类虽然常出现在练习指令里，但本身就是教材词汇，
+     * 早前误放在这里，导致它们永远进不了单词书（表现为「文本里明明有，导入却没有」）。
+     */
     private val STOPWORDS = setOf(
         "der", "die", "das", "den", "dem", "des", "und", "oder", "aber", "ich", "du",
         "er", "sie", "es", "wir", "ihr", "mich", "dich", "sich", "uns", "euch",
@@ -29,7 +34,7 @@ object PhotoOcr {
         "zu", "im", "in", "am", "an", "auf", "mit", "von", "vom", "für", "bei", "aus",
         "nach", "vor", "über", "unter", "zum", "zur", "auch", "noch", "nur", "schon",
         "sehr", "wie", "was", "wer", "wo", "wann", "warum", "dass", "wenn", "dann",
-        "hier", "dort", "ja", "nein", "bitte", "danke"
+        "hier", "dort"
     )
 
     /** 扫描结果：候选词 + 被当作虚词忽略的数量 */

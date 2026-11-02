@@ -1,5 +1,7 @@
 package de.wortschatz.app.ui
 
+import androidx.activity.compose.BackHandler
+
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -53,6 +55,8 @@ import java.io.File
  */
 @Composable
 fun PhotoImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) -> Unit = {}) {
+    // 不接系统返回键的话，按返回会直接退出整个应用
+    BackHandler { onBack() }
     val context = LocalContext.current
     var checked by remember { mutableStateOf<Set<Long>>(emptySet()) }
     // 词库未收录的词：用户自己补的释义，key 为词形

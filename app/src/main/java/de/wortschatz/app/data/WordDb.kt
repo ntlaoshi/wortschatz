@@ -232,6 +232,47 @@ class WordDb private constructor(context: Context) :
     }
 
 
+    /**
+     * 按词元在原文中的先后顺序逐个匹配词库，每个词元只取一个最贴切的词条。
+     *
+     * 不再用一条 `FOLDED_LEMMA IN (...)` 批量查，原因有两个：
+     * 1. 词库里存在只差大小写的同形词（`bitte`/`Bitte`、`leben`/`Leben`、`arm`/`Arm` 等 8 组），
+     *    折叠匹配会把两个都带出来——文本里只写了 bitte，结果却多出一个名词；
+     * 2. 批量查的返回顺序按词库 rowid，与原文顺序无关，看起来就像「有的词没进来、有的凭空出现」。
+     */
+    fun matchTokens(tokens: Collection<String>): List<Pair<String, Word>> {
+        val out = mutableListOf<Pair<String, Word>>()
+        val seen = mutableSetOf<String>()
+        tokens.forEach { raw ->
+            val token = raw.trim()
+            if (token.isEmpty()) return@forEach
+            // 按原样去重：Leben（名词）与 leben（动词）是两个词条，不能合并
+            if (!seen.add(token)) return@forEach
+            val hit = matchOne(token) ?: return@forEach
+            out.add(token to hit)
+        }
+        return out
+    }
+
+    /** 单个词元的匹配：从最严格到最宽松依次尝试，命中即停 */
+    private fun matchOne(token: String): Word? {
+        val attempts = listOf(
+            "lemma = ?" to token,                       // 大小写完全一致，最可信
+            "LOWER(lemma) = ?" to token.lowercase(),    // 忽略大小写
+            "$FOLDED_LEMMA = ?" to foldUmlaut(token),   // Gemuese → Gemüse
+            "LOWER(word) = ?" to token.lowercase()      // 文本里带冠词：der Hund
+        )
+        attempts.forEach { (clause, arg) ->
+            readableDatabase.rawQuery(
+                "SELECT $COLUMNS FROM words WHERE $clause ORDER BY level ASC, id ASC LIMIT 1",
+                arrayOf(arg)
+            ).use { c ->
+                if (c.moveToNext()) return readWord(c, c.getLong(0))
+            }
+        }
+        return null
+    }
+
     fun existingLemmas(lemmas: List<String>): Set<String> {
         if (lemmas.isEmpty()) return emptySet()
         val out = mutableSetOf<String>()

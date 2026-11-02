@@ -1,5 +1,6 @@
 package de.wortschatz.app.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,7 +18,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.CameraAlt
+import androidx.compose.material.icons.rounded.History
 import androidx.compose.material.icons.rounded.LocalFireDepartment
+import androidx.compose.material.icons.rounded.MenuBook
+import androidx.compose.material.icons.rounded.Notes
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -33,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -52,6 +58,10 @@ fun HomeScreen(
     onStartNew: () -> Unit,
     onOpenCalendar: () -> Unit,
     onOpenLevels: () -> Unit,
+    onOpenPhotoImport: () -> Unit,
+    onOpenTextImport: () -> Unit,
+    onOpenBooks: () -> Unit,
+    onOpenRecords: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -95,6 +105,15 @@ fun HomeScreen(
             }
         }
         item {
+            QuickActions(
+                onPhotoImport = onOpenPhotoImport,
+                onTextImport = onOpenTextImport,
+                onBooks = onOpenBooks,
+                onRecords = onOpenRecords,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 2.dp)
+            )
+        }
+        item {
             SectionTitle(text = "词库进度", modifier = Modifier.padding(top = 8.dp))
         }
         item {
@@ -105,6 +124,63 @@ fun HomeScreen(
                 onClick = onOpenLevels,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
+        }
+    }
+}
+
+/**
+ * 首页快捷入口。
+ *
+ * 导入和记录原本都埋在设置页最底部，翻好几屏才能摸到；放到首页，常用操作一眼可见。
+ */
+@Composable
+private fun QuickActions(
+    onPhotoImport: () -> Unit,
+    onTextImport: () -> Unit,
+    onBooks: () -> Unit,
+    onRecords: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val actions = listOf(
+        Triple("拍照导入", Icons.Rounded.CameraAlt as ImageVector, onPhotoImport),
+        Triple("文本导入", Icons.Rounded.Notes as ImageVector, onTextImport),
+        Triple("单词书", Icons.Rounded.MenuBook as ImageVector, onBooks),
+        Triple("学习记录", Icons.Rounded.History as ImageVector, onRecords)
+    )
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        actions.forEach { (label, icon, action) ->
+            Surface(
+                modifier = Modifier
+                    .weight(1f)
+                    .height(72.dp),
+                shape = RoundedCornerShape(16.dp),
+                color = MaterialTheme.colorScheme.surface,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+                onClick = action
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = label,
+                        modifier = Modifier.size(21.dp),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(Modifier.height(6.dp))
+                    Text(
+                        text = label,
+                        fontSize = 11.5.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 1
+                    )
+                }
+            }
         }
     }
 }

@@ -176,17 +176,18 @@ fun WortschatzApp(vm: AppViewModel) {
                             showStudy = true
                         },
                         onOpenCalendar = { showCalendar = true },
-                        onOpenLevels = { tab = 3 }
+                        onOpenLevels = { tab = 3 },
+                        onOpenPhotoImport = { showPhotoImport = true },
+                        onOpenTextImport = { showTextImport = true },
+                        onOpenBooks = { tab = 3 },
+                        onOpenRecords = { showRecords = true }
                     )
 
                     1 -> SearchScreen(vm = vm)
                     2 -> StarredScreen(vm = vm)
                     else -> SettingsScreen(
                         vm = vm,
-                        onOpenRecords = { showRecords = true },
-                        onOpenBook = { showBook = true },
-                        onOpenPhotoImport = { showPhotoImport = true },
-                        onOpenTextImport = { showTextImport = true }
+                        onOpenBook = { showBook = true }
                     )
                 }
             }

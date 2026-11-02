@@ -1,5 +1,7 @@
 package de.wortschatz.app.ui
 
+import androidx.activity.compose.BackHandler
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -51,6 +53,8 @@ import de.wortschatz.app.AppViewModel
  */
 @Composable
 fun TextImportScreen(vm: AppViewModel, onBack: () -> Unit, onLookup: (String) -> Unit = {}) {
+    // 不接系统返回键的话，按返回会直接退出整个应用
+    BackHandler { onBack() }
     val clipboard = LocalClipboardManager.current
     val keyboard = LocalSoftwareKeyboardController.current
     val context = LocalContext.current

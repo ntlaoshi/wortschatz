@@ -1,5 +1,7 @@
 package de.wortschatz.app.ui
 
+import android.widget.Toast
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +35,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -142,6 +145,16 @@ fun ImportResultPane(
                             fontSize = 12.5.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
+                        // 原文写法与词库词形不同时标出来，方便逐行核对（Gemuese → das Gemüse）
+                        val token = vm.importTokenOf[word.id]
+                        if (token != null) {
+                            Text(
+                                text = "原文 $token",
+                                fontFamily = FontFamily.Default,
+                                fontSize = 10.5.sp,
+                                color = MaterialTheme.colorScheme.outline
+                            )
+                        }
                     }
                 }
             }
@@ -267,6 +280,7 @@ fun ImportConfirmBar(
     onDone: () -> Unit,
     meanings: Map<String, String> = emptyMap()
 ) {
+    val context = LocalContext.current
     var showDialog by remember { mutableStateOf(false) }
     var bookName by rememberSaveable { mutableStateOf(defaultName) }
     // 用户补填了释义的词，会作为自定义词条一并入库
@@ -318,7 +332,12 @@ fun ImportConfirmBar(
                 TextButton(onClick = {
                     showDialog = false
                     val words = vm.importWords.filter { it.id in checked }
-                    vm.importAsBook(bookName, words, extras) { _, _ ->
+                    vm.importAsBook(bookName, words, extras) { count, name ->
+                        Toast.makeText(
+                            context,
+                            "已导入 $count 个词到《$name》",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         vm.clearImport()
                         onDone()
                     }
